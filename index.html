@@ -19,6 +19,7 @@
       <li><a href="#about" data-en="About" data-zh="关于">About</a></li>
       <li><a href="#skills" data-en="Skills" data-zh="技能">Skills</a></li>
       <li><a href="#projects" data-en="Projects" data-zh="项目">Projects</a></li>
+      <li><a href="#blog" data-en="Blog" data-zh="博客">Blog</a></li>
       <li><a href="#experience" data-en="Experience" data-zh="经历">Experience</a></li>
       <li><a href="#education" data-en="Education" data-zh="教育">Education</a></li>
       <li><a href="#certs" data-en="Certs" data-zh="证书">Certs</a></li>
@@ -318,6 +319,64 @@
   </div>
 </section>
 
+<!-- ===== BLOG ===== -->
+<section class="section" id="blog">
+  <div class="section-inner">
+    <h2 class="section-title fade-in" data-en="Blog &amp; Articles" data-zh="博客与文章">Blog &amp; Articles</h2>
+    <p class="section-subtitle fade-in" data-en="Thoughts on AI, data science, and industrial intelligence — from WeChat Official Account '失控的智能'" data-zh="关于AI、数据科学与工业智能的思考 — 来自微信公众号「失控的智能」">Thoughts on AI, data science, and industrial intelligence — from WeChat Official Account '失控的智能'</p>
+
+    <div class="blog-grid">
+
+      <article class="blog-card fade-in">
+        <div class="blog-cover" style="background-image: url('blog/covers/placeholder-1.svg');">
+          <span class="blog-tag">AI Agent</span>
+        </div>
+        <div class="blog-content">
+          <time class="blog-date">2026-04-20</time>
+          <h3 data-en="How I Built an Industrial ChatBI Platform with Vibe Coding" data-zh="我如何用Vibe Coding构建工业ChatBI平台">How I Built an Industrial ChatBI Platform with Vibe Coding</h3>
+          <p data-en="A deep dive into building an OEE analytics platform that combines traditional dashboards with AI-powered NL2SQL conversational analysis." data-zh="深入剖析如何构建一个融合传统BI仪表盘与AI对话式NL2SQL分析的OEE分析平台。">A deep dive into building an OEE analytics platform that combines traditional dashboards with AI-powered NL2SQL conversational analysis.</p>
+          <div class="blog-footer">
+            <span class="blog-source" data-en="WeChat: 失控的智能" data-zh="微信公众号：失控的智能">WeChat: 失控的智能</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="blog-card fade-in">
+        <div class="blog-cover" style="background-image: url('blog/covers/placeholder-2.svg');">
+          <span class="blog-tag">RAG</span>
+        </div>
+        <div class="blog-content">
+          <time class="blog-date">2026-03-15</time>
+          <h3 data-en="RAG in Practice: Building an Industrial Knowledge Q&A System" data-zh="RAG实战：构建工业知识库智能问答系统">RAG in Practice: Building an Industrial Knowledge Q&amp;A System</h3>
+          <p data-en="From PDF parsing to semantic retrieval — a practical guide to building RAG applications for industrial equipment maintenance." data-zh="从PDF解析到语义检索——工业设备维护RAG应用的实战指南。">From PDF parsing to semantic retrieval — a practical guide to building RAG applications for industrial equipment maintenance.</p>
+          <div class="blog-footer">
+            <span class="blog-source" data-en="WeChat: 失控的智能" data-zh="微信公众号：失控的智能">WeChat: 失控的智能</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="blog-card fade-in">
+        <div class="blog-cover" style="background-image: url('blog/covers/placeholder-3.svg');">
+          <span class="blog-tag" data-en="Computer Vision" data-zh="计算机视觉">Computer Vision</span>
+        </div>
+        <div class="blog-content">
+          <time class="blog-date">2026-02-10</time>
+          <h3 data-en="YOLO11 for Industrial Defect Detection: A Complete Guide" data-zh="YOLO11工业缺陷检测：完整指南">YOLO11 for Industrial Defect Detection: A Complete Guide</h3>
+          <p data-en="How to fine-tune YOLO11 on a small industrial dataset and deploy a defect detection system with Streamlit." data-zh="如何在小样本工业数据集上微调YOLO11，并用Streamlit部署缺陷检测系统。">How to fine-tune YOLO11 on a small industrial dataset and deploy a defect detection system with Streamlit.</p>
+          <div class="blog-footer">
+            <span class="blog-source" data-en="WeChat: 失控的智能" data-zh="微信公众号：失控的智能">WeChat: 失控的智能</span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+    <div style="text-align: center; margin-top: 40px;" class="fade-in">
+      <a href="https://github.com/sharp-007" target="_blank" class="btn-outline" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 28px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.938rem;" data-en="Follow WeChat: 失控的智能 for more articles" data-zh="关注微信公众号「失控的智能」阅读更多">Follow WeChat: 失控的智能 for more articles</a>
+    </div>
+  </div>
+</section>
+
 <!-- ===== CREATIVE ===== -->
 <section class="section" id="creative">
   <div class="section-inner">
@@ -339,7 +398,13 @@
         </div>
       </div>
       <div class="creative-video">
-        <iframe src="https://www.youtube.com/embed/OMIchR2C6qs" title="Light Everywhere" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        <div class="video-switch">
+          <button class="video-switch-btn active" onclick="switchVideo('youtube')">YouTube</button>
+          <button class="video-switch-btn" onclick="switchVideo('bilibili')">Bilibili</button>
+        </div>
+        <div class="video-container" id="videoContainer">
+          <iframe id="videoFrame" src="https://www.youtube.com/embed/OMIchR2C6qs" title="Light Everywhere" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        </div>
       </div>
     </div>
   </div>

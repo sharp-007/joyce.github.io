@@ -17,6 +17,20 @@
     });
   };
 
+  // --- Video source switch (YouTube / Bilibili) ---
+  const videoSources = {
+    youtube: 'https://www.youtube.com/embed/OMIchR2C6qs',
+    bilibili: 'https://player.bilibili.com/player.html?bvid=BV1pyofB2Ebe&autoplay=0'
+  };
+
+  window.switchVideo = function (source) {
+    const frame = document.getElementById('videoFrame');
+    if (frame) frame.src = videoSources[source];
+    document.querySelectorAll('.video-switch-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.textContent.toLowerCase().includes(source));
+    });
+  };
+
   // --- Mobile menu ---
   window.toggleMenu = function () {
     document.getElementById('navLinks').classList.toggle('open');
