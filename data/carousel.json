@@ -20,6 +20,20 @@
       "subtitle": "AIGC Short Film · AI Music & Visuals",
       "cover": "https://img.youtube.com/vi/OMIchR2C6qs/hqdefault.jpg",
       "url": "https://www.youtube.com/watch?v=OMIchR2C6qs"
+    },
+    {
+      "title_en": "DOE Introduction Course",
+      "title_zh": "DOE入门课：60分钟掌握DOE",
+      "subtitle": "JMP · DOE · Public Course",
+      "cover": "images/talks/doe-intro.svg",
+      "url": "https://www.jmp.com/zh-hans/resources/on-demand/local/jmp-doe-from-zero-on-demand"
+    },
+    {
+      "title_en": "Coming Soon",
+      "title_zh": "更多精彩即将呈现",
+      "subtitle": "Stay Tuned",
+      "cover": "images/projects/placeholder.svg",
+      "url": "#"
     }
   ]
 }

@@ -18,7 +18,9 @@
     'data/carousel.json': [
       { title_en:"Industrial ChatBI Platform", title_zh:"工业ChatBI智能对话分析平台", subtitle:"NL2SQL · Streamlit · Qwen", cover:"images/projects/chatbi-oee.svg", url:"https://github.com/sharp-007/ChatBI_OEE" },
       { title_en:"Industrial Knowledge Q&A · RAG", title_zh:"工业知识库智能问答系统", subtitle:"LangChain · ChromaDB · React", cover:"images/projects/rag-qa.svg", url:"https://github.com/sharp-007/industrial_agent_mini_demo" },
-      { title_en:"Light Everywhere", title_zh:"城市角落的光", subtitle:"AIGC Short Film · AI Music & Visuals", cover:"https://img.youtube.com/vi/OMIchR2C6qs/hqdefault.jpg", url:"https://www.youtube.com/watch?v=OMIchR2C6qs" }
+      { title_en:"Light Everywhere", title_zh:"城市角落的光", subtitle:"AIGC Short Film · AI Music & Visuals", cover:"https://img.youtube.com/vi/OMIchR2C6qs/hqdefault.jpg", url:"https://www.youtube.com/watch?v=OMIchR2C6qs" },
+      { title_en:"DOE Introduction Course", title_zh:"DOE入门课：60分钟掌握DOE", subtitle:"JMP · DOE · Public Course", cover:"images/talks/doe-intro.svg", url:"https://www.jmp.com/zh-hans/resources/on-demand/local/jmp-doe-from-zero-on-demand" },
+      { title_en:"Coming Soon", title_zh:"更多精彩即将呈现", subtitle:"Stay Tuned", cover:"images/projects/placeholder.svg", url:"#" }
     ],
     'data/projects.json': [
       { title_en:"Industrial ChatBI Platform", title_zh:"工业ChatBI智能对话分析平台", desc_en:"OEE analytics combining traditional BI dashboards with NL2SQL conversational analysis", desc_zh:"面向制造业OEE场景，融合传统BI仪表盘与AI对话式分析双模式", cover:"images/projects/chatbi-oee.svg", url:"https://github.com/sharp-007/ChatBI_OEE", id:"project-chatbi", featured:true },
@@ -77,6 +79,35 @@
         </div>
       </a>
     `).join('');
+    initCarouselControls(items.length);
+  }
+
+  function initCarouselControls(totalItems) {
+    const track = document.getElementById('carouselTrack');
+    const prevBtn = document.getElementById('carouselPrev');
+    const nextBtn = document.getElementById('carouselNext');
+    if (!track || !prevBtn || !nextBtn) return;
+    
+    const visibleCount = 3;
+    let currentIndex = 0;
+    const maxIndex = Math.max(0, totalItems - visibleCount);
+    
+    function updateCarousel() {
+      const cardWidth = track.children[0]?.offsetWidth || 0;
+      const gap = 12;
+      track.style.transform = `translateX(-${currentIndex * (cardWidth + gap)}px)`;
+      prevBtn.style.opacity = currentIndex === 0 ? '0.4' : '1';
+      nextBtn.style.opacity = currentIndex >= maxIndex ? '0.4' : '1';
+    }
+    
+    prevBtn.addEventListener('click', () => {
+      if (currentIndex > 0) { currentIndex--; updateCarousel(); }
+    });
+    nextBtn.addEventListener('click', () => {
+      if (currentIndex < maxIndex) { currentIndex++; updateCarousel(); }
+    });
+    
+    setTimeout(updateCarousel, 100);
   }
 
   function renderProjects(items) {
