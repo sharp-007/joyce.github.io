@@ -399,11 +399,11 @@
       </div>
       <div class="creative-video">
         <div class="video-switch">
-          <button class="video-switch-btn active" onclick="switchVideo('youtube')">YouTube</button>
-          <button class="video-switch-btn" onclick="switchVideo('bilibili')">Bilibili</button>
+          <button class="video-switch-btn active" onclick="switchVideo('bilibili')">Bilibili</button>
+          <button class="video-switch-btn" onclick="switchVideo('youtube')">YouTube</button>
         </div>
         <div class="video-container" id="videoContainer">
-          <iframe id="videoFrame" src="https://www.youtube.com/embed/OMIchR2C6qs" title="Light Everywhere" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+          <iframe id="videoFrame" src="https://player.bilibili.com/player.html?bvid=BV1pyofB2Ebe&autoplay=0" title="Light Everywhere" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" sandbox="allow-scripts allow-same-origin allow-popups allow-presentation"></iframe>
         </div>
       </div>
     </div>
@@ -614,7 +614,18 @@
         <a href="https://www.linkedin.com/in/joyce-pan-549596138/" target="_blank">LinkedIn Profile</a>
       </div>
     </div>
-    <p style="font-size: 0.9rem; opacity: 0.7;" data-en="WeChat Official Account: 失控的智能 — AI exploration &amp; knowledge sharing" data-zh="微信公众号：失控的智能 — AI前沿探索与知识分享">WeChat Official Account: &#22833;&#25511;&#30340;&#26234;&#33021; — AI exploration &amp; knowledge sharing</p>
+    <div class="qrcode-section">
+      <div class="qrcode-card">
+        <img src="images/wechat-oa.jpg" alt="WeChat Official Account QR Code" loading="lazy">
+        <div class="qrcode-label" data-en="WeChat Official Account" data-zh="微信公众号">WeChat Official Account</div>
+        <div class="qrcode-name">失控的智能</div>
+      </div>
+      <div class="qrcode-card">
+        <img src="images/wechat-channel.jpg" alt="WeChat Channel QR Code" loading="lazy">
+        <div class="qrcode-label" data-en="WeChat Channel" data-zh="微信视频号">WeChat Channel</div>
+        <div class="qrcode-name">AIPanda007</div>
+      </div>
+    </div>
   </div>
 </section>
 

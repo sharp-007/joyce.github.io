@@ -19,13 +19,30 @@
 
   // --- Video source switch (YouTube / Bilibili) ---
   const videoSources = {
-    youtube: 'https://www.youtube.com/embed/OMIchR2C6qs',
+    youtube: 'https://www.youtube-nocookie.com/embed/OMIchR2C6qs',
     bilibili: 'https://player.bilibili.com/player.html?bvid=BV1pyofB2Ebe&autoplay=0'
   };
 
   window.switchVideo = function (source) {
-    const frame = document.getElementById('videoFrame');
-    if (frame) frame.src = videoSources[source];
+    const container = document.getElementById('videoContainer');
+    if (!container) return;
+
+    const oldFrame = document.getElementById('videoFrame');
+    if (oldFrame) oldFrame.remove();
+
+    const iframe = document.createElement('iframe');
+    iframe.id = 'videoFrame';
+    iframe.src = videoSources[source];
+    iframe.title = 'Light Everywhere';
+    iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+    iframe.allowFullscreen = true;
+    iframe.loading = 'lazy';
+    if (source === 'bilibili') {
+      iframe.sandbox = 'allow-scripts allow-same-origin allow-popups allow-presentation';
+    }
+    container.appendChild(iframe);
+
     document.querySelectorAll('.video-switch-btn').forEach(btn => {
       btn.classList.toggle('active', btn.textContent.toLowerCase().includes(source));
     });
