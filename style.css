@@ -18,12 +18,12 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: 64px; }
 body {
-  font-family: 'Aptos', 'Segoe UI', sans-serif;
+  font-family: 'Noto Serif SC', 'Source Han Serif SC', serif;
   background: var(--bg); color: var(--text); line-height: 1.7;
   -webkit-font-smoothing: antialiased; text-align: justify;
 }
-:lang(zh), :lang(zh-CN), [data-zh] {
-  font-family: 'Noto Serif SC', 'Source Han Serif SC', serif; font-weight: 600;
+:lang(zh), :lang(zh-CN) {
+  font-weight: 600;
 }
 
 a { color: var(--primary); text-decoration: none; }
@@ -182,10 +182,10 @@ a:hover { text-decoration: underline; }
 
 /* ===== SKILLS (inline) ===== */
 .skills-inline { display: flex; flex-direction: column; gap: 12px; }
-.skill-group { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.skill-group { display: flex; flex-wrap: wrap; align-items: flex-start; column-gap: 6px; row-gap: 6px; padding-left: 106px; }
 .skill-group-label {
   font-size: 0.8rem; font-weight: 700; color: var(--text-secondary);
-  min-width: 100px;
+  width: 100px; margin-left: -106px; flex-shrink: 0;
 }
 .skill-tag {
   background: var(--bg-alt); border: 1px solid var(--border);
@@ -265,6 +265,7 @@ a:hover { text-decoration: underline; }
 .exp-body h3 a:hover { color: var(--primary); }
 .company-logo { width: 32px; height: 32px; object-fit: contain; border-radius: 4px; flex-shrink: 0; }
 .exp-role { font-size: 0.88rem; color: var(--primary); font-weight: 600; margin-bottom: 6px; }
+.exp-status { font-size: 0.9rem; color: var(--text); font-weight: 600; margin-bottom: 8px; }
 .exp-body ul { list-style: none; }
 .exp-body li {
   position: relative; padding-left: 14px; margin-bottom: 3px;
