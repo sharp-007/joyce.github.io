@@ -20,7 +20,7 @@
       { title_en:"Industrial Knowledge Q&A · RAG", title_zh:"工业知识库智能问答系统", subtitle:"LangChain · ChromaDB · React", cover:"images/projects/rag-qa.svg", url:"https://github.com/sharp-007/industrial_agent_mini_demo" },
       { title_en:"Light Everywhere", title_zh:"城市角落的光", subtitle:"AIGC Short Film · AI Music & Visuals", cover:"https://img.youtube.com/vi/OMIchR2C6qs/hqdefault.jpg", url:"https://www.youtube.com/watch?v=OMIchR2C6qs" },
       { title_en:"DOE Introduction Course", title_zh:"DOE入门课：60分钟掌握DOE", subtitle:"JMP · DOE · Public Course", cover:"images/talks/doe-intro.svg", url:"https://www.jmp.com/zh-hans/resources/on-demand/local/jmp-doe-from-zero-on-demand" },
-      { title_en:"Coming Soon", title_zh:"更多精彩即将呈现", subtitle:"Stay Tuned", cover:"images/projects/placeholder.svg", url:"#" }
+      { title_en:"Industrial Defect Detection · YOLO11", title_zh:"工业缺陷智能检测系统", subtitle:"YOLO11 · Deep Learning · Quality Control", cover:"images/projects/defect-detection.svg", url:"https://github.com/sharp-007/carbon_fiber_defect_detection_system_python3.10" }
     ],
     'data/projects.json': [
       { title_en:"Industrial ChatBI Platform", title_zh:"工业ChatBI智能对话分析平台", desc_en:"OEE analytics combining traditional BI dashboards with NL2SQL conversational analysis", desc_zh:"面向制造业OEE场景，融合传统BI仪表盘与AI对话式分析双模式", cover:"images/projects/chatbi-oee.svg", url:"https://github.com/sharp-007/ChatBI_OEE", id:"project-chatbi", featured:true },
@@ -145,7 +145,7 @@
     const container = document.getElementById('blogs-grid');
     if (!container || !items.length) return;
 
-    let html = '<div class="photo-grid photo-grid-3 fade-in">';
+    let html = '<div class="photo-grid photo-grid-4 fade-in">';
     items.forEach(b => {
       const tag = b.url ? 'a' : 'div';
       const linkAttr = b.url ? ` href="${escHtml(b.url)}" target="_blank"` : '';

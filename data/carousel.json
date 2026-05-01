@@ -29,11 +29,11 @@
       "url": "https://www.jmp.com/zh-hans/resources/on-demand/local/jmp-doe-from-zero-on-demand"
     },
     {
-      "title_en": "Coming Soon",
-      "title_zh": "更多精彩即将呈现",
-      "subtitle": "Stay Tuned",
-      "cover": "images/projects/placeholder.svg",
-      "url": "#"
+      "title_en": "Industrial Defect Detection · YOLO11",
+      "title_zh": "工业缺陷智能检测系统",
+      "subtitle": "YOLO11 · Deep Learning · Quality Control",
+      "cover": "images/projects/defect-detection.svg",
+      "url": "https://github.com/sharp-007/carbon_fiber_defect_detection_system_python3.10"
     }
   ]
 }
