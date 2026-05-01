@@ -33,6 +33,7 @@
       { title_en:"Glass Panel Quality · Random Forest", title_zh:"玻璃面板质量分析 · 随机森林", desc_en:"Applied Random Forest for defect classification and key factor identification, AUC 0.92", desc_zh:"应用随机森林模型预测缺陷分类并识别关键因子，AUC达0.92", cover:"images/projects/arcing-rf.svg", url:"https://github.com/sharp-007/Arcing-Issue-Solution-with-Random-Forest", id:"", featured:false }
     ],
     'data/blogs.json': [
+      { title_en:"Understanding How LLMs Reshape Data Platforms in One Diagram", title_zh:"一图理解大模型如何重塑数据平台", cover:"images/blogs/impact_diagram_zh.png", url:"https://mp.weixin.qq.com/s/RlMWMXGu4taOElHMOSVk-g", date:"2026-04-20" },
       { title_en:"How I Built an Industrial ChatBI Platform with Vibe Coding", title_zh:"我如何用Vibe Coding构建工业ChatBI平台", cover:"blog/covers/placeholder-1.svg", url:"", date:"2026-04-15" },
       { title_en:"RAG in Practice: Building an Industrial Knowledge Q&A System", title_zh:"RAG实战：构建工业知识库智能问答系统", cover:"blog/covers/placeholder-2.svg", url:"", date:"2026-03-20" },
       { title_en:"YOLO11 for Industrial Defect Detection: A Complete Guide", title_zh:"YOLO11工业缺陷检测：完整指南", cover:"blog/covers/placeholder-3.svg", url:"", date:"2026-02-10" }

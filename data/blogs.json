@@ -1,6 +1,13 @@
 {
   "items": [
     {
+      "title_en": "Understanding How LLMs Reshape Data Platforms in One Diagram",
+      "title_zh": "一图理解大模型如何重塑数据平台",
+      "cover": "images/blogs/impact_diagram_zh.png",
+      "url": "https://mp.weixin.qq.com/s/RlMWMXGu4taOElHMOSVk-g",
+      "date": "2026-04-20"
+    },
+    {
       "title_en": "How I Built an Industrial ChatBI Platform with Vibe Coding",
       "title_zh": "我如何用Vibe Coding构建工业ChatBI平台",
       "cover": "blog/covers/placeholder-1.svg",
