@@ -193,6 +193,15 @@ a:hover { text-decoration: underline; }
 .video-switch-btn:not(.active):hover { color: var(--primary); }
 .video-container { aspect-ratio: 16/9; border-radius: 6px; overflow: hidden; background: #000; }
 .video-container iframe { width: 100%; height: 100%; border: none; }
+.video-fallback {
+  width: 100%; height: 100%; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; color: #888; font-size: 0.9rem;
+}
+.video-fallback a {
+  margin-top: 12px; padding: 10px 20px; background: #c00; color: #fff;
+  border-radius: 4px; text-decoration: none; font-weight: 600;
+}
+.video-fallback a:hover { background: #a00; }
 
 /* ===== EXPERIENCE ===== */
 .exp-list { display: flex; flex-direction: column; gap: 24px; }

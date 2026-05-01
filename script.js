@@ -18,7 +18,7 @@
     'data/carousel.json': [
       { title_en:"ChatBI OEE Platform", title_zh:"工业ChatBI平台", subtitle:"NL2SQL · Streamlit · Qwen", cover:"images/projects/chatbi-oee.svg", url:"#project-chatbi" },
       { title_en:"Industrial RAG Q&A", title_zh:"工业知识问答", subtitle:"LangChain · ChromaDB · React", cover:"images/projects/rag-qa.svg", url:"#project-rag" },
-      { title_en:"Light Everywhere", title_zh:"城市角落的光", subtitle:"AIGC Short Film · AI Music & Visuals", cover:"blog/covers/placeholder-1.svg", url:"#creative" }
+      { title_en:"Light Everywhere", title_zh:"城市角落的光", subtitle:"AIGC Short Film · AI Music & Visuals", cover:"https://img.youtube.com/vi/OMIchR2C6qs/hqdefault.jpg", url:"#creative" }
     ],
     'data/projects.json': [
       { title_en:"Industrial ChatBI Platform", title_zh:"工业ChatBI对话分析平台", cover:"images/projects/chatbi-oee.svg", url:"https://github.com/sharp-007/ChatBI_OEE", id:"project-chatbi", featured:true },
@@ -175,25 +175,41 @@
 
   // --- Video source switch ---
   const videoSources = {
-    youtube: 'https://www.youtube-nocookie.com/embed/OMIchR2C6qs',
+    youtube: 'https://www.youtube-nocookie.com/embed/OMIchR2C6qs?rel=0',
     bilibili: 'https://player.bilibili.com/player.html?bvid=BV1pyofB2Ebe&autoplay=0'
   };
+  const videoLinks = {
+    youtube: 'https://www.youtube.com/watch?v=OMIchR2C6qs',
+    bilibili: 'https://www.bilibili.com/video/BV1pyofB2Ebe/'
+  };
+  const isLocalFile = location.protocol === 'file:';
 
   window.switchVideo = function (source) {
     const container = document.getElementById('videoContainer');
     if (!container) return;
-    const old = document.getElementById('videoFrame');
-    if (old) old.remove();
-    const iframe = document.createElement('iframe');
-    iframe.id = 'videoFrame';
-    iframe.src = videoSources[source];
-    iframe.title = 'Light Everywhere';
-    iframe.referrerPolicy = 'strict-origin-when-cross-origin';
-    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
-    iframe.allowFullscreen = true;
-    iframe.loading = 'lazy';
-    if (source === 'bilibili') iframe.sandbox = 'allow-scripts allow-same-origin allow-popups allow-presentation';
-    container.appendChild(iframe);
+    container.innerHTML = '';
+
+    if (source === 'youtube' && isLocalFile) {
+      const fallback = document.createElement('div');
+      fallback.className = 'video-fallback';
+      fallback.innerHTML = `
+        <p>YouTube 视频无法在本地预览</p>
+        <a href="${videoLinks.youtube}" target="_blank">点击在 YouTube 上观看</a>
+      `;
+      container.appendChild(fallback);
+    } else {
+      const iframe = document.createElement('iframe');
+      iframe.id = 'videoFrame';
+      iframe.src = videoSources[source];
+      iframe.title = 'Light Everywhere';
+      iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+      iframe.allowFullscreen = true;
+      iframe.loading = 'lazy';
+      if (source === 'bilibili') iframe.sandbox = 'allow-scripts allow-same-origin allow-popups allow-presentation';
+      container.appendChild(iframe);
+    }
+
     document.querySelectorAll('.video-switch-btn').forEach(btn => {
       btn.classList.toggle('active', btn.textContent.toLowerCase().includes(source));
     });
