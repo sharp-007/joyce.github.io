@@ -152,81 +152,30 @@ a:hover { text-decoration: underline; }
   font-size: 0.75rem; font-weight: 500; color: var(--text);
 }
 
-/* ===== PROJECTS (showcase = image + info) ===== */
-.project-showcase {
-  display: flex; gap: 28px; margin-bottom: 36px;
-  align-items: flex-start;
+/* ===== PHOTO GRID (unified: projects, blog, talks) ===== */
+.photo-grid {
+  display: grid; gap: 16px;
 }
-.project-showcase.reverse { flex-direction: row-reverse; }
-.project-img {
-  flex: 0 0 340px; border-radius: var(--radius); overflow: hidden;
-  border: 1px solid var(--border);
-}
-.project-img img { width: 100%; display: block; }
-.project-info { flex: 1; min-width: 0; }
-.project-category {
-  display: inline-block; font-size: 0.7rem; font-weight: 700;
-  color: var(--primary); text-transform: uppercase; letter-spacing: 0.5px;
-  margin-bottom: 4px;
-}
-.project-info h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 4px; }
-.project-date { font-size: 0.78rem; color: var(--text-light); margin-bottom: 8px; display: block; }
-.project-info p { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 12px; }
-.project-tech { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 12px; }
-.project-tech span {
-  background: var(--bg-alt); border: 1px solid var(--border);
-  padding: 2px 8px; border-radius: 3px; font-size: 0.7rem; color: var(--text-secondary);
-}
-.project-links { display: flex; gap: 16px; }
-.project-links a { font-size: 0.85rem; font-weight: 600; }
+.photo-grid-4 { grid-template-columns: repeat(4, 1fr); }
+.photo-grid-3 { grid-template-columns: repeat(3, 1fr); }
 
-/* Project list (compact) */
-.project-list { display: flex; flex-direction: column; }
-.project-list-item {
-  display: flex; justify-content: space-between; align-items: baseline;
-  padding: 10px 0; border-bottom: 1px solid var(--border);
-  text-decoration: none; color: var(--text); transition: var(--transition);
-  gap: 16px;
-}
-.project-list-item:hover { background: var(--bg-alt); padding-left: 8px; padding-right: 8px; border-radius: 4px; }
-.project-list-item strong { font-size: 0.9rem; }
-.project-list-tech { font-size: 0.72rem; color: var(--text-light); margin-left: 8px; }
-.project-list-desc { font-size: 0.8rem; color: var(--text-secondary); text-align: right; flex-shrink: 0; }
-
-/* ===== BLOG (horizontal card) ===== */
-.blog-list { display: flex; flex-direction: column; gap: 20px; }
-.blog-item {
-  display: flex; gap: 20px; align-items: flex-start;
-  padding-bottom: 20px; border-bottom: 1px solid var(--border);
-}
-.blog-item:last-child { border-bottom: none; padding-bottom: 0; }
-.blog-thumb {
-  flex: 0 0 160px; border-radius: var(--radius); overflow: hidden;
-  border: 1px solid var(--border);
-}
-.blog-thumb img { width: 100%; aspect-ratio: 16/10; object-fit: cover; display: block; }
-.blog-body { flex: 1; min-width: 0; }
-.blog-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
-.blog-tag {
-  background: var(--primary); color: #fff;
-  padding: 1px 8px; border-radius: 3px; font-size: 0.68rem; font-weight: 600;
-}
-.blog-meta time { font-size: 0.75rem; color: var(--text-light); }
-.blog-item h3 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; line-height: 1.4; }
-.blog-item p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; }
-
-/* ===== TALKS ===== */
-.talks-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
-.talk-card {
-  display: flex; gap: 12px; align-items: flex-start;
-  padding: 16px; border-radius: var(--radius);
+.photo-card {
+  display: block; text-decoration: none; color: var(--text);
+  border-radius: var(--radius); overflow: hidden;
   border: 1px solid var(--border); background: var(--bg);
-  text-decoration: none; color: var(--text); transition: var(--transition);
+  transition: var(--transition);
 }
-.talk-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); text-decoration: none; }
-.talk-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 2px; }
-.talk-card strong { font-size: 0.88rem; display: block; margin-bottom: 4px; color: var(--text); }
-.talk-card p { font-size: 0.78rem; color: var(--text-secondary); line-height: 1.5; margin: 0; }
+.photo-card:hover {
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  transform: translateY(-3px); text-decoration: none;
+}
+.photo-card img {
+  width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block;
+}
+.photo-card-label {
+  padding: 10px 12px; font-size: 0.82rem; font-weight: 600;
+  line-height: 1.4; color: var(--text);
+}
 
 /* ===== CREATIVE ===== */
 .creative-card {
@@ -349,20 +298,12 @@ a:hover { text-decoration: underline; }
   .section { padding: 36px 16px; }
   .section-title { font-size: 1.25rem; }
 
-  .project-showcase, .project-showcase.reverse { flex-direction: column; gap: 16px; }
-  .project-img { flex: none; width: 100%; }
-
-  .blog-item { flex-direction: column; gap: 12px; }
-  .blog-thumb { flex: none; width: 100%; }
-
-  .talks-grid { grid-template-columns: 1fr; }
+  .photo-grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .photo-grid-3 { grid-template-columns: 1fr; }
 
   .creative-card { flex-direction: column; }
   .creative-video { width: 100%; }
 
   .exp-item { flex-direction: column; gap: 4px; }
   .exp-period { flex: none; }
-
-  .project-list-item { flex-direction: column; gap: 2px; }
-  .project-list-desc { text-align: left; }
 }

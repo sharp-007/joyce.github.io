@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
+  <rect width="400" height="300" rx="8" fill="#1a1a2e"/>
+  <rect x="30" y="30" width="110" height="110" rx="8" fill="#16213e"/>
+  <circle cx="85" cy="70" r="15" fill="#f59e0b" opacity="0.3"/>
+  <circle cx="85" cy="70" r="8" fill="#f59e0b" opacity="0.5"/>
+  <path d="M 60 100 Q 85 85 110 100" fill="none" stroke="#f59e0b" stroke-width="1.5" opacity="0.4"/>
+  <text x="85" y="130" font-family="Inter,sans-serif" font-size="10" fill="#f59e0b" text-anchor="middle" font-weight="600">Cat 0.97</text>
+  <rect x="155" y="30" width="110" height="110" rx="8" fill="#16213e"/>
+  <circle cx="210" cy="65" r="12" fill="#38bdf8" opacity="0.3"/>
+  <circle cx="210" cy="65" r="6" fill="#38bdf8" opacity="0.5"/>
+  <rect x="185" y="85" width="50" height="30" rx="4" fill="#38bdf8" opacity="0.1"/>
+  <text x="210" y="130" font-family="Inter,sans-serif" font-size="10" fill="#38bdf8" text-anchor="middle" font-weight="600">Dog 0.95</text>
+  <rect x="280" y="30" width="90" height="110" rx="8" fill="#16213e"/>
+  <text x="325" y="60" font-family="Inter,sans-serif" font-size="9" fill="#64748b" text-anchor="middle">Accuracy</text>
+  <text x="325" y="85" font-family="Inter,sans-serif" font-size="22" fill="#10b981" text-anchor="middle" font-weight="800">98%</text>
+  <text x="325" y="105" font-family="Inter,sans-serif" font-size="9" fill="#64748b" text-anchor="middle">Transfer</text>
+  <text x="325" y="120" font-family="Inter,sans-serif" font-size="9" fill="#64748b" text-anchor="middle">Learning</text>
+  <rect x="30" y="160" width="340" height="110" rx="8" fill="#16213e"/>
+  <text x="200" y="190" font-family="Inter,sans-serif" font-size="13" fill="#fff" text-anchor="middle" font-weight="700">Kaggle Dogs vs Cats</text>
+  <text x="200" y="210" font-family="Inter,sans-serif" font-size="10" fill="#64748b" text-anchor="middle">PyTorch · Transfer Learning · ResNet</text>
+  <rect x="100" y="225" width="200" height="8" rx="4" fill="#0f172a"/>
+  <rect x="100" y="225" width="196" height="8" rx="4" fill="#10b981" opacity="0.6"/>
+  <text x="200" y="250" font-family="Inter,sans-serif" font-size="9" fill="#64748b" text-anchor="middle">Training Progress: 98%</text>
+  <text x="200" y="15" font-family="Inter,sans-serif" font-size="9" fill="#475569" text-anchor="middle">REPLACE WITH REAL SCREENSHOT</text>
+</svg>

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
+  <rect width="400" height="300" rx="8" fill="#0c1222"/>
+  <rect x="30" y="30" width="220" height="140" rx="6" fill="#1e293b"/>
+  <text x="140" y="55" font-family="Inter,sans-serif" font-size="11" fill="#38bdf8" text-anchor="middle" font-weight="700">SPC Control Chart</text>
+  <line x1="50" y1="70" x2="230" y2="70" stroke="#334155" stroke-width="0.5"/>
+  <line x1="50" y1="100" x2="230" y2="100" stroke="#ef4444" stroke-width="1" stroke-dasharray="4,3" opacity="0.5"/>
+  <line x1="50" y1="140" x2="230" y2="140" stroke="#ef4444" stroke-width="1" stroke-dasharray="4,3" opacity="0.5"/>
+  <polyline points="60,110 80,95 100,105 120,98 140,115 160,92 180,108 200,100 220,112" fill="none" stroke="#38bdf8" stroke-width="2"/>
+  <circle cx="60" cy="110" r="3" fill="#38bdf8"/>
+  <circle cx="100" cy="105" r="3" fill="#38bdf8"/>
+  <circle cx="140" cy="115" r="3" fill="#38bdf8"/>
+  <circle cx="160" cy="92" r="3" fill="#f59e0b"/>
+  <circle cx="200" cy="100" r="3" fill="#38bdf8"/>
+  <rect x="270" y="30" width="100" height="140" rx="6" fill="#1e293b"/>
+  <text x="320" y="55" font-family="Inter,sans-serif" font-size="10" fill="#94a3b8" text-anchor="middle" font-weight="600">Cpk</text>
+  <text x="320" y="90" font-family="Inter,sans-serif" font-size="28" fill="#10b981" text-anchor="middle" font-weight="800">1.67</text>
+  <text x="320" y="115" font-family="Inter,sans-serif" font-size="9" fill="#475569" text-anchor="middle">Sigma Level</text>
+  <text x="320" y="140" font-family="Inter,sans-serif" font-size="20" fill="#f59e0b" text-anchor="middle" font-weight="700">5.0Ã</text>
+  <rect x="30" y="190" width="340" height="80" rx="6" fill="#1e293b"/>
+  <text x="200" y="220" font-family="Inter,sans-serif" font-size="13" fill="#f59e0b" text-anchor="middle" font-weight="700">Quality Analysis for Engineers</text>
+  <text x="200" y="240" font-family="Inter,sans-serif" font-size="10" fill="#64748b" text-anchor="middle">SPC + Six Sigma · 2 Industry Cases</text>
+  <text x="200" y="260" font-family="Inter,sans-serif" font-size="10" fill="#475569" text-anchor="middle">45 min · 1,000+ registrations</text>
+  <text x="200" y="15" font-family="Inter,sans-serif" font-size="9" fill="#475569" text-anchor="middle">REPLACE WITH REAL PHOTO</text>
+</svg>

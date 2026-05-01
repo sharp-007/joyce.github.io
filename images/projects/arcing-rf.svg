@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
+  <rect width="400" height="300" rx="8" fill="#0f172a"/>
+  <text x="200" y="30" font-family="Inter,sans-serif" font-size="12" fill="#64748b" text-anchor="middle" font-weight="600">Random Forest · Feature Importance</text>
+  <rect x="30" y="50" width="200" height="220" rx="6" fill="#1e293b"/>
+  <text x="130" y="75" font-family="Inter,sans-serif" font-size="10" fill="#94a3b8" text-anchor="middle" font-weight="600">Feature Ranking</text>
+  <rect x="50" y="90" width="150" height="14" rx="3" fill="#38bdf8" opacity="0.8"/>
+  <text x="55" y="101" font-family="Inter,sans-serif" font-size="9" fill="#fff" font-weight="600">Temperature</text>
+  <rect x="50" y="112" width="120" height="14" rx="3" fill="#38bdf8" opacity="0.6"/>
+  <text x="55" y="123" font-family="Inter,sans-serif" font-size="9" fill="#fff" font-weight="600">Pressure</text>
+  <rect x="50" y="134" width="95" height="14" rx="3" fill="#38bdf8" opacity="0.45"/>
+  <text x="55" y="145" font-family="Inter,sans-serif" font-size="9" fill="#fff" font-weight="600">Humidity</text>
+  <rect x="50" y="156" width="70" height="14" rx="3" fill="#38bdf8" opacity="0.3"/>
+  <text x="55" y="167" font-family="Inter,sans-serif" font-size="9" fill="#fff" font-weight="600">Speed</text>
+  <rect x="50" y="178" width="50" height="14" rx="3" fill="#38bdf8" opacity="0.2"/>
+  <text x="55" y="189" font-family="Inter,sans-serif" font-size="9" fill="#d1d5db" font-weight="600">Time</text>
+  <rect x="50" y="210" width="160" height="40" rx="4" fill="#0f172a"/>
+  <text x="130" y="232" font-family="Inter,sans-serif" font-size="10" fill="#10b981" text-anchor="middle" font-weight="600">Accuracy: 94.7%</text>
+  <text x="130" y="245" font-family="Inter,sans-serif" font-size="9" fill="#64748b" text-anchor="middle">F1-Score: 0.93</text>
+  <rect x="250" y="50" width="120" height="220" rx="6" fill="#1e293b"/>
+  <text x="310" y="75" font-family="Inter,sans-serif" font-size="10" fill="#94a3b8" text-anchor="middle" font-weight="600">Confusion</text>
+  <rect x="270" y="90" width="35" height="35" rx="3" fill="#10b981" opacity="0.6"/>
+  <text x="287" y="112" font-family="Inter,sans-serif" font-size="11" fill="#fff" text-anchor="middle" font-weight="700">TP</text>
+  <rect x="310" y="90" width="35" height="35" rx="3" fill="#ef4444" opacity="0.2"/>
+  <text x="327" y="112" font-family="Inter,sans-serif" font-size="11" fill="#94a3b8" text-anchor="middle">FP</text>
+  <rect x="270" y="130" width="35" height="35" rx="3" fill="#ef4444" opacity="0.2"/>
+  <text x="287" y="152" font-family="Inter,sans-serif" font-size="11" fill="#94a3b8" text-anchor="middle">FN</text>
+  <rect x="310" y="130" width="35" height="35" rx="3" fill="#10b981" opacity="0.6"/>
+  <text x="327" y="152" font-family="Inter,sans-serif" font-size="11" fill="#fff" text-anchor="middle" font-weight="700">TN</text>
+  <rect x="265" y="185" width="85" height="65" rx="4" fill="#0f172a"/>
+  <text x="307" y="210" font-family="Inter,sans-serif" font-size="9" fill="#64748b" text-anchor="middle">Classification</text>
+  <text x="307" y="228" font-family="Inter,sans-serif" font-size="16" fill="#f59e0b" text-anchor="middle" font-weight="800">OK / NG</text>
+</svg>
