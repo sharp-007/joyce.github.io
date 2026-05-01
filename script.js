@@ -228,11 +228,15 @@
   const sections = document.querySelectorAll('section[id]');
   const navAnchors = document.querySelectorAll('.nav-links a[href^="#"]');
 
+  const backToTop = document.getElementById('backToTop');
+
   function onScroll() {
     nav.classList.toggle('scrolled', window.scrollY > 10);
     let current = '';
     sections.forEach(sec => { if (window.scrollY >= sec.offsetTop - 100) current = sec.id; });
     navAnchors.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
+    
+    if (backToTop) backToTop.classList.toggle('visible', window.scrollY > 400);
   }
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
