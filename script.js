@@ -1,7 +1,6 @@
 (() => {
   let lang = 'en';
 
-  // --- Language toggle ---
   window.toggleLang = function () {
     lang = lang === 'en' ? 'zh' : 'en';
     document.getElementById('langToggle').textContent = lang === 'en' ? '中文' : 'EN';
@@ -13,40 +12,35 @@
     });
   };
 
-  // --- Carousel ---
+  // --- Carousel (horizontal scroll) ---
   const track = document.getElementById('carouselTrack');
-  const dotsContainer = document.getElementById('carouselDots');
-  let currentSlide = 0;
-  let slideCount = 0;
-  let autoplayTimer;
-
-  if (track && dotsContainer) {
-    const slides = track.querySelectorAll('.carousel-slide');
-    slideCount = slides.length;
-    slides.forEach((_, i) => {
-      const dot = document.createElement('button');
-      dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
-      dot.onclick = () => goToSlide(i);
-      dotsContainer.appendChild(dot);
-    });
-    startAutoplay();
-  }
-
-  function goToSlide(n) {
-    currentSlide = ((n % slideCount) + slideCount) % slideCount;
-    track.style.transform = `translateX(-${currentSlide * 100}%)`;
-    dotsContainer.querySelectorAll('.carousel-dot').forEach((d, i) => {
-      d.classList.toggle('active', i === currentSlide);
-    });
-  }
+  let scrollAmount = 276;
 
   window.moveCarousel = function (dir) {
-    goToSlide(currentSlide + dir);
-    resetAutoplay();
+    if (!track) return;
+    track.scrollBy({ left: dir * scrollAmount, behavior: 'smooth' });
   };
 
-  function startAutoplay() { autoplayTimer = setInterval(() => goToSlide(currentSlide + 1), 4000); }
-  function resetAutoplay() { clearInterval(autoplayTimer); startAutoplay(); }
+  if (track) {
+    let autoTimer = setInterval(() => {
+      if (track.scrollLeft + track.clientWidth >= track.scrollWidth - 10) {
+        track.scrollTo({ left: 0, behavior: 'smooth' });
+      } else {
+        track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+      }
+    }, 4000);
+
+    track.addEventListener('mouseenter', () => clearInterval(autoTimer));
+    track.addEventListener('mouseleave', () => {
+      autoTimer = setInterval(() => {
+        if (track.scrollLeft + track.clientWidth >= track.scrollWidth - 10) {
+          track.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+          track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        }
+      }, 4000);
+    });
+  }
 
   // --- Video source switch ---
   const videoSources = {
@@ -96,7 +90,7 @@
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
-  // --- Fade-in on scroll ---
+  // --- Fade-in ---
   const observer = new IntersectionObserver(
     entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } }),
     { threshold: 0.08 }

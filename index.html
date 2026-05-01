@@ -17,13 +17,11 @@
     <a href="#" class="nav-logo">Joyce Pan</a>
     <ul class="nav-links" id="navLinks">
       <li><a href="#about" data-en="About" data-zh="关于">About</a></li>
-      <li><a href="#skills" data-en="Skills" data-zh="技能">Skills</a></li>
       <li><a href="#projects" data-en="Projects" data-zh="项目">Projects</a></li>
       <li><a href="#blog" data-en="Blog" data-zh="博客">Blog</a></li>
+      <li><a href="#talks" data-en="Talks" data-zh="公开课">Talks</a></li>
       <li><a href="#experience" data-en="Experience" data-zh="经历">Experience</a></li>
-      <li><a href="#education" data-en="Education" data-zh="教育">Education</a></li>
-      <li><a href="#certs" data-en="Certs" data-zh="证书">Certs</a></li>
-      <li><a href="#publications" data-en="Publications" data-zh="论文">Publications</a></li>
+      <li><a href="#publications" data-en="Papers" data-zh="论文">Papers</a></li>
       <li><a href="#contact" data-en="Contact" data-zh="联系">Contact</a></li>
       <li><button class="lang-toggle" id="langToggle" onclick="toggleLang()">中文</button></li>
     </ul>
@@ -35,316 +33,215 @@
 
 <!-- ===== HERO ===== -->
 <section class="hero" id="about">
-  <div class="hero-top fade-in">
-    <div class="hero-left">
-      <div class="hero-avatar">JP</div>
-      <h1 data-en="Joyce Pan" data-zh="潘 姣">Joyce Pan</h1>
-      <p class="hero-subtitle" data-en="Data + AI | Industrial AI | Manufacturing Intelligence" data-zh="Data + AI | 工业智能 | 制造业数字化">Data + AI | Industrial AI | Manufacturing Intelligence</p>
-      <p class="hero-desc" data-en="8 years in data analysis consulting &amp; manufacturing R&D. From defect detection, RAG Q&A to ChatBI — translating AI into real industrial value." data-zh="3年数据分析顾问 + 5年制造业研发，聚焦缺陷检测、RAG问答、ChatBI对话式分析，将AI技术转化为工业场景价值。">8 years in data analysis consulting &amp; manufacturing R&D. From defect detection, RAG Q&A to ChatBI — translating AI into real industrial value.</p>
-      <div class="hero-links">
-        <a href="https://github.com/sharp-007" target="_blank" class="btn-primary">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.694.825.576C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12z"/></svg>
-          GitHub
-        </a>
-        <a href="https://www.linkedin.com/in/joyce-pan-549596138/" target="_blank" class="btn-outline">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-          LinkedIn
-        </a>
-        <a href="mailto:panjiao007@126.com" class="btn-outline">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          Email
-        </a>
-      </div>
+  <div class="hero-inner">
+    <div class="hero-profile">
+      <img src="images/profile-placeholder.svg" alt="Joyce Pan" class="hero-photo" id="profilePhoto">
     </div>
-    <div class="hero-carousel" id="carousel">
-      <div class="carousel-track" id="carouselTrack">
-        <div class="carousel-slide">
-          <img src="blog/covers/placeholder-1.svg" alt="ChatBI OEE">
-          <div class="carousel-overlay">
-            <h3 data-en="Industrial ChatBI Platform" data-zh="工业ChatBI对话分析平台">Industrial ChatBI Platform</h3>
-            <p data-en="NL2SQL + OEE Dashboard" data-zh="NL2SQL + OEE仪表盘">NL2SQL + OEE Dashboard</p>
-          </div>
-        </div>
-        <div class="carousel-slide">
-          <img src="blog/covers/placeholder-2.svg" alt="RAG Q&A">
-          <div class="carousel-overlay">
-            <h3 data-en="Industrial Knowledge Q&A" data-zh="工业知识库智能问答">Industrial Knowledge Q&amp;A</h3>
-            <p data-en="RAG + LangChain + ChromaDB" data-zh="RAG + LangChain + ChromaDB">RAG + LangChain + ChromaDB</p>
-          </div>
-        </div>
-        <div class="carousel-slide">
-          <img src="blog/covers/placeholder-3.svg" alt="Defect Detection">
-          <div class="carousel-overlay">
-            <h3 data-en="Defect Detection System" data-zh="工业缺陷检测系统">Defect Detection System</h3>
-            <p data-en="YOLO11 + PyTorch + Streamlit" data-zh="YOLO11 + PyTorch + Streamlit">YOLO11 + PyTorch + Streamlit</p>
-          </div>
-        </div>
+    <div class="hero-text">
+      <h1>Joyce Pan</h1>
+      <p class="hero-tagline" data-en="I build AI-powered solutions for industrial intelligence" data-zh="我构建面向工业智能的AI解决方案">I build AI-powered solutions for industrial intelligence</p>
+      <div class="hero-bio">
+        <p data-en="8 years of combined experience in data analysis consulting and manufacturing R&D. Currently focusing on industrial AI applications — ChatBI conversational analytics, RAG-based knowledge Q&A, computer vision defect detection, and AI agent systems." data-zh="3年ToB售前数据分析顾问与5年制造业产品研发复合背景，当前聚焦工业AI应用——ChatBI对话式分析、RAG知识问答、计算机视觉缺陷检测以及AI智能体系统。">8 years of combined experience in data analysis consulting and manufacturing R&D. Currently focusing on industrial AI applications — ChatBI conversational analytics, RAG-based knowledge Q&A, computer vision defect detection, and AI agent systems.</p>
+        <p data-en="Previously Systems Engineer at SAS (JMP data analysis consultant), Department Manager at StarNeto. Beihang University M.Eng." data-zh="曾任SAS系统工程师（JMP数据分析顾问）、星网宇达总体部部门经理。北京航空航天大学工学硕士。">Previously Systems Engineer at SAS (JMP data analysis consultant), Department Manager at StarNeto. Beihang University M.Eng.</p>
       </div>
-      <button class="carousel-nav carousel-prev" onclick="moveCarousel(-1)">&#8249;</button>
-      <button class="carousel-nav carousel-next" onclick="moveCarousel(1)">&#8250;</button>
-      <div class="carousel-dots" id="carouselDots"></div>
+      <div class="hero-links">
+        <a href="https://github.com/sharp-007" target="_blank">GitHub</a>
+        <a href="https://www.linkedin.com/in/joyce-pan-549596138/" target="_blank">LinkedIn</a>
+        <a href="mailto:panjiao007@126.com">Email</a>
+        <a href="https://www.youtube.com/@sharp-007" target="_blank">YouTube</a>
+      </div>
+      <div class="hero-badges">
+        <span class="badge" data-en="PMP Certified" data-zh="PMP认证">PMP Certified</span>
+        <span class="badge" data-en="Alibaba Cloud ACP" data-zh="阿里云ACP">Alibaba Cloud ACP</span>
+        <span class="badge" data-en="Deep Learning Architect" data-zh="深度学习架构师">Deep Learning Architect</span>
+        <span class="badge">IELTS 7.5</span>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ===== SKILLS ===== -->
+<!-- ===== HIGHLIGHT CAROUSEL ===== -->
+<section class="carousel-section">
+  <div class="carousel-wrapper" id="carousel">
+    <div class="carousel-track" id="carouselTrack">
+      <a class="carousel-card" href="#project-chatbi">
+        <img src="images/projects/chatbi-oee.svg" alt="ChatBI OEE">
+        <div class="carousel-label">
+          <strong data-en="ChatBI OEE Platform" data-zh="工业ChatBI平台">ChatBI OEE Platform</strong>
+          <span>NL2SQL · Streamlit · Qwen</span>
+        </div>
+      </a>
+      <a class="carousel-card" href="#project-defect">
+        <img src="images/projects/defect-detection.svg" alt="Defect Detection">
+        <div class="carousel-label">
+          <strong data-en="Defect Detection" data-zh="缺陷检测系统">Defect Detection</strong>
+          <span>YOLO11 · PyTorch · OpenCV</span>
+        </div>
+      </a>
+      <a class="carousel-card" href="#project-rag">
+        <img src="images/projects/rag-qa.svg" alt="RAG Q&A">
+        <div class="carousel-label">
+          <strong data-en="Industrial RAG Q&A" data-zh="工业知识问答">Industrial RAG Q&amp;A</strong>
+          <span>LangChain · ChromaDB · React</span>
+        </div>
+      </a>
+      <a class="carousel-card" href="#project-dify">
+        <img src="images/projects/dify-agents.svg" alt="Dify Agents">
+        <div class="carousel-label">
+          <strong>Dify Agents</strong>
+          <span>RAG · Doubao TTS · Workflow</span>
+        </div>
+      </a>
+    </div>
+    <button class="carousel-nav carousel-prev" onclick="moveCarousel(-1)">&#8249;</button>
+    <button class="carousel-nav carousel-next" onclick="moveCarousel(1)">&#8250;</button>
+  </div>
+</section>
+
+<!-- ===== SKILLS (inline badges) ===== -->
 <section class="section" id="skills">
   <div class="section-inner">
-    <h2 class="section-title fade-in" data-en="Technical Skills" data-zh="技术技能">Technical Skills</h2>
-    <p class="section-subtitle fade-in" data-en="Core competencies spanning data science, AI, and project management" data-zh="覆盖数据科学、AI与项目管理的核心能力">Core competencies spanning data science, AI, and project management</p>
-    <div class="skills-grid">
-      <div class="skill-card fade-in">
-        <div class="skill-card-icon">&#128187;</div>
-        <h3 data-en="Programming &amp; Data Science" data-zh="编程与数据科学">Programming &amp; Data Science</h3>
-        <div class="skill-tags">
-          <span class="skill-tag">Python</span><span class="skill-tag">SQL</span><span class="skill-tag">Git</span><span class="skill-tag">JMP</span><span class="skill-tag">JSL</span><span class="skill-tag">Pandas</span><span class="skill-tag">NumPy</span><span class="skill-tag">Matplotlib</span><span class="skill-tag">Scikit-learn</span><span class="skill-tag">Streamlit</span>
-        </div>
+    <h2 class="section-title fade-in" data-en="Skills & Tools" data-zh="技能与工具">Skills &amp; Tools</h2>
+    <div class="skills-inline fade-in">
+      <div class="skill-group">
+        <span class="skill-group-label" data-en="Programming" data-zh="编程">Programming</span>
+        <span class="skill-tag">Python</span><span class="skill-tag">SQL</span><span class="skill-tag">Git</span><span class="skill-tag">JMP/JSL</span><span class="skill-tag">Pandas</span><span class="skill-tag">NumPy</span><span class="skill-tag">Streamlit</span>
       </div>
-      <div class="skill-card fade-in">
-        <div class="skill-card-icon">&#129302;</div>
-        <h3 data-en="AI &amp; LLM" data-zh="AI与大模型">AI &amp; LLM</h3>
-        <div class="skill-tags">
-          <span class="skill-tag">Machine Learning</span><span class="skill-tag">Deep Learning</span><span class="skill-tag">Computer Vision</span><span class="skill-tag">PyTorch</span><span class="skill-tag">YOLO</span><span class="skill-tag">LLM</span><span class="skill-tag">RAG</span><span class="skill-tag">ChatBI</span><span class="skill-tag">Agent</span><span class="skill-tag">LangChain</span><span class="skill-tag">Dify</span><span class="skill-tag">Cursor</span><span class="skill-tag">Claude Code</span>
-        </div>
+      <div class="skill-group">
+        <span class="skill-group-label">AI / LLM</span>
+        <span class="skill-tag">PyTorch</span><span class="skill-tag">YOLO</span><span class="skill-tag">LLM</span><span class="skill-tag">RAG</span><span class="skill-tag">ChatBI</span><span class="skill-tag">Agent</span><span class="skill-tag">LangChain</span><span class="skill-tag">Dify</span><span class="skill-tag">Cursor</span><span class="skill-tag">Claude Code</span>
       </div>
-      <div class="skill-card fade-in">
-        <div class="skill-card-icon">&#128203;</div>
-        <h3 data-en="Project Management" data-zh="项目管理">Project Management</h3>
-        <div class="skill-tags">
-          <span class="skill-tag">PMP</span><span class="skill-tag">Agile/Scrum</span><span class="skill-tag">Stakeholder Mgmt</span><span class="skill-tag">Cross-Functional</span>
-        </div>
-      </div>
-      <div class="skill-card fade-in">
-        <div class="skill-card-icon">&#128200;</div>
-        <h3 data-en="Six Sigma &amp; Quality" data-zh="六西格玛与质量">Six Sigma &amp; Quality</h3>
-        <div class="skill-tags">
-          <span class="skill-tag">Process Improvement</span><span class="skill-tag">Root Cause Analysis</span><span class="skill-tag">DOE</span><span class="skill-tag">SPC</span>
-        </div>
-      </div>
-      <div class="skill-card fade-in">
-        <div class="skill-card-icon">&#127760;</div>
-        <h3 data-en="Languages" data-zh="语言能力">Languages</h3>
-        <div class="skill-tags">
-          <span class="skill-tag" data-en="English (IELTS 7.5)" data-zh="英语 (雅思7.5)">English (IELTS 7.5)</span><span class="skill-tag" data-en="Mandarin (Native)" data-zh="普通话 (母语)">Mandarin (Native)</span>
-        </div>
+      <div class="skill-group">
+        <span class="skill-group-label" data-en="Domain" data-zh="领域">Domain</span>
+        <span class="skill-tag">PMP</span><span class="skill-tag">Six Sigma</span><span class="skill-tag">DOE</span><span class="skill-tag">SPC</span><span class="skill-tag">Agile</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== PROJECTS ===== -->
+<!-- ===== FEATURED PROJECTS ===== -->
 <section class="section" id="projects">
   <div class="section-inner">
     <h2 class="section-title fade-in" data-en="Featured Projects" data-zh="精选项目">Featured Projects</h2>
     <p class="section-subtitle fade-in" data-en="AI-powered solutions for industrial applications" data-zh="面向工业场景的AI解决方案">AI-powered solutions for industrial applications</p>
 
-    <div class="projects-grid">
-
-      <!-- ChatBI OEE -->
-      <div class="project-card fade-in">
-        <div class="project-header">
-          <span class="project-category" data-en="AI / ChatBI" data-zh="AI / ChatBI">AI / ChatBI</span>
-          <h3 data-en="Industrial ChatBI Platform" data-zh="工业ChatBI智能对话分析平台">Industrial ChatBI Platform</h3>
-          <div class="project-date">2026.03 – 2026.04</div>
+    <!-- ChatBI -->
+    <div class="project-showcase fade-in" id="project-chatbi">
+      <div class="project-img">
+        <img src="images/projects/chatbi-oee.svg" alt="ChatBI OEE Platform" loading="lazy">
+      </div>
+      <div class="project-info">
+        <span class="project-category">AI / ChatBI</span>
+        <h3 data-en="Industrial ChatBI Platform" data-zh="工业ChatBI智能对话分析平台">Industrial ChatBI Platform</h3>
+        <span class="project-date">2026.03 – 2026.04</span>
+        <p data-en="An industrial OEE analytical system combining traditional BI dashboards with AI-powered conversational analytics via NL2SQL, enabling zero-barrier production data exploration." data-zh="面向制造业OEE场景，融合传统BI仪表盘与AI对话式分析双模式，实现自然语言到SQL的智能转换，零门槛探索生产数据。">An industrial OEE analytical system combining traditional BI dashboards with AI-powered conversational analytics via NL2SQL, enabling zero-barrier production data exploration.</p>
+        <div class="project-tech">
+          <span>FastAPI</span><span>Streamlit</span><span>Qwen</span><span>MySQL</span><span>NL2SQL</span><span>Plotly</span>
         </div>
-        <div class="project-body">
-          <p data-en="An industrial OEE analytical system combining traditional BI dashboards with AI-powered conversational analytics via NL2SQL, enabling zero-barrier production data exploration." data-zh="面向制造业OEE场景，融合传统BI仪表盘与AI对话式分析双模式，实现自然语言到SQL的智能转换，零门槛探索生产数据。">An industrial OEE analytical system combining traditional BI dashboards with AI-powered conversational analytics via NL2SQL, enabling zero-barrier production data exploration.</p>
-          <div class="project-tech">
-            <span>FastAPI</span><span>Streamlit</span><span>Qwen</span><span>MySQL</span><span>NL2SQL</span><span>Plotly</span>
-          </div>
-        </div>
-        <div class="project-footer">
-          <a href="https://github.com/sharp-007/ChatBI_OEE" target="_blank" class="project-link">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.694.825.576C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12z"/></svg>
-            GitHub
-          </a>
-          <a href="https://www.youtube.com/watch?v=uN0ACWdIo_w" target="_blank" class="project-link">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z"/><polygon fill="#fff" points="9.545,15.568 15.818,12 9.545,8.432"/></svg>
-            Video Demo
-          </a>
+        <div class="project-links">
+          <a href="https://github.com/sharp-007/ChatBI_OEE" target="_blank">GitHub</a>
+          <a href="https://www.youtube.com/watch?v=uN0ACWdIo_w" target="_blank">Video Demo</a>
         </div>
       </div>
+    </div>
 
-      <!-- Dify Agents -->
-      <div class="project-card fade-in">
-        <div class="project-header">
-          <span class="project-category" data-en="AI / Agent" data-zh="AI / Agent">AI / Agent</span>
-          <h3>Dify Agents</h3>
-          <div class="project-date">2025</div>
+    <!-- Defect Detection -->
+    <div class="project-showcase fade-in reverse" id="project-defect">
+      <div class="project-img">
+        <img src="images/projects/defect-detection.svg" alt="Defect Detection" loading="lazy">
+      </div>
+      <div class="project-info">
+        <span class="project-category" data-en="Computer Vision" data-zh="计算机视觉">Computer Vision</span>
+        <h3 data-en="Industrial Defect Detection System" data-zh="工业缺陷智能检测系统">Industrial Defect Detection System</h3>
+        <span class="project-date">2026.01</span>
+        <p data-en="A deep learning object detection system based on YOLO11, replacing manual inspection with intelligent detection for manufacturing quality control." data-zh="基于YOLO11的深度学习目标检测系统，以智能检测替代传统人工检测，赋能制造业质量控制。">A deep learning object detection system based on YOLO11, replacing manual inspection with intelligent detection for manufacturing quality control.</p>
+        <div class="project-tech">
+          <span>Python</span><span>PyTorch</span><span>YOLO</span><span>OpenCV</span><span>Streamlit</span>
         </div>
-        <div class="project-body">
-          <p data-en="A collection of AI agents built on Dify, including RAG-based statistical analysis assistant and Doubao-powered TTS workflow." data-zh="基于Dify平台构建的AI智能体合集，包含RAG统计分析课程助手和豆包TTS语音工作流。">A collection of AI agents built on Dify, including RAG-based statistical analysis assistant and Doubao-powered TTS workflow.</p>
-          <div class="project-tech">
-            <span>Dify</span><span>Qwen</span><span>Doubao TTS</span><span>RAG</span><span>LLM</span>
-          </div>
-        </div>
-        <div class="project-footer">
-          <a href="https://github.com/sharp-007/Dify_Agents" target="_blank" class="project-link">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.694.825.576C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12z"/></svg>
-            GitHub
-          </a>
-          <a href="https://udify.app/chat/XT3989ncVdT34kF1" target="_blank" class="project-link">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            Online Demo
-          </a>
+        <div class="project-links">
+          <a href="https://github.com/sharp-007/carbon_fiber_defect_detection_system_pyhton3.10" target="_blank">GitHub</a>
+          <a href="https://carbon-fiber-defect-detection-system.streamlit.app/" target="_blank">Live Demo</a>
         </div>
       </div>
+    </div>
 
-      <!-- Defect Detection -->
-      <div class="project-card fade-in">
-        <div class="project-header">
-          <span class="project-category" data-en="Computer Vision" data-zh="计算机视觉">Computer Vision</span>
-          <h3 data-en="Industrial Defect Detection System" data-zh="工业缺陷智能检测系统">Industrial Defect Detection System</h3>
-          <div class="project-date">2026.01</div>
+    <!-- RAG Q&A -->
+    <div class="project-showcase fade-in" id="project-rag">
+      <div class="project-img">
+        <img src="images/projects/rag-qa.svg" alt="RAG Q&A System" loading="lazy">
+      </div>
+      <div class="project-info">
+        <span class="project-category">RAG / Agent</span>
+        <h3 data-en="Industrial Knowledge Q&A System" data-zh="工业知识库智能问答系统">Industrial Knowledge Q&amp;A System</h3>
+        <span class="project-date">2026.02</span>
+        <p data-en="A locally deployed intelligent Q&A system based on RAG, enabling precise Q&A from private documents for industrial equipment maintenance." data-zh="基于RAG的本地部署智能问答系统，基于私有文档进行精准问答，赋能工业设备维护知识管理。">A locally deployed intelligent Q&amp;A system based on RAG, enabling precise Q&amp;A from private documents for industrial equipment maintenance.</p>
+        <div class="project-tech">
+          <span>React</span><span>FastAPI</span><span>LangChain</span><span>ChromaDB</span><span>Qwen</span>
         </div>
-        <div class="project-body">
-          <p data-en="A deep learning object detection system based on YOLO11, replacing manual inspection with intelligent detection for manufacturing quality control." data-zh="基于YOLO11的深度学习目标检测系统，以智能检测替代传统人工检测，赋能制造业质量控制。">A deep learning object detection system based on YOLO11, replacing manual inspection with intelligent detection for manufacturing quality control.</p>
-          <div class="project-tech">
-            <span>Python</span><span>PyTorch</span><span>YOLO</span><span>OpenCV</span><span>Streamlit</span>
-          </div>
-        </div>
-        <div class="project-footer">
-          <a href="https://github.com/sharp-007/carbon_fiber_defect_detection_system_pyhton3.10" target="_blank" class="project-link">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.694.825.576C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12z"/></svg>
-            GitHub
-          </a>
-          <a href="https://carbon-fiber-defect-detection-system.streamlit.app/" target="_blank" class="project-link">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            Live Demo
-          </a>
+        <div class="project-links">
+          <a href="https://github.com/sharp-007/industrial_agent_mini_demo" target="_blank">GitHub</a>
         </div>
       </div>
+    </div>
 
-      <!-- Industrial Agent -->
-      <div class="project-card fade-in">
-        <div class="project-header">
-          <span class="project-category" data-en="RAG / Agent" data-zh="RAG / Agent">RAG / Agent</span>
-          <h3 data-en="Industrial Knowledge Q&A System" data-zh="工业知识库智能问答系统">Industrial Knowledge Q&amp;A System</h3>
-          <div class="project-date">2026.02</div>
+    <!-- Dify Agents -->
+    <div class="project-showcase fade-in reverse" id="project-dify">
+      <div class="project-img">
+        <img src="images/projects/dify-agents.svg" alt="Dify Agents" loading="lazy">
+      </div>
+      <div class="project-info">
+        <span class="project-category">AI / Agent</span>
+        <h3>Dify Agents</h3>
+        <span class="project-date">2025</span>
+        <p data-en="A collection of AI agents built on Dify, including RAG-based statistical analysis assistant and Doubao-powered TTS workflow." data-zh="基于Dify平台构建的AI智能体合集，包含RAG统计分析课程助手和豆包TTS语音工作流。">A collection of AI agents built on Dify, including RAG-based statistical analysis assistant and Doubao-powered TTS workflow.</p>
+        <div class="project-tech">
+          <span>Dify</span><span>Qwen</span><span>Doubao TTS</span><span>RAG</span><span>LLM</span>
         </div>
-        <div class="project-body">
-          <p data-en="A locally deployed intelligent Q&A system based on RAG, enabling precise Q&A from private documents for industrial equipment maintenance." data-zh="基于RAG的本地部署智能问答系统，基于私有文档进行精准问答，赋能工业设备维护知识管理。">A locally deployed intelligent Q&amp;A system based on RAG, enabling precise Q&amp;A from private documents for industrial equipment maintenance.</p>
-          <div class="project-tech">
-            <span>React</span><span>FastAPI</span><span>LangChain</span><span>ChromaDB</span><span>Qwen</span>
-          </div>
-        </div>
-        <div class="project-footer">
-          <a href="https://github.com/sharp-007/industrial_agent_mini_demo" target="_blank" class="project-link">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.694.825.576C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12z"/></svg>
-            GitHub
-          </a>
+        <div class="project-links">
+          <a href="https://github.com/sharp-007/Dify_Agents" target="_blank">GitHub</a>
+          <a href="https://udify.app/chat/XT3989ncVdT34kF1" target="_blank">Online Demo</a>
         </div>
       </div>
+    </div>
 
-      <!-- AssetOpsBench -->
-      <div class="project-card fade-in">
-        <div class="project-header">
-          <span class="project-category" data-en="AI / Agent" data-zh="AI / Agent">AI / Agent</span>
-          <h3>AssetOpsBench Agent Demo</h3>
-          <div class="project-date">2026</div>
+    <!-- More Projects (compact list) -->
+    <h3 class="subsection-title fade-in" data-en="More Projects" data-zh="更多项目">More Projects</h3>
+    <div class="project-list fade-in">
+      <a href="https://github.com/sharp-007/mini_demo_with_AssetOpsBench" target="_blank" class="project-list-item">
+        <div>
+          <strong>AssetOpsBench Agent Demo</strong>
+          <span class="project-list-tech">React · Python · LLM · AI Agent</span>
         </div>
-        <div class="project-body">
-          <p data-en="AI agent mini demo based on IBM's AssetOpsBench framework for asset management operations." data-zh="基于IBM AssetOpsBench框架的AI智能体演示，面向资产管理运维场景。">AI agent mini demo based on IBM's AssetOpsBench framework for asset management operations.</p>
-          <div class="project-tech">
-            <span>React</span><span>Python</span><span>LLM</span><span>AI Agent</span>
-          </div>
+        <span class="project-list-desc" data-en="AI agent demo for asset management operations based on IBM's framework" data-zh="基于IBM AssetOpsBench框架的AI智能体演示">AI agent demo for asset management operations based on IBM's framework</span>
+      </a>
+      <a href="https://github.com/sharp-007/Kaggle_Dogs_vs_Cats_PyTorch" target="_blank" class="project-list-item">
+        <div>
+          <strong>Kaggle Dogs vs Cats</strong>
+          <span class="project-list-tech">PyTorch · Transfer Learning</span>
         </div>
-        <div class="project-footer">
-          <a href="https://github.com/sharp-007/mini_demo_with_AssetOpsBench" target="_blank" class="project-link">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.694.825.576C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12z"/></svg>
-            GitHub
-          </a>
+        <span class="project-list-desc" data-en="Image classification with transfer learning on classic dataset" data-zh="基于迁移学习的经典猫狗分类">Image classification with transfer learning on classic dataset</span>
+      </a>
+      <a href="https://github.com/sharp-007/Hexi-Corridor-Silk-Road" target="_blank" class="project-list-item">
+        <div>
+          <strong data-en="Hexi Corridor Silk Road" data-zh="河西走廊丝绸之路">Hexi Corridor Silk Road</strong>
+          <span class="project-list-tech">JMP · Data Visualization</span>
         </div>
-      </div>
-
-      <!-- Kaggle -->
-      <div class="project-card fade-in">
-        <div class="project-header">
-          <span class="project-category" data-en="Deep Learning" data-zh="深度学习">Deep Learning</span>
-          <h3>Kaggle Dogs vs Cats</h3>
-          <div class="project-date">2025</div>
+        <span class="project-list-desc" data-en="Data-driven storytelling along China's ancient Silk Road" data-zh="数据驱动的丝绸之路故事">Data-driven storytelling along China's ancient Silk Road</span>
+      </a>
+      <a href="https://github.com/sharp-007/Arcing-Issue-Solution-with-Random-Forest" target="_blank" class="project-list-item">
+        <div>
+          <strong data-en="Arcing Issue — Random Forest" data-zh="电弧问题 — 随机森林">Arcing Issue — Random Forest</strong>
+          <span class="project-list-tech">Python · Random Forest · JMP</span>
         </div>
-        <div class="project-body">
-          <p data-en="Image classification using PyTorch with transfer learning techniques on the classic Kaggle Dogs vs Cats dataset." data-zh="基于PyTorch和迁移学习技术，在经典Kaggle猫狗数据集上实现图像分类。">Image classification using PyTorch with transfer learning techniques on the classic Kaggle Dogs vs Cats dataset.</p>
-          <div class="project-tech">
-            <span>PyTorch</span><span>Deep Learning</span><span>Transfer Learning</span>
-          </div>
+        <span class="project-list-desc" data-en="Manufacturing defect classification with key factor identification" data-zh="制造业缺陷分类与关键因子识别">Manufacturing defect classification with key factor identification</span>
+      </a>
+      <a href="https://github.com/sharp-007/Digit-Recognizer" target="_blank" class="project-list-item">
+        <div>
+          <strong data-en="Digit Recognizer" data-zh="手写数字识别">Digit Recognizer</strong>
+          <span class="project-list-tech">Python · ML · MNIST</span>
         </div>
-        <div class="project-footer">
-          <a href="https://github.com/sharp-007/Kaggle_Dogs_vs_Cats_PyTorch" target="_blank" class="project-link">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.694.825.576C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12z"/></svg>
-            GitHub
-          </a>
-        </div>
-      </div>
-
-      <!-- Hexi Corridor -->
-      <div class="project-card fade-in">
-        <div class="project-header">
-          <span class="project-category" data-en="Data Visualization" data-zh="数据可视化">Data Visualization</span>
-          <h3 data-en="Hexi Corridor Silk Road" data-zh="河西走廊丝绸之路">Hexi Corridor Silk Road</h3>
-          <div class="project-date">2024</div>
-        </div>
-        <div class="project-body">
-          <p data-en="A data-driven journey along China's ancient Silk Road, combining interactive data visualization with travel storytelling across geography, history, culture, and climate." data-zh="以数据驱动的视角探索中国古丝绸之路，融合交互式数据可视化与旅行故事，跨越地理、历史、文化和气候维度。">A data-driven journey along China's ancient Silk Road, combining interactive data visualization with travel storytelling across geography, history, culture, and climate.</p>
-          <div class="project-tech">
-            <span>JMP</span><span>Graph Builder</span><span>Data Visualization</span>
-          </div>
-        </div>
-        <div class="project-footer">
-          <a href="https://github.com/sharp-007/Hexi-Corridor-Silk-Road" target="_blank" class="project-link">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.694.825.576C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12z"/></svg>
-            GitHub
-          </a>
-          <a href="https://www.youtube.com/watch?v=bP5fksosc08" target="_blank" class="project-link">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z"/><polygon fill="#fff" points="9.545,15.568 15.818,12 9.545,8.432"/></svg>
-            Video
-          </a>
-        </div>
-      </div>
-
-      <!-- Arcing Random Forest -->
-      <div class="project-card fade-in">
-        <div class="project-header">
-          <span class="project-category" data-en="Machine Learning" data-zh="机器学习">Machine Learning</span>
-          <h3 data-en="Arcing Issue — Random Forest" data-zh="电弧问题 — 随机森林">Arcing Issue — Random Forest</h3>
-          <div class="project-date">2022</div>
-        </div>
-        <div class="project-body">
-          <p data-en="Manufacturing quality issue analysis using Random Forest for defect classification and key factor identification." data-zh="应用随机森林模型分析制造业质量问题，实现缺陷分类与关键因子识别。">Manufacturing quality issue analysis using Random Forest for defect classification and key factor identification.</p>
-          <div class="project-tech">
-            <span>Python</span><span>Random Forest</span><span>JMP</span><span>Statistical Analysis</span>
-          </div>
-        </div>
-        <div class="project-footer">
-          <a href="https://github.com/sharp-007/Arcing-Issue-Solution-with-Random-Forest" target="_blank" class="project-link">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.694.825.576C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12z"/></svg>
-            GitHub
-          </a>
-        </div>
-      </div>
-
-      <!-- Digit Recognizer -->
-      <div class="project-card fade-in">
-        <div class="project-header">
-          <span class="project-category" data-en="Machine Learning" data-zh="机器学习">Machine Learning</span>
-          <h3 data-en="Digit Recognizer" data-zh="手写数字识别">Digit Recognizer</h3>
-          <div class="project-date">2022</div>
-        </div>
-        <div class="project-body">
-          <p data-en="Handwritten digit recognition project using machine learning techniques on the MNIST dataset." data-zh="基于机器学习技术在MNIST数据集上实现手写数字识别。">Handwritten digit recognition project using machine learning techniques on the MNIST dataset.</p>
-          <div class="project-tech">
-            <span>Python</span><span>Machine Learning</span><span>Data Science</span>
-          </div>
-        </div>
-        <div class="project-footer">
-          <a href="https://github.com/sharp-007/Digit-Recognizer" target="_blank" class="project-link">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.694.825.576C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12z"/></svg>
-            GitHub
-          </a>
-        </div>
-      </div>
-
+        <span class="project-list-desc" data-en="Handwritten digit recognition on MNIST" data-zh="MNIST手写数字识别">Handwritten digit recognition on MNIST</span>
+      </a>
     </div>
   </div>
 </section>
@@ -352,57 +249,90 @@
 <!-- ===== BLOG ===== -->
 <section class="section" id="blog">
   <div class="section-inner">
-    <h2 class="section-title fade-in" data-en="Blog &amp; Articles" data-zh="博客与文章">Blog &amp; Articles</h2>
-    <p class="section-subtitle fade-in" data-en="Thoughts on AI, data science, and industrial intelligence — from WeChat Official Account '失控的智能'" data-zh="关于AI、数据科学与工业智能的思考 — 来自微信公众号「失控的智能」">Thoughts on AI, data science, and industrial intelligence — from WeChat Official Account '失控的智能'</p>
+    <h2 class="section-title fade-in" data-en="Blog & Articles" data-zh="博客与文章">Blog &amp; Articles</h2>
+    <p class="section-subtitle fade-in" data-en="From WeChat Official Account '失控的智能'" data-zh="来自微信公众号「失控的智能」">From WeChat Official Account '失控的智能'</p>
 
-    <div class="blog-grid">
-
-      <article class="blog-card fade-in">
-        <div class="blog-cover" style="background-image: url('blog/covers/placeholder-1.svg');">
-          <span class="blog-tag">AI Agent</span>
+    <div class="blog-list">
+      <article class="blog-item fade-in">
+        <div class="blog-thumb">
+          <img src="blog/covers/placeholder-1.svg" alt="ChatBI" loading="lazy">
         </div>
-        <div class="blog-content">
-          <time class="blog-date">2026-04-20</time>
+        <div class="blog-body">
+          <div class="blog-meta">
+            <span class="blog-tag">AI Agent</span>
+            <time>2026-04-20</time>
+          </div>
           <h3 data-en="How I Built an Industrial ChatBI Platform with Vibe Coding" data-zh="我如何用Vibe Coding构建工业ChatBI平台">How I Built an Industrial ChatBI Platform with Vibe Coding</h3>
           <p data-en="A deep dive into building an OEE analytics platform that combines traditional dashboards with AI-powered NL2SQL conversational analysis." data-zh="深入剖析如何构建一个融合传统BI仪表盘与AI对话式NL2SQL分析的OEE分析平台。">A deep dive into building an OEE analytics platform that combines traditional dashboards with AI-powered NL2SQL conversational analysis.</p>
-          <div class="blog-footer">
-            <span class="blog-source" data-en="WeChat: 失控的智能" data-zh="微信公众号：失控的智能">WeChat: 失控的智能</span>
-          </div>
         </div>
       </article>
 
-      <article class="blog-card fade-in">
-        <div class="blog-cover" style="background-image: url('blog/covers/placeholder-2.svg');">
-          <span class="blog-tag">RAG</span>
+      <article class="blog-item fade-in">
+        <div class="blog-thumb">
+          <img src="blog/covers/placeholder-2.svg" alt="RAG" loading="lazy">
         </div>
-        <div class="blog-content">
-          <time class="blog-date">2026-03-15</time>
+        <div class="blog-body">
+          <div class="blog-meta">
+            <span class="blog-tag">RAG</span>
+            <time>2026-03-15</time>
+          </div>
           <h3 data-en="RAG in Practice: Building an Industrial Knowledge Q&A System" data-zh="RAG实战：构建工业知识库智能问答系统">RAG in Practice: Building an Industrial Knowledge Q&amp;A System</h3>
           <p data-en="From PDF parsing to semantic retrieval — a practical guide to building RAG applications for industrial equipment maintenance." data-zh="从PDF解析到语义检索——工业设备维护RAG应用的实战指南。">From PDF parsing to semantic retrieval — a practical guide to building RAG applications for industrial equipment maintenance.</p>
-          <div class="blog-footer">
-            <span class="blog-source" data-en="WeChat: 失控的智能" data-zh="微信公众号：失控的智能">WeChat: 失控的智能</span>
-          </div>
         </div>
       </article>
 
-      <article class="blog-card fade-in">
-        <div class="blog-cover" style="background-image: url('blog/covers/placeholder-3.svg');">
-          <span class="blog-tag" data-en="Computer Vision" data-zh="计算机视觉">Computer Vision</span>
+      <article class="blog-item fade-in">
+        <div class="blog-thumb">
+          <img src="blog/covers/placeholder-3.svg" alt="YOLO11" loading="lazy">
         </div>
-        <div class="blog-content">
-          <time class="blog-date">2026-02-10</time>
+        <div class="blog-body">
+          <div class="blog-meta">
+            <span class="blog-tag" data-en="Computer Vision" data-zh="计算机视觉">Computer Vision</span>
+            <time>2026-02-10</time>
+          </div>
           <h3 data-en="YOLO11 for Industrial Defect Detection: A Complete Guide" data-zh="YOLO11工业缺陷检测：完整指南">YOLO11 for Industrial Defect Detection: A Complete Guide</h3>
           <p data-en="How to fine-tune YOLO11 on a small industrial dataset and deploy a defect detection system with Streamlit." data-zh="如何在小样本工业数据集上微调YOLO11，并用Streamlit部署缺陷检测系统。">How to fine-tune YOLO11 on a small industrial dataset and deploy a defect detection system with Streamlit.</p>
-          <div class="blog-footer">
-            <span class="blog-source" data-en="WeChat: 失控的智能" data-zh="微信公众号：失控的智能">WeChat: 失控的智能</span>
-          </div>
         </div>
       </article>
-
     </div>
+  </div>
+</section>
 
-    <div style="text-align: center; margin-top: 24px;" class="fade-in">
-      <a href="https://github.com/sharp-007" target="_blank" class="btn-outline" style="display: inline-flex; align-items: center; gap: 6px; padding: 8px 20px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.85rem;" data-en="Follow WeChat: 失控的智能 for more" data-zh="关注公众号「失控的智能」阅读更多">Follow WeChat: 失控的智能 for more</a>
+<!-- ===== TALKS & COURSES ===== -->
+<section class="section" id="talks">
+  <div class="section-inner">
+    <h2 class="section-title fade-in" data-en="Public Courses & White Papers" data-zh="公开课与白皮书">Public Courses &amp; White Papers</h2>
+    <p class="section-subtitle fade-in" data-en="Educational content on DOE, SPC, and quality engineering" data-zh="实验设计、统计过程控制与质量工程系列教育内容">Educational content on DOE, SPC, and quality engineering</p>
+
+    <div class="talks-grid">
+      <a href="https://www.jmp.com/zh-hans/resources/on-demand/local/jmp-doe-from-zero-on-demand" target="_blank" class="talk-card fade-in">
+        <div class="talk-icon">&#127891;</div>
+        <div>
+          <strong data-en="DOE Intro: Master DOE in 60 Minutes" data-zh="DOE入门课：60分钟轻松掌握DOE">DOE Intro: Master DOE in 60 Minutes</strong>
+          <p data-en="DOE fundamentals covering scenarios, workflows, classic cases, and custom design." data-zh="DOE基础入门，涵盖应用场景、操作流程、经典案例与定制设计实战。">DOE fundamentals covering scenarios, workflows, classic cases, and custom design.</p>
+        </div>
+      </a>
+      <a href="https://www.jmp.com/zh-hans/resources/on-demand/local/doe-industry-cases-study" target="_blank" class="talk-card fade-in">
+        <div class="talk-icon">&#127891;</div>
+        <div>
+          <strong data-en="DOE Case Studies: 3 Methods for R&D" data-zh="DOE经典案例实战：3种实验设计方法">DOE Case Studies: 3 Methods for R&amp;D</strong>
+          <p data-en="Three industry DOE cases comparing classical, optimal, and modern experimental design." data-zh="3大行业领域DOE应用实例，对比经典、最优与现代实验设计方法。">Three industry DOE cases comparing classical, optimal, and modern experimental design.</p>
+        </div>
+      </a>
+      <a href="https://www.jmp.com/zh-hans/resources/white-papers/doe-from-zero-for-engineers" target="_blank" class="talk-card fade-in">
+        <div class="talk-icon">&#128196;</div>
+        <div>
+          <strong data-en="DOE White Paper: Zero-to-One Guide" data-zh="从0到1掌握DOE白皮书">DOE White Paper: Zero-to-One Guide</strong>
+          <p data-en="Comprehensive DOE handbook with case studies for engineers starting from scratch." data-zh="DOE核心知识与案例解析白皮书，帮助工程师从零掌握DOE。">Comprehensive DOE handbook with case studies for engineers starting from scratch.</p>
+        </div>
+      </a>
+      <a href="https://www.jmp.com/zh-hans/resources/on-demand/local/get-started-quality-engineer" target="_blank" class="talk-card fade-in">
+        <div class="talk-icon">&#127891;</div>
+        <div>
+          <strong data-en="Quality Analysis: 2 Cases for QE" data-zh="45分钟完全入门质量分析">Quality Analysis: 2 Cases for QE</strong>
+          <p data-en="SPC process capability and Six Sigma yield improvement covering 80% of QE scenarios." data-zh="SPC过程能力分析与六西格玛良率提升案例，覆盖80%质量分析场景。">SPC process capability and Six Sigma yield improvement covering 80% of QE scenarios.</p>
+        </div>
+      </a>
     </div>
   </div>
 </section>
@@ -411,20 +341,13 @@
 <section class="section" id="creative">
   <div class="section-inner">
     <h2 class="section-title fade-in" data-en="Creative Work" data-zh="创意作品">Creative Work</h2>
-    <p class="section-subtitle fade-in" data-en="AIGC music and short video creator" data-zh="AIGC音乐与短片创作">AIGC music and short video creator</p>
     <div class="creative-card fade-in">
       <div class="creative-text">
         <h3 data-en="Light Everywhere" data-zh="城市角落的光">Light Everywhere</h3>
-        <p data-en="An original AIGC short film combining AI-generated music and visuals, exploring light and warmth in urban corners." data-zh="一部原创AIGC短片，融合AI生成的音乐与视觉，探索城市角落的光与温暖。">An original AIGC short film combining AI-generated music and visuals, exploring light and warmth in urban corners.</p>
+        <p data-en="An original AIGC short film combining AI-generated music and visuals." data-zh="一部原创AIGC短片，融合AI生成的音乐与视觉。">An original AIGC short film combining AI-generated music and visuals.</p>
         <div class="creative-links">
-          <a href="https://www.youtube.com/watch?v=OMIchR2C6qs" target="_blank">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z"/><polygon fill="#fff" points="9.545,15.568 15.818,12 9.545,8.432"/></svg>
-            YouTube
-          </a>
-          <a href="https://www.bilibili.com/video/BV1pyofB2Ebe/" target="_blank">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-            Bilibili
-          </a>
+          <a href="https://www.youtube.com/watch?v=OMIchR2C6qs" target="_blank">YouTube</a>
+          <a href="https://www.bilibili.com/video/BV1pyofB2Ebe/" target="_blank">Bilibili</a>
         </div>
       </div>
       <div class="creative-video">
@@ -443,138 +366,67 @@
 <!-- ===== EXPERIENCE ===== -->
 <section class="section" id="experience">
   <div class="section-inner">
-    <h2 class="section-title fade-in" data-en="Work Experience" data-zh="工作经历">Work Experience</h2>
-    <p class="section-subtitle fade-in" data-en="Data analysis consulting and manufacturing R&D" data-zh="数据分析顾问与制造业研发">Data analysis consulting and manufacturing R&amp;D</p>
+    <h2 class="section-title fade-in" data-en="Experience" data-zh="工作经历">Experience</h2>
 
-    <div class="timeline">
-      <div class="timeline-item fade-in">
-        <div class="timeline-card">
-          <div class="timeline-header">
-            <div>
-              <h3><a href="https://www.sas.com/en_hk/home.html" target="_blank">SAS</a></h3>
-              <div class="timeline-role" data-en="Systems Engineer (Data Analysis Consultant)" data-zh="系统工程师（数据分析顾问）">Systems Engineer (Data Analysis Consultant)</div>
-            </div>
-            <div class="timeline-meta">Beijing &middot; 2023.02 – 2025.12</div>
-          </div>
-          <ul class="timeline-highlights">
-            <li data-en="JMP software data analysis consultant for North China territory, translated business requirements into actionable Data and AI solutions for leading manufacturing clients across semiconductor and automotive industries." data-zh="担任JMP软件华北区数据分析顾问，面向半导体和汽车等制造业标杆客户，将业务需求转化为可落地的数据分析与AI赋能解决方案。">JMP software data analysis consultant for North China territory, translated business requirements into actionable Data and AI solutions for leading manufacturing clients across semiconductor and automotive industries.</li>
-            <li data-en="Managed end-to-end engagement from requirements analysis to pilot project, facilitated strategic clients' digital transformation and secured million-RMB-level orders." data-zh="从需求沟通到项目试点全程跟进，助力战略客户数字化转型，赢得百万级订单。">Managed end-to-end engagement from requirements analysis to pilot project, facilitated strategic clients' digital transformation and secured million-RMB-level orders.</li>
-            <li data-en="Designed and delivered Webinars and White Papers, averaging 1,000+ registrations per webinar, set the annual record for the most popular webinar." data-zh="设计并交付直播课与白皮书，平均注册超1000人，创年度最受欢迎直播课记录。">Designed and delivered Webinars and White Papers, averaging 1,000+ registrations per webinar, set the annual record for the most popular webinar.</li>
-            <li data-en="Led the development of an AI-powered JMP Statistical Analysis Report Assistant Add-In, integrating LLM visual understanding and report interpretation." data-zh="主导AI驱动的JMP统计分析报告助手插件开发，集成大模型视觉理解与报告解读能力。">Led the development of an AI-powered JMP Statistical Analysis Report Assistant Add-In, integrating LLM visual understanding and report interpretation.</li>
+    <div class="exp-list">
+      <div class="exp-item fade-in">
+        <div class="exp-period">2023 – 2025</div>
+        <div class="exp-body">
+          <h3><a href="https://www.sas.com/en_hk/home.html" target="_blank">SAS</a></h3>
+          <div class="exp-role" data-en="Systems Engineer (Data Analysis Consultant)" data-zh="系统工程师（数据分析顾问）">Systems Engineer (Data Analysis Consultant)</div>
+          <ul>
+            <li data-en="JMP data analysis consultant for North China territory, serving semiconductor and automotive manufacturing clients." data-zh="JMP软件华北区数据分析顾问，服务半导体和汽车制造业客户。">JMP data analysis consultant for North China territory, serving semiconductor and automotive manufacturing clients.</li>
+            <li data-en="Delivered Webinars averaging 1,000+ registrations, set annual record for most popular webinar." data-zh="交付直播课平均注册超1000人，创年度最受欢迎直播课记录。">Delivered Webinars averaging 1,000+ registrations, set annual record for most popular webinar.</li>
+            <li data-en="Led AI-powered JMP Statistical Analysis Report Assistant Add-In development." data-zh="主导AI驱动的JMP统计分析报告助手插件开发。">Led AI-powered JMP Statistical Analysis Report Assistant Add-In development.</li>
           </ul>
         </div>
       </div>
-      <div class="timeline-item fade-in">
-        <div class="timeline-card">
-          <div class="timeline-header">
-            <div>
-              <h3><a href="https://www.starneto.com/" target="_blank" data-en="Beijing StarNeto Technology" data-zh="北京星网宇达科技">Beijing StarNeto Technology</a></h3>
-              <div class="timeline-role" data-en="Department Manager" data-zh="总体部 · 部门经理">Department Manager</div>
-            </div>
-            <div class="timeline-meta">Beijing &middot; 2017.09 – 2022.09</div>
-          </div>
-          <ul class="timeline-highlights">
-            <li data-en="Led product metric improvement and new-product system design, brought core metrics to a domestic leading level and significantly shortened the R&D to mass production path." data-zh="主导产品指标优化与新产品开发总体方案设计，将核心指标提升至国内领先水平，显著加速产品研发至量产的转化。">Led product metric improvement and new-product system design, brought core metrics to a domestic leading level and significantly shortened the R&D to mass production path.</li>
-            <li data-en="Led technical proposal development for bidding, contributed to 5+ successful project bidding wins worth multimillion-RMB." data-zh="主导投标书技术方案大纲制定和编写，助力5+个千万级项目成功中标。">Led technical proposal development for bidding, contributed to 5+ successful project bidding wins worth multimillion-RMB.</li>
-            <li data-en="Awards: Excellent Employee, Technology Innovation Prize, Excellent Manager." data-zh="荣誉奖项：优秀员工，技术创新奖，优秀部门经理。">Awards: Excellent Employee, Technology Innovation Prize, Excellent Manager.</li>
+      <div class="exp-item fade-in">
+        <div class="exp-period">2017 – 2022</div>
+        <div class="exp-body">
+          <h3><a href="https://www.starneto.com/" target="_blank" data-en="Beijing StarNeto Technology" data-zh="北京星网宇达科技">Beijing StarNeto Technology</a></h3>
+          <div class="exp-role" data-en="Department Manager" data-zh="总体部 · 部门经理">Department Manager</div>
+          <ul>
+            <li data-en="Led product R&D and technical proposal development, contributed to 5+ successful multimillion-RMB project bids." data-zh="主导产品研发和技术方案编写，助力5+个千万级项目成功中标。">Led product R&D and technical proposal development, contributed to 5+ successful multimillion-RMB project bids.</li>
+            <li data-en="Awards: Excellent Employee, Technology Innovation Prize, Excellent Manager." data-zh="荣誉：优秀员工、技术创新奖、优秀部门经理。">Awards: Excellent Employee, Technology Innovation Prize, Excellent Manager.</li>
           </ul>
         </div>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- ===== EDUCATION ===== -->
-<section class="section" id="education">
-  <div class="section-inner">
-    <h2 class="section-title fade-in" data-en="Education" data-zh="教育背景">Education</h2>
-    <p class="section-subtitle fade-in" data-en="Beihang University — Materials Science &amp; Engineering" data-zh="北京航空航天大学 — 材料科学与工程">Beihang University — Materials Science &amp; Engineering</p>
-    <div class="edu-grid">
-      <div class="edu-card fade-in">
-        <h3 data-en="Beihang University" data-zh="北京航空航天大学">Beihang University</h3>
-        <div class="edu-degree" data-en="M.Eng. in Materials Science &amp; Engineering" data-zh="工学硕士 · 材料科学与工程">M.Eng. in Materials Science &amp; Engineering</div>
-        <div class="edu-meta">2014.09 – 2017.03 &middot; Beijing</div>
-        <div class="edu-highlight" data-en="Grade: 90/100, First Prize Academic Scholarship, Excellent Graduate" data-zh="平均分90/100，学业奖学金一等奖，优秀毕业生">Grade: 90/100, First Prize Academic Scholarship, Excellent Graduate</div>
+    <!-- Education inline -->
+    <h3 class="subsection-title fade-in" data-en="Education" data-zh="教育背景">Education</h3>
+    <div class="exp-list">
+      <div class="exp-item fade-in">
+        <div class="exp-period">2014 – 2017</div>
+        <div class="exp-body">
+          <h3 data-en="Beihang University" data-zh="北京航空航天大学">Beihang University</h3>
+          <div class="exp-role" data-en="M.Eng. in Materials Science & Engineering" data-zh="工学硕士 · 材料科学与工程">M.Eng. in Materials Science &amp; Engineering</div>
+          <p class="exp-note" data-en="Grade: 90/100 · First Prize Scholarship · Excellent Graduate" data-zh="均分90/100 · 学业奖学金一等奖 · 优秀毕业生">Grade: 90/100 · First Prize Scholarship · Excellent Graduate</p>
+        </div>
       </div>
-      <div class="edu-card fade-in">
-        <h3 data-en="Beihang University" data-zh="北京航空航天大学">Beihang University</h3>
-        <div class="edu-degree" data-en="B.Eng. in Materials Science &amp; Engineering" data-zh="工学学士 · 材料科学与工程">B.Eng. in Materials Science &amp; Engineering</div>
-        <div class="edu-meta">2010.09 – 2014.06 &middot; Beijing</div>
-        <div class="edu-highlight" data-en="Grade: 86/100, First Prize Scholarship, Excellent Student" data-zh="平均分86/100，学习优秀奖学金一等奖，优秀生">Grade: 86/100, First Prize Scholarship, Excellent Student</div>
+      <div class="exp-item fade-in">
+        <div class="exp-period">2010 – 2014</div>
+        <div class="exp-body">
+          <h3 data-en="Beihang University" data-zh="北京航空航天大学">Beihang University</h3>
+          <div class="exp-role" data-en="B.Eng. in Materials Science & Engineering" data-zh="工学学士 · 材料科学与工程">B.Eng. in Materials Science &amp; Engineering</div>
+          <p class="exp-note" data-en="Grade: 86/100 · First Prize Scholarship · Excellent Student" data-zh="均分86/100 · 学习优秀奖学金一等奖 · 优秀生">Grade: 86/100 · First Prize Scholarship · Excellent Student</p>
+        </div>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- ===== CERTIFICATIONS ===== -->
-<section class="section" id="certs">
-  <div class="section-inner">
-    <h2 class="section-title fade-in" data-en="Certifications" data-zh="专业证书">Certifications</h2>
-    <p class="section-subtitle fade-in" data-en="Professional credentials in AI, data science, and project management" data-zh="AI、数据科学与项目管理领域专业认证">Professional credentials in AI, data science, and project management</p>
-    <div class="certs-grid">
-      <div class="cert-item fade-in">
-        <div class="cert-icon">&#127942;</div>
-        <div>
-          <a href="https://www.credly.com/badges/a758c464-6935-4adc-9cf2-d5785520fc5e" target="_blank"><strong>PMP</strong> — Project Management Professional</a>
-          <div class="cert-org">PMI Certified</div>
-        </div>
-      </div>
-      <div class="cert-item fade-in">
-        <div class="cert-icon">&#127942;</div>
-        <div>
-          <a href="https://www.linkedin.com/in/joyce-pan-549596138/details/certifications/" target="_blank"><strong data-en="Alibaba Cloud ACP" data-zh="阿里云大模型ACP">Alibaba Cloud ACP</strong> — Senior LLM Engineer</a>
-          <div class="cert-org" data-en="Alibaba Cloud" data-zh="阿里云认证">Alibaba Cloud</div>
-        </div>
-      </div>
-      <div class="cert-item fade-in">
-        <div class="cert-icon">&#127942;</div>
-        <div>
-          <a href="https://www.linkedin.com/in/joyce-pan-549596138/details/certifications/" target="_blank"><strong data-en="Deep Learning Architect" data-zh="深度学习架构师">Deep Learning Architect</strong></a>
-          <div class="cert-org" data-en="MIIT Talent Exchange Center" data-zh="工信部人才交流中心认证">MIIT Talent Exchange Center</div>
-        </div>
-      </div>
-      <div class="cert-item fade-in">
-        <div class="cert-icon">&#128202;</div>
-        <div>
-          <a href="https://www.credly.com/badges/18d44ede-7045-4a93-b156-48b435f325f9/public_url" target="_blank">Statistical Thinking &amp; Problem Solving</a>
-          <div class="cert-org">SAS Certified</div>
-        </div>
-      </div>
-      <div class="cert-item fade-in">
-        <div class="cert-icon">&#128202;</div>
-        <div>
-          <a href="https://www.credly.com/badges/60dde99a-3fc5-4823-b207-098da667ed2a/public_url" target="_blank">Exploratory Data Analysis</a>
-          <div class="cert-org">SAS Certified</div>
-        </div>
-      </div>
-      <div class="cert-item fade-in">
-        <div class="cert-icon">&#128202;</div>
-        <div>
-          <a href="https://www.credly.com/badges/d2f98c3c-4910-4243-9771-40139310ae99/public_url" target="_blank">Quality Methods</a>
-          <div class="cert-org">SAS Certified</div>
-        </div>
-      </div>
-      <div class="cert-item fade-in">
-        <div class="cert-icon">&#128187;</div>
-        <div>
-          <a href="https://www.coursera.org/account/accomplishments/verify/K5E5ST5SYFCW" target="_blank">Python for Data Science, AI &amp; Development</a>
-          <div class="cert-org">IBM / Coursera</div>
-        </div>
-      </div>
-      <div class="cert-item fade-in">
-        <div class="cert-icon">&#128187;</div>
-        <div>
-          <a href="https://www.hackerrank.com/certificates/5a483dd934b9" target="_blank">SQL Intermediate</a>
-          <div class="cert-org">HackerRank</div>
-        </div>
-      </div>
-      <div class="cert-item fade-in">
-        <div class="cert-icon">&#127760;</div>
-        <div>
-          <a href="https://www.coursera.org/account/accomplishments/specialization/VA23KNUCMFJU" target="_blank">Business English Communication Skills</a>
-          <div class="cert-org">University of Washington / Coursera</div>
-        </div>
-      </div>
+    <!-- Certifications inline -->
+    <h3 class="subsection-title fade-in" data-en="Certifications" data-zh="专业证书">Certifications</h3>
+    <div class="cert-list fade-in">
+      <a href="https://www.credly.com/badges/a758c464-6935-4adc-9cf2-d5785520fc5e" target="_blank"><strong>PMP</strong> — PMI</a>
+      <a href="https://www.linkedin.com/in/joyce-pan-549596138/details/certifications/" target="_blank"><strong data-en="Alibaba Cloud ACP" data-zh="阿里云大模型ACP">Alibaba Cloud ACP</strong> — Senior LLM Engineer</a>
+      <a href="https://www.linkedin.com/in/joyce-pan-549596138/details/certifications/" target="_blank"><strong data-en="Deep Learning Architect" data-zh="深度学习架构师">Deep Learning Architect</strong> — MIIT</a>
+      <a href="https://www.credly.com/badges/18d44ede-7045-4a93-b156-48b435f325f9/public_url" target="_blank">Statistical Thinking — SAS</a>
+      <a href="https://www.credly.com/badges/60dde99a-3fc5-4823-b207-098da667ed2a/public_url" target="_blank">Exploratory Data Analysis — SAS</a>
+      <a href="https://www.credly.com/badges/d2f98c3c-4910-4243-9771-40139310ae99/public_url" target="_blank">Quality Methods — SAS</a>
+      <a href="https://www.coursera.org/account/accomplishments/verify/K5E5ST5SYFCW" target="_blank">Python for Data Science — IBM</a>
+      <a href="https://www.hackerrank.com/certificates/5a483dd934b9" target="_blank">SQL Intermediate — HackerRank</a>
+      <a href="https://www.coursera.org/account/accomplishments/specialization/VA23KNUCMFJU" target="_blank">Business English — UW</a>
     </div>
   </div>
 </section>
@@ -582,44 +434,17 @@
 <!-- ===== PUBLICATIONS ===== -->
 <section class="section" id="publications">
   <div class="section-inner">
-    <h2 class="section-title fade-in" data-en="Publications &amp; Patents" data-zh="论文与专利">Publications &amp; Patents</h2>
-    <p class="section-subtitle fade-in" data-en="Academic research and intellectual property" data-zh="学术研究与知识产权">Academic research and intellectual property</p>
-    <div class="pub-list">
-      <div class="pub-item fade-in">
+    <h2 class="section-title fade-in" data-en="Publications & Patents" data-zh="论文与专利">Publications &amp; Patents</h2>
+    <div class="pub-list fade-in">
+      <div class="pub-item">
         <span class="pub-type" data-en="Invention Patent" data-zh="发明专利">Invention Patent</span>
-        <h3><a href="https://patents.google.com/patent/CN110106474B/en" target="_blank" data-en="Conductive Fabric, Preparation Method and Application" data-zh="导电织物、其制备方法及应用">Conductive Fabric, Preparation Method and Application</a></h3>
-        <div class="pub-meta">Tao Xu, Yefeng Xu, Jiao Pan &middot; CN110106474B &middot; 2021</div>
+        <a href="https://patents.google.com/patent/CN110106474B/en" target="_blank" data-en="Conductive Fabric, Preparation Method and Application" data-zh="导电织物、其制备方法及应用">Conductive Fabric, Preparation Method and Application</a>
+        <span class="pub-meta">Tao Xu, Yefeng Xu, Jiao Pan &middot; CN110106474B &middot; 2021</span>
       </div>
-      <div class="pub-item fade-in">
+      <div class="pub-item">
         <span class="pub-type">SCI Paper</span>
-        <h3><a href="https://journals.sagepub.com/doi/10.1177/0731684416684020" target="_blank">Hybrid Effect of Carbon Nanotube Film and Ultrathin Carbon Fiber Prepreg Composites</a></h3>
-        <div class="pub-meta">Jiao Pan, Min Li, Shaokai Wang et al. &middot; Journal of Reinforced Plastics and Composites &middot; 2016</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== COURSES ===== -->
-<section class="section" id="courses">
-  <div class="section-inner">
-    <h2 class="section-title fade-in" data-en="Public Courses &amp; White Papers" data-zh="公开课与白皮书">Public Courses &amp; White Papers</h2>
-    <p class="section-subtitle fade-in" data-en="Educational content on DOE, SPC, and quality engineering" data-zh="实验设计、统计过程控制与质量工程系列教育内容">Educational content on DOE, SPC, and quality engineering</p>
-    <div class="courses-grid">
-      <div class="course-card fade-in">
-        <h3><a href="https://www.jmp.com/zh-hans/resources/on-demand/local/jmp-doe-from-zero-on-demand" target="_blank" data-en="DOE Intro: Master DOE in 60 Minutes" data-zh="DOE入门课：从方法到实践，60分钟轻松掌握DOE">DOE Intro: Master DOE in 60 Minutes</a></h3>
-        <p data-en="DOE fundamentals covering application scenarios, workflows, classic cases, and custom design practice." data-zh="DOE基础入门课程，涵盖应用场景、操作流程、经典案例与定制设计实战。">DOE fundamentals covering application scenarios, workflows, classic cases, and custom design practice.</p>
-      </div>
-      <div class="course-card fade-in">
-        <h3><a href="https://www.jmp.com/zh-hans/resources/on-demand/local/doe-industry-cases-study" target="_blank" data-en="DOE Case Studies: 3 Methods for R&amp;D" data-zh="DOE经典案例实战：3种实验设计方法">DOE Case Studies: 3 Methods for R&amp;D</a></h3>
-        <p data-en="Three industry DOE application cases comparing classical, optimal, and modern experimental design methods." data-zh="3大行业领域DOE应用实例，对比经典、最优与现代实验设计方法。">Three industry DOE application cases comparing classical, optimal, and modern experimental design methods.</p>
-      </div>
-      <div class="course-card fade-in">
-        <h3><a href="https://www.jmp.com/zh-hans/resources/white-papers/doe-from-zero-for-engineers" target="_blank" data-en="DOE White Paper: Zero-to-One Guide" data-zh="从0到1掌握DOE白皮书">DOE White Paper: Zero-to-One Guide</a></h3>
-        <p data-en="A comprehensive DOE knowledge handbook with case studies, designed for engineers starting from scratch." data-zh="DOE核心知识与案例解析白皮书，帮助工程师从零基础快速掌握DOE。">A comprehensive DOE knowledge handbook with case studies, designed for engineers starting from scratch.</p>
-      </div>
-      <div class="course-card fade-in">
-        <h3><a href="https://www.jmp.com/zh-hans/resources/on-demand/local/get-started-quality-engineer" target="_blank" data-en="Quality Analysis: 2 Cases for QE" data-zh="45分钟完全入门质量分析">Quality Analysis: 2 Cases for QE</a></h3>
-        <p data-en="SPC process capability analysis and Six Sigma yield improvement cases covering 80% of quality engineer scenarios." data-zh="通过SPC过程能力分析与六西格玛良率提升2大案例，覆盖质量工程师核心分析场景。">SPC process capability analysis and Six Sigma yield improvement cases covering 80% of quality engineer scenarios.</p>
+        <a href="https://journals.sagepub.com/doi/10.1177/0731684416684020" target="_blank">Hybrid Effect of Carbon Nanotube Film and Ultrathin Carbon Fiber Prepreg Composites</a>
+        <span class="pub-meta">Jiao Pan, Min Li, Shaokai Wang et al. &middot; J. Reinforced Plastics &amp; Composites &middot; 2016</span>
       </div>
     </div>
   </div>
@@ -629,38 +454,27 @@
 <section class="contact-section" id="contact">
   <div class="contact-inner fade-in">
     <h2 data-en="Let's Connect" data-zh="联系我">Let's Connect</h2>
-    <p data-en="Open to Data+AI / Industrial AI project collaboration. Let's create value together!" data-zh="欢迎 Data+AI / 工业智能 项目合作与交流，一起创造价值！">Open to Data+AI / Industrial AI project collaboration. Let's create value together!</p>
-    <div class="contact-grid">
-      <div class="contact-card">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        <a href="mailto:panjiao007@126.com">panjiao007@126.com</a>
-      </div>
-      <div class="contact-card">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.694.825.576C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12z"/></svg>
-        <a href="https://github.com/sharp-007" target="_blank">github.com/sharp-007</a>
-      </div>
-      <div class="contact-card">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-        <a href="https://www.linkedin.com/in/joyce-pan-549596138/" target="_blank">LinkedIn Profile</a>
-      </div>
+    <p data-en="Open to Data+AI / Industrial AI project collaboration." data-zh="欢迎 Data+AI / 工业智能 项目合作与交流！">Open to Data+AI / Industrial AI project collaboration.</p>
+    <div class="contact-links">
+      <a href="mailto:panjiao007@126.com">panjiao007@126.com</a>
+      <a href="https://github.com/sharp-007" target="_blank">GitHub</a>
+      <a href="https://www.linkedin.com/in/joyce-pan-549596138/" target="_blank">LinkedIn</a>
     </div>
     <div class="qrcode-section">
       <div class="qrcode-card">
         <img src="images/wechat-oa.jpg" alt="WeChat Official Account QR Code" loading="lazy">
-        <div class="qrcode-label" data-en="WeChat Official Account" data-zh="微信公众号">WeChat Official Account</div>
-        <div class="qrcode-name">失控的智能</div>
+        <span data-en="WeChat: 失控的智能" data-zh="公众号：失控的智能">WeChat: 失控的智能</span>
       </div>
       <div class="qrcode-card">
         <img src="images/wechat-channel.jpg" alt="WeChat Channel QR Code" loading="lazy">
-        <div class="qrcode-label" data-en="WeChat Channel" data-zh="微信视频号">WeChat Channel</div>
-        <div class="qrcode-name">AIPanda007</div>
+        <span data-en="Channel: AIPanda007" data-zh="视频号：AIPanda007">Channel: AIPanda007</span>
       </div>
     </div>
   </div>
 </section>
 
 <footer class="footer">
-  <p>&copy; 2026 Joyce Pan. All rights reserved.</p>
+  <p>&copy; 2026 Joyce Pan &middot; Built with pure HTML &amp; CSS</p>
 </footer>
 
 <script src="script.js"></script>
