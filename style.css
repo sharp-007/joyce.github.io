@@ -9,7 +9,7 @@
   --border: #e5e7eb;
   --radius: 8px;
   --transition: 0.2s ease;
-  --max-w: 820px;
+  --max-w: 900px;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -31,7 +31,7 @@ a:hover { text-decoration: underline; }
 }
 .nav.scrolled { box-shadow: 0 1px 8px rgba(0,0,0,0.06); }
 .nav-inner {
-  max-width: 1000px; margin: 0 auto; padding: 0 24px;
+  max-width: var(--max-w); margin: 0 auto; padding: 0 24px;
   display: flex; align-items: center; justify-content: space-between; height: 52px;
 }
 .nav-logo { font-size: 1.05rem; font-weight: 700; color: var(--text); text-decoration: none; }
@@ -61,8 +61,8 @@ a:hover { text-decoration: underline; }
 }
 .hero-profile { flex-shrink: 0; }
 .hero-photo {
-  width: 150px; height: 150px; border-radius: 50%;
-  object-fit: cover; border: 3px solid var(--border);
+  width: 180px; height: 180px; border-radius: 50%;
+  object-fit: cover; object-position: center 25%; border: 3px solid var(--border);
 }
 .hero-text { flex: 1; min-width: 0; }
 .hero-text h1 { font-size: 2rem; font-weight: 800; margin-bottom: 8px; line-height: 1.2; }
@@ -89,38 +89,31 @@ a:hover { text-decoration: underline; }
   font-size: 0.73rem; font-weight: 600; color: var(--text-secondary);
 }
 
-/* ===== CAROUSEL (horizontal scroll) ===== */
+/* ===== CAROUSEL (grid) ===== */
 .carousel-section {
   background: var(--bg-alt); border-bottom: 1px solid var(--border);
-  padding: 24px 0; position: relative;
+  padding: 28px 24px;
 }
 .carousel-wrapper {
-  max-width: 1100px; margin: 0 auto; position: relative;
-  overflow: hidden; padding: 0 24px;
+  max-width: var(--max-w); margin: 0 auto; position: relative;
 }
 .carousel-track {
-  display: flex; gap: 16px; overflow-x: auto;
-  scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
-  scrollbar-width: none; cursor: grab;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
 }
-.carousel-track::-webkit-scrollbar { display: none; }
-.carousel-card { scroll-snap-align: start; }
 .carousel-card {
-  flex: 0 0 260px; border-radius: var(--radius); overflow: hidden;
+  border-radius: var(--radius); overflow: hidden;
   border: 1px solid var(--border); background: var(--bg);
   text-decoration: none; transition: var(--transition);
 }
 .carousel-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); transform: translateY(-2px); text-decoration: none; }
-.carousel-card img { width: 100%; aspect-ratio: 16/10; object-fit: cover; display: block; }
+.carousel-card img { width: 100%; aspect-ratio: 16/10; object-fit: cover; display: block; background: var(--bg-alt); }
 .carousel-label {
   padding: 10px 14px;
 }
 .carousel-label strong { display: block; font-size: 0.85rem; color: var(--text); margin-bottom: 2px; }
 .carousel-label span { font-size: 0.73rem; color: var(--text-light); }
 .carousel-nav {
-  position: absolute; top: 50%; transform: translateY(-50%);
-  background: var(--bg); border: 1px solid var(--border); cursor: pointer;
-  width: 32px; height: 32px; border-radius: 50%;
+  display: none;
   display: flex; align-items: center; justify-content: center;
   font-size: 1.1rem; color: var(--text); z-index: 2;
   transition: var(--transition); box-shadow: 0 2px 6px rgba(0,0,0,0.06);
@@ -170,7 +163,7 @@ a:hover { text-decoration: underline; }
   transform: translateY(-3px); text-decoration: none;
 }
 .photo-card img {
-  width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block;
+  width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; background: var(--bg-alt);
 }
 .photo-card-label {
   padding: 10px 12px; font-size: 0.82rem; font-weight: 600;
@@ -263,10 +256,10 @@ a:hover { text-decoration: underline; }
 .qrcode-section { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; }
 .qrcode-card { display: flex; flex-direction: column; align-items: center; gap: 8px; }
 .qrcode-card img {
-  width: 120px; height: 120px; object-fit: contain; border-radius: 8px;
-  background: #fff; padding: 6px;
+  width: 160px; height: 160px; object-fit: contain; border-radius: 8px;
+  background: #fff; padding: 8px;
 }
-.qrcode-card span { font-size: 0.78rem; opacity: 0.7; }
+.qrcode-card span { font-size: 0.85rem; opacity: 0.7; }
 
 .footer {
   background: var(--text); color: rgba(255,255,255,0.4);
@@ -292,8 +285,7 @@ a:hover { text-decoration: underline; }
   .hero-links, .hero-badges { justify-content: center; }
   .hero { padding: 68px 16px 32px; }
 
-  .carousel-card { flex: 0 0 200px; }
-  .carousel-nav { display: none; }
+  .carousel-track { grid-template-columns: 1fr; gap: 12px; }
 
   .section { padding: 36px 16px; }
   .section-title { font-size: 1.25rem; }

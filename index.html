@@ -35,7 +35,7 @@
 <section class="hero" id="about">
   <div class="hero-inner">
     <div class="hero-profile">
-      <img src="images/profile-placeholder.svg" alt="Joyce Pan" class="hero-photo" id="profilePhoto">
+      <img src="images/Joyce_Photo.jpg" alt="Joyce Pan" class="hero-photo" id="profilePhoto" onerror="this.style.background='linear-gradient(135deg,#004f90,#00a8e8)'">
     </div>
     <div class="hero-text">
       <h1>Joyce Pan</h1>
@@ -64,158 +64,7 @@
 <section class="carousel-section">
   <div class="carousel-wrapper" id="carousel">
     <div class="carousel-track" id="carouselTrack">
-      <a class="carousel-card" href="#project-chatbi">
-        <img src="images/projects/chatbi-oee.svg" alt="ChatBI OEE">
-        <div class="carousel-label">
-          <strong data-en="ChatBI OEE Platform" data-zh="工业ChatBI平台">ChatBI OEE Platform</strong>
-          <span>NL2SQL · Streamlit · Qwen</span>
-        </div>
-      </a>
-      <a class="carousel-card" href="#project-defect">
-        <img src="images/projects/defect-detection.svg" alt="Defect Detection">
-        <div class="carousel-label">
-          <strong data-en="Defect Detection" data-zh="缺陷检测系统">Defect Detection</strong>
-          <span>YOLO11 · PyTorch · OpenCV</span>
-        </div>
-      </a>
-      <a class="carousel-card" href="#project-rag">
-        <img src="images/projects/rag-qa.svg" alt="RAG Q&A">
-        <div class="carousel-label">
-          <strong data-en="Industrial RAG Q&A" data-zh="工业知识问答">Industrial RAG Q&amp;A</strong>
-          <span>LangChain · ChromaDB · React</span>
-        </div>
-      </a>
-      <a class="carousel-card" href="#project-dify">
-        <img src="images/projects/dify-agents.svg" alt="Dify Agents">
-        <div class="carousel-label">
-          <strong>Dify Agents</strong>
-          <span>RAG · Doubao TTS · Workflow</span>
-        </div>
-      </a>
-    </div>
-    <button class="carousel-nav carousel-prev" onclick="moveCarousel(-1)">&#8249;</button>
-    <button class="carousel-nav carousel-next" onclick="moveCarousel(1)">&#8250;</button>
-  </div>
-</section>
-
-<!-- ===== FEATURED PROJECTS ===== -->
-<section class="section" id="projects">
-  <div class="section-inner">
-    <h2 class="section-title fade-in" data-en="Featured Projects" data-zh="精选项目">Featured Projects</h2>
-    <p class="section-subtitle fade-in" data-en="AI-powered solutions for industrial applications" data-zh="面向工业场景的AI解决方案">AI-powered solutions for industrial applications</p>
-
-    <div class="photo-grid photo-grid-4 fade-in">
-      <a href="https://github.com/sharp-007/ChatBI_OEE" target="_blank" class="photo-card" id="project-chatbi">
-        <img src="images/projects/chatbi-oee.svg" alt="ChatBI OEE Platform" loading="lazy">
-        <div class="photo-card-label" data-en="Industrial ChatBI Platform" data-zh="工业ChatBI对话分析平台">Industrial ChatBI Platform</div>
-      </a>
-      <a href="https://github.com/sharp-007/carbon_fiber_defect_detection_system_pyhton3.10" target="_blank" class="photo-card" id="project-defect">
-        <img src="images/projects/defect-detection.svg" alt="Defect Detection" loading="lazy">
-        <div class="photo-card-label" data-en="Defect Detection · YOLO11" data-zh="工业缺陷检测 · YOLO11">Defect Detection · YOLO11</div>
-      </a>
-      <a href="https://github.com/sharp-007/industrial_agent_mini_demo" target="_blank" class="photo-card" id="project-rag">
-        <img src="images/projects/rag-qa.svg" alt="RAG Q&A System" loading="lazy">
-        <div class="photo-card-label" data-en="Industrial RAG Q&A" data-zh="工业知识问答系统">Industrial RAG Q&amp;A</div>
-      </a>
-      <a href="https://github.com/sharp-007/Dify_Agents" target="_blank" class="photo-card" id="project-dify">
-        <img src="images/projects/dify-agents.svg" alt="Dify Agents" loading="lazy">
-        <div class="photo-card-label">Dify Agents · RAG + TTS</div>
-      </a>
-    </div>
-
-    <div class="photo-grid photo-grid-4 fade-in" style="margin-top: 16px;">
-      <a href="https://github.com/sharp-007/mini_demo_with_AssetOpsBench" target="_blank" class="photo-card">
-        <img src="images/projects/assetops.svg" alt="AssetOpsBench" loading="lazy">
-        <div class="photo-card-label">AssetOpsBench Agent</div>
-      </a>
-      <a href="https://github.com/sharp-007/Kaggle_Dogs_vs_Cats_PyTorch" target="_blank" class="photo-card">
-        <img src="images/projects/kaggle-cats.svg" alt="Kaggle Dogs vs Cats" loading="lazy">
-        <div class="photo-card-label">Kaggle Dogs vs Cats</div>
-      </a>
-      <a href="https://github.com/sharp-007/Hexi-Corridor-Silk-Road" target="_blank" class="photo-card">
-        <img src="images/projects/hexi-corridor.svg" alt="Hexi Corridor" loading="lazy">
-        <div class="photo-card-label" data-en="Hexi Corridor Silk Road" data-zh="河西走廊丝绸之路">Hexi Corridor Silk Road</div>
-      </a>
-      <a href="https://github.com/sharp-007/Arcing-Issue-Solution-with-Random-Forest" target="_blank" class="photo-card">
-        <img src="images/projects/arcing-rf.svg" alt="Arcing Random Forest" loading="lazy">
-        <div class="photo-card-label" data-en="Arcing Issue · Random Forest" data-zh="电弧问题 · 随机森林">Arcing Issue · Random Forest</div>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- ===== BLOG ===== -->
-<section class="section" id="blog">
-  <div class="section-inner">
-    <h2 class="section-title fade-in" data-en="Blog & Articles" data-zh="博客与文章">Blog &amp; Articles</h2>
-    <p class="section-subtitle fade-in" data-en="From WeChat Official Account '失控的智能'" data-zh="来自微信公众号「失控的智能」">From WeChat Official Account '失控的智能'</p>
-
-    <div class="photo-grid photo-grid-3 fade-in">
-      <div class="photo-card">
-        <img src="blog/covers/placeholder-1.svg" alt="ChatBI Article" loading="lazy">
-        <div class="photo-card-label" data-en="How I Built an Industrial ChatBI Platform with Vibe Coding" data-zh="我如何用Vibe Coding构建工业ChatBI平台">How I Built an Industrial ChatBI Platform with Vibe Coding</div>
-      </div>
-      <div class="photo-card">
-        <img src="blog/covers/placeholder-2.svg" alt="RAG Article" loading="lazy">
-        <div class="photo-card-label" data-en="RAG in Practice: Building an Industrial Knowledge Q&A System" data-zh="RAG实战：构建工业知识库智能问答系统">RAG in Practice: Building an Industrial Knowledge Q&amp;A System</div>
-      </div>
-      <div class="photo-card">
-        <img src="blog/covers/placeholder-3.svg" alt="YOLO11 Article" loading="lazy">
-        <div class="photo-card-label" data-en="YOLO11 for Industrial Defect Detection: A Complete Guide" data-zh="YOLO11工业缺陷检测：完整指南">YOLO11 for Industrial Defect Detection: A Complete Guide</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== TALKS & COURSES ===== -->
-<section class="section" id="talks">
-  <div class="section-inner">
-    <h2 class="section-title fade-in" data-en="Featured Talks & White Papers" data-zh="公开课与白皮书">Featured Talks &amp; White Papers</h2>
-    <p class="section-subtitle fade-in" data-en="Educational content on DOE, SPC, and quality engineering — averaging 1,000+ registrations per webinar" data-zh="DOE、SPC与质量工程系列教育内容 — 平均每场直播课注册超1000人">Educational content on DOE, SPC, and quality engineering — averaging 1,000+ registrations per webinar</p>
-
-    <div class="photo-grid photo-grid-4 fade-in">
-      <a href="https://www.jmp.com/zh-hans/resources/on-demand/local/jmp-doe-from-zero-on-demand" target="_blank" class="photo-card">
-        <img src="images/talks/doe-intro.svg" alt="DOE Intro Webinar" loading="lazy">
-        <div class="photo-card-label" data-en="DOE Intro: Master DOE in 60 Minutes" data-zh="DOE入门课：60分钟轻松掌握DOE">DOE Intro: Master DOE in 60 Minutes</div>
-      </a>
-      <a href="https://www.jmp.com/zh-hans/resources/on-demand/local/doe-industry-cases-study" target="_blank" class="photo-card">
-        <img src="images/talks/doe-cases.svg" alt="DOE Case Studies" loading="lazy">
-        <div class="photo-card-label" data-en="DOE Case Studies: 3 Methods for R&D" data-zh="DOE经典案例实战：3种实验设计方法">DOE Case Studies: 3 Methods for R&amp;D</div>
-      </a>
-      <a href="https://www.jmp.com/zh-hans/resources/white-papers/doe-from-zero-for-engineers" target="_blank" class="photo-card">
-        <img src="images/talks/doe-whitepaper.svg" alt="DOE White Paper" loading="lazy">
-        <div class="photo-card-label" data-en="DOE White Paper: Zero-to-One Guide" data-zh="从0到1掌握DOE白皮书">DOE White Paper: Zero-to-One Guide</div>
-      </a>
-      <a href="https://www.jmp.com/zh-hans/resources/on-demand/local/get-started-quality-engineer" target="_blank" class="photo-card">
-        <img src="images/talks/quality-analysis.svg" alt="Quality Analysis Webinar" loading="lazy">
-        <div class="photo-card-label" data-en="Quality Analysis: 2 Cases for QE" data-zh="45分钟完全入门质量分析">Quality Analysis: 2 Cases for QE</div>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- ===== CREATIVE ===== -->
-<section class="section" id="creative">
-  <div class="section-inner">
-    <h2 class="section-title fade-in" data-en="Creative Work" data-zh="创意作品">Creative Work</h2>
-    <div class="creative-card fade-in">
-      <div class="creative-text">
-        <h3 data-en="Light Everywhere" data-zh="城市角落的光">Light Everywhere</h3>
-        <p data-en="An original AIGC short film combining AI-generated music and visuals." data-zh="一部原创AIGC短片，融合AI生成的音乐与视觉。">An original AIGC short film combining AI-generated music and visuals.</p>
-        <div class="creative-links">
-          <a href="https://www.youtube.com/watch?v=OMIchR2C6qs" target="_blank">YouTube</a>
-          <a href="https://www.bilibili.com/video/BV1pyofB2Ebe/" target="_blank">Bilibili</a>
-        </div>
-      </div>
-      <div class="creative-video">
-        <div class="video-switch">
-          <button class="video-switch-btn active" onclick="switchVideo('bilibili')">Bilibili</button>
-          <button class="video-switch-btn" onclick="switchVideo('youtube')">YouTube</button>
-        </div>
-        <div class="video-container" id="videoContainer">
-          <iframe id="videoFrame" src="https://player.bilibili.com/player.html?bvid=BV1pyofB2Ebe&autoplay=0" title="Light Everywhere" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" sandbox="allow-scripts allow-same-origin allow-popups allow-presentation"></iframe>
-        </div>
-      </div>
+      <!-- Dynamically rendered from data/carousel.json -->
     </div>
   </div>
 </section>
@@ -305,6 +154,42 @@
   </div>
 </section>
 
+<!-- ===== FEATURED PROJECTS ===== -->
+<section class="section" id="projects">
+  <div class="section-inner">
+    <h2 class="section-title fade-in" data-en="Featured Projects" data-zh="精选项目">Featured Projects</h2>
+    <p class="section-subtitle fade-in" data-en="AI-powered solutions for industrial applications" data-zh="面向工业场景的AI解决方案">AI-powered solutions for industrial applications</p>
+
+    <div id="projects-grid">
+      <!-- Dynamically rendered from data/projects.json -->
+    </div>
+  </div>
+</section>
+
+<!-- ===== BLOG ===== -->
+<section class="section" id="blog">
+  <div class="section-inner">
+    <h2 class="section-title fade-in" data-en="Blog & Articles" data-zh="博客与文章">Blog &amp; Articles</h2>
+    <p class="section-subtitle fade-in" data-en="From WeChat Official Account '失控的智能'" data-zh="来自微信公众号「失控的智能」">From WeChat Official Account '失控的智能'</p>
+
+    <div id="blogs-grid">
+      <!-- Dynamically rendered from data/blogs.json -->
+    </div>
+  </div>
+</section>
+
+<!-- ===== TALKS & COURSES ===== -->
+<section class="section" id="talks">
+  <div class="section-inner">
+    <h2 class="section-title fade-in" data-en="Featured Talks & White Papers" data-zh="公开课与白皮书">Featured Talks &amp; White Papers</h2>
+    <p class="section-subtitle fade-in" data-en="Educational content on DOE, SPC, and quality engineering — averaging 1,000+ registrations per webinar" data-zh="DOE、SPC与质量工程系列教育内容 — 平均每场直播课注册超1000人">Educational content on DOE, SPC, and quality engineering — averaging 1,000+ registrations per webinar</p>
+
+    <div id="talks-grid">
+      <!-- Dynamically rendered from data/talks.json -->
+    </div>
+  </div>
+</section>
+
 <!-- ===== PUBLICATIONS ===== -->
 <section class="section" id="publications">
   <div class="section-inner">
@@ -319,6 +204,32 @@
         <span class="pub-type">SCI Paper</span>
         <a href="https://journals.sagepub.com/doi/10.1177/0731684416684020" target="_blank">Hybrid Effect of Carbon Nanotube Film and Ultrathin Carbon Fiber Prepreg Composites</a>
         <span class="pub-meta">Jiao Pan, Min Li, Shaokai Wang et al. &middot; J. Reinforced Plastics &amp; Composites &middot; 2016</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CREATIVE ===== -->
+<section class="section" id="creative">
+  <div class="section-inner">
+    <h2 class="section-title fade-in" data-en="Creative Work" data-zh="创意作品">Creative Work</h2>
+    <div class="creative-card fade-in">
+      <div class="creative-text">
+        <h3 data-en="Light Everywhere" data-zh="城市角落的光">Light Everywhere</h3>
+        <p data-en="An original AIGC short film combining AI-generated music and visuals." data-zh="一部原创AIGC短片，融合AI生成的音乐与视觉。">An original AIGC short film combining AI-generated music and visuals.</p>
+        <div class="creative-links">
+          <a href="https://www.youtube.com/watch?v=OMIchR2C6qs" target="_blank">YouTube</a>
+          <a href="https://www.bilibili.com/video/BV1pyofB2Ebe/" target="_blank">Bilibili</a>
+        </div>
+      </div>
+      <div class="creative-video">
+        <div class="video-switch">
+          <button class="video-switch-btn active" onclick="switchVideo('bilibili')">Bilibili</button>
+          <button class="video-switch-btn" onclick="switchVideo('youtube')">YouTube</button>
+        </div>
+        <div class="video-container" id="videoContainer">
+          <iframe id="videoFrame" src="https://player.bilibili.com/player.html?bvid=BV1pyofB2Ebe&autoplay=0" title="Light Everywhere" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" sandbox="allow-scripts allow-same-origin allow-popups allow-presentation"></iframe>
+        </div>
       </div>
     </div>
   </div>

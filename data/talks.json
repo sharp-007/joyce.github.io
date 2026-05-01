@@ -1,0 +1,28 @@
+{
+  "items": [
+    {
+      "title_en": "DOE Intro: Master DOE in 60 Minutes",
+      "title_zh": "DOE入门课：60分钟轻松掌握DOE",
+      "cover": "images/talks/doe-intro.svg",
+      "url": "https://www.jmp.com/zh-hans/resources/on-demand/local/jmp-doe-from-zero-on-demand"
+    },
+    {
+      "title_en": "DOE Case Studies: 3 Methods for R&D",
+      "title_zh": "DOE经典案例实战：3种实验设计方法",
+      "cover": "images/talks/doe-cases.svg",
+      "url": "https://www.jmp.com/zh-hans/resources/on-demand/local/doe-industry-cases-study"
+    },
+    {
+      "title_en": "DOE White Paper: Zero-to-One Guide",
+      "title_zh": "从0到1掌握DOE白皮书",
+      "cover": "images/talks/doe-whitepaper.svg",
+      "url": "https://www.jmp.com/zh-hans/resources/white-papers/doe-from-zero-for-engineers"
+    },
+    {
+      "title_en": "Quality Analysis: 2 Cases for QE",
+      "title_zh": "45分钟完全入门质量分析",
+      "cover": "images/talks/quality-analysis.svg",
+      "url": "https://www.jmp.com/zh-hans/resources/on-demand/local/get-started-quality-engineer"
+    }
+  ]
+}

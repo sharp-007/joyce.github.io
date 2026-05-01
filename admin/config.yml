@@ -1,0 +1,75 @@
+backend:
+  name: github
+  repo: sharp-007/sharp-007.github.io
+  branch: main
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+# Use local backend for development (npx decap-server)
+local_backend: true
+
+collections:
+  - name: "carousel"
+    label: "首页走马灯 Carousel"
+    file: "data/carousel.json"
+    format: "json"
+    description: "首页高亮展示的走马灯卡片"
+    fields:
+      - label: "Items"
+        name: "items"
+        widget: "list"
+        fields:
+          - { label: "英文标题 Title (EN)", name: "title_en", widget: "string" }
+          - { label: "中文标题 Title (ZH)", name: "title_zh", widget: "string" }
+          - { label: "副标题 Subtitle", name: "subtitle", widget: "string" }
+          - { label: "封面图 Cover", name: "cover", widget: "image" }
+          - { label: "链接 URL", name: "url", widget: "string" }
+
+  - name: "projects"
+    label: "项目 Projects"
+    file: "data/projects.json"
+    format: "json"
+    description: "个人项目展示"
+    fields:
+      - label: "Items"
+        name: "items"
+        widget: "list"
+        fields:
+          - { label: "英文标题 Title (EN)", name: "title_en", widget: "string" }
+          - { label: "中文标题 Title (ZH)", name: "title_zh", widget: "string" }
+          - { label: "封面图 Cover", name: "cover", widget: "image" }
+          - { label: "项目链接 URL", name: "url", widget: "string" }
+          - { label: "HTML ID", name: "id", widget: "string", required: false, default: "" }
+          - { label: "重点展示 Featured", name: "featured", widget: "boolean", default: false }
+
+  - name: "blogs"
+    label: "博客 Blog"
+    file: "data/blogs.json"
+    format: "json"
+    description: "微信公众号文章"
+    fields:
+      - label: "Items"
+        name: "items"
+        widget: "list"
+        fields:
+          - { label: "英文标题 Title (EN)", name: "title_en", widget: "string" }
+          - { label: "中文标题 Title (ZH)", name: "title_zh", widget: "string" }
+          - { label: "封面图 Cover", name: "cover", widget: "image" }
+          - { label: "文章链接 URL", name: "url", widget: "string", required: false, default: "" }
+          - { label: "日期 Date", name: "date", widget: "date", format: "YYYY-MM-DD" }
+
+  - name: "talks"
+    label: "演讲与白皮书 Talks"
+    file: "data/talks.json"
+    format: "json"
+    description: "公开课、白皮书和演讲"
+    fields:
+      - label: "Items"
+        name: "items"
+        widget: "list"
+        fields:
+          - { label: "英文标题 Title (EN)", name: "title_en", widget: "string" }
+          - { label: "中文标题 Title (ZH)", name: "title_zh", widget: "string" }
+          - { label: "封面图 Cover", name: "cover", widget: "image" }
+          - { label: "链接 URL", name: "url", widget: "string" }

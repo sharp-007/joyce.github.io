@@ -1,0 +1,25 @@
+{
+  "items": [
+    {
+      "title_en": "How I Built an Industrial ChatBI Platform with Vibe Coding",
+      "title_zh": "我如何用Vibe Coding构建工业ChatBI平台",
+      "cover": "blog/covers/placeholder-1.svg",
+      "url": "",
+      "date": "2026-04-15"
+    },
+    {
+      "title_en": "RAG in Practice: Building an Industrial Knowledge Q&A System",
+      "title_zh": "RAG实战：构建工业知识库智能问答系统",
+      "cover": "blog/covers/placeholder-2.svg",
+      "url": "",
+      "date": "2026-03-20"
+    },
+    {
+      "title_en": "YOLO11 for Industrial Defect Detection: A Complete Guide",
+      "title_zh": "YOLO11工业缺陷检测：完整指南",
+      "cover": "blog/covers/placeholder-3.svg",
+      "url": "",
+      "date": "2026-02-10"
+    }
+  ]
+}

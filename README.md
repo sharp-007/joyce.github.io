@@ -14,13 +14,24 @@ https://<your-github-username>.github.io/<repo-name>/
 
 ```
 joyce_pan_portfolio/
-├── index.html        # 主页面（包含所有版块内容）
-├── style.css         # 全局样式
-├── script.js         # 交互逻辑（语言切换、视频源切换、导航、动画等）
+├── index.html          # 主页面（静态框架 + 动态容器）
+├── style.css           # 全局样式
+├── script.js           # 交互逻辑 + 数据驱动渲染
+├── data/               # 模块化内容数据（JSON）
+│   ├── projects.json   # 项目数据
+│   ├── blogs.json      # 博客文章数据
+│   ├── talks.json      # 演讲与白皮书数据
+│   └── carousel.json   # 首页走马灯数据
+├── admin/              # Decap CMS 可视化管理后台
+│   ├── index.html      # CMS 入口页面
+│   └── config.yml      # CMS 配置文件
 ├── blog/
-│   └── covers/       # 博客封面占位图
-├── QRCODE/           # 微信公众号二维码图片
-├── resume/           # 简历 YAML 数据源
+│   └── covers/         # 博客封面图片
+├── images/
+│   ├── projects/       # 项目封面图片
+│   ├── talks/          # 演讲封面图片
+│   └── uploads/        # CMS 上传图片目录
+├── resume/             # 简历 YAML 数据源
 │   ├── Joyce_EN.yaml
 │   └── Joyce_ZH.yaml
 └── README.md
@@ -33,6 +44,8 @@ joyce_pan_portfolio/
 - **视频嵌入** — 支持 YouTube / Bilibili 双源切换
 - **平滑滚动与动画** — 基于 Intersection Observer 的淡入效果
 - **纯静态** — 无需后端服务，直接部署到任意静态托管平台
+- **数据驱动** — 项目、博客、演讲等内容存储在 JSON 文件中，页面动态渲染
+- **可视化 CMS** — 集成 Decap CMS，通过浏览器后台可视化添加/编辑内容，自动提交到 GitHub
 
 ## 部署指南
 
@@ -94,20 +107,60 @@ npx serve .
 
 然后在浏览器访问 `http://localhost:8000`。
 
+## 内容管理（Decap CMS）
+
+网站集成了 [Decap CMS](https://decapcms.org/)，支持通过浏览器可视化管理内容。
+
+### 在线使用（GitHub Pages 部署后）
+
+1. 访问 `https://<your-domain>/admin/`
+2. 通过 GitHub 账号授权登录
+3. 在可视化界面中添加/编辑博客、项目、演讲等内容
+4. 点击发布，CMS 自动将修改 commit 到 GitHub 仓库
+5. GitHub Pages 自动重新部署，主页即时更新
+
+### 本地开发使用
+
+```bash
+# 1. 安装并启动 Decap CMS 本地代理
+npx decap-server
+
+# 2. 在另一个终端启动本地 HTTP 服务器
+npx serve .
+
+# 3. 访问 http://localhost:3000/admin/ 即可在本地可视化编辑
+```
+
+### GitHub OAuth 配置
+
+在线使用 CMS 需要配置 GitHub OAuth App：
+
+1. 在 GitHub Settings > Developer settings > OAuth Apps 中创建 OAuth App
+2. 设置 Homepage URL 为你的站点地址，Authorization callback URL 为 `https://<your-domain>/admin/`
+3. 部署一个 OAuth 代理服务（推荐使用免费的 Cloudflare Worker 方案）
+4. 在 `admin/config.yml` 中的 `backend` 部分添加 `base_url` 指向代理地址
+
+详见 [Decap CMS 文档](https://decapcms.org/docs/github-backend/)。
+
 ## 自定义修改
 
 | 修改内容 | 对应文件 |
 |---------|---------|
-| 个人信息、项目、经历等 | `index.html` |
+| 项目展示 | `data/projects.json` 或通过 CMS 后台 |
+| 博客文章 | `data/blogs.json` 或通过 CMS 后台 |
+| 演讲/白皮书 | `data/talks.json` 或通过 CMS 后台 |
+| 首页走马灯 | `data/carousel.json` 或通过 CMS 后台 |
+| 个人信息、经历等 | `index.html` |
 | 颜色、字体、布局样式 | `style.css` |
 | 语言切换、视频源、导航交互 | `script.js` |
-| 简历数据 | `resume/*.yaml` |
+| CMS 配置（字段定义等） | `admin/config.yml` |
 
 ## 技术栈
 
 - HTML5
 - CSS3（CSS Variables、Flexbox、Grid、动画）
-- Vanilla JavaScript（ES6+）
+- Vanilla JavaScript（ES6+、Fetch API 数据驱动）
+- [Decap CMS](https://decapcms.org/)（可视化内容管理）
 - Google Fonts（Inter + Noto Sans SC）
 
 ## License

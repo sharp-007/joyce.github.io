@@ -1,14 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="640" height="360" viewBox="0 0 640 360">
-  <defs>
-    <linearGradient id="bg2" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#00a8e8;stop-opacity:0.15"/>
-      <stop offset="100%" style="stop-color:#004f90;stop-opacity:0.1"/>
-    </linearGradient>
-  </defs>
-  <rect width="640" height="360" fill="url(#bg2)"/>
-  <text x="320" y="160" text-anchor="middle" font-family="Inter,sans-serif" font-size="48" font-weight="700" fill="#004f90" opacity="0.3">RAG</text>
-  <text x="320" y="210" text-anchor="middle" font-family="Inter,sans-serif" font-size="20" fill="#004f90" opacity="0.25">Industrial Knowledge Q&amp;A</text>
-  <circle cx="540" cy="80" r="50" fill="#00a8e8" opacity="0.05"/>
-  <circle cx="100" cy="280" r="45" fill="#004f90" opacity="0.05"/>
-  <rect x="260" y="240" width="120" height="4" rx="2" fill="#00a8e8" opacity="0.1"/>
+  <rect width="640" height="360" fill="#eef6fb"/>
+  <circle cx="540" cy="80" r="50" fill="#00a8e8" opacity="0.06"/>
+  <circle cx="100" cy="280" r="45" fill="#004f90" opacity="0.06"/>
+  <text x="320" y="150" text-anchor="middle" font-family="Arial,sans-serif" font-size="42" font-weight="700" fill="#004f90" opacity="0.25">RAG</text>
+  <text x="320" y="195" text-anchor="middle" font-family="Arial,sans-serif" font-size="18" fill="#004f90" opacity="0.2">Industrial Knowledge QA</text>
+  <rect x="260" y="230" width="120" height="4" rx="2" fill="#00a8e8" opacity="0.1"/>
 </svg>

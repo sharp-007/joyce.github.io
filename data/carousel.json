@@ -1,0 +1,25 @@
+{
+  "items": [
+    {
+      "title_en": "ChatBI OEE Platform",
+      "title_zh": "工业ChatBI平台",
+      "subtitle": "NL2SQL · Streamlit · Qwen",
+      "cover": "images/projects/chatbi-oee.svg",
+      "url": "#project-chatbi"
+    },
+    {
+      "title_en": "Industrial RAG Q&A",
+      "title_zh": "工业知识问答",
+      "subtitle": "LangChain · ChromaDB · React",
+      "cover": "images/projects/rag-qa.svg",
+      "url": "#project-rag"
+    },
+    {
+      "title_en": "Light Everywhere",
+      "title_zh": "城市角落的光",
+      "subtitle": "AIGC Short Film · AI Music & Visuals",
+      "cover": "blog/covers/placeholder-1.svg",
+      "url": "#creative"
+    }
+  ]
+}
