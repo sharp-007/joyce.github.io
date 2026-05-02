@@ -4,29 +4,43 @@
       "title_en": "Understanding How LLMs Reshape Data Platforms in One Diagram",
       "title_zh": "一图理解大模型如何重塑数据平台",
       "cover": "images/blogs/impact_diagram_zh.png",
-      "url": "https://mp.weixin.qq.com/s/RlMWMXGu4taOElHMOSVk-g",
+      "url": "https://mp.weixin.qq.com/s/eIQ0NeJ9hnBqkX6ueDvy2A",
       "date": "2026-04-20"
     },
     {
-      "title_en": "How I Built an Industrial ChatBI Platform with Vibe Coding",
-      "title_zh": "我如何用Vibe Coding构建工业ChatBI平台",
-      "cover": "blog/covers/placeholder-1.svg",
-      "url": "",
+      "title_en": "The Ultimate Guide to World Models",
+      "title_zh": "一文读懂世界模型",
+      "cover": "/images/uploads/world-model-wechat-cover.png",
+      "url": "https://mp.weixin.qq.com/s/Dq5zCliOY9LeO0Uzh3oTCA?token=2126128470&lang=zh_CN",
       "date": "2026-04-15"
     },
     {
-      "title_en": "RAG in Practice: Building an Industrial Knowledge Q&A System",
-      "title_zh": "RAG实战：构建工业知识库智能问答系统",
-      "cover": "blog/covers/placeholder-2.svg",
-      "url": "",
+      "title_en": "What Defines Human Value in the Era of AI?",
+      "title_zh": "AI时代，人类的核心价值在哪里？",
+      "cover": "/images/uploads/xiaohongshu_cover.png",
+      "url": "https://mp.weixin.qq.com/s/79hOq2ySP2MQts5QpMe7kg?token=2126128470&lang=zh_CN",
       "date": "2026-03-20"
     },
     {
-      "title_en": "YOLO11 for Industrial Defect Detection: A Complete Guide",
-      "title_zh": "YOLO11工业缺陷检测：完整指南",
-      "cover": "blog/covers/placeholder-3.svg",
-      "url": "",
+      "title_en": "In an AI-Driven World, Play the Long Game",
+      "title_zh": "AI时代如何反脆弱：相信时间的力量",
+      "cover": "/images/uploads/wechat-illustration-03-fundamentals-practice.png",
+      "url": "https://mp.weixin.qq.com/s/cDDkY_QcgwUJKKTHa95UgQ",
       "date": "2026-02-10"
+    },
+    {
+      "url": "https://mp.weixin.qq.com/s/6kTeCudFb2IB3j5evO73gQ",
+      "title_zh": "一图理解世界模型",
+      "title_en": "World Models, Explained in One Diagram",
+      "cover": "/images/uploads/worldmodels_xiaohongshu.png",
+      "date": "2026-05-02"
+    },
+    {
+      "url": "https://mp.weixin.qq.com/s/RlMWMXGu4taOElHMOSVk-g",
+      "title_zh": "大模型如何重塑数据平台？一张图讲清楚10层技术栈的变与不变",
+      "title_en": "How Large Models Are Reshaping Data Platforms: One Diagram, 10 Layers Explained",
+      "cover": "/images/uploads/wechat-cover-llm-data-platform.png",
+      "date": "2026-05-02"
     }
   ]
 }
