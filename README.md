@@ -144,11 +144,18 @@ npx serve .
 
 | 修改内容 | 对应文件 |
 |---------|---------|
-| 项目展示 | `data/projects.json` 或通过 CMS 后台 |
-| 博客文章 | `data/blogs.json` 或通过 CMS 后台 |
-| 演讲/白皮书 | `data/talks.json` 或通过 CMS 后台 |
-| 首页走马灯 | `data/carousel.json` 或通过 CMS 后台 |
-| 个人信息、经历等 | `index.html` |
+| 首页走马灯 (Carousel) | `data/carousel.json` 或通过 CMS 后台 |
+| 精选项目 (Projects) | `data/projects.json` 或通过 CMS 后台 |
+| 博客文章 (Blog) | `data/blogs.json` 或通过 CMS 后台 |
+| 技术分享 (Talks) | `data/talks.json` 或通过 CMS 后台 |
+| 个人简介 (Hero) | `index.html` — Hero 模块 |
+| 工作经历 (Experience) | `index.html` — Experience 模块 |
+| 教育背景 (Education) | `index.html` — Education 模块 |
+| 专业证书 (Certifications) | `index.html` — Certifications 模块 |
+| 职业技能 (Skills) | `index.html` — Skills 模块 |
+| 发表作品 (Publications) | `index.html` — Publications 模块 |
+| 创意作品 (Creative) | `index.html` — Creative 模块 |
+| 联系方式 (Contact) | `index.html` — Contact 模块 |
 | 颜色、字体、布局样式 | `style.css` |
 | 语言切换、视频源、导航交互 | `script.js` |
 | CMS 配置（字段定义等） | `admin/config.yml` |
