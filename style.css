@@ -32,32 +32,32 @@ a:hover { text-decoration: underline; }
 /* ===== NAV ===== */
 .nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-  background: rgba(255,255,255,0.98); backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(8, 145, 178, 0.1); transition: var(--transition);
+  background: linear-gradient(135deg, #0e7490 0%, #059669 100%);
+  border-bottom: none; transition: var(--transition);
 }
-.nav.scrolled { box-shadow: 0 2px 12px rgba(8, 145, 178, 0.08); }
+.nav.scrolled { box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15); }
 .nav-inner {
   max-width: var(--max-w); margin: 0 auto; padding: 0 32px;
   display: flex; align-items: center; justify-content: space-between; height: 40px;
 }
 .nav-logo { 
   font-size: 1rem; font-weight: 700; text-decoration: none;
-  background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  color: #fff;
 }
 .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; }
 .nav-links a {
-  text-decoration: none; color: var(--text-secondary); font-size: 0.85rem; font-weight: 500;
+  text-decoration: none; color: rgba(255,255,255,0.85); font-size: 0.85rem; font-weight: 500;
   padding: 6px 12px; border-radius: 8px; transition: var(--transition);
 }
-.nav-links a:hover { color: var(--primary); background: var(--gradient-subtle); }
-.nav-links a.active { color: var(--primary); background: var(--gradient-subtle); font-weight: 600; }
+.nav-links a:hover { color: #fff; background: rgba(255,255,255,0.15); }
+.nav-links a.active { color: #fff; background: rgba(255,255,255,0.2); font-weight: 600; }
 .lang-toggle {
-  background: var(--gradient); color: #fff; border: none;
+  background: rgba(255,255,255,0.2); color: #fff; border: 1px solid rgba(255,255,255,0.3);
   padding: 4px 12px; border-radius: 4px; cursor: pointer;
   font-size: 0.75rem; font-weight: 600; transition: var(--transition); font-family: inherit;
 }
-.lang-toggle:hover { opacity: 0.9; }
-.mobile-menu-btn { display: none; background: none; border: none; cursor: pointer; padding: 6px; color: var(--text); }
+.lang-toggle:hover { background: rgba(255,255,255,0.3); }
+.mobile-menu-btn { display: none; background: none; border: none; cursor: pointer; padding: 6px; color: #fff; }
 .mobile-menu-btn svg { width: 22px; height: 22px; }
 
 /* ===== HERO ===== */
@@ -291,6 +291,7 @@ a:hover { text-decoration: underline; }
 /* ===== PUBLICATIONS ===== */
 .pub-list { display: flex; flex-direction: column; gap: 16px; }
 .pub-item { display: flex; flex-direction: column; gap: 2px; }
+.pub-title-row { display: flex; align-items: center; gap: 6px; }
 .pub-type {
   display: inline-block; background: var(--bg-alt); border: 1px solid var(--border);
   padding: 1px 8px; border-radius: 3px; font-size: 0.68rem; font-weight: 700;
@@ -299,6 +300,14 @@ a:hover { text-decoration: underline; }
 .pub-item a { font-size: 0.92rem; font-weight: 600; color: var(--text); }
 .pub-item a:hover { color: var(--primary); }
 .pub-meta { font-size: 0.78rem; color: var(--text-light); }
+.pub-download {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 22px; height: 22px; margin-left: 6px;
+  background: var(--gradient); color: #fff !important;
+  border-radius: 4px; text-decoration: none;
+}
+.pub-download:hover { opacity: 0.85; color: #fff !important; text-decoration: none; }
+.pub-download svg { flex-shrink: 0; }
 
 /* ===== CONTACT ===== */
 .contact-section {
@@ -345,9 +354,10 @@ a:hover { text-decoration: underline; }
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
   .nav-links {
-    display: none; position: absolute; top: 52px; left: 0; right: 0;
-    background: #fff; flex-direction: column; padding: 12px 20px;
-    border-bottom: 1px solid var(--border); box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    display: none; position: absolute; top: 40px; left: 0; right: 0;
+    background: linear-gradient(135deg, #0e7490 0%, #059669 100%);
+    flex-direction: column; padding: 12px 20px;
+    border-bottom: none; box-shadow: 0 4px 16px rgba(0,0,0,0.15);
   }
   .nav-links.open { display: flex; }
   .mobile-menu-btn { display: block; }

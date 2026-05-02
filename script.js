@@ -19,7 +19,7 @@
       { title_en:"Industrial ChatBI Platform", title_zh:"工业ChatBI智能对话分析平台", subtitle:"NL2SQL · Streamlit · Qwen", cover:"images/projects/chatbi-oee.svg", url:"https://github.com/sharp-007/ChatBI_OEE" },
       { title_en:"Industrial Knowledge Q&A · RAG", title_zh:"工业知识库智能问答系统", subtitle:"LangChain · ChromaDB · React", cover:"images/projects/rag-qa.svg", url:"https://github.com/sharp-007/industrial_agent_mini_demo" },
       { title_en:"Light Everywhere", title_zh:"城市角落的光 | AI原创音乐MV | 原创动画短片", subtitle:"AIGC Short Film · AI Music & Visuals", cover:"https://img.youtube.com/vi/OMIchR2C6qs/hqdefault.jpg", url:"https://www.youtube.com/watch?v=OMIchR2C6qs" },
-      { title_en:"DOE Introduction Course", title_zh:"DOE入门课：60分钟掌握DOE", subtitle:"JMP · DOE · Public Course", cover:"images/talks/doe-intro.svg", url:"https://www.jmp.com/zh-hans/resources/on-demand/local/jmp-doe-from-zero-on-demand" },
+      { title_en:"DOE Introduction Course", title_zh:"DOE入门课：60分钟掌握DOE", subtitle:"JMP · DOE · Public Course", cover:"images/talks/doe-intro.png", url:"https://www.jmp.com/zh-hans/resources/on-demand/local/jmp-doe-from-zero-on-demand" },
       { title_en:"Industrial Defect Detection · YOLO11", title_zh:"工业缺陷智能检测系统", subtitle:"YOLO11 · Deep Learning · Quality Control", cover:"images/projects/defect-detection.svg", url:"https://github.com/sharp-007/carbon_fiber_defect_detection_system_python3.10" }
     ],
     'data/projects.json': [
@@ -33,16 +33,19 @@
       { title_en:"Hexi Corridor Silk Road", title_zh:"河西走廊丝绸之路之旅", desc_en:"Data-driven journey combining JMP interactive visualization with travel storytelling", desc_zh:"数据驱动的丝绸之路之旅，结合JMP交互式数据可视化与旅行叙事", cover:"images/projects/hexi-corridor.svg", url:"https://github.com/sharp-007/Hexi-Corridor-Silk-Road", id:"", featured:false }
     ],
     'data/blogs.json': [
-      { title_en:"Understanding How LLMs Reshape Data Platforms in One Diagram", title_zh:"一图理解大模型如何重塑数据平台", cover:"images/blogs/impact_diagram_zh.png", url:"https://mp.weixin.qq.com/s/RlMWMXGu4taOElHMOSVk-g", date:"2026-04-20" },
-      { title_en:"How I Built an Industrial ChatBI Platform with Vibe Coding", title_zh:"我如何用Vibe Coding构建工业ChatBI平台", cover:"blog/covers/placeholder-1.svg", url:"", date:"2026-04-15" },
-      { title_en:"RAG in Practice: Building an Industrial Knowledge Q&A System", title_zh:"RAG实战：构建工业知识库智能问答系统", cover:"blog/covers/placeholder-2.svg", url:"", date:"2026-03-20" },
-      { title_en:"YOLO11 for Industrial Defect Detection: A Complete Guide", title_zh:"YOLO11工业缺陷检测：完整指南", cover:"blog/covers/placeholder-3.svg", url:"", date:"2026-02-10" }
+      { title_en:"Understanding How LLMs Reshape Data Platforms in One Diagram", title_zh:"一图理解大模型如何重塑数据平台", cover:"images/blogs/impact_diagram_zh.png", url:"https://mp.weixin.qq.com/s/eIQ0NeJ9hnBqkX6ueDvy2A", date:"2026-04-20" },
+      { title_en:"The Ultimate Guide to World Models", title_zh:"一文读懂世界模型", cover:"/images/uploads/world-model-wechat-cover.png", url:"https://mp.weixin.qq.com/s/Dq5zCliOY9LeO0Uzh3oTCA?token=2126128470&lang=zh_CN", date:"2026-04-15" },
+      { title_en:"What Defines Human Value in the Era of AI?", title_zh:"AI时代，人类的核心价值在哪里？", cover:"/images/uploads/xiaohongshu_cover.png", url:"https://mp.weixin.qq.com/s/79hOq2ySP2MQts5QpMe7kg?token=2126128470&lang=zh_CN", date:"2026-03-20" },
+      { title_en:"In an AI-Driven World, Play the Long Game", title_zh:"AI时代如何反脆弱：相信时间的力量", cover:"/images/uploads/wechat-illustration-03-fundamentals-practice.png", url:"https://mp.weixin.qq.com/s/cDDkY_QcgwUJKKTHa95UgQ", date:"2026-02-10" },
+      { title_en:"World Models, Explained in One Diagram", title_zh:"一图理解世界模型", cover:"/images/uploads/worldmodels_xiaohongshu.png", url:"https://mp.weixin.qq.com/s/6kTeCudFb2IB3j5evO73gQ", date:"2026-05-02" },
+      { title_en:"How Large Models Are Reshaping Data Platforms: One Diagram, 10 Layers Explained", title_zh:"大模型如何重塑数据平台？一张图讲清楚10层技术栈的变与不变", cover:"/images/uploads/wechat-cover-llm-data-platform.png", url:"https://mp.weixin.qq.com/s/RlMWMXGu4taOElHMOSVk-g", date:"2026-05-02" }
     ],
     'data/talks.json': [
-      { title_en:"DOE Intro: Master DOE in 60 Minutes", title_zh:"DOE入门课：从方法到实践，60分钟轻松掌握DOE", cover:"images/talks/doe-intro.svg", url:"https://www.jmp.com/zh-hans/resources/on-demand/local/jmp-doe-from-zero-on-demand" },
-      { title_en:"DOE Case Studies: 3 Methods for R&D & Process Optimization", title_zh:"DOE经典案例实战：产品研发与工艺优化的3种实验设计方法", cover:"images/talks/doe-cases.svg", url:"https://www.jmp.com/zh-hans/resources/on-demand/local/doe-industry-cases-study" },
-      { title_en:"Quality Analysis: 2 Cases Covering 80% QE Scenarios", title_zh:"45分钟完全入门质量分析：2大案例讲透质量工程师80%的数据分析场景", cover:"images/talks/quality-analysis.svg", url:"https://www.jmp.com/zh-hans/resources/on-demand/local/get-started-quality-engineer" },
-      { title_en:"DOE White Paper: Zero-to-One Guide for Engineers", title_zh:"从0到1掌握DOE：为工程师定制的零基础DOE手册", cover:"images/talks/doe-whitepaper.svg", url:"https://www.jmp.com/zh-hans/resources/white-papers/doe-from-zero-for-engineers" }
+      { title_en:"DOE Intro: Master DOE in 60 Minutes", title_zh:"DOE入门课：从方法到实践，60分钟轻松掌握DOE", cover:"images/talks/doe-intro.png", url:"https://www.jmp.com/zh-hans/resources/on-demand/local/jmp-doe-from-zero-on-demand" },
+      { title_en:"DOE Case Studies: 3 Methods for R&D & Process Optimization", title_zh:"DOE经典案例实战：产品研发与工艺优化的3种实验设计方法", cover:"images/talks/doe-cases.png", url:"https://www.jmp.com/zh-hans/resources/on-demand/local/doe-industry-cases-study" },
+      { title_en:"Quality Analysis: 2 Cases Covering 80% QE Scenarios", title_zh:"45分钟完全入门质量分析：2大案例讲透质量工程师80%的数据分析场景", cover:"images/talks/quality-analysis.png", url:"https://www.jmp.com/zh-hans/resources/on-demand/local/get-started-quality-engineer" },
+      { title_en:"Data Visualization User Group", title_zh:"数据可视化用户训练营", cover:"images/talks/user-group.png", url:"" },
+      { title_en:"Food Sensory Analysis & Recipe Optimization: Statistical Methods & Cases", title_zh:"食品感官分析与配方优化的常用统计方法与实战案例", cover:"images/talks/food-webinar.png", url:"" }
     ]
   };
 
@@ -166,11 +169,14 @@
 
     let html = '<div class="photo-grid photo-grid-4 fade-in">';
     items.forEach(tk => {
+      const hasUrl = tk.url && tk.url.trim();
+      const tag = hasUrl ? 'a' : 'div';
+      const linkAttr = hasUrl ? ` href="${escHtml(tk.url)}" target="_blank"` : '';
       html += `
-        <a href="${escHtml(tk.url)}" target="_blank" class="photo-card">
+        <${tag}${linkAttr} class="photo-card">
           <img src="${escHtml(tk.cover)}" alt="${escHtml(tk.title_en)}" loading="lazy" ${imgErr}>
           <div class="photo-card-label" data-en="${escHtml(tk.title_en)}" data-zh="${escHtml(tk.title_zh)}">${escHtml(tk.title_en)}</div>
-        </a>`;
+        </${tag}>`;
     });
     html += '</div>';
     container.innerHTML = html;
