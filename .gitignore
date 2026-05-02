@@ -1,2 +1,6 @@
 resume/
 sharp-007/
+
+# Windows temp files
+*.TMP
+*~RF*.TMP
