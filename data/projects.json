@@ -61,22 +61,22 @@
       "featured": false
     },
     {
-      "title_en": "Hexi Corridor Silk Road",
-      "title_zh": "河西走廊丝绸之路之旅",
-      "desc_en": "Data-driven journey combining JMP interactive visualization with travel storytelling",
-      "desc_zh": "数据驱动的丝绸之路之旅，结合JMP交互式数据可视化与旅行叙事",
-      "cover": "images/projects/hexi-corridor.svg",
-      "url": "https://github.com/sharp-007/Hexi-Corridor-Silk-Road",
-      "id": "",
-      "featured": false
-    },
-    {
       "title_en": "Glass Panel Quality · Random Forest",
       "title_zh": "玻璃面板质量分析 · 随机森林",
       "desc_en": "Applied Random Forest for defect classification and key factor identification, AUC 0.92",
       "desc_zh": "应用随机森林模型预测缺陷分类并识别关键因子，AUC达0.92",
       "cover": "images/projects/arcing-rf.svg",
       "url": "https://github.com/sharp-007/Arcing-Issue-Solution-with-Random-Forest",
+      "id": "",
+      "featured": false
+    },
+    {
+      "title_en": "Hexi Corridor Silk Road",
+      "title_zh": "河西走廊丝绸之路之旅",
+      "desc_en": "Data-driven journey combining JMP interactive visualization with travel storytelling",
+      "desc_zh": "数据驱动的丝绸之路之旅，结合JMP交互式数据可视化与旅行叙事",
+      "cover": "images/projects/hexi-corridor.svg",
+      "url": "https://github.com/sharp-007/Hexi-Corridor-Silk-Road",
       "id": "",
       "featured": false
     }
