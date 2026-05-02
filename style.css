@@ -38,7 +38,7 @@ a:hover { text-decoration: underline; }
 .nav.scrolled { box-shadow: 0 2px 12px rgba(8, 145, 178, 0.08); }
 .nav-inner {
   max-width: var(--max-w); margin: 0 auto; padding: 0 32px;
-  display: flex; align-items: center; justify-content: space-between; height: 52px;
+  display: flex; align-items: center; justify-content: space-between; height: 40px;
 }
 .nav-logo { 
   font-size: 1rem; font-weight: 700; text-decoration: none;
@@ -62,7 +62,7 @@ a:hover { text-decoration: underline; }
 
 /* ===== HERO ===== */
 .hero {
-  padding: 68px 24px 16px;
+  padding: 52px 24px 16px;
   border-bottom: none;
   background: var(--bg-alt);
   overflow: hidden;
@@ -94,7 +94,7 @@ a:hover { text-decoration: underline; }
 .hero-bio p {
   font-size: 0.92rem; color: var(--text-secondary); margin-bottom: 6px; line-height: 1.65;
 }
-.hero-badges { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+.hero-badges { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 6px; }
 .badge {
   background: var(--gradient-subtle); border: 1px solid rgba(8, 145, 178, 0.15);
   padding: 4px 10px; border-radius: 4px;
@@ -116,7 +116,7 @@ a:hover { text-decoration: underline; }
 /* ===== CAROUSEL (grid) ===== */
 .carousel-section {
   background: var(--bg-alt);
-  padding: 20px 24px 32px;
+  padding: 4px 24px 20px;
   border: none;
 }
 .carousel-wrapper {
@@ -226,8 +226,10 @@ a:hover { text-decoration: underline; }
 .creative-text { flex: 1; min-width: 240px; }
 .creative-text h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 6px; }
 .creative-text p { font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 12px; }
-.creative-links { display: flex; gap: 14px; }
+.creative-links { display: flex; gap: 14px; flex-wrap: wrap; }
 .creative-links a { font-size: 0.85rem; font-weight: 600; }
+.music-player { margin-top: 12px; }
+.music-player iframe { border-radius: 8px; max-width: 100%; }
 .creative-video { width: 380px; max-width: 100%; flex-shrink: 0; }
 .video-switch {
   display: flex; gap: 2px; margin-bottom: 6px;
