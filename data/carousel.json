@@ -4,14 +4,14 @@
       "title_en": "Industrial ChatBI Platform",
       "title_zh": "工业ChatBI智能对话分析平台",
       "subtitle": "NL2SQL · Streamlit · Qwen",
-      "cover": "images/projects/chatbi-oee.svg",
+      "cover": "images/projects/chatbi-oee.png",
       "url": "https://github.com/sharp-007/ChatBI_OEE"
     },
     {
       "title_en": "Industrial Knowledge Q&A · RAG",
       "title_zh": "工业知识库智能问答系统",
       "subtitle": "LangChain · ChromaDB · React",
-      "cover": "images/projects/rag-qa.svg",
+      "cover": "images/projects/rag-qa.png",
       "url": "https://github.com/sharp-007/industrial_agent_mini_demo"
     },
     {
@@ -32,7 +32,7 @@
       "title_en": "Industrial Defect Detection · YOLO11",
       "title_zh": "工业缺陷智能检测系统",
       "subtitle": "YOLO11 · Deep Learning · Quality Control",
-      "cover": "images/projects/defect-detection.svg",
+      "cover": "images/projects/defect-detection.png",
       "url": "https://github.com/sharp-007/carbon_fiber_defect_detection_system_python3.10"
     }
   ]
