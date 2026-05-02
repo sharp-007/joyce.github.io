@@ -13,7 +13,7 @@ https://<your-github-username>.github.io/<repo-name>/
 ## 项目结构
 
 ```
-joyce_pan_portfolio/
+joyce_pan.github.io/
 ├── index.html          # 主页面（静态框架 + 动态容器）
 ├── style.css           # 全局样式
 ├── script.js           # 交互逻辑 + 数据驱动渲染
@@ -31,9 +31,7 @@ joyce_pan_portfolio/
 │   ├── projects/       # 项目封面图片
 │   ├── talks/          # 演讲封面图片
 │   └── uploads/        # CMS 上传图片目录
-├── resume/             # 简历 YAML 数据源
-│   ├── Joyce_EN.yaml
-│   └── Joyce_ZH.yaml
+├── .gitignore          # Git 忽略文件配置
 └── README.md
 ```
 
