@@ -7,7 +7,7 @@
 站点部署后可通过 GitHub Pages 访问：
 
 ```
-https://<your-github-username>.github.io/<repo-name>/
+https://sharp-007.github.io/joyce_pan.github.io/
 ```
 
 ## 项目结构
@@ -51,12 +51,12 @@ joyce_pan.github.io/
 
 1. **创建 GitHub 仓库**
 
-   在 GitHub 上新建一个仓库，仓库名建议使用 `<username>.github.io`（用户主页）或其他任意名称（项目主页）。
+   在 GitHub 上新建一个仓库，仓库名为 `joyce_pan.github.io`。
 
 2. **推送代码到仓库**
 
    ```bash
-   git remote add origin https://github.com/<username>/<repo-name>.git
+   git remote add origin https://github.com/sharp-007/joyce_pan.github.io.git
    git branch -M main
    git push -u origin main
    ```
@@ -71,14 +71,14 @@ joyce_pan.github.io/
 4. **访问站点**
 
    等待 1-2 分钟后，即可通过以下地址访问：
-   - 用户主页：`https://<username>.github.io/`
-   - 项目主页：`https://<username>.github.io/<repo-name>/`
+   
+   `https://sharp-007.github.io/joyce_pan.github.io/`
 
 ### 方式二：自定义域名（可选）
 
 1. 在仓库 **Settings → Pages → Custom domain** 中填写你的域名（如 `www.example.com`）
 2. 在域名 DNS 服务商处添加记录：
-   - **CNAME** 记录：`www` → `<username>.github.io`
+   - **CNAME** 记录：`www` → `sharp-007.github.io`
    - 或 **A** 记录指向 GitHub Pages IP 地址：
      ```
      185.199.108.153
@@ -111,7 +111,7 @@ npx serve .
 
 ### 在线使用（GitHub Pages 部署后）
 
-1. 访问 `https://<your-domain>/admin/`
+1. 访问 `https://sharp-007.github.io/joyce_pan.github.io/admin/`
 2. 通过 GitHub 账号授权登录
 3. 在可视化界面中添加/编辑博客、项目、演讲等内容
 4. 点击发布，CMS 自动将修改 commit 到 GitHub 仓库
@@ -134,7 +134,7 @@ npx serve .
 在线使用 CMS 需要配置 GitHub OAuth App：
 
 1. 在 GitHub Settings > Developer settings > OAuth Apps 中创建 OAuth App
-2. 设置 Homepage URL 为你的站点地址，Authorization callback URL 为 `https://<your-domain>/admin/`
+2. 设置 Homepage URL 为站点地址，Authorization callback URL 为 `https://sharp-007.github.io/joyce_pan.github.io/admin/`
 3. 部署一个 OAuth 代理服务（推荐使用免费的 Cloudflare Worker 方案）
 4. 在 `admin/config.yml` 中的 `backend` 部分添加 `base_url` 指向代理地址
 

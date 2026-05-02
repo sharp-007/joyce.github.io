@@ -4,7 +4,7 @@ backend:
   branch: main
 
 media_folder: "images/uploads"
-public_folder: "/images/uploads"
+public_folder: "images/uploads"
 
 # Use local backend for development (npx decap-server)
 local_backend: true
