@@ -18,7 +18,7 @@
     'data/carousel.json': [
       { title_en:"Industrial ChatBI Platform", title_zh:"工业ChatBI智能对话分析平台", subtitle:"NL2SQL · Streamlit · Qwen", cover:"images/projects/chatbi-oee.svg", url:"https://github.com/sharp-007/ChatBI_OEE" },
       { title_en:"Industrial Knowledge Q&A · RAG", title_zh:"工业知识库智能问答系统", subtitle:"LangChain · ChromaDB · React", cover:"images/projects/rag-qa.svg", url:"https://github.com/sharp-007/industrial_agent_mini_demo" },
-      { title_en:"Light Everywhere", title_zh:"城市角落的光", subtitle:"AIGC Short Film · AI Music & Visuals", cover:"https://img.youtube.com/vi/OMIchR2C6qs/hqdefault.jpg", url:"https://www.youtube.com/watch?v=OMIchR2C6qs" },
+      { title_en:"Light Everywhere", title_zh:"城市角落的光 | AI原创音乐MV | 原创动画短片", subtitle:"AIGC Short Film · AI Music & Visuals", cover:"https://img.youtube.com/vi/OMIchR2C6qs/hqdefault.jpg", url:"https://www.youtube.com/watch?v=OMIchR2C6qs" },
       { title_en:"DOE Introduction Course", title_zh:"DOE入门课：60分钟掌握DOE", subtitle:"JMP · DOE · Public Course", cover:"images/talks/doe-intro.svg", url:"https://www.jmp.com/zh-hans/resources/on-demand/local/jmp-doe-from-zero-on-demand" },
       { title_en:"Industrial Defect Detection · YOLO11", title_zh:"工业缺陷智能检测系统", subtitle:"YOLO11 · Deep Learning · Quality Control", cover:"images/projects/defect-detection.svg", url:"https://github.com/sharp-007/carbon_fiber_defect_detection_system_python3.10" }
     ],
@@ -41,8 +41,8 @@
     'data/talks.json': [
       { title_en:"DOE Intro: Master DOE in 60 Minutes", title_zh:"DOE入门课：从方法到实践，60分钟轻松掌握DOE", cover:"images/talks/doe-intro.svg", url:"https://www.jmp.com/zh-hans/resources/on-demand/local/jmp-doe-from-zero-on-demand" },
       { title_en:"DOE Case Studies: 3 Methods for R&D & Process Optimization", title_zh:"DOE经典案例实战：产品研发与工艺优化的3种实验设计方法", cover:"images/talks/doe-cases.svg", url:"https://www.jmp.com/zh-hans/resources/on-demand/local/doe-industry-cases-study" },
-      { title_en:"DOE White Paper: Zero-to-One Guide for Engineers", title_zh:"从0到1掌握DOE：为工程师定制的零基础DOE手册", cover:"images/talks/doe-whitepaper.svg", url:"https://www.jmp.com/zh-hans/resources/white-papers/doe-from-zero-for-engineers" },
-      { title_en:"Quality Analysis: 2 Cases Covering 80% QE Scenarios", title_zh:"45分钟完全入门质量分析：2大案例讲透质量工程师80%的数据分析场景", cover:"images/talks/quality-analysis.svg", url:"https://www.jmp.com/zh-hans/resources/on-demand/local/get-started-quality-engineer" }
+      { title_en:"Quality Analysis: 2 Cases Covering 80% QE Scenarios", title_zh:"45分钟完全入门质量分析：2大案例讲透质量工程师80%的数据分析场景", cover:"images/talks/quality-analysis.svg", url:"https://www.jmp.com/zh-hans/resources/on-demand/local/get-started-quality-engineer" },
+      { title_en:"DOE White Paper: Zero-to-One Guide for Engineers", title_zh:"从0到1掌握DOE：为工程师定制的零基础DOE手册", cover:"images/talks/doe-whitepaper.svg", url:"https://www.jmp.com/zh-hans/resources/white-papers/doe-from-zero-for-engineers" }
     ]
   };
 

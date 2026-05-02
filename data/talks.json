@@ -13,16 +13,16 @@
       "url": "https://www.jmp.com/zh-hans/resources/on-demand/local/doe-industry-cases-study"
     },
     {
-      "title_en": "DOE White Paper: Zero-to-One Guide for Engineers",
-      "title_zh": "从0到1掌握DOE：为工程师定制的零基础DOE手册",
-      "cover": "images/talks/doe-whitepaper.svg",
-      "url": "https://www.jmp.com/zh-hans/resources/white-papers/doe-from-zero-for-engineers"
-    },
-    {
       "title_en": "Quality Analysis: 2 Cases Covering 80% QE Scenarios",
       "title_zh": "45分钟完全入门质量分析：2大案例讲透质量工程师80%的数据分析场景",
       "cover": "images/talks/quality-analysis.svg",
       "url": "https://www.jmp.com/zh-hans/resources/on-demand/local/get-started-quality-engineer"
+    },
+    {
+      "title_en": "DOE White Paper: Zero-to-One Guide for Engineers",
+      "title_zh": "从0到1掌握DOE：为工程师定制的零基础DOE手册",
+      "cover": "images/talks/doe-whitepaper.svg",
+      "url": "https://www.jmp.com/zh-hans/resources/white-papers/doe-from-zero-for-engineers"
     }
   ]
 }
