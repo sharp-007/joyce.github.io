@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: sharp-007/sharp-007.github.io
+  repo: sharp-007/joyce.github.io
   branch: main
 
 media_folder: "images/uploads"
