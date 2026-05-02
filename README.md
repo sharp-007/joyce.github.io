@@ -1,19 +1,19 @@
 # Joyce Pan | Data + AI Portfolio
 
-个人主页展示站点，基于纯前端技术栈（HTML + CSS + JavaScript）构建，用于展示个人技能、项目经历、博客、教育背景、证书及发表论文等内容。支持中英文双语切换。
+个人主页展示站点，基于纯前端技术栈（HTML + CSS + JavaScript）构建，用于展示个人技能、项目经历、博客、演讲等内容。支持中英文双语切换。
 
 ## 预览
 
 站点部署后可通过 GitHub Pages 访问：
 
 ```
-https://sharp-007.github.io/joyce_pan.github.io/
+https://sharp-007.github.io/joyce.github.io/
 ```
 
 ## 项目结构
 
 ```
-joyce_pan.github.io/
+joyce.github.io/
 ├── index.html          # 主页面（静态框架 + 动态容器）
 ├── style.css           # 全局样式
 ├── script.js           # 交互逻辑 + 数据驱动渲染
@@ -50,42 +50,34 @@ joyce_pan.github.io/
 ### 方式一：GitHub Pages（推荐）
 
 1. **创建 GitHub 仓库**
-
-   在 GitHub 上新建一个仓库，仓库名为 `joyce_pan.github.io`。
-
+  在 GitHub 上新建一个仓库，仓库名为 `joyce.github.io`。
 2. **推送代码到仓库**
-
-   ```bash
-   git remote add origin https://github.com/sharp-007/joyce_pan.github.io.git
+  ```bash
+   git remote add origin https://github.com/sharp-007/joyce.github.io.git
    git branch -M main
    git push -u origin main
-   ```
-
+  ```
 3. **开启 GitHub Pages**
-
-   - 进入仓库页面 → **Settings** → **Pages**
-   - **Source** 选择 `Deploy from a branch`
-   - **Branch** 选择 `main`，目录选择 `/ (root)`
-   - 点击 **Save**
-
+  - 进入仓库页面 → **Settings** → **Pages**
+  - **Source** 选择 `Deploy from a branch`
+  - **Branch** 选择 `main`，目录选择 `/ (root)`
+  - 点击 **Save**
 4. **访问站点**
-
-   等待 1-2 分钟后，即可通过以下地址访问：
-   
-   `https://sharp-007.github.io/joyce_pan.github.io/`
+  等待 1-2 分钟后，即可通过以下地址访问：
+   `https://sharp-007.github.io/joyce.github.io/`
 
 ### 方式二：自定义域名（可选）
 
 1. 在仓库 **Settings → Pages → Custom domain** 中填写你的域名（如 `www.example.com`）
 2. 在域名 DNS 服务商处添加记录：
-   - **CNAME** 记录：`www` → `sharp-007.github.io`
-   - 或 **A** 记录指向 GitHub Pages IP 地址：
-     ```
-     185.199.108.153
-     185.199.109.153
-     185.199.110.153
-     185.199.111.153
-     ```
+  - **CNAME** 记录：`www` → `sharp-007.github.io`
+  - 或 **A** 记录指向 GitHub Pages IP 地址：
+    ```
+    185.199.108.153
+    185.199.109.153
+    185.199.110.153
+    185.199.111.153
+    ```
 3. 勾选 **Enforce HTTPS**
 
 ### 方式三：本地预览
@@ -111,7 +103,7 @@ npx serve .
 
 ### 在线使用（GitHub Pages 部署后）
 
-1. 访问 `https://sharp-007.github.io/joyce_pan.github.io/admin/`
+1. 访问 `https://sharp-007.github.io/joyce.github.io/admin/`
 2. 通过 GitHub 账号授权登录
 3. 在可视化界面中添加/编辑博客、项目、演讲等内容
 4. 点击发布，CMS 自动将修改 commit 到 GitHub 仓库
@@ -134,7 +126,7 @@ npx serve .
 在线使用 CMS 需要配置 GitHub OAuth App：
 
 1. 在 GitHub Settings > Developer settings > OAuth Apps 中创建 OAuth App
-2. 设置 Homepage URL 为站点地址，Authorization callback URL 为 `https://sharp-007.github.io/joyce_pan.github.io/admin/`
+2. 设置 Homepage URL 为站点地址，Authorization callback URL 为 `https://sharp-007.github.io/joyce.github.io/admin/`
 3. 部署一个 OAuth 代理服务（推荐使用免费的 Cloudflare Worker 方案）
 4. 在 `admin/config.yml` 中的 `backend` 部分添加 `base_url` 指向代理地址
 
@@ -142,23 +134,25 @@ npx serve .
 
 ## 自定义修改
 
-| 修改内容 | 对应文件 |
-|---------|---------|
-| 首页走马灯 (Carousel) | `data/carousel.json` 或通过 CMS 后台 |
-| 精选项目 (Projects) | `data/projects.json` 或通过 CMS 后台 |
-| 博客文章 (Blog) | `data/blogs.json` 或通过 CMS 后台 |
-| 技术分享 (Talks) | `data/talks.json` 或通过 CMS 后台 |
-| 个人简介 (Hero) | `index.html` — Hero 模块 |
-| 工作经历 (Experience) | `index.html` — Experience 模块 |
-| 教育背景 (Education) | `index.html` — Education 模块 |
+
+| 修改内容                  | 对应文件                             |
+| --------------------- | -------------------------------- |
+| 首页走马灯 (Carousel)      | `data/carousel.json` 或通过 CMS 后台  |
+| 精选项目 (Projects)       | `data/projects.json` 或通过 CMS 后台  |
+| 博客文章 (Blog)           | `data/blogs.json` 或通过 CMS 后台     |
+| 技术分享 (Talks)          | `data/talks.json` 或通过 CMS 后台     |
+| 个人简介 (Hero)           | `index.html` — Hero 模块           |
+| 工作经历 (Experience)     | `index.html` — Experience 模块     |
+| 教育背景 (Education)      | `index.html` — Education 模块      |
 | 专业证书 (Certifications) | `index.html` — Certifications 模块 |
-| 职业技能 (Skills) | `index.html` — Skills 模块 |
-| 发表作品 (Publications) | `index.html` — Publications 模块 |
-| 创意作品 (Creative) | `index.html` — Creative 模块 |
-| 联系方式 (Contact) | `index.html` — Contact 模块 |
-| 颜色、字体、布局样式 | `style.css` |
-| 语言切换、视频源、导航交互 | `script.js` |
-| CMS 配置（字段定义等） | `admin/config.yml` |
+| 职业技能 (Skills)         | `index.html` — Skills 模块         |
+| 发表作品 (Publications)   | `index.html` — Publications 模块   |
+| 创意作品 (Creative)       | `index.html` — Creative 模块       |
+| 联系方式 (Contact)        | `index.html` — Contact 模块        |
+| 颜色、字体、布局样式            | `style.css`                      |
+| 语言切换、视频源、导航交互         | `script.js`                      |
+| CMS 配置（字段定义等）         | `admin/config.yml`               |
+
 
 ## 技术栈
 
