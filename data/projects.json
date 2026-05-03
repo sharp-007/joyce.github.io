@@ -8,7 +8,8 @@
       "cover": "images/projects/chatbi-oee.png",
       "url": "https://github.com/sharp-007/ChatBI_OEE",
       "id": "project-chatbi",
-      "featured": true
+      "featured": true,
+      "skills": ["Python", "SQL", "LLM", "ChatBI", "NL2SQL"]
     },
     {
       "title_en": "Industrial Defect Detection · YOLO11",
@@ -18,7 +19,8 @@
       "cover": "images/projects/defect-detection.png",
       "url": "https://github.com/sharp-007/carbon_fiber_defect_detection_system_python3.10",
       "id": "project-defect",
-      "featured": true
+      "featured": true,
+      "skills": ["Python", "PyTorch", "YOLO", "Deep Learning"]
     },
     {
       "title_en": "Industrial Knowledge Q&A · RAG",
@@ -28,7 +30,8 @@
       "cover": "images/projects/rag-qa.png",
       "url": "https://github.com/sharp-007/industrial_agent_mini_demo",
       "id": "project-rag",
-      "featured": true
+      "featured": true,
+      "skills": ["Python", "RAG", "LLM", "LangChain"]
     },
     {
       "title_en": "Dify Agents · RAG + TTS",
@@ -38,7 +41,8 @@
       "cover": "images/projects/dify-agents.png",
       "url": "https://github.com/sharp-007/Dify_Agents",
       "id": "project-dify",
-      "featured": true
+      "featured": true,
+      "skills": ["Dify", "RAG", "LLM", "Agent", "TTS"]
     },
     {
       "title_en": "AssetOpsBench Agent",
@@ -48,7 +52,8 @@
       "cover": "images/projects/assetops.png",
       "url": "https://github.com/sharp-007/mini_demo_with_AssetOpsBench",
       "id": "",
-      "featured": false
+      "featured": false,
+      "skills": ["Python", "Agent", "LLM"]
     },
     {
       "title_en": "Kaggle Dogs vs Cats · PyTorch",
@@ -58,7 +63,8 @@
       "cover": "images/projects/kaggle-cats.png",
       "url": "https://github.com/sharp-007/Kaggle_Dogs_vs_Cats_PyTorch",
       "id": "",
-      "featured": false
+      "featured": false,
+      "skills": ["Python", "PyTorch", "Machine Learning"]
     },
     {
       "title_en": "Glass Panel Quality · Random Forest",
@@ -68,7 +74,8 @@
       "cover": "images/projects/arcing-rf.png",
       "url": "https://github.com/sharp-007/Arcing-Issue-Solution-with-Random-Forest",
       "id": "",
-      "featured": false
+      "featured": false,
+      "skills": ["Python", "Machine Learning", "Random Forest"]
     },
     {
       "title_en": "Hexi Corridor Silk Road",
@@ -78,7 +85,8 @@
       "cover": "images/projects/hexi-corridor.png",
       "url": "https://github.com/sharp-007/Hexi-Corridor-Silk-Road",
       "id": "",
-      "featured": false
+      "featured": false,
+      "skills": ["JMP", "Data Visualization"]
     }
   ]
 }

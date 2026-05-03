@@ -121,12 +121,18 @@
     const container = document.getElementById('projects-grid');
     if (!container) return;
 
+    const renderSkills = (skills) => {
+      if (!skills || !skills.length) return '';
+      return `<div class="project-skills">${skills.map(s => `<span class="project-skill">${escHtml(s)}</span>`).join('')}</div>`;
+    };
+
     let html = '<div class="photo-grid photo-grid-4 fade-in">';
     featured.forEach(p => {
       html += `
         <a href="${escHtml(p.url)}" target="_blank" class="photo-card"${p.id ? ` id="${escHtml(p.id)}"` : ''}>
           <img src="${escHtml(p.cover)}" alt="${escHtml(p.title_en)}" loading="lazy" ${imgErr}>
           <div class="photo-card-label" data-en="${escHtml(p.title_en)}" data-zh="${escHtml(p.title_zh)}">${escHtml(p.title_en)}</div>
+          ${renderSkills(p.skills)}
         </a>`;
     });
     html += '</div>';
@@ -138,6 +144,7 @@
           <a href="${escHtml(p.url)}" target="_blank" class="photo-card"${p.id ? ` id="${escHtml(p.id)}"` : ''}>
             <img src="${escHtml(p.cover)}" alt="${escHtml(p.title_en)}" loading="lazy" ${imgErr}>
             <div class="photo-card-label" data-en="${escHtml(p.title_en)}" data-zh="${escHtml(p.title_zh)}">${escHtml(p.title_en)}</div>
+            ${renderSkills(p.skills)}
           </a>`;
       });
       html += '</div>';
@@ -149,7 +156,7 @@
     const container = document.getElementById('blogs-grid');
     if (!container || !items.length) return;
 
-    let html = '<div class="photo-grid photo-grid-4 fade-in">';
+    let html = '<div class="photo-grid photo-grid-6 fade-in">';
     items.forEach(b => {
       const tag = b.url ? 'a' : 'div';
       const linkAttr = b.url ? ` href="${escHtml(b.url)}" target="_blank"` : '';
@@ -167,6 +174,11 @@
     const container = document.getElementById('talks-grid');
     if (!container || !items.length) return;
 
+    const renderSkills = (skills) => {
+      if (!skills || !skills.length) return '';
+      return `<div class="project-skills">${skills.map(s => `<span class="project-skill">${escHtml(s)}</span>`).join('')}</div>`;
+    };
+
     let html = '<div class="photo-grid photo-grid-4 fade-in">';
     items.forEach(tk => {
       const hasUrl = tk.url && tk.url.trim();
@@ -176,6 +188,7 @@
         <${tag}${linkAttr} class="photo-card">
           <img src="${escHtml(tk.cover)}" alt="${escHtml(tk.title_en)}" loading="lazy" ${imgErr}>
           <div class="photo-card-label" data-en="${escHtml(tk.title_en)}" data-zh="${escHtml(tk.title_zh)}">${escHtml(tk.title_en)}</div>
+          ${renderSkills(tk.skills)}
         </${tag}>`;
     });
     html += '</div>';

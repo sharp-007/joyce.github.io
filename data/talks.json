@@ -4,31 +4,36 @@
       "title_en": "DOE Intro: Master DOE in 60 Minutes",
       "title_zh": "DOE入门课：从方法到实践，60分钟轻松掌握DOE",
       "cover": "images/talks/doe-intro.png",
-      "url": "https://www.jmp.com/zh-hans/resources/on-demand/local/jmp-doe-from-zero-on-demand"
+      "url": "https://www.jmp.com/zh-hans/resources/on-demand/local/jmp-doe-from-zero-on-demand",
+      "skills": ["DOE", "统计分析", "JMP"]
     },
     {
       "title_en": "DOE Case Studies: 3 Methods for R&D & Process Optimization",
       "title_zh": "DOE经典案例实战：产品研发与工艺优化的3种实验设计方法",
       "cover": "images/talks/doe-cases.png",
-      "url": "https://www.jmp.com/zh-hans/resources/on-demand/local/doe-industry-cases-study"
+      "url": "https://www.jmp.com/zh-hans/resources/on-demand/local/doe-industry-cases-study",
+      "skills": ["DOE", "统计分析", "工艺优化", "JMP"]
     },
     {
       "title_en": "Quality Analysis: 2 Cases Covering 80% QE Scenarios",
       "title_zh": "45分钟完全入门质量分析：2大案例讲透质量工程师80%的数据分析场景",
       "cover": "images/talks/quality-analysis.png",
-      "url": "https://www.jmp.com/zh-hans/resources/on-demand/local/get-started-quality-engineer"
+      "url": "https://www.jmp.com/zh-hans/resources/on-demand/local/get-started-quality-engineer",
+      "skills": ["质量管理", "统计分析", "数据可视化", "JMP"]
     },
     {
-      "title_en": "Data Visualization User Group",
-      "title_zh": "数据可视化用户训练营",
+      "title_en": "Data Visualization User Group: Online Courses + Offline Training",
+      "title_zh": "数据可视化User Group：线上课程+线下用户训练营",
       "cover": "images/talks/user-group.png",
-      "url": ""
+      "url": "",
+      "skills": ["数据可视化", "JMP"]
     },
     {
       "title_en": "Food Sensory Analysis & Recipe Optimization: Statistical Methods & Cases",
       "title_zh": "食品感官分析与配方优化的常用统计方法与实战案例",
       "cover": "images/talks/food-webinar.png",
-      "url": ""
+      "url": "",
+      "skills": ["统计分析", "DOE", "感官分析", "JMP"]
     }
   ]
 }
