@@ -129,7 +129,7 @@
     let html = '<div class="photo-grid photo-grid-4 fade-in">';
     featured.forEach(p => {
       html += `
-        <a href="${escHtml(p.url)}" target="_blank" class="photo-card"${p.id ? ` id="${escHtml(p.id)}"` : ''}>
+        <a href="${escHtml(p.url)}" target="_blank" class="photo-card project-card"${p.id ? ` id="${escHtml(p.id)}"` : ''}>
           <img src="${escHtml(p.cover)}" alt="${escHtml(p.title_en)}" loading="lazy" ${imgErr}>
           <div class="photo-card-label" data-en="${escHtml(p.title_en)}" data-zh="${escHtml(p.title_zh)}">${escHtml(p.title_en)}</div>
           ${renderSkills(p.skills)}
@@ -141,7 +141,7 @@
       html += '<div class="photo-grid photo-grid-4 fade-in" style="margin-top:16px">';
       others.forEach(p => {
         html += `
-          <a href="${escHtml(p.url)}" target="_blank" class="photo-card"${p.id ? ` id="${escHtml(p.id)}"` : ''}>
+          <a href="${escHtml(p.url)}" target="_blank" class="photo-card project-card"${p.id ? ` id="${escHtml(p.id)}"` : ''}>
             <img src="${escHtml(p.cover)}" alt="${escHtml(p.title_en)}" loading="lazy" ${imgErr}>
             <div class="photo-card-label" data-en="${escHtml(p.title_en)}" data-zh="${escHtml(p.title_zh)}">${escHtml(p.title_en)}</div>
             ${renderSkills(p.skills)}
@@ -161,7 +161,7 @@
       const tag = b.url ? 'a' : 'div';
       const linkAttr = b.url ? ` href="${escHtml(b.url)}" target="_blank"` : '';
       html += `
-        <${tag}${linkAttr} class="photo-card">
+        <${tag}${linkAttr} class="photo-card blog-card">
           <img src="${escHtml(b.cover)}" alt="${escHtml(b.title_en)}" loading="lazy" ${imgErr}>
           <div class="photo-card-label" data-en="${escHtml(b.title_en)}" data-zh="${escHtml(b.title_zh)}">${escHtml(b.title_en)}</div>
         </${tag}>`;
@@ -185,7 +185,7 @@
       const tag = hasUrl ? 'a' : 'div';
       const linkAttr = hasUrl ? ` href="${escHtml(tk.url)}" target="_blank"` : '';
       html += `
-        <${tag}${linkAttr} class="photo-card">
+        <${tag}${linkAttr} class="photo-card talk-card">
           <img src="${escHtml(tk.cover)}" alt="${escHtml(tk.title_en)}" loading="lazy" ${imgErr}>
           <div class="photo-card-label" data-en="${escHtml(tk.title_en)}" data-zh="${escHtml(tk.title_zh)}">${escHtml(tk.title_en)}</div>
           ${renderSkills(tk.skills)}

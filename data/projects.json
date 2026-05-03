@@ -45,8 +45,8 @@
       "skills": ["Dify", "RAG", "LLM", "Agent", "TTS"]
     },
     {
-      "title_en": "AssetOpsBench Agent",
-      "title_zh": "资产运维智能体",
+      "title_en": "AssetOpsBench Agent Mini Demo",
+      "title_zh": "资产运维智能体迷你演示项目",
       "desc_en": "AI agent demo based on IBM AssetOpsBench for asset management operations",
       "desc_zh": "基于IBM AssetOpsBench的资产管理运维AI Agent演示",
       "cover": "images/projects/assetops.png",

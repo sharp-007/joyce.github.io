@@ -1,6 +1,6 @@
 # Joyce Pan | Data + AI Portfolio
 
-个人主页展示站点，基于纯前端技术栈（HTML + CSS + JavaScript）构建，用于展示个人技能、项目经历、博客、演讲等内容。支持中英文双语切换。
+个人作品集展示站点，基于纯前端技术栈（HTML + CSS + JavaScript）构建，用于展示个人项目、技术分享、博客文章、工作经历等内容。支持中英文双语切换。
 
 ## 预览
 
@@ -15,12 +15,12 @@ https://sharp-007.github.io/joyce.github.io/
 ```
 joyce.github.io/
 ├── index.html          # 主页面（静态框架 + 动态容器）
-├── style.css           # 全局样式
+├── style.css           # 全局样式（主题色、卡片、时间线等）
 ├── script.js           # 交互逻辑 + 数据驱动渲染
 ├── data/               # 模块化内容数据（JSON）
-│   ├── projects.json   # 项目数据
+│   ├── projects.json   # 项目数据（含技能标签）
 │   ├── blogs.json      # 博客文章数据
-│   ├── talks.json      # 演讲与白皮书数据
+│   ├── talks.json      # 技术分享数据（含技能标签）
 │   └── carousel.json   # 首页走马灯数据
 ├── admin/              # Decap CMS 可视化管理后台
 │   ├── index.html      # CMS 入口页面
@@ -29,7 +29,8 @@ joyce.github.io/
 │   └── covers/         # 博客封面图片
 ├── images/
 │   ├── projects/       # 项目封面图片
-│   ├── talks/          # 演讲封面图片
+│   ├── talks/          # 技术分享封面图片
+│   ├── logos/          # 公司/学校 Logo
 │   └── uploads/        # CMS 上传图片目录
 ├── .gitignore          # Git 忽略文件配置
 └── README.md
@@ -39,10 +40,13 @@ joyce.github.io/
 
 - **中英文双语切换** — 一键切换全站语言
 - **响应式设计** — 适配桌面端与移动端
+- **主题色视觉系统** — 统一的青绿色渐变主题，卡片边框、分隔线等体现品牌色
+- **技能标签关联** — 项目和技术分享卡片显示相关技能标签，技能与作品自然关联
 - **视频嵌入** — 支持 YouTube / Bilibili 双源切换
 - **平滑滚动与动画** — 基于 Intersection Observer 的淡入效果
+- **时间线布局** — 工作经历与教育背景采用时间线设计
 - **纯静态** — 无需后端服务，直接部署到任意静态托管平台
-- **数据驱动** — 项目、博客、演讲等内容存储在 JSON 文件中，页面动态渲染
+- **数据驱动** — 项目、博客、技术分享等内容存储在 JSON 文件中，页面动态渲染
 - **可视化 CMS** — 集成 Decap CMS，通过浏览器后台可视化添加/编辑内容，自动提交到 GitHub
 
 ## 部署指南
@@ -135,23 +139,21 @@ npx serve .
 ## 自定义修改
 
 
-| 修改内容                  | 对应文件                             |
-| --------------------- | -------------------------------- |
-| 首页走马灯 (Carousel)      | `data/carousel.json` 或通过 CMS 后台  |
-| 精选项目 (Projects)       | `data/projects.json` 或通过 CMS 后台  |
-| 博客文章 (Blog)           | `data/blogs.json` 或通过 CMS 后台     |
-| 技术分享 (Talks)          | `data/talks.json` 或通过 CMS 后台     |
-| 个人简介 (Hero)           | `index.html` — Hero 模块           |
-| 工作经历 (Experience)     | `index.html` — Experience 模块     |
-| 教育背景 (Education)      | `index.html` — Education 模块      |
-| 专业证书 (Certifications) | `index.html` — Certifications 模块 |
-| 职业技能 (Skills)         | `index.html` — Skills 模块         |
-| 发表作品 (Publications)   | `index.html` — Publications 模块   |
-| 创意作品 (Creative)       | `index.html` — Creative 模块       |
-| 联系方式 (Contact)        | `index.html` — Contact 模块        |
-| 颜色、字体、布局样式            | `style.css`                      |
-| 语言切换、视频源、导航交互         | `script.js`                      |
-| CMS 配置（字段定义等）         | `admin/config.yml`               |
+| 修改内容                     | 对应文件                                          |
+| ------------------------ | --------------------------------------------- |
+| 首页走马灯 (Carousel)         | `data/carousel.json` 或通过 CMS 后台               |
+| 精选项目 (Projects)          | `data/projects.json`（含 skills 字段）或通过 CMS 后台   |
+| 博客文章 (Blog)              | `data/blogs.json` 或通过 CMS 后台                  |
+| 技术分享 (Talks)             | `data/talks.json`（含 skills 字段）或通过 CMS 后台      |
+| 个人简介与核心技能 (Hero)         | `index.html` — Hero 模块（证书徽章 + 技能标签）           |
+| 工作经历 (Experience)        | `index.html` — Experience 模块（时间线布局）           |
+| 教育背景 (Education)         | `index.html` — Education 模块（时间线布局）            |
+| 发表作品 (Publications)      | `index.html` — Publications 模块                |
+| 创意作品 (Creative)          | `index.html` — Creative 模块                    |
+| 联系方式 (Contact)           | `index.html` — Contact 模块                     |
+| 主题色、卡片样式、时间线布局          | `style.css`                                   |
+| 语言切换、视频源、导航交互、卡片渲染      | `script.js`                                   |
+| CMS 配置（字段定义等）            | `admin/config.yml`                            |
 
 
 ## 技术栈

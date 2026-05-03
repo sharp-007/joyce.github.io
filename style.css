@@ -167,12 +167,12 @@ a:hover { text-decoration: underline; }
   transform: translateY(-2px); text-decoration: none;
   border-color: rgba(8, 145, 178, 0.3);
 }
-.carousel-card img { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; background: var(--bg-alt); }
+.carousel-card img { width: 100%; aspect-ratio: 2/1; object-fit: cover; display: block; background: var(--bg-alt); }
 .carousel-label {
-  padding: 6px 10px;
+  padding: 5px 10px;
 }
-.carousel-label strong { display: block; font-size: 0.78rem; color: var(--text); margin-bottom: 1px; }
-.carousel-label span { font-size: 0.68rem; color: var(--text-light); }
+.carousel-label strong { display: block; font-size: 0.75rem; color: var(--text); margin-bottom: 1px; }
+.carousel-label span { font-size: 0.65rem; color: var(--text-light); }
 .carousel-nav {
   display: none;
   display: flex; align-items: center; justify-content: center;
@@ -279,6 +279,29 @@ a:hover { text-decoration: underline; }
 }
 .project-skills { margin-top: auto; }
 
+/* ===== CARD THEME ACCENTS ===== */
+.project-card, .talk-card, .blog-card {
+  border-top: 3px solid var(--primary);
+  border-bottom: 3px solid var(--primary);
+}
+.project-card:hover, .talk-card:hover, .blog-card:hover {
+  border-top-color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+.project-card .photo-card-label,
+.talk-card .photo-card-label,
+.blog-card .photo-card-label {
+  border-top: 2px solid rgba(8, 145, 178, 0.4);
+}
+.project-card:hover .photo-card-label,
+.talk-card:hover .photo-card-label,
+.blog-card:hover .photo-card-label {
+  border-top-color: rgba(5, 150, 105, 0.6);
+}
+.blog-card .photo-card-label {
+  font-size: 0.72rem; padding: 8px 10px;
+}
+
 /* ===== CREATIVE ===== */
 .creative-card {
   display: flex; gap: 24px; align-items: center; flex-wrap: wrap;
@@ -315,19 +338,19 @@ a:hover { text-decoration: underline; }
 .video-fallback a:hover { background: #a00; }
 
 /* ===== EXPERIENCE (Timeline Cards) ===== */
-.exp-list { 
-  display: flex; flex-direction: column; gap: 20px;
+.exp-list {
+  display: flex; flex-direction: column; gap: 4px;
   position: relative; padding-left: 120px;
 }
 .exp-list::before {
   content: ''; position: absolute; left: 106px; top: 8px; bottom: 8px; width: 3px;
   background: var(--gradient); border-radius: 2px; opacity: 0.3;
 }
-.exp-item { 
+.exp-item {
   display: block; position: relative;
-  background: var(--bg); border-radius: var(--radius);
-  padding: 18px 20px; border: 1px solid var(--border);
-  transition: var(--transition);
+  background: transparent; border-radius: var(--radius);
+  padding: 6px 18px; border: none;
+  transition: var(--transition); max-width: 810px;
 }
 .exp-item::before {
   content: ''; position: absolute; left: -18px; top: 22px;
@@ -335,8 +358,7 @@ a:hover { text-decoration: underline; }
   background: var(--gradient); box-shadow: 0 0 0 3px rgba(8, 145, 178, 0.15);
 }
 .exp-item:hover {
-  border-color: rgba(8, 145, 178, 0.4);
-  box-shadow: 0 4px 20px rgba(8, 145, 178, 0.12);
+  background: rgba(8, 145, 178, 0.03);
 }
 .exp-period {
   position: absolute; left: -118px; top: 18px; width: 90px;
