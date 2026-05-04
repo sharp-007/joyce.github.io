@@ -604,10 +604,10 @@
     const botMessage = addAIMessage('', false);
     const contentEl = botMessage.querySelector('.ai-message-content');
     
-    let thoughts = [];
-    let currentThought = '';
+    // 存储思考过程和回答
+    let allThoughts = '';
     let fullAnswer = '';
-    let isThinking = false;
+    let hasThought = false;
     
     try {
       const response = await fetch(aiChatConfig.proxy_url, {
@@ -628,7 +628,7 @@
       let buffer = '';
       
       // 显示初始状态
-      contentEl.innerHTML = '<span class="ai-cursor"></span>';
+      contentEl.innerHTML = '<div class="ai-thinking-live"><span class="ai-thinking-icon">💭</span> ' + (lang === 'zh' ? '思考中...' : 'Thinking...') + '</div><span class="ai-cursor"></span>';
       
       while (true) {
         const { done, value } = await reader.read();
@@ -650,22 +650,32 @@
                 aiConversationId = json.conversation_id;
               }
               
-              // 处理思考过程
-              if (json.event === 'agent_thought') {
-                isThinking = true;
-                currentThought = json.thought || '';
-                if (currentThought) {
-                  thoughts.push(currentThought);
-                }
-                // 显示思考中状态
-                contentEl.innerHTML = renderThinkingState(thoughts, currentThought, true);
+              // 处理思考过程 (Agent 模式)
+              if (json.event === 'agent_thought' && json.thought) {
+                hasThought = true;
+                allThoughts += json.thought;
+                // 实时显示思考过程
+                contentEl.innerHTML = `
+                  <div class="ai-thinking-live"><span class="ai-thinking-icon">💭</span> ${lang === 'zh' ? '思考中...' : 'Thinking...'}</div>
+                  <div class="ai-thought-content">${escHtml(allThoughts)}<span class="ai-cursor"></span></div>
+                `;
                 scrollToBottom();
               }
               // 处理最终回答
               else if (json.event === 'message' || json.event === 'agent_message') {
-                isThinking = false;
                 fullAnswer += json.answer || '';
-                contentEl.innerHTML = renderStreamingContent(thoughts, fullAnswer, true);
+                // 显示回答（如果有思考过程，先显示折叠的思考）
+                let html = '';
+                if (hasThought && allThoughts) {
+                  html += `
+                    <details class="ai-thought-details">
+                      <summary><span class="ai-thought-icon">💭</span> ${lang === 'zh' ? '查看思考过程' : 'View thinking'}</summary>
+                      <div class="ai-thought-text">${escHtml(allThoughts)}</div>
+                    </details>
+                  `;
+                }
+                html += formatMarkdown(fullAnswer) + '<span class="ai-cursor"></span>';
+                contentEl.innerHTML = html;
                 scrollToBottom();
               }
               else if (json.event === 'message_end') {
@@ -680,8 +690,18 @@
         }
       }
       
-      // 最终渲染：折叠思考过程
-      contentEl.innerHTML = renderFinalContent(thoughts, fullAnswer);
+      // 最终渲染：移除光标
+      let finalHtml = '';
+      if (hasThought && allThoughts) {
+        finalHtml += `
+          <details class="ai-thought-details">
+            <summary><span class="ai-thought-icon">💭</span> ${lang === 'zh' ? '查看思考过程' : 'View thinking'}</summary>
+            <div class="ai-thought-text">${escHtml(allThoughts)}</div>
+          </details>
+        `;
+      }
+      finalHtml += formatMarkdown(fullAnswer) || (lang === 'zh' ? '抱歉，我暂时无法回答。' : 'Sorry, I cannot answer right now.');
+      contentEl.innerHTML = finalHtml;
       scrollToBottom();
       
     } catch (err) {
@@ -693,45 +713,6 @@
       input.focus();
     }
   };
-  
-  function renderThinkingState(thoughts, current, streaming) {
-    const thinkingLabel = lang === 'zh' ? '思考中...' : 'Thinking...';
-    let html = `<div class="ai-thinking-live"><span class="ai-thinking-icon">💭</span> ${thinkingLabel}</div>`;
-    html += `<div class="ai-thought-content">${escHtml(current)}<span class="ai-cursor"></span></div>`;
-    return html;
-  }
-  
-  function renderStreamingContent(thoughts, answer, streaming) {
-    let html = '';
-    if (thoughts.length > 0) {
-      const label = lang === 'zh' ? '思考过程' : 'Thinking';
-      html += `<div class="ai-thinking-live"><span class="ai-thinking-icon">💭</span> ${label}</div>`;
-    }
-    html += formatMarkdown(answer);
-    if (streaming) html += '<span class="ai-cursor"></span>';
-    return html;
-  }
-  
-  function renderFinalContent(thoughts, answer) {
-    let html = '';
-    
-    // 如果有思考过程，折叠显示
-    if (thoughts.length > 0) {
-      const thoughtText = thoughts.join('\n\n');
-      const toggleLabel = lang === 'zh' ? '查看思考过程' : 'View thinking process';
-      html += `
-        <details class="ai-thought-details">
-          <summary><span class="ai-thought-icon">💭</span> ${toggleLabel}</summary>
-          <div class="ai-thought-text">${escHtml(thoughtText)}</div>
-        </details>
-      `;
-    }
-    
-    // 最终答案
-    html += formatMarkdown(answer) || (lang === 'zh' ? '抱歉，我暂时无法回答。' : 'Sorry, I cannot answer right now.');
-    
-    return html;
-  }
   
   function scrollToBottom() {
     const container = document.getElementById('aiChatMessages');
