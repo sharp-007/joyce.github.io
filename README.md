@@ -1,5 +1,7 @@
 # Joyce Pan | Data + AI Portfolio
 
+![Portfolio Banner](images/uploads/portfolio-banner.png)
+
 个人作品集展示站点，基于纯前端技术栈（HTML + CSS + JavaScript）构建，集成 Sveltia CMS 可视化内容管理系统。用于展示个人项目、公开分享、博客文章、工作经历等内容，支持中英文双语切换。
 
 **无需编写代码，通过浏览器后台即可管理全站内容。**
@@ -13,59 +15,9 @@
 
 ## 项目架构
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                              用户访问层                                       │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                             │
-│    ┌─────────────────────┐              ┌─────────────────────┐            │
-│    │   📱 Portfolio      │              │   ⚙️ CMS 后台        │            │
-│    │   主页 (访客)        │              │   (内容管理员)       │            │
-│    │                     │              │                     │            │
-│    │  index.html         │              │  admin/index.html   │            │
-│    │  ├─ style.css       │              │  └─ Sveltia CMS     │            │
-│    │  └─ script.js       │              │                     │            │
-│    └─────────┬───────────┘              └──────────┬──────────┘            │
-│              │                                     │                        │
-│              │ 读取 JSON                           │ 可视化编辑              │
-│              ▼                                     ▼                        │
-│    ┌─────────────────────────────────────────────────────────┐             │
-│    │                    📁 data/ (JSON 数据层)                │             │
-│    │  ┌──────────┬──────────┬──────────┬──────────┬────────┐ │             │
-│    │  │carousel  │projects  │blogs     │talks     │profile │ │             │
-│    │  │.json     │.json     │.json     │.json     │.json   │ │             │
-│    │  └──────────┴──────────┴──────────┴──────────┴────────┘ │             │
-│    │  ┌──────────┬──────────┬──────────┬──────────────────┐  │             │
-│    │  │experience│contact   │creative  │publications      │  │             │
-│    │  │.json     │.json     │.json     │.json             │  │             │
-│    │  └──────────┴──────────┴──────────┴──────────────────┘  │             │
-│    └─────────────────────────────────────────────────────────┘             │
-│                                    │                                        │
-│                                    │ 图片资源                               │
-│                                    ▼                                        │
-│    ┌─────────────────────────────────────────────────────────┐             │
-│    │              📷 images/uploads/ (统一图片目录)            │             │
-│    │  ┌──────────┬──────────┬──────────┬──────────┬────────┐ │             │
-│    │  │projects/ │talks/    │logos/    │blogs/    │profile/│ │             │
-│    │  │项目封面   │分享封面   │公司Logo  │博客封面   │头像    │ │             │
-│    │  └──────────┴──────────┴──────────┴──────────┴────────┘ │             │
-│    │  ┌──────────┐                                           │             │
-│    │  │qrcodes/  │  + 其他上传图片                            │             │
-│    │  │二维码    │                                           │             │
-│    │  └──────────┘                                           │             │
-│    └─────────────────────────────────────────────────────────┘             │
-│                                                                             │
-└─────────────────────────────────────────────────────────────────────────────┘
-                                    │
-                                    │ Git 自动同步
-                                    ▼
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                           GitHub 仓库 + Pages                                │
-│                                                                             │
-│   CMS 编辑 → 自动 Commit → GitHub Actions → 自动部署 → 网站更新              │
-│                                                                             │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
+![Architecture Diagram](images/uploads/architecture-diagram.png)
+
+**核心设计理念：** 内容与代码分离，通过 CMS 可视化编辑 JSON 数据，自动同步到 GitHub 并触发部署。
 
 ## CMS 后台管理优势
 
@@ -412,6 +364,25 @@ npx serve .
 3. 选择 **Deploy from branch** → `main` → `/ (root)`
 4. 等待部署完成
 
+## 联系与合作
+
+欢迎 **Data+AI** / **Industrial AI** 项目合作；欢迎 **Vibe Coding** 项目合作与案例展示；欢迎 **AIGC短片制作** 项目合作。
+
+_Open to **Data+AI** / **Industrial AI** projects collaboration; Open to **Vibe Coding** collaborations and case showcases; Open to **AIGC Short Film Production** projects collaboration. Let's connect!_
+
+<table>
+  <tr>
+    <td align="center">
+      <b>微信公众号 · 失控的智能</b><br>
+      <img src="images/uploads/qrcodes/wechat-oa.jpg" width="150" alt="WeChat Official Account">
+    </td>
+    <td align="center">
+      <b>微信视频号 · AIPanda007</b><br>
+      <img src="images/uploads/qrcodes/wechat-channel.jpg" width="150" alt="WeChat Channels">
+    </td>
+  </tr>
+</table>
+
 ## License
 
 &copy; 2026 Joyce Pan. All rights reserved.
@@ -421,5 +392,6 @@ npx serve .
 <p align="center">
   <b>Made with ❤️ by Joyce Pan</b><br>
   <a href="https://sharp-007.github.io/joyce.github.io/">View Portfolio</a> · 
-  <a href="https://sharp-007.github.io/joyce.github.io/admin/">Manage Content</a>
+  <a href="https://sharp-007.github.io/joyce.github.io/admin/">Manage Content</a> · 
+  <a href="https://github.com/sharp-007">GitHub Profile</a>
 </p>
