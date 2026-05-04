@@ -23,7 +23,10 @@ joyce.github.io/
 │   ├── blogs.json      # 博客文章数据
 │   ├── talks.json      # 技术分享数据（含技能标签）
 │   ├── publications.json # 发表作品数据（白皮书、专利、论文）
-│   └── creative.json   # 创意作品数据（AI创作、音乐视频）
+│   ├── creative.json   # 创意作品数据（AI创作、音乐视频）
+│   ├── profile.json    # 个人简介数据（头像、简介、技能、社交链接）
+│   ├── experience.json # 工作经历与教育背景数据
+│   └── contact.json    # 联系方式数据（社交链接、二维码）
 ├── admin/              # Decap CMS 可视化管理后台
 │   ├── index.html      # CMS 入口页面
 │   └── config.yml      # CMS 配置文件
@@ -219,10 +222,9 @@ backend:
 | 技术分享 (Talks) | `data/talks.json` | ✅ |
 | 发表作品 (Publications) | `data/publications.json` | ✅ |
 | 创意作品 (Creative) | `data/creative.json` | ✅ |
-| 个人简介与核心技能 (Hero) | `index.html` — Hero 模块 | ❌ |
-| 工作经历 (Experience) | `index.html` — Experience 模块 | ❌ |
-| 教育背景 (Education) | `index.html` — Education 模块 | ❌ |
-| 联系方式 (Contact) | `index.html` — Contact 模块 | ❌ |
+| 个人简介与核心技能 (Profile) | `data/profile.json` | ✅ |
+| 工作经历与教育背景 (Experience) | `data/experience.json` | ✅ |
+| 联系方式 (Contact) | `data/contact.json` | ✅ |
 | 主题色、卡片样式 | `style.css` | ❌ |
 | 交互逻辑、数据渲染 | `script.js` | ❌ |
 | CMS 配置 | `admin/config.yml` | - |
