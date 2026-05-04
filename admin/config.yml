@@ -20,7 +20,7 @@ local_backend: false
 # Logo and site info
 site_url: https://sharp-007.github.io/joyce.github.io
 display_url: https://sharp-007.github.io/joyce.github.io
-logo_url: images/uploads/logos/favicon.svg
+logo_url: /joyce.github.io/images/uploads/logos/favicon.svg
 
 # Slug settings
 slug:
