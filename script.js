@@ -18,7 +18,7 @@
     'data/carousel.json': [
       { title_en:"Industrial ChatBI Platform", title_zh:"工业ChatBI智能对话分析平台", subtitle:"NL2SQL · Streamlit · Qwen", cover:"images/projects/chatbi-oee.png", url:"https://github.com/sharp-007/ChatBI_OEE" },
       { title_en:"Industrial Knowledge Q&A · RAG", title_zh:"工业知识库智能问答系统", subtitle:"LangChain · ChromaDB · React", cover:"images/projects/rag-qa.png", url:"https://github.com/sharp-007/industrial_agent_mini_demo" },
-      { title_en:"Light Everywhere", title_zh:"城市角落的光 | AI原创音乐MV | 原创动画短片", subtitle:"AIGC Short Film · AI Music & Visuals", cover:"https://img.youtube.com/vi/OMIchR2C6qs/hqdefault.jpg", url:"https://www.youtube.com/watch?v=OMIchR2C6qs" },
+      { title_en:"Light Everywhere", title_zh:"城市角落的光 | AI原创音乐MV | 原创动画短片", subtitle:"AIGC Short Film · AI Music & Visuals", cover:"images/uploads/mv.png", url:"https://www.youtube.com/watch?v=OMIchR2C6qs" },
       { title_en:"DOE Introduction Course", title_zh:"DOE入门课：60分钟掌握DOE", subtitle:"JMP · DOE · Public Course", cover:"images/talks/doe-intro.png", url:"https://www.jmp.com/zh-hans/resources/on-demand/local/jmp-doe-from-zero-on-demand" },
       { title_en:"Industrial Defect Detection · YOLO11", title_zh:"工业缺陷智能检测系统", subtitle:"YOLO11 · Deep Learning · Quality Control", cover:"images/projects/defect-detection.png", url:"https://github.com/sharp-007/carbon_fiber_defect_detection_system_python3.10" }
     ],
