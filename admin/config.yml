@@ -373,3 +373,37 @@ collections:
                 choose_url: true
               - { label: "标题（英文）", name: "title_en", widget: "string" }
               - { label: "标题（中文）", name: "title_zh", widget: "string" }
+
+  # ========== AI 助手配置 ==========
+  - name: "ai_chat"
+    label: "🤖 AI 助手 AI Chat"
+    description: "网站右下角 AI 智能体对话功能开关和配置"
+    files:
+      - name: "ai_chat_config"
+        label: "AI 助手配置"
+        file: "data/ai-chat.json"
+        format: "json"
+        fields:
+          - label: "🔘 启用 AI 助手"
+            name: "enabled"
+            widget: "boolean"
+            default: false
+            hint: "开启后，网站右下角将显示 AI 对话按钮"
+          - label: "🌐 Dify 服务地址"
+            name: "base_url"
+            widget: "string"
+            default: "https://udify.app"
+            hint: "Dify Cloud 使用 https://udify.app，自托管填写你的域名"
+          - label: "🔑 应用 Token"
+            name: "app_token"
+            widget: "string"
+            default: ""
+            hint: "从 Dify 应用嵌入设置中获取的 Token"
+          - label: "📦 应用类型"
+            name: "chatbot_type"
+            widget: "select"
+            default: "chatbot"
+            options:
+              - { label: "Chatbot（聊天助手）", value: "chatbot" }
+              - { label: "Chat（对话应用）", value: "chat" }
+            hint: "根据你在 Dify 中创建的应用类型选择"
