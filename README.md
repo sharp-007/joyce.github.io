@@ -2,7 +2,7 @@
 
 ![Portfolio Banner](images/uploads/portfolio-banner.png)
 
-个人作品集展示站点，基于纯前端技术栈（HTML + CSS + JavaScript）构建，集成 Sveltia CMS 可视化内容管理系统。用于展示个人项目、公开分享、博客文章、工作经历等内容，支持中英文双语切换。
+个人作品集展示站点，基于纯前端技术栈（HTML + CSS + JavaScript）构建，集成 Sveltia CMS 可视化内容管理系统。用于展示个人项目、公开演讲、博客文章、工作经历等内容，支持中英文双语切换。
 
 **无需编写代码，通过浏览器后台即可管理全站内容。**
 
@@ -55,7 +55,7 @@
 - **中英文双语切换** — 一键切换全站语言，所有文案支持双语
 - **响应式设计** — 完美适配桌面端、平板、移动端
 - **主题色视觉系统** — 统一的青绿色渐变主题，品牌化视觉体验
-- **技能标签关联** — 项目和公开分享卡片显示相关技能标签
+- **技能标签关联** — 项目和公开演讲卡片显示相关技能标签
 - **视频嵌入** — 支持 YouTube / Bilibili 双源一键切换
 - **平滑滚动与动画** — 基于 Intersection Observer 的淡入效果
 - **时间线布局** — 工作经历与教育背景采用专业时间线设计
@@ -142,7 +142,7 @@ npx serve .
 | 🎠 首页走马灯 | 首页高亮展示 | 标题、副标题、封面、链接 |
 | 💼 项目 | 个人项目展示 | 标题、描述、封面、链接、技能标签、重点标记 |
 | 📝 博客 | 微信公众号文章 | 标题、封面、链接、发布日期 |
-| 🎤 公开分享 | 技术分享、演讲、会议 | 类型、标题、封面、链接、日期、标签 |
+| 🎤 公开演讲 | 技术分享、演讲、会议 | 类型、标题、封面、链接、日期、标签 |
 | 📚 发表作品 | 专利、论文 | 类型、标题、作者、来源、年份、链接、PDF |
 | 🎨 创意作品 | AI创作、音乐视频 | 标题、描述、技术栈、视频链接、音乐链接 |
 | 👤 个人简介 | Hero 区域 | 姓名、头像、标语、简介、证书、技能、社交链接 |
@@ -254,7 +254,7 @@ backend:
 ```
 images/uploads/
 ├── projects/     # 项目封面图
-├── talks/        # 公开分享封面图
+├── talks/        # 公开演讲封面图
 ├── logos/        # 公司/学校 Logo
 ├── blogs/        # 博客封面图
 ├── profile/      # 个人头像
@@ -342,7 +342,7 @@ joyce.github.io/
 │   ├── carousel.json       #    首页走马灯
 │   ├── projects.json       #    项目（含技能标签）
 │   ├── blogs.json          #    博客文章
-│   ├── talks.json          #    公开分享（技术分享、演讲、会议等）
+│   ├── talks.json          #    公开演讲（技术分享、演讲、会议等）
 │   ├── publications.json   #    发表作品（白皮书、专利、论文）
 │   ├── creative.json       #    创意作品（AI创作、音乐视频）
 │   ├── profile.json        #    个人简介（头像、技能、社交链接）
@@ -354,7 +354,7 @@ joyce.github.io/
 ├── images/                 # 📷 图片资源
 │   └── uploads/            #    统一图片目录（CMS 上传）
 │       ├── projects/       #    项目封面
-│       ├── talks/          #    公开分享封面
+│       ├── talks/          #    公开演讲封面
 │       ├── logos/          #    公司/学校 Logo
 │       ├── blogs/          #    博客封面
 │       ├── profile/        #    个人头像
@@ -373,7 +373,7 @@ joyce.github.io/
 | 首页走马灯 (Carousel) | `data/carousel.json` | ✅ |
 | 精选项目 (Projects) | `data/projects.json` | ✅ |
 | 博客文章 (Blog) | `data/blogs.json` | ✅ |
-| 公开分享 (Talks) | `data/talks.json` | ✅ |
+| 公开演讲 (Talks) | `data/talks.json` | ✅ |
 | 发表作品 (Publications) | `data/publications.json` | ✅ |
 | 创意作品 (Creative) | `data/creative.json` | ✅ |
 | 个人简介与核心技能 (Profile) | `data/profile.json` | ✅ |

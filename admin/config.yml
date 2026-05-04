@@ -115,13 +115,13 @@ collections:
               - { label: "🔗 文章链接", name: "url", widget: "string", required: false, default: "", hint: "微信公众号文章链接" }
               - { label: "📅 发布日期", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, hint: "用于排序" }
 
-  # ========== 公开分享 ==========
+  # ========== 公开演讲 ==========
   - name: "talks"
-    label: "🎤 公开分享 Talks"
+    label: "🎤 公开演讲 Talks"
     description: "技术分享、公开演讲、行业会议等"
     files:
       - name: "talks_items"
-        label: "公开分享配置"
+        label: "公开演讲配置"
         file: "data/talks.json"
         format: "json"
         fields:
