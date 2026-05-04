@@ -82,7 +82,7 @@ a:hover { text-decoration: underline; }
 .hero-text { flex: 1; min-width: 0; overflow: hidden; }
 .hero-text h1 {
   font-size: 1.5rem; font-weight: 600; margin-bottom: 2px; line-height: 1.4;
-  letter-spacing: 0.1em; color: var(--primary);
+  letter-spacing: 0.1em; color: var(--primary-dark);
   background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
 }
 .hero-tagline {
