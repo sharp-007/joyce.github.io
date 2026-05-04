@@ -18,10 +18,12 @@ joyce.github.io/
 ├── style.css           # 全局样式（主题色、卡片、时间线等）
 ├── script.js           # 交互逻辑 + 数据驱动渲染
 ├── data/               # 模块化内容数据（JSON）
+│   ├── carousel.json   # 首页走马灯数据
 │   ├── projects.json   # 项目数据（含技能标签）
 │   ├── blogs.json      # 博客文章数据
 │   ├── talks.json      # 技术分享数据（含技能标签）
-│   └── carousel.json   # 首页走马灯数据
+│   ├── publications.json # 发表作品数据（白皮书、专利、论文）
+│   └── creative.json   # 创意作品数据（AI创作、音乐视频）
 ├── admin/              # Decap CMS 可视化管理后台
 │   ├── index.html      # CMS 入口页面
 │   └── config.yml      # CMS 配置文件
@@ -125,35 +127,105 @@ npx serve .
 # 3. 访问 http://localhost:3000/admin/ 即可在本地可视化编辑
 ```
 
-### GitHub OAuth 配置
+### GitHub OAuth 配置（完整指南）
 
-在线使用 CMS 需要配置 GitHub OAuth App：
+在线使用 CMS 需要配置 GitHub OAuth，以下是完整配置步骤：
 
-1. 在 GitHub Settings > Developer settings > OAuth Apps 中创建 OAuth App
-2. 设置 Homepage URL 为站点地址，Authorization callback URL 为 `https://sharp-007.github.io/joyce.github.io/admin/`
-3. 部署一个 OAuth 代理服务（推荐使用免费的 Cloudflare Worker 方案）
-4. 在 `admin/config.yml` 中的 `backend` 部分添加 `base_url` 指向代理地址
+#### 步骤 1：部署 OAuth 代理服务
 
-详见 [Decap CMS 文档](https://decapcms.org/docs/github-backend/)。
+推荐使用免费的 [Sveltia CMS Auth](https://github.com/sveltia/sveltia-cms-auth)（Cloudflare Worker 方案）：
+
+1. 访问 [Sveltia CMS Auth](https://github.com/sveltia/sveltia-cms-auth)
+2. 点击 **"Deploy to Cloudflare"** 按钮
+3. 登录 Cloudflare 账号，完成一键部署
+4. 部署成功后获得 Worker URL，格式如：`https://sveltia-cms-auth.xxx.workers.dev`
+
+#### 步骤 2：创建 GitHub OAuth App
+
+1. 访问 [GitHub Developer Settings](https://github.com/settings/developers)
+2. 点击 **OAuth Apps** → **New OAuth App**
+3. 填写以下信息：
+
+| 字段 | 值 |
+|------|-----|
+| Application name | `Joyce Portfolio CMS`（任意名称） |
+| Homepage URL | `https://sharp-007.github.io/joyce.github.io/` |
+| Authorization callback URL | `https://你的Worker地址/callback` |
+
+4. 点击 **Register application**
+5. 创建成功后，复制 **Client ID**
+6. 点击 **Generate a new client secret**，复制 **Client Secret**（只显示一次）
+
+#### 步骤 3：配置 Cloudflare 环境变量
+
+1. 登录 [Cloudflare Dashboard](https://dash.cloudflare.com/)
+2. 进入 **Workers & Pages** → 点击你的 Worker（如 `sveltia-cms-auth`）
+3. 点击 **Settings** → **Variables and Secrets**
+4. 添加两个环境变量：
+
+| 变量名 | 值 |
+|--------|-----|
+| `GITHUB_CLIENT_ID` | 你的 GitHub OAuth Client ID |
+| `GITHUB_CLIENT_SECRET` | 你的 GitHub OAuth Client Secret |
+
+5. 点击 **Save and Deploy** 重新部署 Worker
+
+#### 步骤 4：更新 CMS 配置
+
+在 `admin/config.yml` 中配置 `base_url`：
+
+```yaml
+backend:
+  name: github
+  repo: sharp-007/joyce.github.io
+  branch: main
+  base_url: https://你的Worker地址
+```
+
+#### 步骤 5：测试 CMS
+
+1. 推送更新后的 `config.yml` 到 GitHub
+2. 等待 1-2 分钟 GitHub Pages 更新
+3. 访问 `https://sharp-007.github.io/joyce.github.io/admin/`
+4. 点击 **Login with GitHub** 授权登录
+
+详见 [Decap CMS 官方文档](https://decapcms.org/docs/github-backend/)。
+
+### CMS 支持的内容模块
+
+| 模块 | 说明 | 数据文件 |
+|------|------|----------|
+| 🎠 首页走马灯 | 首页高亮展示卡片 | `data/carousel.json` |
+| 💼 项目 | 个人项目（支持重点展示标记） | `data/projects.json` |
+| 📝 博客 | 微信公众号文章 | `data/blogs.json` |
+| 🎤 技术分享 | 公开课、白皮书 | `data/talks.json` |
+| 📚 发表作品 | 专利、论文、白皮书 | `data/publications.json` |
+| 🎨 创意作品 | AI 创作、音乐视频 | `data/creative.json` |
+
+所有模块都支持：
+- ✅ 拖拽排序
+- ✅ 图片上传
+- ✅ 中英文双语字段
+- ✅ 实时预览
 
 ## 自定义修改
 
 
-| 修改内容                     | 对应文件                                          |
-| ------------------------ | --------------------------------------------- |
-| 首页走马灯 (Carousel)         | `data/carousel.json` 或通过 CMS 后台               |
-| 精选项目 (Projects)          | `data/projects.json`（含 skills 字段）或通过 CMS 后台   |
-| 博客文章 (Blog)              | `data/blogs.json` 或通过 CMS 后台                  |
-| 技术分享 (Talks)             | `data/talks.json`（含 skills 字段）或通过 CMS 后台      |
-| 个人简介与核心技能 (Hero)         | `index.html` — Hero 模块（证书徽章 + 技能标签）           |
-| 工作经历 (Experience)        | `index.html` — Experience 模块（时间线布局）           |
-| 教育背景 (Education)         | `index.html` — Education 模块（时间线布局）            |
-| 发表作品 (Publications)      | `index.html` — Publications 模块                |
-| 创意作品 (Creative)          | `index.html` — Creative 模块                    |
-| 联系方式 (Contact)           | `index.html` — Contact 模块                     |
-| 主题色、卡片样式、时间线布局          | `style.css`                                   |
-| 语言切换、视频源、导航交互、卡片渲染      | `script.js`                                   |
-| CMS 配置（字段定义等）            | `admin/config.yml`                            |
+| 修改内容 | 对应文件 | CMS 支持 |
+| --- | --- | :---: |
+| 首页走马灯 (Carousel) | `data/carousel.json` | ✅ |
+| 精选项目 (Projects) | `data/projects.json` | ✅ |
+| 博客文章 (Blog) | `data/blogs.json` | ✅ |
+| 技术分享 (Talks) | `data/talks.json` | ✅ |
+| 发表作品 (Publications) | `data/publications.json` | ✅ |
+| 创意作品 (Creative) | `data/creative.json` | ✅ |
+| 个人简介与核心技能 (Hero) | `index.html` — Hero 模块 | ❌ |
+| 工作经历 (Experience) | `index.html` — Experience 模块 | ❌ |
+| 教育背景 (Education) | `index.html` — Education 模块 | ❌ |
+| 联系方式 (Contact) | `index.html` — Contact 模块 | ❌ |
+| 主题色、卡片样式 | `style.css` | ❌ |
+| 交互逻辑、数据渲染 | `script.js` | ❌ |
+| CMS 配置 | `admin/config.yml` | - |
 
 
 ## 技术栈
