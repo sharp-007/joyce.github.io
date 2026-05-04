@@ -53,7 +53,6 @@ collections:
                 widget: "image"
                 hint: "支持 PNG/JPG/SVG，推荐尺寸 800x450。可上传或输入已有图片路径"
                 choose_url: true
-                allow_multiple: false
               - { label: "🔗 链接", name: "url", widget: "string", hint: "点击跳转的链接地址" }
 
   # ========== 项目 ==========
@@ -81,7 +80,6 @@ collections:
                 widget: "image"
                 hint: "已有图片路径如 images/projects/xxx.png，或上传新图片"
                 choose_url: true
-                allow_multiple: false
               - { label: "🔗 项目链接", name: "url", widget: "string", hint: "GitHub 或演示链接" }
               - { label: "🏷️ HTML ID", name: "id", widget: "string", required: false, default: "", hint: "用于页面锚点定位" }
               - { label: "⭐ 重点展示", name: "featured", widget: "boolean", default: false, hint: "开启后在首页重点展示" }
@@ -115,7 +113,6 @@ collections:
                 widget: "image"
                 hint: "微信公众号封面，支持 PNG/JPG"
                 choose_url: true
-                allow_multiple: false
               - { label: "🔗 文章链接", name: "url", widget: "string", required: false, default: "", hint: "微信公众号文章链接" }
               - { label: "📅 发布日期", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, hint: "用于排序" }
 
@@ -142,7 +139,6 @@ collections:
                 widget: "image"
                 hint: "已有图片路径如 images/talks/xxx.png，或上传新图片"
                 choose_url: true
-                allow_multiple: false
               - { label: "🔗 链接", name: "url", widget: "string", hint: "课程或白皮书链接" }
               - label: "🛠️ 技能标签"
                 name: "skills"
@@ -211,7 +207,6 @@ collections:
                 required: false
                 hint: "上传封面图片或输入已有路径"
                 choose_url: true
-                allow_multiple: false
               - { label: "▶️ YouTube 链接", name: "youtube", widget: "string", required: false }
               - { label: "▶️ Bilibili 链接", name: "bilibili", widget: "string", required: false }
               - { label: "🎵 网易云音乐链接", name: "music163", widget: "string", required: false }
