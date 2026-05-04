@@ -2,12 +2,14 @@ backend:
   name: github
   repo: sharp-007/joyce.github.io
   branch: main
+  base_url: https://sveltia-cms-auth.pj0072014.workers.dev
 
 media_folder: "images/uploads"
 public_folder: "images/uploads"
 
 # Use local backend for development (npx decap-server)
-local_backend: true
+# Set to false for production, true for local development
+local_backend: false
 
 collections:
   - name: "carousel"
