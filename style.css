@@ -132,6 +132,12 @@ a:hover { text-decoration: underline; }
 .photo-card:hover .project-skill {
   border-color: var(--primary); background: rgba(8, 145, 178, 0.12);
 }
+.project-skill.talk-type {
+  background: var(--primary); color: #fff; border-color: var(--primary);
+}
+.photo-card:hover .project-skill.talk-type {
+  background: var(--accent); border-color: var(--accent);
+}
 
 /* ===== CAROUSEL (grid) ===== */
 .carousel-section {

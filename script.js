@@ -41,11 +41,11 @@
       { title_en:"How Large Models Are Reshaping Data Platforms: One Diagram, 10 Layers Explained", title_zh:"大模型如何重塑数据平台？一张图讲清楚10层技术栈的变与不变", cover:"/images/uploads/wechat-cover-llm-data-platform.png", url:"https://mp.weixin.qq.com/s/RlMWMXGu4taOElHMOSVk-g", date:"2026-05-02" }
     ],
     'data/talks.json': [
-      { title_en:"DOE Intro: Master DOE in 60 Minutes", title_zh:"DOE入门课：从方法到实践，60分钟轻松掌握DOE", cover:"images/uploads/talks/doe-intro.png", url:"https://www.jmp.com/zh-hans/resources/on-demand/local/jmp-doe-from-zero-on-demand" },
-      { title_en:"DOE Case Studies: 3 Methods for R&D & Process Optimization", title_zh:"DOE经典案例实战：产品研发与工艺优化的3种实验设计方法", cover:"images/uploads/talks/doe-cases.png", url:"https://www.jmp.com/zh-hans/resources/on-demand/local/doe-industry-cases-study" },
-      { title_en:"Quality Analysis: 2 Cases Covering 80% QE Scenarios", title_zh:"45分钟完全入门质量分析：2大案例讲透质量工程师80%的数据分析场景", cover:"images/uploads/talks/quality-analysis.png", url:"https://www.jmp.com/zh-hans/resources/on-demand/local/get-started-quality-engineer" },
-      { title_en:"Data Visualization User Group", title_zh:"数据可视化用户训练营", cover:"images/uploads/talks/user-group.png", url:"" },
-      { title_en:"Food Sensory Analysis & Recipe Optimization: Statistical Methods & Cases", title_zh:"食品感官分析与配方优化的常用统计方法与实战案例", cover:"images/uploads/talks/food-webinar.png", url:"" }
+      { type_en:"Webinar", type_zh:"在线直播", title_en:"DOE Intro: Master DOE in 60 Minutes", title_zh:"DOE入门课：从方法到实践，60分钟轻松掌握DOE", cover:"images/uploads/talks/doe-intro.png", url:"https://www.jmp.com/zh-hans/resources/on-demand/local/jmp-doe-from-zero-on-demand", skills:["DOE","统计分析","JMP"] },
+      { type_en:"Webinar", type_zh:"在线直播", title_en:"DOE Case Studies: 3 Methods for R&D & Process Optimization", title_zh:"DOE经典案例实战：产品研发与工艺优化的3种实验设计方法", cover:"images/uploads/talks/doe-cases.png", url:"https://www.jmp.com/zh-hans/resources/on-demand/local/doe-industry-cases-study", skills:["DOE","统计分析","JMP"] },
+      { type_en:"Webinar", type_zh:"在线直播", title_en:"Quality Analysis: 2 Cases Covering 80% QE Scenarios", title_zh:"45分钟完全入门质量分析：2大案例讲透质量工程师80%的数据分析场景", cover:"images/uploads/talks/quality-analysis.png", url:"https://www.jmp.com/zh-hans/resources/on-demand/local/get-started-quality-engineer", skills:["质量管理","统计分析","JMP"] },
+      { type_en:"Workshop", type_zh:"工作坊", title_en:"Data Visualization User Group", title_zh:"数据可视化用户训练营", cover:"images/uploads/talks/user-group.png", url:"", skills:["数据可视化","JMP"] },
+      { type_en:"Webinar", type_zh:"在线直播", title_en:"Food Sensory Analysis & Recipe Optimization: Statistical Methods & Cases", title_zh:"食品感官分析与配方优化的常用统计方法与实战案例", cover:"images/uploads/talks/food-webinar.png", url:"", skills:["统计分析","DOE","JMP"] }
     ]
   };
 
@@ -184,9 +184,15 @@
     const container = document.getElementById('talks-grid');
     if (!container || !items.length) return;
 
-    const renderSkills = (skills) => {
-      if (!skills || !skills.length) return '';
-      return `<div class="project-skills">${skills.map(s => `<span class="project-skill">${escHtml(s)}</span>`).join('')}</div>`;
+    const renderTags = (tk) => {
+      let tags = [];
+      if (tk.type_en && tk.type_zh) {
+        tags.push(`<span class="project-skill talk-type" data-en="${escHtml(tk.type_en)}" data-zh="${escHtml(tk.type_zh)}">${escHtml(tk.type_en)}</span>`);
+      }
+      if (tk.skills && tk.skills.length) {
+        tags = tags.concat(tk.skills.map(s => `<span class="project-skill">${escHtml(s)}</span>`));
+      }
+      return tags.length ? `<div class="project-skills">${tags.join('')}</div>` : '';
     };
 
     let html = '<div class="photo-grid photo-grid-4 fade-in">';
@@ -198,7 +204,7 @@
         <${tag}${linkAttr} class="photo-card talk-card">
           <img src="${escHtml(tk.cover)}" alt="${escHtml(tk.title_en)}" loading="lazy" ${imgErr}>
           <div class="photo-card-label" data-en="${escHtml(tk.title_en)}" data-zh="${escHtml(tk.title_zh)}">${escHtml(tk.title_en)}</div>
-          ${renderSkills(tk.skills)}
+          ${renderTags(tk)}
         </${tag}>`;
     });
     html += '</div>';

@@ -115,36 +115,59 @@ collections:
               - { label: "🔗 文章链接", name: "url", widget: "string", required: false, default: "", hint: "微信公众号文章链接" }
               - { label: "📅 发布日期", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, hint: "用于排序" }
 
-  # ========== 技术分享 ==========
+  # ========== 公开分享 ==========
   - name: "talks"
-    label: "🎤 技术分享 Talks"
-    description: "公开课、白皮书和演讲"
+    label: "🎤 公开分享 Talks"
+    description: "技术分享、公开演讲、行业会议等"
     files:
       - name: "talks_items"
-        label: "技术分享配置"
+        label: "公开分享配置"
         file: "data/talks.json"
         format: "json"
         fields:
           - label: "分享列表"
             name: "items"
             widget: "list"
-            summary: "{{fields.title_zh}}"
+            summary: "{{fields.type_zh}} | {{fields.title_zh}}"
             minimize_collapsed: true
             fields:
+              - label: "📂 类型（英文）"
+                name: "type_en"
+                widget: "select"
+                default: "Technical Talk"
+                options:
+                  - { label: "Technical Talk", value: "Technical Talk" }
+                  - { label: "Public Speech", value: "Public Speech" }
+                  - { label: "Industry Conference", value: "Industry Conference" }
+                  - { label: "Corporate Training", value: "Corporate Training" }
+                  - { label: "Webinar", value: "Webinar" }
+                  - { label: "Workshop", value: "Workshop" }
+              - label: "📂 类型（中文）"
+                name: "type_zh"
+                widget: "select"
+                default: "技术分享"
+                options:
+                  - { label: "技术分享", value: "技术分享" }
+                  - { label: "公开演讲", value: "公开演讲" }
+                  - { label: "行业会议", value: "行业会议" }
+                  - { label: "企业培训", value: "企业培训" }
+                  - { label: "在线直播", value: "在线直播" }
+                  - { label: "工作坊", value: "工作坊" }
               - { label: "🔤 英文标题", name: "title_en", widget: "string" }
               - { label: "🔤 中文标题", name: "title_zh", widget: "string" }
               - label: "🖼️ 封面图"
                 name: "cover"
                 widget: "image"
-                hint: "已有图片路径如 images/talks/xxx.png，或上传新图片"
+                hint: "上传新图片或输入已有路径"
                 choose_url: true
-              - { label: "🔗 链接", name: "url", widget: "string", hint: "课程或白皮书链接" }
-              - label: "🛠️ 技能标签"
+              - { label: "🔗 链接", name: "url", widget: "string", required: false, hint: "视频回放或资料链接" }
+              - { label: "📅 日期", name: "date", widget: "string", required: false, hint: "如 2025-06 或 2025" }
+              - label: "🛠️ 相关标签"
                 name: "skills"
                 widget: "list"
                 required: false
-                hint: "相关技能标签"
-                field: { label: "技能", name: "skill", widget: "string" }
+                hint: "相关技能或主题标签"
+                field: { label: "标签", name: "skill", widget: "string" }
 
   # ========== 发表作品 ==========
   - name: "publications"
