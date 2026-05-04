@@ -4,48 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Content Manager | Joyce Pan Portfolio</title>
-  <style>
-    /* Fix image preview for all formats */
-    [class*="ImagePreview"] img,
-    [class*="image-preview"] img,
-    .nc-imageControl img,
-    [data-testid="image-preview"] img {
-      max-width: 100%;
-      height: auto;
-      object-fit: contain;
-    }
-    
-    /* SVG specific fixes */
-    img[src$=".svg"],
-    img[src*=".svg?"] {
-      max-width: 200px;
-      max-height: 200px;
-      background: #f0f0f0;
-      padding: 8px;
-      border-radius: 4px;
-    }
-    
-    /* Ensure all image formats display */
-    [class*="PreviewCard"] img,
-    [class*="card"] img {
-      display: block !important;
-      visibility: visible !important;
-    }
-  </style>
+  <link rel="icon" href="/joyce.github.io/images/logos/favicon.svg">
 </head>
 <body>
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
-  <script>
-    // Register custom image preview widget to support all formats
-    CMS.registerPreviewStyle('/admin/preview.css');
-    
-    // Fix for relative image paths
-    CMS.registerEventListener({
-      name: 'preSave',
-      handler: ({ entry }) => {
-        return entry;
-      },
-    });
-  </script>
+  <!-- Sveltia CMS - Better image preview support than Decap CMS -->
+  <script src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js"></script>
 </body>
 </html>
