@@ -430,69 +430,93 @@
   });
   loadAllData();
 
-  // --- AI Chat Widget (Dify Official Embed) ---
-  async function loadDifyChat() {
+  // --- AI Chat Widget ---
+  let aiChatLoaded = false;
+  let aiChatConfig = null;
+
+  async function loadAIChatConfig() {
     try {
       const res = await fetch('data/ai-chat.json');
       if (!res.ok) throw new Error('Failed to load config');
-      const config = await res.json();
+      aiChatConfig = await res.json();
       
-      if (!config.enabled || !config.app_token) {
-        return;
+      const widget = document.getElementById('aiChatWidget');
+      if (widget && aiChatConfig.enabled && aiChatConfig.app_token) {
+        widget.style.display = 'block';
       }
-
-      window.difyChatbotConfig = {
-        token: config.app_token
-      };
-
-      const script = document.createElement('script');
-      script.src = 'https://udify.app/embed.min.js';
-      script.id = config.app_token;
-      script.defer = true;
-      document.body.appendChild(script);
-
-      const style = document.createElement('style');
-      style.textContent = `
-        #dify-chatbot-bubble-button {
-          background: linear-gradient(135deg, #0891b2 0%, #10b981 100%) !important;
-          width: 40px !important;
-          height: 40px !important;
-          bottom: 72px !important;
-          right: 24px !important;
-        }
-        #dify-chatbot-bubble-button svg {
-          width: 22px !important;
-          height: 22px !important;
-        }
-        #dify-chatbot-bubble-window {
-          width: 400px !important;
-          height: 560px !important;
-          bottom: 120px !important;
-          right: 24px !important;
-          border-radius: 16px !important;
-          box-shadow: 0 8px 40px rgba(0, 0, 0, 0.18) !important;
-        }
-        @media (max-width: 768px) {
-          #dify-chatbot-bubble-button {
-            width: 36px !important;
-            height: 36px !important;
-            bottom: 64px !important;
-            right: 16px !important;
-          }
-          #dify-chatbot-bubble-window {
-            width: 100% !important;
-            height: calc(100vh - 60px) !important;
-            bottom: 0 !important;
-            right: 0 !important;
-            border-radius: 16px 16px 0 0 !important;
-          }
-        }
-      `;
-      document.head.appendChild(style);
     } catch {
-      console.log('AI Chat config not found or disabled');
+      aiChatConfig = { enabled: false };
     }
   }
 
-  loadDifyChat();
+  window.toggleAIChat = function() {
+    const widget = document.getElementById('aiChatWidget');
+    const isOpen = widget.classList.toggle('open');
+    
+    if (isOpen && !aiChatLoaded) {
+      loadAIChat();
+    }
+  };
+
+  function loadAIChat() {
+    const config = aiChatConfig || {};
+    const chatBody = document.getElementById('aiChatBody');
+    const placeholder = document.getElementById('aiChatPlaceholder');
+    
+    if (!config.enabled || !config.app_token) {
+      placeholder.innerHTML = `
+        <div class="ai-chat-error">
+          <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M12 2a2 2 0 012 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 017 7v1h1a1 1 0 110 2h-1v1a7 7 0 01-7 7h-1v1a1 1 0 11-2 0v-1h-1a7 7 0 01-7-7v-1H2a1 1 0 110-2h1v-1a7 7 0 017-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 012-2z"/>
+            <circle cx="9" cy="13" r="1.5" fill="currentColor"/>
+            <circle cx="15" cy="13" r="1.5" fill="currentColor"/>
+            <path d="M9 17c.83.67 2 1 3 1s2.17-.33 3-1"/>
+          </svg>
+          <p data-en="AI Assistant is being configured..." data-zh="AI 助手配置中...">AI 助手配置中...</p>
+        </div>
+      `;
+      reapplyLang();
+      return;
+    }
+
+    const token = config.app_token;
+    
+    const iframe = document.createElement('iframe');
+    iframe.src = `https://udify.app/chatbot/${token}`;
+    iframe.allow = 'microphone';
+    iframe.style.cssText = 'width:100%;height:100%;border:none;';
+    
+    iframe.onload = function() {
+      if (placeholder) {
+        placeholder.style.display = 'none';
+      }
+      aiChatLoaded = true;
+    };
+    
+    iframe.onerror = function() {
+      placeholder.innerHTML = `
+        <div class="ai-chat-error">
+          <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M12 8v4M12 16h.01"/>
+          </svg>
+          <p data-en="Failed to load AI Assistant" data-zh="加载 AI 助手失败">加载 AI 助手失败</p>
+        </div>
+      `;
+      reapplyLang();
+    };
+    
+    chatBody.insertBefore(iframe, placeholder);
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      const widget = document.getElementById('aiChatWidget');
+      if (widget && widget.classList.contains('open')) {
+        widget.classList.remove('open');
+      }
+    }
+  });
+
+  loadAIChatConfig();
 })();
