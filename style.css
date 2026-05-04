@@ -287,11 +287,9 @@ a:hover { text-decoration: underline; }
 
 /* ===== CARD THEME ACCENTS ===== */
 .project-card, .talk-card, .blog-card {
-  border-top: 3px solid var(--primary);
   border-bottom: 3px solid var(--primary);
 }
 .project-card:hover, .talk-card:hover, .blog-card:hover {
-  border-top-color: var(--accent);
   border-bottom-color: var(--accent);
 }
 .project-card .photo-card-label,
