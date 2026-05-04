@@ -5,7 +5,12 @@ backend:
   base_url: https://sveltia-cms-auth.pj0072014.workers.dev
 
 media_folder: "images/uploads"
-public_folder: "/images/uploads"
+public_folder: "images/uploads"
+
+# Media library settings
+media_library:
+  max_file_size: 10485760
+  folder_support: true
 
 # Use local backend for development (npx decap-server)
 # Set to false for production, true for local development
@@ -14,7 +19,7 @@ local_backend: false
 # Logo and site info
 site_url: https://sharp-007.github.io/joyce.github.io
 display_url: https://sharp-007.github.io/joyce.github.io
-logo_url: /images/logos/favicon.svg
+logo_url: images/logos/favicon.svg
 
 # Slug settings
 slug:
@@ -41,7 +46,12 @@ collections:
               - { label: "🔤 英文标题", name: "title_en", widget: "string", hint: "English title" }
               - { label: "🔤 中文标题", name: "title_zh", widget: "string", hint: "中文标题" }
               - { label: "📝 副标题", name: "subtitle", widget: "string", hint: "技术栈或简短描述" }
-              - { label: "🖼️ 封面图", name: "cover", widget: "image", hint: "推荐尺寸 800x450" }
+              - label: "🖼️ 封面图"
+                name: "cover"
+                widget: "image"
+                hint: "支持 PNG/JPG/SVG，推荐尺寸 800x450。可上传或输入已有图片路径"
+                choose_url: true
+                allow_multiple: false
               - { label: "🔗 链接", name: "url", widget: "string", hint: "点击跳转的链接地址" }
 
   # ========== 项目 ==========
@@ -64,7 +74,12 @@ collections:
               - { label: "🔤 中文标题", name: "title_zh", widget: "string" }
               - { label: "📝 英文描述", name: "desc_en", widget: "text", required: false }
               - { label: "📝 中文描述", name: "desc_zh", widget: "text", required: false }
-              - { label: "🖼️ 封面图", name: "cover", widget: "image", hint: "推荐尺寸 800x450" }
+              - label: "🖼️ 封面图"
+                name: "cover"
+                widget: "image"
+                hint: "已有图片路径如 images/projects/xxx.png，或上传新图片"
+                choose_url: true
+                allow_multiple: false
               - { label: "🔗 项目链接", name: "url", widget: "string", hint: "GitHub 或演示链接" }
               - { label: "🏷️ HTML ID", name: "id", widget: "string", required: false, default: "", hint: "用于页面锚点定位" }
               - { label: "⭐ 重点展示", name: "featured", widget: "boolean", default: false, hint: "开启后在首页重点展示" }
@@ -93,7 +108,12 @@ collections:
             fields:
               - { label: "🔤 英文标题", name: "title_en", widget: "string" }
               - { label: "🔤 中文标题", name: "title_zh", widget: "string" }
-              - { label: "🖼️ 封面图", name: "cover", widget: "image", hint: "微信公众号封面" }
+              - label: "🖼️ 封面图"
+                name: "cover"
+                widget: "image"
+                hint: "微信公众号封面，支持 PNG/JPG"
+                choose_url: true
+                allow_multiple: false
               - { label: "🔗 文章链接", name: "url", widget: "string", required: false, default: "", hint: "微信公众号文章链接" }
               - { label: "📅 发布日期", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, hint: "用于排序" }
 
@@ -115,7 +135,12 @@ collections:
             fields:
               - { label: "🔤 英文标题", name: "title_en", widget: "string" }
               - { label: "🔤 中文标题", name: "title_zh", widget: "string" }
-              - { label: "🖼️ 封面图", name: "cover", widget: "image" }
+              - label: "🖼️ 封面图"
+                name: "cover"
+                widget: "image"
+                hint: "已有图片路径如 images/talks/xxx.png，或上传新图片"
+                choose_url: true
+                allow_multiple: false
               - { label: "🔗 链接", name: "url", widget: "string", hint: "课程或白皮书链接" }
               - label: "🛠️ 技能标签"
                 name: "skills"
@@ -178,7 +203,13 @@ collections:
               - { label: "📝 中文描述", name: "desc_zh", widget: "text" }
               - { label: "🛠️ 技术栈（英文）", name: "tech_en", widget: "string", required: false }
               - { label: "🛠️ 技术栈（中文）", name: "tech_zh", widget: "string", required: false }
-              - { label: "🖼️ 封面图", name: "cover", widget: "image", required: false }
+              - label: "🖼️ 封面图"
+                name: "cover"
+                widget: "image"
+                required: false
+                hint: "上传封面图片或输入已有路径"
+                choose_url: true
+                allow_multiple: false
               - { label: "▶️ YouTube 链接", name: "youtube", widget: "string", required: false }
               - { label: "▶️ Bilibili 链接", name: "bilibili", widget: "string", required: false }
               - { label: "🎵 网易云音乐链接", name: "music163", widget: "string", required: false }
