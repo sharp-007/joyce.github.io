@@ -713,6 +713,9 @@ a:hover { text-decoration: underline; }
   overflow: hidden;
   position: relative;
   background: #f8fafc;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
 }
 
 .ai-chat-body iframe {
@@ -802,11 +805,30 @@ a:hover { text-decoration: underline; }
 .ai-chat-messages {
   flex: 1;
   overflow-y: auto;
+  overflow-x: hidden;
   padding: 16px;
   display: flex;
   flex-direction: column;
   gap: 12px;
   background: #f8fafc;
+  min-height: 0;
+}
+
+.ai-chat-messages::-webkit-scrollbar {
+  width: 6px;
+}
+
+.ai-chat-messages::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.ai-chat-messages::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+}
+
+.ai-chat-messages::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
 }
 
 .ai-message {
@@ -948,6 +970,22 @@ a:hover { text-decoration: underline; }
 .ai-chat-send:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+}
+
+/* 流式输出光标 */
+.ai-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  background: var(--primary);
+  margin-left: 2px;
+  vertical-align: text-bottom;
+  animation: ai-blink 0.8s infinite;
+}
+
+@keyframes ai-blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
 }
 
 .ai-chat-footer a {

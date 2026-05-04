@@ -1,5 +1,5 @@
 /**
- * Dify API Proxy Worker
+ * Dify API Proxy Worker (支持流式输出)
  * 部署到 Cloudflare Workers，安全代理 Dify API 请求
  * 
  * 环境变量配置：
@@ -10,9 +10,11 @@
 
 export default {
   async fetch(request, env) {
+    const origin = request.headers.get('Origin') || '';
+    
     // CORS 预检请求
     if (request.method === 'OPTIONS') {
-      return handleCORS(request, env);
+      return handleCORS(origin);
     }
 
     // 只允许 POST 请求
@@ -21,17 +23,15 @@ export default {
     }
 
     // 验证来源
-    const origin = request.headers.get('Origin') || '';
     const allowedOrigins = (env.ALLOWED_ORIGINS || '').split(',').map(o => o.trim());
-    
-    if (allowedOrigins.length > 0 && !allowedOrigins.includes(origin) && !allowedOrigins.includes('*')) {
+    if (allowedOrigins.length > 0 && allowedOrigins[0] !== '' && !allowedOrigins.includes(origin) && !allowedOrigins.includes('*')) {
       return new Response('Forbidden', { status: 403 });
     }
 
     try {
       const body = await request.json();
+      const streaming = body.streaming !== false;
       
-      // 调用 Dify API
       const difyBaseUrl = env.DIFY_BASE_URL || 'https://api.dify.ai/v1';
       const response = await fetch(`${difyBaseUrl}/chat-messages`, {
         method: 'POST',
@@ -42,38 +42,59 @@ export default {
         body: JSON.stringify({
           inputs: body.inputs || {},
           query: body.query,
-          response_mode: 'blocking',
+          response_mode: streaming ? 'streaming' : 'blocking',
           conversation_id: body.conversation_id || '',
           user: body.user || 'website-visitor'
         })
       });
 
-      const data = await response.json();
+      if (!response.ok) {
+        const err = await response.text();
+        return new Response(JSON.stringify({ error: 'Dify API error', detail: err }), {
+          status: response.status,
+          headers: corsHeaders(origin)
+        });
+      }
 
-      return new Response(JSON.stringify(data), {
-        status: response.status,
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': origin || '*',
-          'Access-Control-Allow-Methods': 'POST, OPTIONS',
-          'Access-Control-Allow-Headers': 'Content-Type'
-        }
-      });
+      if (streaming) {
+        // 流式输出：直接转发 SSE 流
+        return new Response(response.body, {
+          headers: {
+            'Content-Type': 'text/event-stream',
+            'Cache-Control': 'no-cache',
+            'Connection': 'keep-alive',
+            'Access-Control-Allow-Origin': origin || '*',
+            'Access-Control-Allow-Methods': 'POST, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type'
+          }
+        });
+      } else {
+        // 阻塞模式
+        const data = await response.json();
+        return new Response(JSON.stringify(data), {
+          headers: corsHeaders(origin)
+        });
+      }
 
     } catch (error) {
       return new Response(JSON.stringify({ error: 'Proxy error', message: error.message }), {
         status: 500,
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': origin || '*'
-        }
+        headers: corsHeaders(origin)
       });
     }
   }
 };
 
-function handleCORS(request, env) {
-  const origin = request.headers.get('Origin') || '';
+function corsHeaders(origin) {
+  return {
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': origin || '*',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type'
+  };
+}
+
+function handleCORS(origin) {
   return new Response(null, {
     status: 204,
     headers: {

@@ -599,7 +599,11 @@
     
     aiIsLoading = true;
     sendBtn.disabled = true;
-    addTypingIndicator();
+    
+    // 创建空的 bot 消息用于流式填充
+    const botMessage = addAIMessage('', false);
+    const contentEl = botMessage.querySelector('.ai-message-content');
+    let fullText = '';
     
     try {
       const response = await fetch(aiChatConfig.proxy_url, {
@@ -608,29 +612,76 @@
         body: JSON.stringify({
           query: message,
           conversation_id: aiConversationId || '',
-          user: 'visitor-' + Date.now()
+          user: 'visitor-' + Date.now(),
+          streaming: true
         })
       });
       
-      removeTypingIndicator();
-      
       if (!response.ok) throw new Error('API error');
       
-      const data = await response.json();
-      aiConversationId = data.conversation_id;
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+      let buffer = '';
       
-      const answer = data.answer || (lang === 'zh' ? '抱歉，我暂时无法回答。' : 'Sorry, I cannot answer right now.');
-      addAIMessage(formatMarkdown(answer));
+      // 显示光标闪烁效果
+      contentEl.innerHTML = '<span class="ai-cursor"></span>';
+      
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        
+        buffer += decoder.decode(value, { stream: true });
+        const lines = buffer.split('\n');
+        buffer = lines.pop() || '';
+        
+        for (const line of lines) {
+          if (line.startsWith('data: ')) {
+            const data = line.slice(6).trim();
+            if (!data || data === '[DONE]') continue;
+            
+            try {
+              const json = JSON.parse(data);
+              
+              // 获取 conversation_id
+              if (json.conversation_id) {
+                aiConversationId = json.conversation_id;
+              }
+              
+              // 处理不同的事件类型
+              if (json.event === 'message' || json.event === 'agent_message') {
+                fullText += json.answer || '';
+                contentEl.innerHTML = formatMarkdown(fullText) + '<span class="ai-cursor"></span>';
+                scrollToBottom();
+              } else if (json.event === 'message_end') {
+                // 消息结束
+                if (json.conversation_id) {
+                  aiConversationId = json.conversation_id;
+                }
+              }
+            } catch (e) {
+              // 忽略解析错误
+            }
+          }
+        }
+      }
+      
+      // 移除光标，显示最终内容
+      contentEl.innerHTML = formatMarkdown(fullText) || (lang === 'zh' ? '抱歉，我暂时无法回答。' : 'Sorry, I cannot answer right now.');
       
     } catch (err) {
-      removeTypingIndicator();
-      addAIMessage(lang === 'zh' ? '请求失败，请稍后再试。' : 'Request failed. Please try again.');
+      console.error('AI Chat Error:', err);
+      contentEl.innerHTML = lang === 'zh' ? '请求失败，请稍后再试。' : 'Request failed. Please try again.';
     } finally {
       aiIsLoading = false;
       sendBtn.disabled = false;
       input.focus();
     }
   };
+  
+  function scrollToBottom() {
+    const container = document.getElementById('aiChatMessages');
+    if (container) container.scrollTop = container.scrollHeight;
+  }
 
   // Enter 发送消息
   document.addEventListener('DOMContentLoaded', function() {
