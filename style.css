@@ -988,6 +988,87 @@ a:hover { text-decoration: underline; }
   51%, 100% { opacity: 0; }
 }
 
+/* 思考过程样式 */
+.ai-thinking-live {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+  padding: 6px 10px;
+  background: rgba(8, 145, 178, 0.08);
+  border-radius: 8px;
+}
+
+.ai-thinking-icon {
+  font-size: 1rem;
+}
+
+.ai-thought-content {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  padding: 8px 10px;
+  background: #f1f5f9;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  white-space: pre-wrap;
+  line-height: 1.5;
+}
+
+/* 折叠的思考过程 */
+.ai-thought-details {
+  margin-bottom: 10px;
+  font-size: 0.82rem;
+}
+
+.ai-thought-details summary {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  color: var(--text-secondary);
+  padding: 6px 10px;
+  background: rgba(8, 145, 178, 0.06);
+  border-radius: 8px;
+  transition: background 0.2s;
+  list-style: none;
+}
+
+.ai-thought-details summary::-webkit-details-marker {
+  display: none;
+}
+
+.ai-thought-details summary::after {
+  content: '▶';
+  font-size: 0.65rem;
+  margin-left: auto;
+  transition: transform 0.2s;
+}
+
+.ai-thought-details[open] summary::after {
+  transform: rotate(90deg);
+}
+
+.ai-thought-details summary:hover {
+  background: rgba(8, 145, 178, 0.1);
+}
+
+.ai-thought-icon {
+  font-size: 0.9rem;
+}
+
+.ai-thought-text {
+  padding: 10px 12px;
+  margin-top: 6px;
+  background: #f1f5f9;
+  border-radius: 8px;
+  color: var(--text-secondary);
+  white-space: pre-wrap;
+  line-height: 1.5;
+  font-size: 0.82rem;
+}
+
 .ai-chat-footer a {
   color: var(--primary);
   font-weight: 600;

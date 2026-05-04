@@ -603,7 +603,11 @@
     // 创建空的 bot 消息用于流式填充
     const botMessage = addAIMessage('', false);
     const contentEl = botMessage.querySelector('.ai-message-content');
-    let fullText = '';
+    
+    let thoughts = [];
+    let currentThought = '';
+    let fullAnswer = '';
+    let isThinking = false;
     
     try {
       const response = await fetch(aiChatConfig.proxy_url, {
@@ -623,7 +627,7 @@
       const decoder = new TextDecoder();
       let buffer = '';
       
-      // 显示光标闪烁效果
+      // 显示初始状态
       contentEl.innerHTML = '<span class="ai-cursor"></span>';
       
       while (true) {
@@ -642,18 +646,29 @@
             try {
               const json = JSON.parse(data);
               
-              // 获取 conversation_id
               if (json.conversation_id) {
                 aiConversationId = json.conversation_id;
               }
               
-              // 处理不同的事件类型
-              if (json.event === 'message' || json.event === 'agent_message') {
-                fullText += json.answer || '';
-                contentEl.innerHTML = formatMarkdown(fullText) + '<span class="ai-cursor"></span>';
+              // 处理思考过程
+              if (json.event === 'agent_thought') {
+                isThinking = true;
+                currentThought = json.thought || '';
+                if (currentThought) {
+                  thoughts.push(currentThought);
+                }
+                // 显示思考中状态
+                contentEl.innerHTML = renderThinkingState(thoughts, currentThought, true);
                 scrollToBottom();
-              } else if (json.event === 'message_end') {
-                // 消息结束
+              }
+              // 处理最终回答
+              else if (json.event === 'message' || json.event === 'agent_message') {
+                isThinking = false;
+                fullAnswer += json.answer || '';
+                contentEl.innerHTML = renderStreamingContent(thoughts, fullAnswer, true);
+                scrollToBottom();
+              }
+              else if (json.event === 'message_end') {
                 if (json.conversation_id) {
                   aiConversationId = json.conversation_id;
                 }
@@ -665,8 +680,9 @@
         }
       }
       
-      // 移除光标，显示最终内容
-      contentEl.innerHTML = formatMarkdown(fullText) || (lang === 'zh' ? '抱歉，我暂时无法回答。' : 'Sorry, I cannot answer right now.');
+      // 最终渲染：折叠思考过程
+      contentEl.innerHTML = renderFinalContent(thoughts, fullAnswer);
+      scrollToBottom();
       
     } catch (err) {
       console.error('AI Chat Error:', err);
@@ -677,6 +693,45 @@
       input.focus();
     }
   };
+  
+  function renderThinkingState(thoughts, current, streaming) {
+    const thinkingLabel = lang === 'zh' ? '思考中...' : 'Thinking...';
+    let html = `<div class="ai-thinking-live"><span class="ai-thinking-icon">💭</span> ${thinkingLabel}</div>`;
+    html += `<div class="ai-thought-content">${escHtml(current)}<span class="ai-cursor"></span></div>`;
+    return html;
+  }
+  
+  function renderStreamingContent(thoughts, answer, streaming) {
+    let html = '';
+    if (thoughts.length > 0) {
+      const label = lang === 'zh' ? '思考过程' : 'Thinking';
+      html += `<div class="ai-thinking-live"><span class="ai-thinking-icon">💭</span> ${label}</div>`;
+    }
+    html += formatMarkdown(answer);
+    if (streaming) html += '<span class="ai-cursor"></span>';
+    return html;
+  }
+  
+  function renderFinalContent(thoughts, answer) {
+    let html = '';
+    
+    // 如果有思考过程，折叠显示
+    if (thoughts.length > 0) {
+      const thoughtText = thoughts.join('\n\n');
+      const toggleLabel = lang === 'zh' ? '查看思考过程' : 'View thinking process';
+      html += `
+        <details class="ai-thought-details">
+          <summary><span class="ai-thought-icon">💭</span> ${toggleLabel}</summary>
+          <div class="ai-thought-text">${escHtml(thoughtText)}</div>
+        </details>
+      `;
+    }
+    
+    // 最终答案
+    html += formatMarkdown(answer) || (lang === 'zh' ? '抱歉，我暂时无法回答。' : 'Sorry, I cannot answer right now.');
+    
+    return html;
+  }
   
   function scrollToBottom() {
     const container = document.getElementById('aiChatMessages');
