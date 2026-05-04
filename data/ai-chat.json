@@ -1,6 +1,6 @@
 {
   "enabled": true,
-  "base_url": "https://udify.app",
+  "mode": "proxy",
   "app_token": "5kXSGBQlYNazCdOW",
-  "chatbot_type": "chatbot"
+  "proxy_url": "https://dify-agent.pj0072014.workers.dev"
 }
