@@ -5,87 +5,181 @@ backend:
   base_url: https://sveltia-cms-auth.pj0072014.workers.dev
 
 media_folder: "images/uploads"
-public_folder: "images/uploads"
+public_folder: "/images/uploads"
 
 # Use local backend for development (npx decap-server)
 # Set to false for production, true for local development
 local_backend: false
 
+# Logo and site info
+site_url: https://sharp-007.github.io/joyce.github.io
+display_url: https://sharp-007.github.io/joyce.github.io
+logo_url: /images/logos/favicon.svg
+
+# Slug settings
+slug:
+  encoding: "unicode"
+  clean_accents: true
+
 collections:
+  # ========== 首页走马灯 ==========
   - name: "carousel"
-    label: "首页走马灯 Carousel"
+    label: "🎠 首页走马灯 Carousel"
+    description: "首页高亮展示的走马灯卡片，支持拖拽排序"
     files:
       - name: "carousel_items"
         label: "走马灯配置"
         file: "data/carousel.json"
         format: "json"
-        description: "首页高亮展示的走马灯卡片"
         fields:
-          - label: "Items"
+          - label: "走马灯项目"
             name: "items"
             widget: "list"
+            summary: "{{fields.title_zh}}"
+            minimize_collapsed: true
             fields:
-              - { label: "英文标题 Title (EN)", name: "title_en", widget: "string" }
-              - { label: "中文标题 Title (ZH)", name: "title_zh", widget: "string" }
-              - { label: "副标题 Subtitle", name: "subtitle", widget: "string" }
-              - { label: "封面图 Cover", name: "cover", widget: "image" }
-              - { label: "链接 URL", name: "url", widget: "string" }
+              - { label: "🔤 英文标题", name: "title_en", widget: "string", hint: "English title" }
+              - { label: "🔤 中文标题", name: "title_zh", widget: "string", hint: "中文标题" }
+              - { label: "📝 副标题", name: "subtitle", widget: "string", hint: "技术栈或简短描述" }
+              - { label: "🖼️ 封面图", name: "cover", widget: "image", hint: "推荐尺寸 800x450" }
+              - { label: "🔗 链接", name: "url", widget: "string", hint: "点击跳转的链接地址" }
 
+  # ========== 项目 ==========
   - name: "projects"
-    label: "项目 Projects"
+    label: "💼 项目 Projects"
+    description: "个人项目展示，featured=true 的项目会在首页重点展示"
     files:
       - name: "projects_items"
         label: "项目配置"
         file: "data/projects.json"
         format: "json"
-        description: "个人项目展示"
         fields:
-          - label: "Items"
+          - label: "项目列表"
             name: "items"
             widget: "list"
+            summary: "{{fields.title_zh}} {{fields.featured}}"
+            minimize_collapsed: true
             fields:
-              - { label: "英文标题 Title (EN)", name: "title_en", widget: "string" }
-              - { label: "中文标题 Title (ZH)", name: "title_zh", widget: "string" }
-              - { label: "英文描述 Desc (EN)", name: "desc_en", widget: "string", required: false }
-              - { label: "中文描述 Desc (ZH)", name: "desc_zh", widget: "string", required: false }
-              - { label: "封面图 Cover", name: "cover", widget: "image" }
-              - { label: "项目链接 URL", name: "url", widget: "string" }
-              - { label: "HTML ID", name: "id", widget: "string", required: false, default: "" }
-              - { label: "重点展示 Featured", name: "featured", widget: "boolean", default: false }
+              - { label: "🔤 英文标题", name: "title_en", widget: "string" }
+              - { label: "🔤 中文标题", name: "title_zh", widget: "string" }
+              - { label: "📝 英文描述", name: "desc_en", widget: "text", required: false }
+              - { label: "📝 中文描述", name: "desc_zh", widget: "text", required: false }
+              - { label: "🖼️ 封面图", name: "cover", widget: "image", hint: "推荐尺寸 800x450" }
+              - { label: "🔗 项目链接", name: "url", widget: "string", hint: "GitHub 或演示链接" }
+              - { label: "🏷️ HTML ID", name: "id", widget: "string", required: false, default: "", hint: "用于页面锚点定位" }
+              - { label: "⭐ 重点展示", name: "featured", widget: "boolean", default: false, hint: "开启后在首页重点展示" }
+              - label: "🛠️ 技能标签"
+                name: "skills"
+                widget: "list"
+                required: false
+                hint: "相关技能标签，如 Python, LLM, RAG"
+                field: { label: "技能", name: "skill", widget: "string" }
 
+  # ========== 博客 ==========
   - name: "blogs"
-    label: "博客 Blog"
+    label: "📝 博客 Blog"
+    description: "微信公众号文章，按日期排序"
     files:
       - name: "blogs_items"
         label: "博客配置"
         file: "data/blogs.json"
         format: "json"
-        description: "微信公众号文章"
         fields:
-          - label: "Items"
+          - label: "博客列表"
             name: "items"
             widget: "list"
+            summary: "{{fields.date}} | {{fields.title_zh}}"
+            minimize_collapsed: true
             fields:
-              - { label: "英文标题 Title (EN)", name: "title_en", widget: "string" }
-              - { label: "中文标题 Title (ZH)", name: "title_zh", widget: "string" }
-              - { label: "封面图 Cover", name: "cover", widget: "image" }
-              - { label: "文章链接 URL", name: "url", widget: "string", required: false, default: "" }
-              - { label: "日期 Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false }
+              - { label: "🔤 英文标题", name: "title_en", widget: "string" }
+              - { label: "🔤 中文标题", name: "title_zh", widget: "string" }
+              - { label: "🖼️ 封面图", name: "cover", widget: "image", hint: "微信公众号封面" }
+              - { label: "🔗 文章链接", name: "url", widget: "string", required: false, default: "", hint: "微信公众号文章链接" }
+              - { label: "📅 发布日期", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, hint: "用于排序" }
 
+  # ========== 技术分享 ==========
   - name: "talks"
-    label: "演讲与白皮书 Talks"
+    label: "🎤 技术分享 Talks"
+    description: "公开课、白皮书和演讲"
     files:
       - name: "talks_items"
-        label: "演讲配置"
+        label: "技术分享配置"
         file: "data/talks.json"
         format: "json"
-        description: "公开课、白皮书和演讲"
         fields:
-          - label: "Items"
+          - label: "分享列表"
             name: "items"
             widget: "list"
+            summary: "{{fields.title_zh}}"
+            minimize_collapsed: true
             fields:
-              - { label: "英文标题 Title (EN)", name: "title_en", widget: "string" }
-              - { label: "中文标题 Title (ZH)", name: "title_zh", widget: "string" }
-              - { label: "封面图 Cover", name: "cover", widget: "image" }
-              - { label: "链接 URL", name: "url", widget: "string" }
+              - { label: "🔤 英文标题", name: "title_en", widget: "string" }
+              - { label: "🔤 中文标题", name: "title_zh", widget: "string" }
+              - { label: "🖼️ 封面图", name: "cover", widget: "image" }
+              - { label: "🔗 链接", name: "url", widget: "string", hint: "课程或白皮书链接" }
+              - label: "🛠️ 技能标签"
+                name: "skills"
+                widget: "list"
+                required: false
+                hint: "相关技能标签"
+                field: { label: "技能", name: "skill", widget: "string" }
+
+  # ========== 发表作品 ==========
+  - name: "publications"
+    label: "📚 发表作品 Publications"
+    description: "白皮书、专利、论文等发表作品"
+    files:
+      - name: "publications_items"
+        label: "发表作品配置"
+        file: "data/publications.json"
+        format: "json"
+        fields:
+          - label: "作品列表"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.year}} | {{fields.title_zh}}"
+            minimize_collapsed: true
+            fields:
+              - label: "📂 类型（英文）"
+                name: "type_en"
+                widget: "select"
+                options: ["White Paper", "Invention Patent", "SCI Paper", "Conference Paper", "Book Chapter"]
+              - label: "📂 类型（中文）"
+                name: "type_zh"
+                widget: "select"
+                options: ["白皮书", "发明专利", "SCI论文", "会议论文", "书籍章节"]
+              - { label: "🔤 英文标题", name: "title_en", widget: "string" }
+              - { label: "🔤 中文标题", name: "title_zh", widget: "string" }
+              - { label: "👥 作者", name: "authors", widget: "string", hint: "作者列表，用逗号分隔" }
+              - { label: "📖 来源", name: "source", widget: "string", hint: "期刊名/专利号/出版社" }
+              - { label: "📅 年份", name: "year", widget: "string" }
+              - { label: "🔗 在线链接", name: "url", widget: "string", required: false }
+              - { label: "📄 PDF文件", name: "pdf", widget: "file", required: false, hint: "可上传PDF文件" }
+
+  # ========== 创意作品 ==========
+  - name: "creative"
+    label: "🎨 创意作品 Creative"
+    description: "AI创作、音乐、视频等创意作品"
+    files:
+      - name: "creative_items"
+        label: "创意作品配置"
+        file: "data/creative.json"
+        format: "json"
+        fields:
+          - label: "作品列表"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.title_zh}}"
+            minimize_collapsed: true
+            fields:
+              - { label: "🔤 英文标题", name: "title_en", widget: "string" }
+              - { label: "🔤 中文标题", name: "title_zh", widget: "string" }
+              - { label: "📝 英文描述", name: "desc_en", widget: "text" }
+              - { label: "📝 中文描述", name: "desc_zh", widget: "text" }
+              - { label: "🛠️ 技术栈（英文）", name: "tech_en", widget: "string", required: false }
+              - { label: "🛠️ 技术栈（中文）", name: "tech_zh", widget: "string", required: false }
+              - { label: "🖼️ 封面图", name: "cover", widget: "image", required: false }
+              - { label: "▶️ YouTube 链接", name: "youtube", widget: "string", required: false }
+              - { label: "▶️ Bilibili 链接", name: "bilibili", widget: "string", required: false }
+              - { label: "🎵 网易云音乐链接", name: "music163", widget: "string", required: false }
+              - { label: "🎵 网易云嵌入播放器", name: "music163_embed", widget: "string", required: false, hint: "外链播放器地址" }

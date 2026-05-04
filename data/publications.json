@@ -1,0 +1,37 @@
+{
+  "items": [
+    {
+      "type_en": "White Paper",
+      "type_zh": "白皮书",
+      "title_en": "DOE Zero-to-One Guide for Engineers",
+      "title_zh": "从0到1掌握DOE：为工程师定制的零基础DOE手册",
+      "authors": "Joyce Pan",
+      "source": "JMP / SAS",
+      "year": "2025",
+      "url": "https://www.jmp.com/zh-hans/resources/white-papers/doe-from-zero-for-engineers",
+      "pdf": "publications/工程师的DOE零基础指南-实验设计赋能研发创新与工艺优化.pdf"
+    },
+    {
+      "type_en": "Invention Patent",
+      "type_zh": "发明专利",
+      "title_en": "Conductive Fabric, Preparation Method and Application",
+      "title_zh": "导电织物、其制备方法及应用",
+      "authors": "Tao Xu, Yefeng Xu, Jiao Pan",
+      "source": "CN110106474B",
+      "year": "2021",
+      "url": "https://patents.google.com/patent/CN110106474B/en",
+      "pdf": "publications/导电织物专利-2019104980463-CN 110106474 B .pdf"
+    },
+    {
+      "type_en": "SCI Paper",
+      "type_zh": "SCI论文",
+      "title_en": "Hybrid Effect of Carbon Nanotube Film and Ultrathin Carbon Fiber Prepreg Composites",
+      "title_zh": "碳纳米管薄膜与超薄碳纤维预浸料复合材料的混杂效应",
+      "authors": "Jiao Pan, Min Li, Shaokai Wang et al.",
+      "source": "Journal of Reinforced Plastics and Composites",
+      "year": "2016",
+      "url": "https://journals.sagepub.com/doi/10.1177/0731684416684020",
+      "pdf": "publications/Hybrid effect of carbon nanotube film and ultrathin carbon fiber prepreg composites.pdf"
+    }
+  ]
+}
