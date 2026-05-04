@@ -11,12 +11,12 @@
   ],
   "qrcodes": [
     {
-      "image": "images/wechat-oa.jpg",
+      "image": "images/uploads/qrcodes/wechat-oa.jpg",
       "title_en": "WeChat: 失控的智能",
       "title_zh": "公众号：失控的智能"
     },
     {
-      "image": "images/wechat-channel.jpg",
+      "image": "images/uploads/qrcodes/wechat-channel.jpg",
       "title_en": "Channel: AIPanda007",
       "title_zh": "视频号：AIPanda007"
     }

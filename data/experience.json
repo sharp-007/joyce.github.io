@@ -36,7 +36,7 @@
       "company_en": "SAS",
       "company_zh": "SAS · 赛仕软件（北京）有限公司",
       "company_url": "https://www.sas.com/en_hk/home.html",
-      "logo": "images/logos/sas.png",
+      "logo": "images/uploads/logos/sas.png",
       "role_en": "Sales · Data Analysis Consultant",
       "role_zh": "销售部 · 数据分析顾问",
       "highlights": [
@@ -65,7 +65,7 @@
       "company_en": "StarNeto",
       "company_zh": "北京星网宇达科技股份有限公司",
       "company_url": "https://www.starneto.com/",
-      "logo": "images/logos/starneto.png",
+      "logo": "images/uploads/logos/starneto.png",
       "role_en": "General System Design · Department Manager",
       "role_zh": "总体部 · 部门经理",
       "highlights": [
@@ -90,7 +90,7 @@
       "company_en": "Beihang University",
       "company_zh": "北京航空航天大学",
       "company_url": "https://www.buaa.edu.cn/",
-      "logo": "images/logos/beihang.jpg",
+      "logo": "images/uploads/logos/beihang.jpg",
       "role_en": "Master of Engineering · Materials Science",
       "role_zh": "工学硕士 · 材料科学与工程",
       "highlights": []
@@ -102,7 +102,7 @@
       "company_en": "Beihang University",
       "company_zh": "北京航空航天大学",
       "company_url": "https://www.buaa.edu.cn/",
-      "logo": "images/logos/beihang.jpg",
+      "logo": "images/uploads/logos/beihang.jpg",
       "role_en": "Bachelor of Engineering · Materials Science",
       "role_zh": "工学学士 · 材料科学与工程",
       "highlights": []
