@@ -1,4 +1,6 @@
 {
   "enabled": true,
-  "app_token": "5kXSGBQlYNazCdOW"
+  "base_url": "https://udify.app",
+  "app_token": "5kXSGBQlYNazCdOW",
+  "chatbot_type": "chatbot"
 }
