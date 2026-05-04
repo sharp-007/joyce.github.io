@@ -7,6 +7,13 @@ backend:
 media_folder: "images/uploads"
 public_folder: "images/uploads"
 
+# Media library config - explicit format support
+media_library:
+  name: "default"
+  config:
+    multiple: false
+    allow_external: true
+
 # Use local backend for development (npx decap-server)
 # Set to false for production, true for local development
 local_backend: false
