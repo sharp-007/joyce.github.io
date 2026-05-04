@@ -204,6 +204,9 @@ backend:
 | 🎤 技术分享 | 公开课、白皮书 | `data/talks.json` |
 | 📚 发表作品 | 专利、论文、白皮书 | `data/publications.json` |
 | 🎨 创意作品 | AI 创作、音乐视频 | `data/creative.json` |
+| 👤 个人简介 | 头像、简介、证书、技能、社交链接 | `data/profile.json` |
+| 💼 工作经历 | 工作经历与教育背景时间线 | `data/experience.json` |
+| 📞 联系方式 | 联系标题、社交链接、二维码 | `data/contact.json` |
 
 所有模块都支持：
 - ✅ 拖拽排序
