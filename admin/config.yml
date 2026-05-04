@@ -7,12 +7,14 @@ backend:
 media_folder: "images/uploads"
 public_folder: "images/uploads"
 
-# Media library config - explicit format support
+# Media library config
 media_library:
   name: "default"
   config:
     multiple: false
-    allow_external: true
+
+# Additional media folders for browsing
+# Note: projects, talks, logos images use relative paths like "images/projects/xxx.png"
 
 # Use local backend for development (npx decap-server)
 # Set to false for production, true for local development
@@ -59,6 +61,8 @@ collections:
   - name: "projects"
     label: "💼 项目 Projects"
     description: "个人项目展示，featured=true 的项目会在首页重点展示"
+    media_folder: "images/projects"
+    public_folder: "images/projects"
     files:
       - name: "projects_items"
         label: "项目配置"
@@ -120,6 +124,8 @@ collections:
   - name: "talks"
     label: "🎤 技术分享 Talks"
     description: "公开课、白皮书和演讲"
+    media_folder: "images/talks"
+    public_folder: "images/talks"
     files:
       - name: "talks_items"
         label: "技术分享配置"
