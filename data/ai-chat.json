@@ -1,5 +1,6 @@
 {
   "enabled": true,
+  "mode": "proxy",
   "app_token": "5kXSGBQlYNazCdOW",
-  "embed_mode": "dify_official"
+  "proxy_url": "https://dify-agent.pj0072014.workers.dev"
 }

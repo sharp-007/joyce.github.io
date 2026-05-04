@@ -429,4 +429,335 @@
     else el.innerHTML = text;
   });
   loadAllData();
+
+  // --- AI Chat Widget ---
+  let aiChatLoaded = false;
+  let aiChatConfig = null;
+  let aiConversationId = null;
+  let aiIsLoading = false;
+
+  async function loadAIChatConfig() {
+    try {
+      const res = await fetch('data/ai-chat.json');
+      if (!res.ok) throw new Error('Failed to load config');
+      aiChatConfig = await res.json();
+      
+      const widget = document.getElementById('aiChatWidget');
+      const hasValidConfig = aiChatConfig.enabled && (aiChatConfig.app_token || aiChatConfig.proxy_url);
+      if (widget && hasValidConfig) {
+        widget.style.display = 'block';
+      }
+    } catch {
+      aiChatConfig = { enabled: false };
+    }
+  }
+
+  window.toggleAIChat = function() {
+    const widget = document.getElementById('aiChatWidget');
+    const isOpen = widget.classList.toggle('open');
+    
+    if (isOpen && !aiChatLoaded) {
+      loadAIChat();
+    }
+    
+    if (isOpen && aiChatConfig?.proxy_url) {
+      const input = document.getElementById('aiChatInput');
+      if (input) setTimeout(() => input.focus(), 300);
+    }
+  };
+
+  function loadAIChat() {
+    const config = aiChatConfig || {};
+    const placeholder = document.getElementById('aiChatPlaceholder');
+    const messagesContainer = document.getElementById('aiChatMessages');
+    const inputWrapper = document.getElementById('aiChatInputWrapper');
+    
+    // 模式判断：有 proxy_url 用自定义界面，否则用 iframe
+    if (config.proxy_url) {
+      // Proxy 模式：自定义聊天界面
+      placeholder.style.display = 'none';
+      messagesContainer.style.display = 'flex';
+      inputWrapper.style.display = 'flex';
+      aiChatLoaded = true;
+      reapplyLang();
+      return;
+    }
+    
+    // iframe 模式
+    if (!config.enabled || !config.app_token) {
+      placeholder.innerHTML = `
+        <div class="ai-chat-error">
+          <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M12 2a2 2 0 012 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 017 7v1h1a1 1 0 110 2h-1v1a7 7 0 01-7 7h-1v1a1 1 0 11-2 0v-1h-1a7 7 0 01-7-7v-1H2a1 1 0 110-2h1v-1a7 7 0 017-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 012-2z"/>
+            <circle cx="9" cy="13" r="1.5" fill="currentColor"/>
+            <circle cx="15" cy="13" r="1.5" fill="currentColor"/>
+            <path d="M9 17c.83.67 2 1 3 1s2.17-.33 3-1"/>
+          </svg>
+          <p data-en="AI Assistant is being configured..." data-zh="AI 助手配置中...">AI 助手配置中...</p>
+        </div>
+      `;
+      reapplyLang();
+      return;
+    }
+
+    const chatBody = document.getElementById('aiChatBody');
+    const iframe = document.createElement('iframe');
+    iframe.src = `https://udify.app/chatbot/${config.app_token}`;
+    iframe.allow = 'microphone';
+    iframe.style.cssText = 'width:100%;height:100%;border:none;';
+    
+    iframe.onload = function() {
+      placeholder.style.display = 'none';
+      aiChatLoaded = true;
+    };
+    
+    iframe.onerror = function() {
+      placeholder.innerHTML = `
+        <div class="ai-chat-error">
+          <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M12 8v4M12 16h.01"/>
+          </svg>
+          <p data-en="Failed to load AI Assistant" data-zh="加载 AI 助手失败">加载 AI 助手失败</p>
+        </div>
+      `;
+      reapplyLang();
+    };
+    
+    chatBody.insertBefore(iframe, placeholder);
+  }
+
+  // --- Proxy 模式：自定义聊天功能 ---
+  function addAIMessage(content, isUser = false) {
+    const container = document.getElementById('aiChatMessages');
+    const div = document.createElement('div');
+    div.className = `ai-message ${isUser ? 'ai-message-user' : 'ai-message-bot'}`;
+    
+    if (isUser) {
+      div.innerHTML = `<div class="ai-message-content">${escHtml(content)}</div>`;
+    } else {
+      div.innerHTML = `
+        <div class="ai-message-avatar">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M12 2a2 2 0 012 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 017 7v1h1a1 1 0 110 2h-1v1a7 7 0 01-7 7h-1v1a1 1 0 11-2 0v-1h-1a7 7 0 01-7-7v-1H2a1 1 0 110-2h1v-1a7 7 0 017-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 012-2z"/>
+            <circle cx="9" cy="13" r="1.5" fill="currentColor"/>
+            <circle cx="15" cy="13" r="1.5" fill="currentColor"/>
+            <path d="M9 17c.83.67 2 1 3 1s2.17-.33 3-1"/>
+          </svg>
+        </div>
+        <div class="ai-message-content">${content}</div>
+      `;
+    }
+    container.appendChild(div);
+    container.scrollTop = container.scrollHeight;
+    return div;
+  }
+
+  function addTypingIndicator() {
+    const container = document.getElementById('aiChatMessages');
+    const div = document.createElement('div');
+    div.className = 'ai-message ai-message-bot';
+    div.id = 'aiTypingIndicator';
+    div.innerHTML = `
+      <div class="ai-message-avatar">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M12 2a2 2 0 012 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 017 7v1h1a1 1 0 110 2h-1v1a7 7 0 01-7 7h-1v1a1 1 0 11-2 0v-1h-1a7 7 0 01-7-7v-1H2a1 1 0 110-2h1v-1a7 7 0 017-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 012-2z"/>
+          <circle cx="9" cy="13" r="1.5" fill="currentColor"/>
+          <circle cx="15" cy="13" r="1.5" fill="currentColor"/>
+          <path d="M9 17c.83.67 2 1 3 1s2.17-.33 3-1"/>
+        </svg>
+      </div>
+      <div class="ai-message-content"><div class="ai-typing-dots"><span></span><span></span><span></span></div></div>
+    `;
+    container.appendChild(div);
+    container.scrollTop = container.scrollHeight;
+  }
+
+  function removeTypingIndicator() {
+    const el = document.getElementById('aiTypingIndicator');
+    if (el) el.remove();
+  }
+
+  function formatMarkdown(text) {
+    return text
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*(.*?)\*/g, '<em>$1</em>')
+      .replace(/`(.*?)`/g, '<code>$1</code>')
+      .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank">$1</a>')
+      .replace(/\n/g, '<br>');
+  }
+
+  window.sendAIMessage = async function() {
+    const input = document.getElementById('aiChatInput');
+    const sendBtn = document.getElementById('aiChatSend');
+    const message = input.value.trim();
+    
+    if (!message || aiIsLoading || !aiChatConfig?.proxy_url) return;
+    
+    input.value = '';
+    addAIMessage(message, true);
+    
+    aiIsLoading = true;
+    sendBtn.disabled = true;
+    
+    const botMessage = addAIMessage('', false);
+    const contentEl = botMessage.querySelector('.ai-message-content');
+    
+    // 分开存储：思考过程 和 最终回答
+    let thoughtChunks = [];
+    let answerText = '';
+    let phase = 'thinking'; // 'thinking' | 'answering'
+    
+    try {
+      const response = await fetch(aiChatConfig.proxy_url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          query: message,
+          conversation_id: aiConversationId || '',
+          user: 'visitor-' + Date.now(),
+          streaming: true
+        })
+      });
+      
+      if (!response.ok) throw new Error('API error');
+      
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+      let buffer = '';
+      
+      contentEl.innerHTML = renderThinking('', true);
+      
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        
+        buffer += decoder.decode(value, { stream: true });
+        const lines = buffer.split('\n');
+        buffer = lines.pop() || '';
+        
+        for (const line of lines) {
+          if (!line.startsWith('data: ')) continue;
+          const data = line.slice(6).trim();
+          if (!data || data === '[DONE]') continue;
+          
+          try {
+            const json = JSON.parse(data);
+            console.log('[AI Event]', json.event, json); // 调试日志
+            
+            if (json.conversation_id) {
+              aiConversationId = json.conversation_id;
+            }
+            
+            const evt = json.event;
+            
+            // 思考过程事件
+            if (evt === 'agent_thought') {
+              const thought = json.thought || json.message || '';
+              if (thought && !thoughtChunks.includes(thought)) {
+                thoughtChunks.push(thought);
+              }
+              if (phase === 'thinking') {
+                contentEl.innerHTML = renderThinking(thoughtChunks.join('\n'), true);
+                scrollToBottom();
+              }
+            }
+            // 回答事件 - 切换到回答阶段
+            else if (evt === 'agent_message' || evt === 'message') {
+              if (phase === 'thinking') {
+                phase = 'answering';
+              }
+              answerText += json.answer || '';
+              contentEl.innerHTML = renderAnswer(thoughtChunks, answerText, true);
+              scrollToBottom();
+            }
+            // 结束事件
+            else if (evt === 'message_end') {
+              // 完成
+            }
+          } catch (e) {
+            // 忽略
+          }
+        }
+      }
+      
+      // 最终渲染
+      contentEl.innerHTML = renderAnswer(thoughtChunks, answerText, false);
+      scrollToBottom();
+      
+    } catch (err) {
+      console.error('AI Chat Error:', err);
+      contentEl.innerHTML = lang === 'zh' ? '请求失败，请稍后再试。' : 'Request failed. Please try again.';
+    } finally {
+      aiIsLoading = false;
+      sendBtn.disabled = false;
+      input.focus();
+    }
+  };
+  
+  // 渲染思考中状态
+  function renderThinking(thought, streaming) {
+    const label = lang === 'zh' ? '思考中...' : 'Thinking...';
+    let html = `<div class="ai-thinking-box">`;
+    html += `<div class="ai-thinking-header"><span class="ai-thinking-icon">💭</span> ${label}</div>`;
+    if (thought) {
+      html += `<div class="ai-thinking-text">${escHtml(thought)}</div>`;
+    }
+    html += `</div>`;
+    if (streaming) html += '<span class="ai-cursor"></span>';
+    return html;
+  }
+  
+  // 渲染回答（带折叠的思考过程）
+  function renderAnswer(thoughts, answer, streaming) {
+    let html = '';
+    
+    // 折叠的思考过程
+    if (thoughts.length > 0) {
+      const thoughtText = thoughts.join('\n');
+      const label = lang === 'zh' ? '已深度思考（点击展开）' : 'Deep thinking (click to expand)';
+      html += `
+        <details class="ai-thought-collapse">
+          <summary>💭 ${label}</summary>
+          <div class="ai-thought-body">${escHtml(thoughtText)}</div>
+        </details>
+      `;
+    }
+    
+    // 回答内容
+    const answerHtml = formatMarkdown(answer) || (streaming ? '' : (lang === 'zh' ? '抱歉，我暂时无法回答。' : 'Sorry, I cannot answer right now.'));
+    html += `<div class="ai-answer">${answerHtml}${streaming ? '<span class="ai-cursor"></span>' : ''}</div>`;
+    
+    return html;
+  }
+  
+  function scrollToBottom() {
+    const container = document.getElementById('aiChatMessages');
+    if (container) container.scrollTop = container.scrollHeight;
+  }
+
+  // Enter 发送消息
+  document.addEventListener('DOMContentLoaded', function() {
+    const input = document.getElementById('aiChatInput');
+    if (input) {
+      input.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault();
+          window.sendAIMessage();
+        }
+      });
+    }
+  });
+
+  // ESC 关闭聊天窗口
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      const widget = document.getElementById('aiChatWidget');
+      if (widget && widget.classList.contains('open')) {
+        widget.classList.remove('open');
+      }
+    }
+  });
+
+  loadAIChatConfig();
 })();

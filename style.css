@@ -938,6 +938,7 @@ a:hover { text-decoration: underline; }
   border: 1px solid var(--border);
   border-radius: 20px;
   font-size: 0.9rem;
+  font-family: inherit;
   outline: none;
   transition: border-color 0.2s, box-shadow 0.2s;
 }
@@ -988,85 +989,96 @@ a:hover { text-decoration: underline; }
   51%, 100% { opacity: 0; }
 }
 
-/* 思考过程样式 */
-.ai-thinking-live {
+/* 思考中状态 */
+.ai-thinking-box {
+  background: linear-gradient(135deg, rgba(8, 145, 178, 0.08), rgba(6, 182, 212, 0.05));
+  border: 1px solid rgba(8, 145, 178, 0.15);
+  border-radius: 12px;
+  padding: 12px;
+  margin-bottom: 8px;
+}
+
+.ai-thinking-header {
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 0.82rem;
-  color: var(--text-secondary);
+  font-size: 0.85rem;
+  color: var(--primary);
+  font-weight: 500;
   margin-bottom: 8px;
-  padding: 6px 10px;
-  background: rgba(8, 145, 178, 0.08);
-  border-radius: 8px;
 }
 
 .ai-thinking-icon {
   font-size: 1rem;
 }
 
-.ai-thought-content {
+.ai-thinking-text {
   font-size: 0.82rem;
   color: var(--text-secondary);
-  padding: 8px 10px;
-  background: #f1f5f9;
-  border-radius: 8px;
-  margin-bottom: 10px;
   white-space: pre-wrap;
-  line-height: 1.5;
+  line-height: 1.6;
+  padding: 8px 10px;
+  background: rgba(255,255,255,0.6);
+  border-radius: 8px;
 }
 
 /* 折叠的思考过程 */
-.ai-thought-details {
-  margin-bottom: 10px;
+.ai-thought-collapse {
+  margin-bottom: 12px;
   font-size: 0.82rem;
+  border: 1px solid rgba(8, 145, 178, 0.12);
+  border-radius: 10px;
+  overflow: hidden;
 }
 
-.ai-thought-details summary {
+.ai-thought-collapse summary {
   display: flex;
   align-items: center;
   gap: 6px;
   cursor: pointer;
   color: var(--text-secondary);
-  padding: 6px 10px;
-  background: rgba(8, 145, 178, 0.06);
-  border-radius: 8px;
+  padding: 10px 14px;
+  background: linear-gradient(135deg, rgba(8, 145, 178, 0.06), rgba(6, 182, 212, 0.03));
   transition: background 0.2s;
   list-style: none;
+  font-weight: 500;
 }
 
-.ai-thought-details summary::-webkit-details-marker {
+.ai-thought-collapse summary::-webkit-details-marker {
   display: none;
 }
 
-.ai-thought-details summary::after {
+.ai-thought-collapse summary::after {
   content: '▶';
-  font-size: 0.65rem;
+  font-size: 0.6rem;
   margin-left: auto;
   transition: transform 0.2s;
+  color: var(--text-light);
 }
 
-.ai-thought-details[open] summary::after {
+.ai-thought-collapse[open] summary::after {
   transform: rotate(90deg);
 }
 
-.ai-thought-details summary:hover {
-  background: rgba(8, 145, 178, 0.1);
+.ai-thought-collapse summary:hover {
+  background: linear-gradient(135deg, rgba(8, 145, 178, 0.1), rgba(6, 182, 212, 0.06));
 }
 
-.ai-thought-icon {
-  font-size: 0.9rem;
-}
-
-.ai-thought-text {
-  padding: 10px 12px;
-  margin-top: 6px;
-  background: #f1f5f9;
-  border-radius: 8px;
+.ai-thought-body {
+  padding: 12px 14px;
+  background: #f8fafc;
   color: var(--text-secondary);
   white-space: pre-wrap;
-  line-height: 1.5;
+  line-height: 1.6;
   font-size: 0.82rem;
+  border-top: 1px solid rgba(8, 145, 178, 0.08);
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+/* 回答内容 */
+.ai-answer {
+  line-height: 1.7;
 }
 
 .ai-chat-footer a {
