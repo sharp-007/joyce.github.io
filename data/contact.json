@@ -1,0 +1,24 @@
+{
+  "title_en": "Let's Connect",
+  "title_zh": "联系我",
+  "subtitle_en": "Open to Data+AI / Industrial AI / Vibe Coding / AIGC Short Film production collaborations.",
+  "subtitle_zh": "欢迎 Data+AI / 工业AI / Vibe Coding / AIGC短片制作 项目合作与交流！",
+  "social_links": [
+    { "platform": "GitHub", "url": "https://github.com/sharp-007", "icon": "github" },
+    { "platform": "LinkedIn", "url": "https://www.linkedin.com/in/joyce-pan-549596138/", "icon": "linkedin" },
+    { "platform": "YouTube", "url": "https://www.youtube.com/@MindsAIPanda", "icon": "youtube" },
+    { "platform": "Email", "url": "mailto:panjiao007@126.com", "icon": "email", "display": "panjiao007@126.com" }
+  ],
+  "qrcodes": [
+    {
+      "image": "images/wechat-oa.jpg",
+      "title_en": "WeChat: 失控的智能",
+      "title_zh": "公众号：失控的智能"
+    },
+    {
+      "image": "images/wechat-channel.jpg",
+      "title_en": "Channel: AIPanda007",
+      "title_zh": "视频号：AIPanda007"
+    }
+  ]
+}

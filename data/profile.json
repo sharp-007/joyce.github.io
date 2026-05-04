@@ -1,0 +1,47 @@
+{
+  "name_en": "Joyce Pan",
+  "name_zh": "潘 姣",
+  "photo": "images/Joyce_Photo.jpg",
+  "tagline_en": "I design Data+AI products and deliver digital transformation solutions",
+  "tagline_zh": "我喜欢设计Data+AI产品，交付数智化转型解决方案",
+  "bio": [
+    {
+      "text_en": "3 years of B2B pre-sales data analysis consulting and 5 years of manufacturing R&D experience. Focusing on data intelligence and industrial AI applications — ChatBI conversational analytics, RAG-based knowledge Q&A, computer vision defect detection, and AI agents.",
+      "text_zh": "3年ToB售前数据分析顾问与5年制造业产品研发复合背景，聚焦数据智能与工业智能体应用，擅长在技术能力与真实场景之间界定产品边界，并将需求转化为可交付的产品方案与工程化路径。"
+    },
+    {
+      "text_en": "At SAS, as JMP data analysis consultant for North China, delivered Data+AI solutions for semicon and auto industries, enabled digital transformation and secured million-RMB-level orders. At StarNeto, led cross-functional collaboration to optimize core metrics to domestic leading level.",
+      "text_zh": "在SAS担任JMP软件华北区数据分析顾问期间，主导售前方案设计与产品演示，赋能半导体、汽车等制造企业数字化转型；在星网宇达任部门经理期间，主导跨部门协作将核心指标提升至国内领先水平，显著加速产品研发与量产。"
+    },
+    {
+      "text_en": "Beihang University M.Eng. PMP and Alibaba Cloud ACP certified.",
+      "text_zh": "北航工学硕士，持有PMP与阿里云大模型ACP认证。"
+    }
+  ],
+  "badges": [
+    { "text_en": "PMP", "text_zh": "PMP" },
+    { "text_en": "Alibaba Cloud ACP", "text_zh": "阿里云ACP" },
+    { "text_en": "Deep Learning Architect", "text_zh": "深度学习架构师" },
+    { "text_en": "LLM App Dev Engineer", "text_zh": "大模型应用开发工程师" }
+  ],
+  "skills": [
+    { "text_en": "LLM", "text_zh": "LLM" },
+    { "text_en": "RAG", "text_zh": "RAG" },
+    { "text_en": "Agent", "text_zh": "Agent" },
+    { "text_en": "ChatBI", "text_zh": "ChatBI" },
+    { "text_en": "Dify", "text_zh": "Dify" },
+    { "text_en": "Vibe Coding", "text_zh": "Vibe Coding" },
+    { "text_en": "Statistical Analysis", "text_zh": "统计分析" },
+    { "text_en": "Data Science", "text_zh": "数据科学" },
+    { "text_en": "Machine Learning", "text_zh": "机器学习" },
+    { "text_en": "Python", "text_zh": "Python" },
+    { "text_en": "SQL", "text_zh": "SQL" },
+    { "text_en": "JMP", "text_zh": "JMP" }
+  ],
+  "social_links": [
+    { "platform": "GitHub", "url": "https://github.com/sharp-007", "icon": "github" },
+    { "platform": "LinkedIn", "url": "https://www.linkedin.com/in/joyce-pan-549596138/", "icon": "linkedin" },
+    { "platform": "YouTube", "url": "https://www.youtube.com/@MindsAIPanda", "icon": "youtube" },
+    { "platform": "Email", "url": "mailto:panjiao007@126.com", "icon": "email", "display": "panjiao007@126.com" }
+  ]
+}

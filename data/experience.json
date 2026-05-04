@@ -1,0 +1,111 @@
+{
+  "items": [
+    {
+      "type": "status",
+      "period_en": "2026 – Present",
+      "period_zh": "2026 – 至今",
+      "company_en": "AI Practitioner",
+      "company_zh": "AI实践者",
+      "company_url": "",
+      "logo": "",
+      "role_en": "",
+      "role_zh": "",
+      "highlights": [
+        {
+          "text_en": "Open to work: AI Product Manager | Pre-Sales Solutions Architect",
+          "text_zh": "求职意向：AI产品经理 | 售前解决方案架构师"
+        },
+        {
+          "text_en": "AI Courses: AI Technology Course (Nov 2025–Present), AI Product Manager Course (Jan 2026–Present)",
+          "text_zh": "AI进阶：人工智能技术课程（2025.11至今）、AI产品经理课程（2026.01至今）"
+        },
+        {
+          "text_en": "AI Certifications: Alibaba Cloud ACP Senior LLM Engineer ✅, Deep Learning Architect ✅, LLM Application Development Engineer ✅",
+          "text_zh": "AI认证：阿里云大模型高级工程师ACP ✅、深度学习架构师 ✅、大模型应用开发工程师 ✅"
+        },
+        {
+          "text_en": "Learning cutting-edge AI technologies, exploring and developing AI products, content creator on WeChat Official Account",
+          "text_zh": "AI实践：学习AI前沿技术，探索和开发AI产品，运营微信公众号持续内容创作"
+        }
+      ]
+    },
+    {
+      "type": "work",
+      "period_en": "2023 – 2025",
+      "period_zh": "2023 – 2025",
+      "company_en": "SAS",
+      "company_zh": "SAS · 赛仕软件（北京）有限公司",
+      "company_url": "https://www.sas.com/en_hk/home.html",
+      "logo": "images/logos/sas.png",
+      "role_en": "Sales · Data Analysis Consultant",
+      "role_zh": "销售部 · 数据分析顾问",
+      "highlights": [
+        {
+          "text_en": "<strong>Pre-sales Solutions</strong>: JMP data analysis consultant for North China territory, identified pain points in R&D, process and quality for semiconductor and automotive clients, translated business requirements into actionable Data+AI solutions.",
+          "text_zh": "<strong>售前解决方案</strong>：担任JMP软件华北区数据分析顾问，精准识别半导体和汽车等制造业客户研发、工艺和质量环节痛点，将业务需求转化为可落地的数据分析与AI赋能解决方案。"
+        },
+        {
+          "text_en": "<strong>Product Demo</strong>: Managed end-to-end engagement from requirements analysis to POC validation, facilitated strategic clients' digital transformation and secured million-RMB-level orders.",
+          "text_zh": "<strong>产品演示交流</strong>：从需求沟通到POC验证全程跟进，主导关键商机的产品演示，助力战略客户数字化转型，赢得百万级订单。"
+        },
+        {
+          "text_en": "<strong>Marketing</strong>: Designed and delivered Webinars, White Papers, averaging 1,000+ registrations per webinar, set annual record for most popular webinar with 1,600+ registrations.",
+          "text_zh": "<strong>市场活动赋能</strong>：设计并交付直播课与白皮书，平均注册超1000人，创年度最受欢迎直播课记录，单场报名1600+人。"
+        },
+        {
+          "text_en": "<strong>AI Product Dev</strong>: Led AI-powered JMP Statistical Analysis Report Assistant Add-In development, integrated LLM visual understanding and report interpretation.",
+          "text_zh": "<strong>AI产品开发</strong>：主导AI驱动的JMP统计分析报告助手插件开发，集成大模型视觉理解与报告解读能力。"
+        }
+      ]
+    },
+    {
+      "type": "work",
+      "period_en": "2017 – 2022",
+      "period_zh": "2017 – 2022",
+      "company_en": "StarNeto",
+      "company_zh": "北京星网宇达科技股份有限公司",
+      "company_url": "https://www.starneto.com/",
+      "logo": "images/logos/starneto.png",
+      "role_en": "General System Design · Department Manager",
+      "role_zh": "总体部 · 部门经理",
+      "highlights": [
+        {
+          "text_en": "<strong>Product R&D</strong>: Led product metric improvement and new-product system design, applied simulation and data analysis to predict key metrics, worked cross-functionally to identify and optimize key factors, brought core metrics to domestic leading level.",
+          "text_zh": "<strong>产品研发</strong>：主导产品指标优化与新产品开发总体方案设计，创新性应用仿真计算与数据分析预测核心指标，跨部门协作识别和优化关键影响因子，将核心指标提升至国内领先水平。"
+        },
+        {
+          "text_en": "<strong>Project Bidding</strong>: Led technical proposal outline and content development for bidding, contributed to 5+ successful project bidding wins worth multimillion-RMB.",
+          "text_zh": "<strong>项目投标</strong>：主导投标书技术方案大纲制定和编写，助力5+个千万级项目成功中标。"
+        },
+        {
+          "text_en": "<strong>Awards</strong>: Excellent Employee, Technology Innovation Prize, Excellent Manager.",
+          "text_zh": "<strong>荣誉奖项</strong>：优秀员工、技术创新奖、优秀部门经理。"
+        }
+      ]
+    },
+    {
+      "type": "education",
+      "period_en": "2014 – 2017",
+      "period_zh": "2014 – 2017",
+      "company_en": "Beihang University",
+      "company_zh": "北京航空航天大学",
+      "company_url": "https://www.buaa.edu.cn/",
+      "logo": "images/logos/beihang.jpg",
+      "role_en": "Master of Engineering · Materials Science",
+      "role_zh": "工学硕士 · 材料科学与工程",
+      "highlights": []
+    },
+    {
+      "type": "education",
+      "period_en": "2010 – 2014",
+      "period_zh": "2010 – 2014",
+      "company_en": "Beihang University",
+      "company_zh": "北京航空航天大学",
+      "company_url": "https://www.buaa.edu.cn/",
+      "logo": "images/logos/beihang.jpg",
+      "role_en": "Bachelor of Engineering · Materials Science",
+      "role_zh": "工学学士 · 材料科学与工程",
+      "highlights": []
+    }
+  ]
+}

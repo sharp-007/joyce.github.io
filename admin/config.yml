@@ -7,11 +7,6 @@ backend:
 media_folder: "images/uploads"
 public_folder: "images/uploads"
 
-# Media library settings
-media_library:
-  max_file_size: 10485760
-  folder_support: true
-
 # Use local backend for development (npx decap-server)
 # Set to false for production, true for local development
 local_backend: false
@@ -214,3 +209,143 @@ collections:
               - { label: "▶️ Bilibili 链接", name: "bilibili", widget: "string", required: false }
               - { label: "🎵 网易云音乐链接", name: "music163", widget: "string", required: false }
               - { label: "🎵 网易云嵌入播放器", name: "music163_embed", widget: "string", required: false, hint: "外链播放器地址" }
+
+  # ========== 个人简介 ==========
+  - name: "profile"
+    label: "👤 个人简介 Profile"
+    description: "首页 Hero 区域的个人信息"
+    files:
+      - name: "profile_info"
+        label: "个人简介配置"
+        file: "data/profile.json"
+        format: "json"
+        fields:
+          - { label: "🔤 英文姓名", name: "name_en", widget: "string" }
+          - { label: "🔤 中文姓名", name: "name_zh", widget: "string" }
+          - label: "🖼️ 头像照片"
+            name: "photo"
+            widget: "image"
+            hint: "个人照片，推荐正方形"
+            choose_url: true
+          - { label: "📝 英文标语", name: "tagline_en", widget: "string", hint: "一句话介绍（英文）" }
+          - { label: "📝 中文标语", name: "tagline_zh", widget: "string", hint: "一句话介绍（中文）" }
+          - label: "📄 个人简介段落"
+            name: "bio"
+            widget: "list"
+            summary: "{{fields.text_zh}}"
+            hint: "每个段落是一条介绍"
+            fields:
+              - { label: "英文", name: "text_en", widget: "text" }
+              - { label: "中文", name: "text_zh", widget: "text" }
+          - label: "🏅 证书徽章"
+            name: "badges"
+            widget: "list"
+            summary: "{{fields.text_zh}}"
+            hint: "专业认证证书"
+            fields:
+              - { label: "英文", name: "text_en", widget: "string" }
+              - { label: "中文", name: "text_zh", widget: "string" }
+          - label: "🛠️ 核心技能"
+            name: "skills"
+            widget: "list"
+            summary: "{{fields.text_en}}"
+            hint: "技能标签列表"
+            fields:
+              - { label: "英文", name: "text_en", widget: "string" }
+              - { label: "中文", name: "text_zh", widget: "string" }
+          - label: "🔗 社交链接"
+            name: "social_links"
+            widget: "list"
+            summary: "{{fields.platform}}"
+            fields:
+              - { label: "平台名称", name: "platform", widget: "string" }
+              - { label: "链接地址", name: "url", widget: "string" }
+              - label: "图标"
+                name: "icon"
+                widget: "select"
+                options: ["github", "linkedin", "youtube", "email", "twitter", "wechat"]
+              - { label: "显示文本", name: "display", widget: "string", required: false, hint: "如邮箱地址" }
+
+  # ========== 工作经历与教育 ==========
+  - name: "experience"
+    label: "💼 工作经历 Experience"
+    description: "工作经历和教育背景时间线"
+    files:
+      - name: "experience_items"
+        label: "经历配置"
+        file: "data/experience.json"
+        format: "json"
+        fields:
+          - label: "经历列表"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.period_zh}} | {{fields.company_zh}}"
+            minimize_collapsed: true
+            fields:
+              - label: "📂 类型"
+                name: "type"
+                widget: "select"
+                options:
+                  - { label: "当前状态", value: "status" }
+                  - { label: "工作经历", value: "work" }
+                  - { label: "教育背景", value: "education" }
+              - { label: "📅 时间段（英文）", name: "period_en", widget: "string", hint: "如 2023 – 2025" }
+              - { label: "📅 时间段（中文）", name: "period_zh", widget: "string", hint: "如 2023 – 2025" }
+              - { label: "🏢 公司/学校（英文）", name: "company_en", widget: "string" }
+              - { label: "🏢 公司/学校（中文）", name: "company_zh", widget: "string" }
+              - { label: "🔗 公司/学校链接", name: "company_url", widget: "string", required: false }
+              - label: "🖼️ Logo"
+                name: "logo"
+                widget: "image"
+                required: false
+                hint: "公司或学校 Logo"
+                choose_url: true
+              - { label: "👔 职位/学位（英文）", name: "role_en", widget: "string", required: false }
+              - { label: "👔 职位/学位（中文）", name: "role_zh", widget: "string", required: false }
+              - label: "✨ 工作亮点"
+                name: "highlights"
+                widget: "list"
+                required: false
+                summary: "{{fields.text_zh}}"
+                hint: "每条工作成果或职责描述"
+                fields:
+                  - { label: "英文", name: "text_en", widget: "text" }
+                  - { label: "中文", name: "text_zh", widget: "text" }
+
+  # ========== 联系方式 ==========
+  - name: "contact"
+    label: "📞 联系方式 Contact"
+    description: "页脚联系信息和二维码"
+    files:
+      - name: "contact_info"
+        label: "联系方式配置"
+        file: "data/contact.json"
+        format: "json"
+        fields:
+          - { label: "🔤 标题（英文）", name: "title_en", widget: "string" }
+          - { label: "🔤 标题（中文）", name: "title_zh", widget: "string" }
+          - { label: "📝 副标题（英文）", name: "subtitle_en", widget: "text" }
+          - { label: "📝 副标题（中文）", name: "subtitle_zh", widget: "text" }
+          - label: "🔗 社交链接"
+            name: "social_links"
+            widget: "list"
+            summary: "{{fields.platform}}"
+            fields:
+              - { label: "平台名称", name: "platform", widget: "string" }
+              - { label: "链接地址", name: "url", widget: "string" }
+              - label: "图标"
+                name: "icon"
+                widget: "select"
+                options: ["github", "linkedin", "youtube", "email", "twitter", "wechat"]
+              - { label: "显示文本", name: "display", widget: "string", required: false }
+          - label: "📱 二维码"
+            name: "qrcodes"
+            widget: "list"
+            summary: "{{fields.title_zh}}"
+            fields:
+              - label: "二维码图片"
+                name: "image"
+                widget: "image"
+                choose_url: true
+              - { label: "标题（英文）", name: "title_en", widget: "string" }
+              - { label: "标题（中文）", name: "title_zh", widget: "string" }

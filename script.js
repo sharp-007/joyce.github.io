@@ -59,17 +59,27 @@
   const imgErr = `onerror="this.style.background='#1e293b';this.alt=''"`;
   const heroErr = `onerror="this.style.background='linear-gradient(135deg,#004f90,#00a8e8)'"`;
 
-  async function fetchJSON(path) {
+  async function fetchJSON(path, returnRaw = false) {
     try {
       const r = await fetch(path);
       if (!r.ok) throw new Error(r.status);
       const data = await r.json();
+      if (returnRaw) return data;
       return Array.isArray(data) ? data : (data.items || []);
     } catch {
       if (FALLBACK_DATA[path]) return FALLBACK_DATA[path];
-      return [];
+      return returnRaw ? {} : [];
     }
   }
+
+  const SOCIAL_ICONS = {
+    github: '<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>',
+    linkedin: '<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>',
+    youtube: '<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>',
+    email: '<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>',
+    twitter: '<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>',
+    wechat: '<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M8.691 2.188C3.891 2.188 0 5.476 0 9.53c0 2.212 1.17 4.203 3.002 5.55a.59.59 0 01.213.665l-.39 1.48c-.019.07-.048.141-.048.213 0 .163.13.295.29.295a.326.326 0 00.167-.054l1.903-1.114a.864.864 0 01.717-.098 10.16 10.16 0 002.837.403c.276 0 .543-.027.811-.05-.857-2.578.157-4.972 1.932-6.446 1.703-1.415 3.882-1.98 5.853-1.838-.576-3.583-4.196-6.348-8.596-6.348zM5.785 5.991c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 01-1.162 1.178A1.17 1.17 0 014.623 7.17c0-.651.52-1.18 1.162-1.18zm5.813 0c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 01-1.162 1.178 1.17 1.17 0 01-1.162-1.178c0-.651.52-1.18 1.162-1.18zm5.34 2.867c-1.797-.052-3.746.512-5.28 1.786-1.72 1.428-2.687 3.72-1.78 6.22.942 2.453 3.666 4.229 6.884 4.229.826 0 1.622-.12 2.361-.336a.722.722 0 01.598.082l1.584.926a.272.272 0 00.14.047c.134 0 .24-.111.24-.247 0-.06-.023-.12-.038-.177l-.327-1.233a.582.582 0 01-.023-.156.49.49 0 01.201-.398C23.024 18.48 24 16.82 24 14.98c0-3.21-2.931-5.837-7.062-6.122zm-2.036 2.87c.535 0 .969.44.969.982a.976.976 0 01-.969.983.976.976 0 01-.969-.983c0-.542.434-.982.97-.982zm4.844 0c.535 0 .969.44.969.982a.976.976 0 01-.969.983.976.976 0 01-.969-.983c0-.542.434-.982.97-.982z"/></svg>'
+  };
 
   function renderCarousel(items) {
     const track = document.getElementById('carouselTrack');
@@ -195,6 +205,107 @@
     container.innerHTML = html;
   }
 
+  function renderProfile(data) {
+    const container = document.getElementById('hero-content');
+    if (!container || !data.name_en) return;
+
+    const bioHtml = (data.bio || []).map(b => 
+      `<p data-en="${escHtml(b.text_en)}" data-zh="${escHtml(b.text_zh)}">${escHtml(b.text_en)}</p>`
+    ).join('');
+
+    const badgesHtml = (data.badges || []).map(b => 
+      `<span class="badge" data-en="${escHtml(b.text_en)}" data-zh="${escHtml(b.text_zh)}">${escHtml(b.text_en)}</span>`
+    ).join('');
+
+    const skillsHtml = (data.skills || []).map(s => 
+      `<span class="hero-skill" data-en="${escHtml(s.text_en)}" data-zh="${escHtml(s.text_zh)}">${escHtml(s.text_en)}</span>`
+    ).join('');
+
+    const linksHtml = (data.social_links || []).map(l => {
+      const icon = SOCIAL_ICONS[l.icon] || '';
+      const text = l.display || l.platform;
+      return `<a href="${escHtml(l.url)}" target="_blank">${icon}${escHtml(text)}</a>`;
+    }).join('');
+
+    container.innerHTML = `
+      <div class="hero-profile">
+        <img src="${escHtml(data.photo)}" alt="${escHtml(data.name_en)}" class="hero-photo" ${heroErr}>
+      </div>
+      <div class="hero-text">
+        <h1 data-en="${escHtml(data.name_en)}" data-zh="${escHtml(data.name_zh)}">${escHtml(data.name_en)}</h1>
+        <p class="hero-tagline" data-en="${escHtml(data.tagline_en)}" data-zh="${escHtml(data.tagline_zh)}">${escHtml(data.tagline_en)}</p>
+        <div class="hero-bio">${bioHtml}</div>
+        <div class="hero-badges">${badgesHtml}</div>
+        <div class="hero-skills">${skillsHtml}</div>
+        <div class="hero-links">${linksHtml}</div>
+      </div>
+    `;
+  }
+
+  function renderExperience(items) {
+    const container = document.getElementById('experience-list');
+    if (!container || !items.length) return;
+
+    container.innerHTML = items.map(exp => {
+      const isEdu = exp.type === 'education';
+      const isStatus = exp.type === 'status';
+      const itemClass = isEdu ? 'exp-item exp-edu fade-in' : 'exp-item fade-in';
+
+      let headerHtml = '';
+      if (isStatus) {
+        headerHtml = `<div class="exp-status" data-en="${escHtml(exp.company_en)}" data-zh="${escHtml(exp.company_zh)}">${escHtml(exp.company_en)}</div>`;
+      } else {
+        const logoHtml = exp.logo ? `<img src="${escHtml(exp.logo)}" alt="${escHtml(exp.company_en)}" class="company-logo">` : '';
+        const linkHtml = exp.company_url 
+          ? `<a href="${escHtml(exp.company_url)}" target="_blank" data-en="${escHtml(exp.company_en)}" data-zh="${escHtml(exp.company_zh)}">${escHtml(exp.company_en)}</a>`
+          : `<span data-en="${escHtml(exp.company_en)}" data-zh="${escHtml(exp.company_zh)}">${escHtml(exp.company_en)}</span>`;
+        headerHtml = `<h3>${logoHtml}${linkHtml}</h3>`;
+        if (exp.role_en) {
+          headerHtml += `<div class="exp-role" data-en="${escHtml(exp.role_en)}" data-zh="${escHtml(exp.role_zh)}">${escHtml(exp.role_en)}</div>`;
+        }
+      }
+
+      const highlightsHtml = (exp.highlights && exp.highlights.length) 
+        ? `<ul>${exp.highlights.map(h => `<li data-en="${escHtml(h.text_en)}" data-zh="${escHtml(h.text_zh)}">${h.text_en}</li>`).join('')}</ul>` 
+        : '';
+
+      return `
+        <div class="${itemClass}">
+          <div class="exp-period" data-en="${escHtml(exp.period_en)}" data-zh="${escHtml(exp.period_zh)}">${escHtml(exp.period_en)}</div>
+          <div class="exp-body">
+            ${headerHtml}
+            ${highlightsHtml}
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  function renderContact(data) {
+    const container = document.getElementById('contact-content');
+    if (!container || !data.title_en) return;
+
+    const linksHtml = (data.social_links || []).map(l => {
+      const icon = SOCIAL_ICONS[l.icon] || '';
+      const text = l.display || l.platform;
+      return `<a href="${escHtml(l.url)}" target="_blank">${icon}${escHtml(text)}</a>`;
+    }).join('');
+
+    const qrcodesHtml = (data.qrcodes || []).map(qr => `
+      <div class="qrcode-card">
+        <img src="${escHtml(qr.image)}" alt="${escHtml(qr.title_en)}" loading="lazy">
+        <span data-en="${escHtml(qr.title_en)}" data-zh="${escHtml(qr.title_zh)}">${escHtml(qr.title_en)}</span>
+      </div>
+    `).join('');
+
+    container.innerHTML = `
+      <h2 data-en="${escHtml(data.title_en)}" data-zh="${escHtml(data.title_zh)}">${escHtml(data.title_en)}</h2>
+      <p data-en="${escHtml(data.subtitle_en)}" data-zh="${escHtml(data.subtitle_zh)}">${escHtml(data.subtitle_en)}</p>
+      <div class="contact-links">${linksHtml}</div>
+      <div class="qrcode-section">${qrcodesHtml}</div>
+    `;
+  }
+
   function reapplyLang() {
     if (lang !== 'en') {
       document.querySelectorAll('[data-en][data-zh]').forEach(el => {
@@ -210,16 +321,22 @@
   }
 
   async function loadAllData() {
-    const [carousel, projects, blogs, talks] = await Promise.all([
+    const [carousel, projects, blogs, talks, profile, experience, contact] = await Promise.all([
       fetchJSON('data/carousel.json'),
       fetchJSON('data/projects.json'),
       fetchJSON('data/blogs.json'),
-      fetchJSON('data/talks.json')
+      fetchJSON('data/talks.json'),
+      fetchJSON('data/profile.json', true),
+      fetchJSON('data/experience.json'),
+      fetchJSON('data/contact.json', true)
     ]);
     renderCarousel(carousel);
     renderProjects(projects);
     renderBlogs(blogs);
     renderTalks(talks);
+    renderProfile(profile);
+    renderExperience(experience);
+    renderContact(contact);
     reapplyLang();
     reobserveFadeIn();
   }
