@@ -607,6 +607,48 @@
       .replace(/\n/g, '<br>');
   }
 
+  // 增量解析 <think>...</think> 标签，把流式 answer 拆分为思考片段 + 答案片段
+  // 状态对象: { inThink: bool, pending: string }
+  function processThinkStream(state, newText) {
+    state.pending += newText;
+    let answerOut = '';
+    let thoughtOut = '';
+    let i = 0;
+
+    while (i < state.pending.length) {
+      if (!state.inThink) {
+        const openIdx = state.pending.indexOf('<think>', i);
+        if (openIdx === -1) {
+          // 保留尾部最多 7 字符（防止 <think> 跨 chunk 被切断）
+          const tailLen = Math.min(state.pending.length - i, 7);
+          const safeEnd = state.pending.length - tailLen;
+          if (safeEnd > i) answerOut += state.pending.slice(i, safeEnd);
+          state.pending = state.pending.slice(safeEnd);
+          return { answerOut, thoughtOut };
+        }
+        if (openIdx > i) answerOut += state.pending.slice(i, openIdx);
+        i = openIdx + 7;
+        state.inThink = true;
+      } else {
+        const closeIdx = state.pending.indexOf('</think>', i);
+        if (closeIdx === -1) {
+          // 保留尾部最多 8 字符（防止 </think> 跨 chunk 被切断）
+          const tailLen = Math.min(state.pending.length - i, 8);
+          const safeEnd = state.pending.length - tailLen;
+          if (safeEnd > i) thoughtOut += state.pending.slice(i, safeEnd);
+          state.pending = state.pending.slice(safeEnd);
+          return { answerOut, thoughtOut };
+        }
+        if (closeIdx > i) thoughtOut += state.pending.slice(i, closeIdx);
+        i = closeIdx + 8;
+        state.inThink = false;
+      }
+    }
+
+    state.pending = '';
+    return { answerOut, thoughtOut };
+  }
+
   window.sendAIMessage = async function() {
     const input = document.getElementById('aiChatInput');
     const sendBtn = document.getElementById('aiChatSend');
@@ -623,10 +665,24 @@
     const botMessage = addAIMessage('', false);
     const contentEl = botMessage.querySelector('.ai-message-content');
     
-    // 分开存储：思考过程 和 最终回答
-    let thoughtChunks = [];
+    // 思考过程（agent_thought 事件 + <think> 标签内容） 和 最终回答
+    const thoughtChunks = [];
+    let inlineThoughtText = ''; // 来自 <think> 标签的累积思考
     let answerText = '';
     let phase = 'thinking'; // 'thinking' | 'answering'
+    const thinkState = { inThink: false, pending: '' }; // <think> 流解析状态
+
+    const updateView = (streaming) => {
+      const allThoughts = inlineThoughtText
+        ? [...thoughtChunks, inlineThoughtText]
+        : thoughtChunks;
+      if (phase === 'thinking') {
+        contentEl.innerHTML = renderThinking(allThoughts.join('\n'), streaming);
+      } else {
+        contentEl.innerHTML = renderAnswer(allThoughts, answerText, streaming);
+      }
+      scrollToBottom();
+    };
     
     try {
       const response = await fetch(aiChatConfig.proxy_url, {
@@ -640,7 +696,7 @@
         })
       });
       
-      if (!response.ok) throw new Error('API error');
+      if (!response.ok) throw new Error('API error: ' + response.status);
       
       const reader = response.body.getReader();
       const decoder = new TextDecoder();
@@ -648,61 +704,74 @@
       
       contentEl.innerHTML = renderThinking('', true);
       
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
-        
-        buffer += decoder.decode(value, { stream: true });
-        const lines = buffer.split('\n');
-        buffer = lines.pop() || '';
-        
-        for (const line of lines) {
-          if (!line.startsWith('data: ')) continue;
-          const data = line.slice(6).trim();
-          if (!data || data === '[DONE]') continue;
+      try {
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
           
-          try {
-            const json = JSON.parse(data);
-            console.log('[AI Event]', json.event, json); // 调试日志
+          buffer += decoder.decode(value, { stream: true });
+          const lines = buffer.split('\n');
+          buffer = lines.pop() || '';
+          
+          for (const line of lines) {
+            if (!line.startsWith('data:')) continue;
+            const data = line.slice(5).trim();
+            if (!data || data === '[DONE]') continue;
             
-            if (json.conversation_id) {
-              aiConversationId = json.conversation_id;
-            }
+            let json;
+            try { json = JSON.parse(data); } catch { continue; }
+            
+            if (json.conversation_id) aiConversationId = json.conversation_id;
             
             const evt = json.event;
             
-            // 思考过程事件
+            // Dify Agent 原生思考事件
             if (evt === 'agent_thought') {
               const thought = json.thought || json.message || '';
               if (thought && !thoughtChunks.includes(thought)) {
                 thoughtChunks.push(thought);
-              }
-              if (phase === 'thinking') {
-                contentEl.innerHTML = renderThinking(thoughtChunks.join('\n'), true);
-                scrollToBottom();
+                if (phase === 'thinking') updateView(true);
               }
             }
-            // 回答事件 - 切换到回答阶段
+            // 回答事件 - 处理 <think> 标签 + 切换到回答阶段
             else if (evt === 'agent_message' || evt === 'message') {
-              if (phase === 'thinking') {
-                phase = 'answering';
+              const newText = json.answer || '';
+              if (!newText) continue;
+              const { answerOut, thoughtOut } = processThinkStream(thinkState, newText);
+              
+              if (thoughtOut) inlineThoughtText += thoughtOut;
+              if (answerOut) {
+                if (phase === 'thinking') phase = 'answering';
+                answerText += answerOut;
               }
-              answerText += json.answer || '';
-              contentEl.innerHTML = renderAnswer(thoughtChunks, answerText, true);
-              scrollToBottom();
+              if (thoughtOut || answerOut) updateView(true);
             }
-            // 结束事件
-            else if (evt === 'message_end') {
-              // 完成
-            }
-          } catch (e) {
-            // 忽略
+            // 结束事件不处理
           }
         }
+      } finally {
+        try { reader.releaseLock(); } catch {}
       }
       
-      // 最终渲染
-      contentEl.innerHTML = renderAnswer(thoughtChunks, answerText, false);
+      // 流结束：把残留的 pending 文本归位
+      if (thinkState.pending) {
+        if (thinkState.inThink) {
+          inlineThoughtText += thinkState.pending;
+        } else {
+          answerText += thinkState.pending;
+          if (phase === 'thinking') phase = 'answering';
+        }
+      }
+      // 如果只有思考没回答（极少情况），也算回答阶段
+      if (phase === 'thinking' && (answerText || inlineThoughtText)) {
+        phase = 'answering';
+      }
+      
+      // 最终渲染（无光标）
+      const finalThoughts = inlineThoughtText
+        ? [...thoughtChunks, inlineThoughtText]
+        : thoughtChunks;
+      contentEl.innerHTML = renderAnswer(finalThoughts, answerText, false);
       scrollToBottom();
       
     } catch (err) {
