@@ -2,6 +2,7 @@ resume/
 sharp-007/
 AI-CHAT-SETUP.md
 ALIYUN-BAILIAN-SETUP.md
+cloudflare-worker\dify-proxy.js
 
 # Windows temp files
 *.TMP
