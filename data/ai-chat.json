@@ -1,6 +1,7 @@
 {
-  "enabled": true,
+  "enabled": false,
   "mode": "proxy",
   "proxy_url": "https://joyce-dify-proxy.pj0072014.workers.dev",
-  "app_token": "5kXSGBQlYNazCdOW"
+  "app_token": "5kXSGBQlYNazCdOW",
+  "welcome_message": ""
 }
