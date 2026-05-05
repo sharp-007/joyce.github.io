@@ -1,5 +1,5 @@
 {
   "enabled": true,
-  "mode": "proxy",
-  "proxy_url": "https://joyce-bailian-proxy.pj0072014.workers.dev"
+  "mode": "iframe",
+  "app_token": "5kXSGBQlYNazCdOW"
 }
