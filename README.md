@@ -70,8 +70,9 @@
 
 ### 2.3 部署特性
 
-- **纯静态架构** — 无需后端服务，零运维成本
-- **GitHub Pages** — 免费托管，自动 HTTPS
+- **纯静态架构** — 无需自建后端服务，零运维成本
+- **多平台支持** — GitHub Pages（海外）+ EdgeOne Pages（国内）双部署，覆盖全球访问
+- **AI 助手集成** — 通过 Edge Functions 安全代理 LLM API（Dify / 阿里云百炼），同源调用、无 CORS、API Key 不暴露
 - **即时部署** — 代码推送后自动构建部署
 
 ---
@@ -351,6 +352,10 @@ joyce.github.io/
 ├── admin/                  # ⚙️ Sveltia CMS 可视化管理后台
 │   ├── index.html          #    CMS 入口页面
 │   └── config.yml          #    CMS 配置（集合、字段、媒体设置）
+├── functions/              # ⚡ EdgeOne Pages Functions（Edge 代理）
+│   └── api/
+│       ├── dify.js         #    /api/dify - Dify 智能体代理
+│       └── bailian.js      #    /api/bailian - 阿里云百炼智能体代理
 ├── images/                 # 📷 图片资源
 │   └── uploads/            #    统一图片目录（CMS 上传）
 │       ├── projects/       #    项目封面
