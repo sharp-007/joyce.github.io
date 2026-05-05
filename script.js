@@ -478,6 +478,23 @@
       placeholder.style.display = 'none';
       messagesContainer.style.display = 'flex';
       inputWrapper.style.display = 'flex';
+      
+      // 显示开场白
+      if (config.welcome_message) {
+        addAIMessage(config.welcome_message, false);
+      }
+      
+      // 显示预设问题
+      if (config.suggested_questions && config.suggested_questions.length > 0) {
+        const suggestionsDiv = document.createElement('div');
+        suggestionsDiv.className = 'ai-suggestions';
+        suggestionsDiv.innerHTML = config.suggested_questions
+          .slice(0, 4)
+          .map(q => `<button class="ai-suggestion-btn" onclick="askSuggestedQuestion('${escHtml(q.text)}')">${escHtml(q.text)}</button>`)
+          .join('');
+        messagesContainer.appendChild(suggestionsDiv);
+      }
+      
       aiChatLoaded = true;
       reapplyLang();
       return;

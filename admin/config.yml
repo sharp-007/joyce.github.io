@@ -377,7 +377,7 @@ collections:
   # ========== AI 助手配置 ==========
   - name: "ai_chat"
     label: "🤖 AI 助手 AI Chat"
-    description: "网站右下角 AI 智能体对话功能开关和配置（基于 Dify）"
+    description: "网站右下角 AI 智能体对话功能开关和配置"
     files:
       - name: "ai_chat_config"
         label: "AI 助手配置"
@@ -389,8 +389,38 @@ collections:
             widget: "boolean"
             default: false
             hint: "开启后，网站右下角将显示 AI 对话按钮"
-          - label: "🔑 应用 Token"
+          - label: "🔧 运行模式"
+            name: "mode"
+            widget: "select"
+            options:
+              - { label: "代理模式（推荐）", value: "proxy" }
+              - { label: "Dify iframe 模式", value: "iframe" }
+            default: "proxy"
+            hint: "代理模式使用自定义界面，支持阿里云百炼等后端；iframe 模式直接嵌入 Dify"
+          - label: "🌐 代理地址"
+            name: "proxy_url"
+            widget: "string"
+            default: ""
+            hint: "代理模式的 API 地址，如 https://bailian-agent.xxx.workers.dev"
+            required: false
+          - label: "🔑 Dify Token（仅 iframe 模式）"
             name: "app_token"
             widget: "string"
             default: ""
-            hint: "从 Dify 应用「嵌入到网站」设置中获取的 Token"
+            hint: "iframe 模式需要：从 Dify 应用「嵌入到网站」设置中获取的 Token"
+            required: false
+          - label: "👋 开场白"
+            name: "welcome_message"
+            widget: "text"
+            default: "你好！我是 Joyce 的 AI 助手，有什么我可以帮你的吗？"
+            hint: "代理模式下，AI 助手打开时显示的欢迎消息"
+            required: false
+          - label: "💡 预设问题"
+            name: "suggested_questions"
+            widget: "list"
+            allow_add: true
+            collapsed: false
+            hint: "代理模式下显示的快捷问题按钮（最多 4 个）"
+            required: false
+            fields:
+              - { label: "问题", name: "text", widget: "string" }

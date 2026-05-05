@@ -1,5 +1,12 @@
 {
   "enabled": true,
   "mode": "proxy",
-  "proxy_url": "https://bailian-agent.pj0072014.workers.dev"
+  "proxy_url": "https://bailian-agent.pj0072014.workers.dev",
+  "welcome_message": "你好！我是 Joyce 的 AI 助手，可以回答关于她的工作经历、技能专长、项目经验等问题。有什么我可以帮你的吗？",
+  "suggested_questions": [
+    { "text": "介绍一下 Joyce 的工作经历" },
+    { "text": "Joyce 有哪些技能专长？" },
+    { "text": "Joyce 做过哪些项目？" },
+    { "text": "如何联系 Joyce？" }
+  ]
 }
