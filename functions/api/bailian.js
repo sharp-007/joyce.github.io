@@ -106,7 +106,12 @@ export async function onRequestPost({ request, env }) {
   }
 }
 
-export async function onRequest({ request }) {
+// 显式分发到对应方法处理函数
+// EdgeOne Pages Functions 当 onRequest 存在时会优先调用它，不会自动路由到 onRequestPost/Options
+export async function onRequest(context) {
+  const method = (context.request.method || '').toUpperCase();
+  if (method === 'POST') return onRequestPost(context);
+  if (method === 'OPTIONS') return onRequestOptions(context);
   return new Response('Method not allowed', { status: 405 });
 }
 
