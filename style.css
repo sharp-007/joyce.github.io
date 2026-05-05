@@ -1091,6 +1091,35 @@ a:hover { text-decoration: underline; }
   text-decoration: underline;
 }
 
+/* Disclaimer 说明栏 - 始终显示 */
+.ai-chat-disclaimer {
+  background: #f8fafc;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  padding: 6px 12px;
+  font-size: 0.7rem;
+  color: var(--text-secondary, #64748b);
+  text-align: center;
+  flex-shrink: 0;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+}
+
+/* iframe 模式：紧凑 header（避免与 Dify 内置 header 重叠） */
+.ai-chat-widget.iframe-mode .ai-chat-header {
+  padding: 6px 12px;
+  min-height: 0;
+}
+
+.ai-chat-widget.iframe-mode .ai-chat-title {
+  display: none;
+}
+
+.ai-chat-widget.iframe-mode .ai-chat-close {
+  width: 26px;
+  height: 26px;
+  margin-left: auto;
+}
+
 /* Mobile responsive */
 @media (max-width: 768px) {
   .ai-chat-widget {

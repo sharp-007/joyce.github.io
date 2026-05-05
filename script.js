@@ -518,6 +518,9 @@
     }
 
     const chatBody = document.getElementById('aiChatBody');
+    const widget = document.getElementById('aiChatWidget');
+    if (widget) widget.classList.add('iframe-mode');
+
     const iframe = document.createElement('iframe');
     iframe.src = `https://udify.app/chatbot/${config.app_token}`;
     iframe.allow = 'microphone';
