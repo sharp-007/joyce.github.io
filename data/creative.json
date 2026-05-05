@@ -1,0 +1,17 @@
+{
+  "items": [
+    {
+      "title_en": "Light Everywhere | AIGC Original Short Film",
+      "title_zh": "城市角落的光 | AI原创音乐MV | 原创动画短片",
+      "desc_en": "Independently completed the entire songwriting and music video production pipeline: lyrics creation, song generation, character design, storyboard, prompt engineering, video generation, compositing, and publishing.",
+      "desc_zh": "独立完成词曲和MV创作全流程：创作歌词、生成歌曲、构造角色、设计分镜、编写提示词、生成视频、合成视频、内容发布。",
+      "tech_en": "Tech: MiniMax Music-2.6, Seedance 2.0 Fast, AIGC",
+      "tech_zh": "技术栈：MiniMax Music-2.6、Seedance 2.0 Fast、AIGC",
+      "cover": "images/uploads/mv.png",
+      "youtube": "https://www.youtube.com/watch?v=OMIchR2C6qs",
+      "bilibili": "https://www.bilibili.com/video/BV1pyofB2Ebe/",
+      "music163": "https://music.163.com/#/song?id=3376108932",
+      "music163_embed": "https://music.163.com/outchain/player?type=2&id=3376108932&auto=0&height=66"
+    }
+  ]
+}

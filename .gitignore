@@ -1,0 +1,45 @@
+resume/
+sharp-007/
+AI-CHAT-SETUP.md
+ALIYUN-BAILIAN-SETUP.md
+cloudflare-worker/
+
+# Windows temp files
+*.TMP
+*~RF*.TMP
+Thumbs.db
+Desktop.ini
+
+# macOS
+.DS_Store
+
+# Environment variables (防止泄露API密钥)
+.env
+.env.*
+*.env
+
+# Logs
+*.log
+logs/
+
+# Dependencies
+node_modules/
+
+# IDE/Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Backup files
+*.bak
+*.backup
+
+# Python (如果以后添加Python脚本)
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Cursor/AI 相关
+.cursor/

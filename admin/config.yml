@@ -1,0 +1,426 @@
+backend:
+  name: github
+  repo: sharp-007/joyce.github.io
+  branch: main
+  base_url: https://sveltia-cms-auth.pj0072014.workers.dev
+
+media_folder: "images/uploads"
+public_folder: "images/uploads"
+
+# Media library config
+media_library:
+  name: "default"
+  config:
+    multiple: false
+
+# Use local backend for development (npx decap-server)
+# Set to false for production, true for local development
+local_backend: false
+
+# Logo and site info
+site_url: https://sharp-007.github.io/joyce.github.io
+display_url: https://sharp-007.github.io/joyce.github.io
+logo_url: /joyce.github.io/images/uploads/logos/favicon.svg
+
+# Slug settings
+slug:
+  encoding: "unicode"
+  clean_accents: true
+
+collections:
+  # ========== 首页走马灯 ==========
+  - name: "carousel"
+    label: "🎠 首页走马灯 Carousel"
+    description: "首页高亮展示的走马灯卡片，支持拖拽排序"
+    files:
+      - name: "carousel_items"
+        label: "走马灯配置"
+        file: "data/carousel.json"
+        format: "json"
+        fields:
+          - label: "走马灯项目"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.title_zh}}"
+            minimize_collapsed: true
+            fields:
+              - { label: "🔤 英文标题", name: "title_en", widget: "string", hint: "English title" }
+              - { label: "🔤 中文标题", name: "title_zh", widget: "string", hint: "中文标题" }
+              - { label: "📝 副标题", name: "subtitle", widget: "string", hint: "技术栈或简短描述" }
+              - label: "🖼️ 封面图"
+                name: "cover"
+                widget: "image"
+                hint: "支持 PNG/JPG/SVG，推荐尺寸 800x450。可上传或输入已有图片路径"
+                choose_url: true
+              - { label: "🔗 链接", name: "url", widget: "string", hint: "点击跳转的链接地址" }
+
+  # ========== 项目 ==========
+  - name: "projects"
+    label: "💼 项目 Projects"
+    description: "个人项目展示，featured=true 的项目会在首页重点展示"
+    files:
+      - name: "projects_items"
+        label: "项目配置"
+        file: "data/projects.json"
+        format: "json"
+        fields:
+          - label: "项目列表"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.title_zh}} {{fields.featured}}"
+            minimize_collapsed: true
+            fields:
+              - { label: "🔤 英文标题", name: "title_en", widget: "string" }
+              - { label: "🔤 中文标题", name: "title_zh", widget: "string" }
+              - { label: "📝 英文描述", name: "desc_en", widget: "text", required: false }
+              - { label: "📝 中文描述", name: "desc_zh", widget: "text", required: false }
+              - label: "🖼️ 封面图"
+                name: "cover"
+                widget: "image"
+                hint: "已有图片路径如 images/projects/xxx.png，或上传新图片"
+                choose_url: true
+              - { label: "🔗 项目链接", name: "url", widget: "string", hint: "GitHub 或演示链接" }
+              - { label: "🏷️ HTML ID", name: "id", widget: "string", required: false, default: "", hint: "用于页面锚点定位" }
+              - { label: "⭐ 重点展示", name: "featured", widget: "boolean", default: false, hint: "开启后在首页重点展示" }
+              - label: "🛠️ 技能标签"
+                name: "skills"
+                widget: "list"
+                required: false
+                hint: "相关技能标签，如 Python, LLM, RAG"
+                field: { label: "技能", name: "skill", widget: "string" }
+
+  # ========== 博客 ==========
+  - name: "blogs"
+    label: "📝 博客 Blog"
+    description: "微信公众号文章，按日期排序"
+    files:
+      - name: "blogs_items"
+        label: "博客配置"
+        file: "data/blogs.json"
+        format: "json"
+        fields:
+          - label: "博客列表"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.date}} | {{fields.title_zh}}"
+            minimize_collapsed: true
+            fields:
+              - { label: "🔤 英文标题", name: "title_en", widget: "string" }
+              - { label: "🔤 中文标题", name: "title_zh", widget: "string" }
+              - label: "🖼️ 封面图"
+                name: "cover"
+                widget: "image"
+                hint: "微信公众号封面，支持 PNG/JPG"
+                choose_url: true
+              - { label: "🔗 文章链接", name: "url", widget: "string", required: false, default: "", hint: "微信公众号文章链接" }
+              - { label: "📅 发布日期", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, hint: "用于排序" }
+
+  # ========== 公开演讲 ==========
+  - name: "talks"
+    label: "🎤 公开演讲 Talks"
+    description: "技术分享、公开演讲、行业会议等"
+    files:
+      - name: "talks_items"
+        label: "公开演讲配置"
+        file: "data/talks.json"
+        format: "json"
+        fields:
+          - label: "分享列表"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.type_zh}} | {{fields.title_zh}}"
+            minimize_collapsed: true
+            fields:
+              - label: "📂 类型（英文）"
+                name: "type_en"
+                widget: "select"
+                default: "Technical Talk"
+                options:
+                  - { label: "Technical Talk", value: "Technical Talk" }
+                  - { label: "Public Speech", value: "Public Speech" }
+                  - { label: "Industry Conference", value: "Industry Conference" }
+                  - { label: "Corporate Training", value: "Corporate Training" }
+                  - { label: "Webinar", value: "Webinar" }
+                  - { label: "Workshop", value: "Workshop" }
+              - label: "📂 类型（中文）"
+                name: "type_zh"
+                widget: "select"
+                default: "技术分享"
+                options:
+                  - { label: "技术分享", value: "技术分享" }
+                  - { label: "公开演讲", value: "公开演讲" }
+                  - { label: "行业会议", value: "行业会议" }
+                  - { label: "企业培训", value: "企业培训" }
+                  - { label: "在线直播", value: "在线直播" }
+                  - { label: "工作坊", value: "工作坊" }
+              - { label: "🔤 英文标题", name: "title_en", widget: "string" }
+              - { label: "🔤 中文标题", name: "title_zh", widget: "string" }
+              - label: "🖼️ 封面图"
+                name: "cover"
+                widget: "image"
+                hint: "上传新图片或输入已有路径"
+                choose_url: true
+              - { label: "🔗 链接", name: "url", widget: "string", required: false, hint: "视频回放或资料链接" }
+              - { label: "📅 日期", name: "date", widget: "string", required: false, hint: "如 2025-06 或 2025" }
+              - label: "🛠️ 相关标签"
+                name: "skills"
+                widget: "list"
+                required: false
+                hint: "相关技能或主题标签"
+                field: { label: "标签", name: "skill", widget: "string" }
+
+  # ========== 发表作品 ==========
+  - name: "publications"
+    label: "📚 发表作品 Publications"
+    description: "白皮书、专利、论文等发表作品"
+    files:
+      - name: "publications_items"
+        label: "发表作品配置"
+        file: "data/publications.json"
+        format: "json"
+        fields:
+          - label: "作品列表"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.year}} | {{fields.title_zh}}"
+            minimize_collapsed: true
+            fields:
+              - label: "📂 类型（英文）"
+                name: "type_en"
+                widget: "select"
+                options: ["White Paper", "Invention Patent", "SCI Paper", "Conference Paper", "Book Chapter"]
+              - label: "📂 类型（中文）"
+                name: "type_zh"
+                widget: "select"
+                options: ["白皮书", "发明专利", "SCI论文", "会议论文", "书籍章节"]
+              - { label: "🔤 英文标题", name: "title_en", widget: "string" }
+              - { label: "🔤 中文标题", name: "title_zh", widget: "string" }
+              - { label: "👥 作者", name: "authors", widget: "string", hint: "作者列表，用逗号分隔" }
+              - { label: "📖 来源", name: "source", widget: "string", hint: "期刊名/专利号/出版社" }
+              - { label: "📅 年份", name: "year", widget: "string" }
+              - { label: "🔗 在线链接", name: "url", widget: "string", required: false }
+              - { label: "📄 PDF文件", name: "pdf", widget: "file", required: false, hint: "可上传PDF文件" }
+
+  # ========== 创意作品 ==========
+  - name: "creative"
+    label: "🎨 创意作品 Creative"
+    description: "AI创作、音乐、视频等创意作品"
+    files:
+      - name: "creative_items"
+        label: "创意作品配置"
+        file: "data/creative.json"
+        format: "json"
+        fields:
+          - label: "作品列表"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.title_zh}}"
+            minimize_collapsed: true
+            fields:
+              - { label: "🔤 英文标题", name: "title_en", widget: "string" }
+              - { label: "🔤 中文标题", name: "title_zh", widget: "string" }
+              - { label: "📝 英文描述", name: "desc_en", widget: "text" }
+              - { label: "📝 中文描述", name: "desc_zh", widget: "text" }
+              - { label: "🛠️ 技术栈（英文）", name: "tech_en", widget: "string", required: false }
+              - { label: "🛠️ 技术栈（中文）", name: "tech_zh", widget: "string", required: false }
+              - label: "🖼️ 封面图"
+                name: "cover"
+                widget: "image"
+                required: false
+                hint: "上传封面图片或输入已有路径"
+                choose_url: true
+              - { label: "▶️ YouTube 链接", name: "youtube", widget: "string", required: false }
+              - { label: "▶️ Bilibili 链接", name: "bilibili", widget: "string", required: false }
+              - { label: "🎵 网易云音乐链接", name: "music163", widget: "string", required: false }
+              - { label: "🎵 网易云嵌入播放器", name: "music163_embed", widget: "string", required: false, hint: "外链播放器地址" }
+
+  # ========== 个人简介 ==========
+  - name: "profile"
+    label: "👤 个人简介 Profile"
+    description: "首页 Hero 区域的个人信息"
+    files:
+      - name: "profile_info"
+        label: "个人简介配置"
+        file: "data/profile.json"
+        format: "json"
+        fields:
+          - { label: "🔤 英文姓名", name: "name_en", widget: "string" }
+          - { label: "🔤 中文姓名", name: "name_zh", widget: "string" }
+          - label: "🖼️ 头像照片"
+            name: "photo"
+            widget: "image"
+            hint: "个人照片，推荐正方形"
+            choose_url: true
+          - { label: "📝 英文标语", name: "tagline_en", widget: "string", hint: "一句话介绍（英文）" }
+          - { label: "📝 中文标语", name: "tagline_zh", widget: "string", hint: "一句话介绍（中文）" }
+          - label: "📄 个人简介段落"
+            name: "bio"
+            widget: "list"
+            summary: "{{fields.text_zh}}"
+            hint: "每个段落是一条介绍"
+            fields:
+              - { label: "英文", name: "text_en", widget: "text" }
+              - { label: "中文", name: "text_zh", widget: "text" }
+          - label: "🏅 证书徽章"
+            name: "badges"
+            widget: "list"
+            summary: "{{fields.text_zh}}"
+            hint: "专业认证证书"
+            fields:
+              - { label: "英文", name: "text_en", widget: "string" }
+              - { label: "中文", name: "text_zh", widget: "string" }
+          - label: "🛠️ 核心技能"
+            name: "skills"
+            widget: "list"
+            summary: "{{fields.text_en}}"
+            hint: "技能标签列表"
+            fields:
+              - { label: "英文", name: "text_en", widget: "string" }
+              - { label: "中文", name: "text_zh", widget: "string" }
+          - label: "🔗 社交链接"
+            name: "social_links"
+            widget: "list"
+            summary: "{{fields.platform}}"
+            fields:
+              - { label: "平台名称", name: "platform", widget: "string" }
+              - { label: "链接地址", name: "url", widget: "string" }
+              - label: "图标"
+                name: "icon"
+                widget: "select"
+                options: ["github", "linkedin", "youtube", "email", "twitter", "wechat"]
+              - { label: "显示文本", name: "display", widget: "string", required: false, hint: "如邮箱地址" }
+
+  # ========== 工作经历与教育 ==========
+  - name: "experience"
+    label: "💼 工作经历 Experience"
+    description: "工作经历和教育背景时间线"
+    files:
+      - name: "experience_items"
+        label: "经历配置"
+        file: "data/experience.json"
+        format: "json"
+        fields:
+          - label: "经历列表"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.period_zh}} | {{fields.company_zh}}"
+            minimize_collapsed: true
+            fields:
+              - label: "📂 类型"
+                name: "type"
+                widget: "select"
+                options:
+                  - { label: "当前状态", value: "status" }
+                  - { label: "工作经历", value: "work" }
+                  - { label: "教育背景", value: "education" }
+              - { label: "📅 时间段（英文）", name: "period_en", widget: "string", hint: "如 2023 – 2025" }
+              - { label: "📅 时间段（中文）", name: "period_zh", widget: "string", hint: "如 2023 – 2025" }
+              - { label: "🏢 公司/学校（英文）", name: "company_en", widget: "string" }
+              - { label: "🏢 公司/学校（中文）", name: "company_zh", widget: "string" }
+              - { label: "🔗 公司/学校链接", name: "company_url", widget: "string", required: false }
+              - label: "🖼️ Logo"
+                name: "logo"
+                widget: "image"
+                required: false
+                hint: "公司或学校 Logo"
+                choose_url: true
+              - { label: "👔 职位/学位（英文）", name: "role_en", widget: "string", required: false }
+              - { label: "👔 职位/学位（中文）", name: "role_zh", widget: "string", required: false }
+              - label: "✨ 工作亮点"
+                name: "highlights"
+                widget: "list"
+                required: false
+                summary: "{{fields.text_zh}}"
+                hint: "每条工作成果或职责描述"
+                fields:
+                  - { label: "英文", name: "text_en", widget: "text" }
+                  - { label: "中文", name: "text_zh", widget: "text" }
+
+  # ========== 联系方式 ==========
+  - name: "contact"
+    label: "📞 联系方式 Contact"
+    description: "页脚联系信息和二维码"
+    files:
+      - name: "contact_info"
+        label: "联系方式配置"
+        file: "data/contact.json"
+        format: "json"
+        fields:
+          - { label: "🔤 标题（英文）", name: "title_en", widget: "string" }
+          - { label: "🔤 标题（中文）", name: "title_zh", widget: "string" }
+          - { label: "📝 副标题（英文）", name: "subtitle_en", widget: "text" }
+          - { label: "📝 副标题（中文）", name: "subtitle_zh", widget: "text" }
+          - label: "🔗 社交链接"
+            name: "social_links"
+            widget: "list"
+            summary: "{{fields.platform}}"
+            fields:
+              - { label: "平台名称", name: "platform", widget: "string" }
+              - { label: "链接地址", name: "url", widget: "string" }
+              - label: "图标"
+                name: "icon"
+                widget: "select"
+                options: ["github", "linkedin", "youtube", "email", "twitter", "wechat"]
+              - { label: "显示文本", name: "display", widget: "string", required: false }
+          - label: "📱 二维码"
+            name: "qrcodes"
+            widget: "list"
+            summary: "{{fields.title_zh}}"
+            fields:
+              - label: "二维码图片"
+                name: "image"
+                widget: "image"
+                choose_url: true
+              - { label: "标题（英文）", name: "title_en", widget: "string" }
+              - { label: "标题（中文）", name: "title_zh", widget: "string" }
+
+  # ========== AI 助手配置 ==========
+  - name: "ai_chat"
+    label: "🤖 AI 助手 AI Chat"
+    description: "网站右下角 AI 智能体对话功能开关和配置"
+    files:
+      - name: "ai_chat_config"
+        label: "AI 助手配置"
+        file: "data/ai-chat.json"
+        format: "json"
+        fields:
+          - label: "🔘 启用 AI 助手"
+            name: "enabled"
+            widget: "boolean"
+            default: false
+            hint: "开启后，网站右下角将显示 AI 对话按钮"
+          - label: "🔧 运行模式"
+            name: "mode"
+            widget: "select"
+            options:
+              - { label: "代理模式（推荐）", value: "proxy" }
+              - { label: "Dify iframe 模式", value: "iframe" }
+            default: "proxy"
+            hint: "代理模式使用自定义界面，支持阿里云百炼等后端；iframe 模式直接嵌入 Dify"
+          - label: "🌐 代理地址"
+            name: "proxy_url"
+            widget: "string"
+            default: ""
+            hint: "代理模式的 API 地址，如 https://bailian-agent.xxx.workers.dev"
+            required: false
+          - label: "🔑 Dify Token（仅 iframe 模式）"
+            name: "app_token"
+            widget: "string"
+            default: ""
+            hint: "iframe 模式需要：从 Dify 应用「嵌入到网站」设置中获取的 Token"
+            required: false
+          - label: "👋 开场白"
+            name: "welcome_message"
+            widget: "text"
+            default: "你好！我是 Joyce 的 AI 助手，有什么我可以帮你的吗？"
+            hint: "代理模式下，AI 助手打开时显示的欢迎消息"
+            required: false
+          - label: "💡 预设问题"
+            name: "suggested_questions"
+            widget: "list"
+            allow_add: true
+            collapsed: false
+            hint: "代理模式下显示的快捷问题按钮（最多 4 个）"
+            required: false
+            fields:
+              - { label: "问题", name: "text", widget: "string" }
