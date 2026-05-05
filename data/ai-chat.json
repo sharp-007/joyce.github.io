@@ -1,6 +1,7 @@
 {
-  "enabled": true,
+  "enabled": false,
   "mode": "proxy",
   "proxy_url": "/api/dify",
-  "app_token": "5kXSGBQlYNazCdOW"
+  "app_token": "5kXSGBQlYNazCdOW",
+  "welcome_message": ""
 }
