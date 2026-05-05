@@ -3,5 +3,6 @@
   "mode": "proxy",
   "proxy_url": "/api/bailian",
   "app_token": "5kXSGBQlYNazCdOW",
-  "welcome_message": ""
+  "welcome_message": "",
+  "allowed_hostnames": ["joyce.hitai.space", "localhost", "127.0.0.1"]
 }

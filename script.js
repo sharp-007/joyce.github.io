@@ -444,7 +444,11 @@
       
       const widget = document.getElementById('aiChatWidget');
       const hasValidConfig = aiChatConfig.enabled && (aiChatConfig.app_token || aiChatConfig.proxy_url);
-      if (widget && hasValidConfig) {
+      // 域名白名单：若配置了 allowed_hostnames，则仅在白名单域名下显示助手
+      const host = window.location.hostname;
+      const allowList = Array.isArray(aiChatConfig.allowed_hostnames) ? aiChatConfig.allowed_hostnames : null;
+      const hostAllowed = !allowList || allowList.length === 0 || allowList.some(h => host === h || host.endsWith('.' + h));
+      if (widget && hasValidConfig && hostAllowed) {
         widget.style.display = 'block';
       }
     } catch {
