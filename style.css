@@ -1049,6 +1049,34 @@ a:hover { text-decoration: underline; }
   font-weight: 400;
 }
 
+.ai-thinking-cancel {
+  margin-left: 8px;
+  padding: 2px 10px;
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(8, 145, 178, 0.2);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.15s;
+  line-height: 1.4;
+}
+
+.ai-thinking-cancel:hover {
+  background: rgba(220, 38, 38, 0.08);
+  color: #dc2626;
+  border-color: rgba(220, 38, 38, 0.3);
+}
+
+.ai-thinking-cancel:active {
+  transform: scale(0.96);
+}
+
+/* elapsed 在 cancel 存在时不要把它挤掉 */
+.ai-thinking-header:has(.ai-thinking-cancel) .ai-thinking-elapsed {
+  margin-left: 0;
+}
+
 .ai-thinking-text {
   font-size: 0.82rem;
   color: var(--text-secondary);

@@ -729,6 +729,36 @@
     let thinkElapsedSec = 0;
     let thinkTimerId = null;
 
+    // 超时 / 取消保护
+    const TOTAL_TIMEOUT_MS = 120000; // 总超时：120 秒，超过强制中止
+    const IDLE_TIMEOUT_MS = 30000;   // 静默超时：30 秒收不到任何 SSE 数据则中止
+    const CANCEL_BTN_AFTER_MS = 8000;// 思考超过 8 秒，思考框出现"取消"按钮
+    const abortController = new AbortController();
+    let totalTimeoutId = null;
+    let idleTimeoutId = null;
+    let userCancelled = false;
+    let timedOut = false;
+    let showCancelBtn = false;
+
+    const armIdleTimeout = () => {
+      if (idleTimeoutId) clearTimeout(idleTimeoutId);
+      idleTimeoutId = setTimeout(() => {
+        timedOut = true;
+        try { abortController.abort('idle-timeout'); } catch {}
+      }, IDLE_TIMEOUT_MS);
+    };
+    totalTimeoutId = setTimeout(() => {
+      timedOut = true;
+      try { abortController.abort('total-timeout'); } catch {}
+    }, TOTAL_TIMEOUT_MS);
+    armIdleTimeout();
+
+    // 暴露给"取消"按钮
+    window.__aiCancelCurrent = () => {
+      userCancelled = true;
+      try { abortController.abort('user'); } catch {}
+    };
+
     // rAF 节流：高频流式 token 不要每次都 reflow，集中到下一帧渲染一次
     let pendingFrame = false;
     let pendingStreaming = true;
@@ -751,7 +781,7 @@
     const renderCurrentView = (streaming) => {
       const allThoughts = collectThoughts();
       if (phase === 'thinking') {
-        contentEl.innerHTML = renderThinking(allThoughts.join('\n'), streaming, thinkElapsedSec);
+        contentEl.innerHTML = renderThinking(allThoughts.join('\n'), streaming, thinkElapsedSec, showCancelBtn);
       } else {
         // answering 阶段：如果思考 pending 还没打完（极少情况），折叠面板默认展开
         const thoughtStillStreaming = totalThoughtPending() > 0;
@@ -866,10 +896,14 @@
     };
 
     // 立即占位渲染，让用户第一时间看到反馈（不等首个 SSE chunk）
-    contentEl.innerHTML = renderThinking('', true, 0);
+    contentEl.innerHTML = renderThinking('', true, 0, false);
     thinkTimerId = setInterval(() => {
       if (phase !== 'thinking') return;
       thinkElapsedSec = Math.floor((Date.now() - thinkStartedAt) / 1000);
+      // 超过 N 秒还在思考 → 显示取消按钮
+      if (!showCancelBtn && (Date.now() - thinkStartedAt) >= CANCEL_BTN_AFTER_MS) {
+        showCancelBtn = true;
+      }
       scheduleUpdate(true);
     }, 1000);
     
@@ -882,7 +916,8 @@
           conversation_id: aiConversationId || '',
           user: 'visitor-' + Date.now(),
           streaming: true
-        })
+        }),
+        signal: abortController.signal
       });
       
       if (!response.ok) {
@@ -904,6 +939,8 @@
         while (true) {
           const { done, value } = await reader.read();
           if (done) break;
+          // 收到任何数据都视为活跃，重置静默超时
+          armIdleTimeout();
           
           buffer += decoder.decode(value, { stream: true });
           const lines = buffer.split('\n');
@@ -988,8 +1025,10 @@
       }
       // 标记流已结束，让打字机进入"加速消费 + 完成后做最终静态渲染"模式
       streamEnded = true;
-      // 停掉耗时计时器
+      // 停掉耗时计时器 + 超时保护（正常完成路径）
       if (thinkTimerId) { clearInterval(thinkTimerId); thinkTimerId = null; }
+      if (totalTimeoutId) { clearTimeout(totalTimeoutId); totalTimeoutId = null; }
+      if (idleTimeoutId) { clearTimeout(idleTimeoutId); idleTimeoutId = null; }
 
       // 没有任何待打字内容 → 立即做最终渲染（极少见）
       if (totalThoughtPending() === 0 && answerPending.length === 0) {
@@ -1006,25 +1045,43 @@
       if (typeWriterId) { clearInterval(typeWriterId); typeWriterId = null; }
       if (thinkTimerId) { clearInterval(thinkTimerId); thinkTimerId = null; }
 
-      // 已经有部分内容时，把剩余 pending 也 flush 出来 + 末尾提示"出错了"，
-      // 不要把已显示的思考 / 回答全部覆盖掉
+      // 已经有部分内容时把 pending 全部 flush 到显示，避免内容丢失
       flushAllPending();
       const hasContent = answerText || inlineThoughtText || thoughtDisplayed.some(Boolean);
-      const errMsg = lang === 'zh'
-        ? '（连接中断，请稍后重试）'
-        : '(Connection interrupted. Please retry.)';
+
+      let errMsg;
+      if (userCancelled) {
+        errMsg = lang === 'zh' ? '（已取消）' : '(Cancelled)';
+      } else if (timedOut) {
+        errMsg = lang === 'zh'
+          ? '（响应超时，请稍后重试）'
+          : '(Response timeout. Please retry.)';
+      } else {
+        errMsg = lang === 'zh'
+          ? '（连接中断，请稍后重试）'
+          : '(Connection interrupted. Please retry.)';
+      }
+
       if (hasContent) {
         if (phase === 'thinking') phase = 'answering';
         const allThoughts = collectThoughts();
         const tailedAnswer = (answerText || '') + '\n\n' + errMsg;
         contentEl.innerHTML = renderAnswer(allThoughts, tailedAnswer, false, false);
       } else {
-        contentEl.innerHTML = lang === 'zh' ? '请求失败，请稍后再试。' : 'Request failed. Please try again.';
+        contentEl.innerHTML = userCancelled
+          ? (lang === 'zh' ? '已取消。' : 'Cancelled.')
+          : (timedOut
+              ? (lang === 'zh' ? '响应超时，请稍后重试。' : 'Response timeout. Please retry.')
+              : (lang === 'zh' ? '请求失败，请稍后再试。' : 'Request failed. Please try again.'));
       }
       scrollToBottom();
     } finally {
       if (thinkTimerId) clearInterval(thinkTimerId);
+      if (totalTimeoutId) clearTimeout(totalTimeoutId);
+      if (idleTimeoutId) clearTimeout(idleTimeoutId);
       // 注意：正常路径不在 finally 里清打字机，让它跑完剩余 pending 自然停止
+      // 但如果是取消 / 超时，前面 catch 已经清了
+      try { delete window.__aiCancelCurrent; } catch { window.__aiCancelCurrent = null; }
       aiIsLoading = false;
       sendBtn.disabled = false;
       input.focus();
@@ -1032,8 +1089,9 @@
   };
   
   // 渲染思考中状态
-  function renderThinking(thought, streaming, elapsedSec) {
+  function renderThinking(thought, streaming, elapsedSec, showCancel) {
     const baseLabel = lang === 'zh' ? '思考中' : 'Thinking';
+    const cancelLabel = lang === 'zh' ? '取消' : 'Cancel';
     const elapsed = typeof elapsedSec === 'number' && elapsedSec > 0 ? ` ${elapsedSec}s` : '';
     let html = `<div class="ai-thinking-box">`;
     html += `<div class="ai-thinking-header">`;
@@ -1041,6 +1099,9 @@
     html += `<span class="ai-thinking-label">${baseLabel}</span>`;
     html += `<span class="ai-thinking-dots"><i></i><i></i><i></i></span>`;
     if (elapsed) html += `<span class="ai-thinking-elapsed">${elapsed}</span>`;
+    if (showCancel) {
+      html += `<button type="button" class="ai-thinking-cancel" onclick="window.__aiCancelCurrent && window.__aiCancelCurrent()">${cancelLabel}</button>`;
+    }
     html += `</div>`;
     if (thought) {
       html += `<div class="ai-thinking-text">${escHtml(thought)}${streaming ? '<span class="ai-cursor"></span>' : ''}</div>`;
