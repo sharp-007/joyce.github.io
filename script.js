@@ -669,24 +669,55 @@
     const botMessage = addAIMessage('', false);
     const contentEl = botMessage.querySelector('.ai-message-content');
     
-    // 思考过程（agent_thought 事件 + <think> 标签内容） 和 最终回答
-    const thoughtChunks = [];
+    // 思考过程：按 index 累积（avoid 旧版 push 累积式整段导致的重复递增）
+    const thoughtParts = []; // thoughtParts[i] = '...'
     let inlineThoughtText = ''; // 来自 <think> 标签的累积思考
     let answerText = '';
     let phase = 'thinking'; // 'thinking' | 'answering'
     const thinkState = { inThink: false, pending: '' }; // <think> 流解析状态
 
-    const updateView = (streaming) => {
-      const allThoughts = inlineThoughtText
-        ? [...thoughtChunks, inlineThoughtText]
-        : thoughtChunks;
+    // 思考开始时间戳，驱动"思考中 3s"耗时显示
+    const thinkStartedAt = Date.now();
+    let thinkElapsedSec = 0;
+    let thinkTimerId = null;
+
+    // rAF 节流：高频流式 token 不要每次都 reflow，集中到下一帧渲染一次
+    let pendingFrame = false;
+    let pendingStreaming = true;
+    const scheduleUpdate = (streaming) => {
+      pendingStreaming = streaming;
+      if (pendingFrame) return;
+      pendingFrame = true;
+      requestAnimationFrame(() => {
+        pendingFrame = false;
+        renderCurrentView(pendingStreaming);
+      });
+    };
+
+    const collectThoughts = () => {
+      const arr = thoughtParts.filter(Boolean);
+      if (inlineThoughtText) arr.push(inlineThoughtText);
+      return arr;
+    };
+
+    const renderCurrentView = (streaming) => {
+      const allThoughts = collectThoughts();
       if (phase === 'thinking') {
-        contentEl.innerHTML = renderThinking(allThoughts.join('\n'), streaming);
+        contentEl.innerHTML = renderThinking(allThoughts.join('\n'), streaming, thinkElapsedSec);
       } else {
         contentEl.innerHTML = renderAnswer(allThoughts, answerText, streaming);
       }
       scrollToBottom();
     };
+
+    // 立即占位渲染，让用户第一时间看到反馈（不等首个 SSE chunk）
+    contentEl.innerHTML = renderThinking('', true, 0);
+    thinkTimerId = setInterval(() => {
+      if (phase !== 'thinking') return;
+      thinkElapsedSec = Math.floor((Date.now() - thinkStartedAt) / 1000);
+      // 仅当还在思考阶段时刷新计时器；用 rAF 节流
+      scheduleUpdate(true);
+    }, 1000);
     
     try {
       const response = await fetch(aiChatConfig.proxy_url, {
@@ -705,8 +736,6 @@
       const reader = response.body.getReader();
       const decoder = new TextDecoder();
       let buffer = '';
-      
-      contentEl.innerHTML = renderThinking('', true);
       
       try {
         while (true) {
@@ -731,11 +760,17 @@
             
             // Dify Agent 原生思考事件
             if (evt === 'agent_thought') {
-              const thought = json.thought || json.message || '';
-              if (thought && !thoughtChunks.includes(thought)) {
-                thoughtChunks.push(thought);
-                if (phase === 'thinking') updateView(true);
+              // 新协议（百炼）：{ index, delta }，按索引累加增量
+              // 兼容旧协议（Dify）：{ thought } 完整文本，按索引覆盖
+              const idx = typeof json.index === 'number' ? json.index : 0;
+              if (typeof json.delta === 'string' && json.delta.length > 0) {
+                thoughtParts[idx] = (thoughtParts[idx] || '') + json.delta;
+              } else {
+                const thought = json.thought || json.message || '';
+                if (!thought) continue;
+                thoughtParts[idx] = thought;
               }
+              if (phase === 'thinking') scheduleUpdate(true);
             }
             // 回答事件 - 处理 <think> 标签 + 切换到回答阶段
             else if (evt === 'agent_message' || evt === 'message') {
@@ -748,7 +783,7 @@
                 if (phase === 'thinking') phase = 'answering';
                 answerText += answerOut;
               }
-              if (thoughtOut || answerOut) updateView(true);
+              if (thoughtOut || answerOut) scheduleUpdate(true);
             }
             // 结束事件不处理
           }
@@ -767,21 +802,19 @@
         }
       }
       // 如果只有思考没回答（极少情况），也算回答阶段
-      if (phase === 'thinking' && (answerText || inlineThoughtText)) {
+      if (phase === 'thinking' && (answerText || inlineThoughtText || thoughtParts.length)) {
         phase = 'answering';
       }
       
-      // 最终渲染（无光标）
-      const finalThoughts = inlineThoughtText
-        ? [...thoughtChunks, inlineThoughtText]
-        : thoughtChunks;
-      contentEl.innerHTML = renderAnswer(finalThoughts, answerText, false);
+      // 最终渲染（无光标、无计时器）
+      contentEl.innerHTML = renderAnswer(collectThoughts(), answerText, false);
       scrollToBottom();
       
     } catch (err) {
       console.error('AI Chat Error:', err);
       contentEl.innerHTML = lang === 'zh' ? '请求失败，请稍后再试。' : 'Request failed. Please try again.';
     } finally {
+      if (thinkTimerId) clearInterval(thinkTimerId);
       aiIsLoading = false;
       sendBtn.disabled = false;
       input.focus();
@@ -789,15 +822,20 @@
   };
   
   // 渲染思考中状态
-  function renderThinking(thought, streaming) {
-    const label = lang === 'zh' ? '思考中...' : 'Thinking...';
+  function renderThinking(thought, streaming, elapsedSec) {
+    const baseLabel = lang === 'zh' ? '思考中' : 'Thinking';
+    const elapsed = typeof elapsedSec === 'number' && elapsedSec > 0 ? ` ${elapsedSec}s` : '';
     let html = `<div class="ai-thinking-box">`;
-    html += `<div class="ai-thinking-header"><span class="ai-thinking-icon">💭</span> ${label}</div>`;
+    html += `<div class="ai-thinking-header">`;
+    html += `<span class="ai-thinking-icon">💭</span>`;
+    html += `<span class="ai-thinking-label">${baseLabel}</span>`;
+    html += `<span class="ai-thinking-dots"><i></i><i></i><i></i></span>`;
+    if (elapsed) html += `<span class="ai-thinking-elapsed">${elapsed}</span>`;
+    html += `</div>`;
     if (thought) {
-      html += `<div class="ai-thinking-text">${escHtml(thought)}</div>`;
+      html += `<div class="ai-thinking-text">${escHtml(thought)}${streaming ? '<span class="ai-cursor"></span>' : ''}</div>`;
     }
     html += `</div>`;
-    if (streaming) html += '<span class="ai-cursor"></span>';
     return html;
   }
   

@@ -126,8 +126,9 @@ function streamBailianSSE(upstream, origin) {
     const reader = upstream.body.getReader();
     let buffer = '';
     let sessionId = '';
-    let lastTextLen = 0;
-    const seenThoughts = new Set();
+    // 记录每个 thought（按数组索引）已经推送过的字符长度
+    // 百炼把 thought 当成"累积式整段"返回，需要在这里转成真正的 delta 增量
+    const thoughtsLastLen = [];
 
     const flush = (obj) => writer.write(encoder.encode(`data: ${JSON.stringify(obj)}\n\n`));
 
@@ -155,29 +156,31 @@ function streamBailianSSE(upstream, origin) {
           const output = parsed.output || {};
           if (output.session_id) sessionId = output.session_id;
 
-          // 思考过程
+          // 思考过程：把累积式 thought 转成 delta 增量
           if (Array.isArray(output.thoughts)) {
-            for (const t of output.thoughts) {
-              const txt = t && t.thought;
-              if (txt && !seenThoughts.has(txt)) {
-                seenThoughts.add(txt);
+            for (let i = 0; i < output.thoughts.length; i++) {
+              const txt = (output.thoughts[i] && output.thoughts[i].thought) || '';
+              const last = thoughtsLastLen[i] || 0;
+              if (txt.length > last) {
+                const delta = txt.slice(last);
+                thoughtsLastLen[i] = txt.length;
                 await flush({
                   event: 'agent_thought',
-                  thought: txt,
+                  index: i,
+                  delta,
                   conversation_id: sessionId
                 });
               }
             }
           }
 
-          // 回答内容（增量模式 incremental_output: true 时直接是片段）
+          // 回答内容（incremental_output: true 时直接是 delta 片段）
           if (output.text) {
             await flush({
               event: 'message',
               answer: output.text,
               conversation_id: sessionId
             });
-            lastTextLen = output.text.length;
           }
 
           if (output.finish_reason === 'stop') {
