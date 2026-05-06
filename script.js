@@ -602,34 +602,41 @@
     if (el) el.remove();
   }
 
-  // 清理百炼智能体可能暴露的"知识库文件引用"，但保留正常的网页 URL 脚注：
-  // - 解析所有 [^N]: ... 脚注定义，逐个判断指向是 URL 还是文件
-  //   → URL 且不含文件名 → 保留
-  //   → 不含 URL / 含文件名（json/md/pdf 等） → 删除该定义 + 文中对应的 [^N]
-  // - 流式过程中的残缺脚注定义（被截断在末尾的 [^N]: ...）暂时保留原状
-  // - "参考: xxx.json" / "来源: xxx.md" 这种自然语言形式的文件引用 → 删除整行
+  // 清理百炼智能体可能暴露的"知识库文件引用"，保留指向网页的合法 URL：
+  // 处理 4 种暴露形式：
+  //   ① 脚注定义 [^1]: xxx.json  / [^1]: https://xxx.json
+  //   ② markdown 链接 [文字](https://xxx.json)
+  //   ③ 裸 URL：... 👉 https://bailian-datahub.../xxx.json?Expires=...
+  //   ④ 自然语言行：参考: xxx.json / 来源：xxx.md
   function stripFootnotes(text) {
     if (!text) return text;
     let out = text;
 
-    const FILE_EXT_RE = /\.(?:json|md|markdown|pdf|txt|docx?|xlsx?|pptx?|csv|html?)\b/i;
+    // URL 路径（query 之前）含文件扩展名 → 视为"文件链接"
+    // 注意：要在 ? 之前判断，因为百炼 OSS 链接的 query 里也常有点号（Signature 等）
+    const isFileUrl = (url) => {
+      const m = String(url).match(/^([^?#]+)/);
+      const path = m ? m[1] : url;
+      return /\.(?:json|md|markdown|pdf|txt|docx?|xlsx?|pptx?|csv)$/i.test(path);
+    };
+    const FILE_EXT_RE = /\.(?:json|md|markdown|pdf|txt|docx?|xlsx?|pptx?|csv)\b/i;
     const URL_RE = /https?:\/\/\S+/i;
 
-    // 1) 文末脚注定义块：从 [^N]: 开始，直到下一空行 / 下一个脚注定义 / 文末
-    //    用全局匹配抽出每一段，逐个判断是否要删
+    // ① 脚注定义块 [^N]: ... 直到下一空行 / 下一个脚注 / 文末
     const defRe = /(\n|^)(\[\^([\w-]+)\]:[ \t]*([\s\S]*?))(?=\n[ \t]*\n|\n\[\^[\w-]+\]:|\s*$)/g;
     const removeIds = new Set();
     out = out.replace(defRe, (full, lead, defBlock, id, content) => {
-      const hasFile = FILE_EXT_RE.test(content);
-      const hasUrl = URL_RE.test(content);
+      const urlMatch = content.match(URL_RE);
+      const hasFile = FILE_EXT_RE.test(content) || (urlMatch && isFileUrl(urlMatch[0]));
+      const hasUrl = !!urlMatch;
       if (!hasUrl || hasFile) {
         removeIds.add(id);
         return ''; // 删除整段
       }
-      return full; // URL 形式，保留
+      return full; // 真 URL 脚注，保留
     });
 
-    // 2) 删除文中对应的 [^N] 引用上标（仅删那些定义被移除的）
+    // 删除文中对应的 [^N] 引用上标（仅那些定义被移除的）
     if (removeIds.size > 0) {
       removeIds.forEach((id) => {
         const inlineRe = new RegExp(`\\[\\^${id.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\]`, 'g');
@@ -637,11 +644,30 @@
       });
     }
 
-    // 3) 行内自然语言形式的文件引用（"参考: xxx.json"、"来源：xxx.md"）整行删除
+    // ② markdown 链接 [文字](URL文件) → 整体删除
+    out = out.replace(
+      /\[[^\]]*\]\(\s*(https?:\/\/[^\s)]+?)\s*\)/gi,
+      (full, url) => isFileUrl(url) ? '' : full
+    );
+
+    // ③ 裸 URL 指向文件 → 删除 URL 自身 + 紧贴前面的引导符号（emoji / "链接:" / "查看：" 等）
+    //   例如把 "...板块 👉 https://xxx.json?Expires=..." 整段去掉，只留 "...板块"
+    out = out.replace(
+      /[ \t]*[👉🔗📎📄📁🌐➡️]*[ \t]*(?:链接|参见|来源|参考|查看|详见|更多|戳这里|点此|访问|前往)?[ \t]*[:：]?[ \t]*(https?:\/\/\S+)/gi,
+      (full, url) => isFileUrl(url) ? '' : full
+    );
+
+    // ④ 自然语言形式 "参考: xxx.json" / "来源: xxx.md" 整行删除
     out = out.replace(
       /(?:^|\n)[ \t>]*(?:参考|来源|引用|Reference|Source|参考文件|参考来源)[ \t]*[:：][ \t]*[^\n]*\.(?:json|md|markdown|pdf|txt|docx?|xlsx?)[^\n]*/gi,
       ''
     );
+
+    // 收尾：去掉因为删除留下的多余连续空格 / 残留括号
+    out = out.replace(/[ \t]{2,}/g, ' ');
+    // 句末裸落孤独的"👉 "/"链接："/空括号"()" 等
+    out = out.replace(/[ \t]*[👉🔗📎📄📁🌐➡️]+[ \t]*$/gm, '');
+    out = out.replace(/[ \t]*\(\s*\)/g, '');
 
     return out;
   }
@@ -1088,14 +1114,43 @@
     }
   };
   
+  // 还没收到任何思考内容时，根据等待时长展示阶段性过渡文案
+  // （上游百炼智能体应用首字节延迟通常较长，这里用递进话术缓解等待感）
+  function pickWaitingStage(elapsedSec) {
+    const stages = lang === 'zh'
+      ? [
+          { until: 2,  icon: '💭', label: '思考中' },
+          { until: 5,  icon: '🔍', label: '分析您的问题中' },
+          { until: 10, icon: '📚', label: '查找相关资料中' },
+          { until: 18, icon: '🧩', label: '整理回答中' },
+          { until: 30, icon: '✨', label: '即将完成' },
+          { until: Infinity, icon: '⏳', label: '复杂问题需要更多时间，请稍候' }
+        ]
+      : [
+          { until: 2,  icon: '💭', label: 'Thinking' },
+          { until: 5,  icon: '🔍', label: 'Analyzing your question' },
+          { until: 10, icon: '📚', label: 'Searching references' },
+          { until: 18, icon: '🧩', label: 'Drafting the answer' },
+          { until: 30, icon: '✨', label: 'Finishing up' },
+          { until: Infinity, icon: '⏳', label: 'A complex question — hang tight' }
+        ];
+    for (const s of stages) {
+      if (elapsedSec < s.until) return s;
+    }
+    return stages[stages.length - 1];
+  }
+
   // 渲染思考中状态
   function renderThinking(thought, streaming, elapsedSec, showCancel) {
-    const baseLabel = lang === 'zh' ? '思考中' : 'Thinking';
     const cancelLabel = lang === 'zh' ? '取消' : 'Cancel';
+    // 没拿到思考内容时用阶段性话术；拿到了就回归"思考中"+ 实际内容
+    const stage = !thought ? pickWaitingStage(elapsedSec || 0) : null;
+    const icon = stage ? stage.icon : '💭';
+    const baseLabel = stage ? stage.label : (lang === 'zh' ? '思考中' : 'Thinking');
     const elapsed = typeof elapsedSec === 'number' && elapsedSec > 0 ? ` ${elapsedSec}s` : '';
     let html = `<div class="ai-thinking-box">`;
     html += `<div class="ai-thinking-header">`;
-    html += `<span class="ai-thinking-icon">💭</span>`;
+    html += `<span class="ai-thinking-icon">${icon}</span>`;
     html += `<span class="ai-thinking-label">${baseLabel}</span>`;
     html += `<span class="ai-thinking-dots"><i></i><i></i><i></i></span>`;
     if (elapsed) html += `<span class="ai-thinking-elapsed">${elapsed}</span>`;
