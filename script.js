@@ -841,7 +841,12 @@
         })
       });
       
-      if (!response.ok) throw new Error('API error: ' + response.status);
+      if (!response.ok) {
+        let errBody = '';
+        try { errBody = await response.text(); } catch {}
+        console.error('AI Chat HTTP error:', response.status, errBody.slice(0, 500));
+        throw new Error('API error: ' + response.status + (errBody ? ' - ' + errBody.slice(0, 200) : ''));
+      }
       
       const reader = response.body.getReader();
       const decoder = new TextDecoder();
@@ -953,12 +958,29 @@
       }
       
     } catch (err) {
-      console.error('AI Chat Error:', err);
-      contentEl.innerHTML = lang === 'zh' ? '请求失败，请稍后再试。' : 'Request failed. Please try again.';
+      console.error('AI Chat Error:', err && (err.stack || err.message || err));
       if (typeWriterId) { clearInterval(typeWriterId); typeWriterId = null; }
+      if (thinkTimerId) { clearInterval(thinkTimerId); thinkTimerId = null; }
+
+      // 已经有部分内容时，把剩余 pending 也 flush 出来 + 末尾提示"出错了"，
+      // 不要把已显示的思考 / 回答全部覆盖掉
+      flushAllPending();
+      const hasContent = answerText || inlineThoughtText || thoughtDisplayed.some(Boolean);
+      const errMsg = lang === 'zh'
+        ? '（连接中断，请稍后重试）'
+        : '(Connection interrupted. Please retry.)';
+      if (hasContent) {
+        if (phase === 'thinking') phase = 'answering';
+        const allThoughts = collectThoughts();
+        const tailedAnswer = (answerText || '') + '\n\n' + errMsg;
+        contentEl.innerHTML = renderAnswer(allThoughts, tailedAnswer, false, false);
+      } else {
+        contentEl.innerHTML = lang === 'zh' ? '请求失败，请稍后再试。' : 'Request failed. Please try again.';
+      }
+      scrollToBottom();
     } finally {
       if (thinkTimerId) clearInterval(thinkTimerId);
-      // 注意：不在 finally 里清打字机，让它跑完剩余 pending 自然停止
+      // 注意：正常路径不在 finally 里清打字机，让它跑完剩余 pending 自然停止
       aiIsLoading = false;
       sendBtn.disabled = false;
       input.focus();
