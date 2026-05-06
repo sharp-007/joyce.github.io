@@ -64,7 +64,10 @@ export async function onRequestPost({ request, env }) {
         },
         parameters: {
           incremental_output: streaming,
-          has_thoughts: true
+          has_thoughts: true,
+          // Qwen3 等思考模型：API 显式打开思考模式，
+          // 即使智能体应用内没有发布"思考模式"开关也能拿到 thoughts
+          enable_thinking: true
         },
         debug: {}
       })
@@ -126,11 +129,15 @@ function streamBailianSSE(upstream, origin) {
     const reader = upstream.body.getReader();
     let buffer = '';
     let sessionId = '';
-    // 记录每个 thought（按数组索引）已经推送过的字符长度
-    // 百炼把 thought 当成"累积式整段"返回，需要在这里转成真正的 delta 增量
-    const thoughtsLastLen = [];
 
     const flush = (obj) => writer.write(encoder.encode(`data: ${JSON.stringify(obj)}\n\n`));
+
+    // 立即发送 2KB 的 SSE 注释 padding，强制下游 CDN / 浏览器立刻打开 SSE 通道，
+    // 不要等攒满缓冲区才把第一帧吐给前端（解决"前几秒前端完全收不到数据"的问题）
+    try {
+      const padding = ':' + ' '.repeat(2048) + '\n\n';
+      await writer.write(encoder.encode(padding));
+    } catch {}
 
     try {
       while (true) {
@@ -156,21 +163,24 @@ function streamBailianSSE(upstream, origin) {
           const output = parsed.output || {};
           if (output.session_id) sessionId = output.session_id;
 
-          // 思考过程：把累积式 thought 转成 delta 增量
+          // 思考过程：incremental_output: true 时每个 chunk 的 thought 字段
+          // 本身就是当次 delta 片段（参考百炼官方文档 5694-5698 的 Python 示例），
+          // 直接透传即可。只关心 action_type === 'reasoning' 的深度思考；
+          // 其他 action_type（如 api / response 等工具调用）暂不传给前端。
           if (Array.isArray(output.thoughts)) {
-            for (let i = 0; i < output.thoughts.length; i++) {
-              const txt = (output.thoughts[i] && output.thoughts[i].thought) || '';
-              const last = thoughtsLastLen[i] || 0;
-              if (txt.length > last) {
-                const delta = txt.slice(last);
-                thoughtsLastLen[i] = txt.length;
-                await flush({
-                  event: 'agent_thought',
-                  index: i,
-                  delta,
-                  conversation_id: sessionId
-                });
-              }
+            for (const t of output.thoughts) {
+              if (!t) continue;
+              const at = t.action_type || t.actionType || '';
+              // 仅 reasoning 类型走思考流；如果上游未提供 action_type 字段，
+              // 出于兼容性也透传（旧模型 / Dify 行为）
+              if (at && at !== 'reasoning') continue;
+              const delta = t.thought || '';
+              if (!delta) continue;
+              await flush({
+                event: 'agent_thought',
+                delta,
+                conversation_id: sessionId
+              });
             }
           }
 
