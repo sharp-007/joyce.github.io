@@ -602,8 +602,52 @@
     if (el) el.remove();
   }
 
+  // 清理百炼智能体可能暴露的"知识库文件引用"，但保留正常的网页 URL 脚注：
+  // - 解析所有 [^N]: ... 脚注定义，逐个判断指向是 URL 还是文件
+  //   → URL 且不含文件名 → 保留
+  //   → 不含 URL / 含文件名（json/md/pdf 等） → 删除该定义 + 文中对应的 [^N]
+  // - 流式过程中的残缺脚注定义（被截断在末尾的 [^N]: ...）暂时保留原状
+  // - "参考: xxx.json" / "来源: xxx.md" 这种自然语言形式的文件引用 → 删除整行
+  function stripFootnotes(text) {
+    if (!text) return text;
+    let out = text;
+
+    const FILE_EXT_RE = /\.(?:json|md|markdown|pdf|txt|docx?|xlsx?|pptx?|csv|html?)\b/i;
+    const URL_RE = /https?:\/\/\S+/i;
+
+    // 1) 文末脚注定义块：从 [^N]: 开始，直到下一空行 / 下一个脚注定义 / 文末
+    //    用全局匹配抽出每一段，逐个判断是否要删
+    const defRe = /(\n|^)(\[\^([\w-]+)\]:[ \t]*([\s\S]*?))(?=\n[ \t]*\n|\n\[\^[\w-]+\]:|\s*$)/g;
+    const removeIds = new Set();
+    out = out.replace(defRe, (full, lead, defBlock, id, content) => {
+      const hasFile = FILE_EXT_RE.test(content);
+      const hasUrl = URL_RE.test(content);
+      if (!hasUrl || hasFile) {
+        removeIds.add(id);
+        return ''; // 删除整段
+      }
+      return full; // URL 形式，保留
+    });
+
+    // 2) 删除文中对应的 [^N] 引用上标（仅删那些定义被移除的）
+    if (removeIds.size > 0) {
+      removeIds.forEach((id) => {
+        const inlineRe = new RegExp(`\\[\\^${id.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\]`, 'g');
+        out = out.replace(inlineRe, '');
+      });
+    }
+
+    // 3) 行内自然语言形式的文件引用（"参考: xxx.json"、"来源：xxx.md"）整行删除
+    out = out.replace(
+      /(?:^|\n)[ \t>]*(?:参考|来源|引用|Reference|Source|参考文件|参考来源)[ \t]*[:：][ \t]*[^\n]*\.(?:json|md|markdown|pdf|txt|docx?|xlsx?)[^\n]*/gi,
+      ''
+    );
+
+    return out;
+  }
+
   function formatMarkdown(text) {
-    return text
+    return stripFootnotes(text)
       .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
       .replace(/\*(.*?)\*/g, '<em>$1</em>')
       .replace(/`(.*?)`/g, '<code>$1</code>')
