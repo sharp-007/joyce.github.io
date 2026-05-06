@@ -119,98 +119,103 @@ export async function onRequest(context) {
 }
 
 // 把百炼 SSE 转换为前端兼容的事件格式
+// 改用 ReadableStream + controller.enqueue：相比 TransformStream 在 EdgeOne 上
+// 更直接地把每条事件 push 给下游，避免边缘节点积累缓冲；
+// 每条事件附带服务端时间戳 ts（ms 相对请求开始），方便前端 DevTools 排查链路延迟
 function streamBailianSSE(upstream, origin) {
-  const { readable, writable } = new TransformStream();
-  const writer = writable.getWriter();
   const encoder = new TextEncoder();
   const decoder = new TextDecoder();
 
-  (async () => {
-    const reader = upstream.body.getReader();
-    let buffer = '';
-    let sessionId = '';
+  const stream = new ReadableStream({
+    async start(controller) {
+      const reader = upstream.body.getReader();
+      let buffer = '';
+      let sessionId = '';
+      const t0 = Date.now();
+      const enqueue = (obj) => {
+        const payload = { ...obj, ts: Date.now() - t0 };
+        controller.enqueue(encoder.encode(`data: ${JSON.stringify(payload)}\n\n`));
+      };
 
-    const flush = (obj) => writer.write(encoder.encode(`data: ${JSON.stringify(obj)}\n\n`));
+      // 立即发送 2KB 的 SSE 注释 padding，强制下游 CDN / 浏览器立刻打开 SSE 通道
+      try {
+        controller.enqueue(encoder.encode(':' + ' '.repeat(2048) + '\n\n'));
+      } catch {}
 
-    // 立即发送 2KB 的 SSE 注释 padding，强制下游 CDN / 浏览器立刻打开 SSE 通道，
-    // 不要等攒满缓冲区才把第一帧吐给前端（解决"前几秒前端完全收不到数据"的问题）
-    try {
-      const padding = ':' + ' '.repeat(2048) + '\n\n';
-      await writer.write(encoder.encode(padding));
-    } catch {}
+      try {
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          buffer += decoder.decode(value, { stream: true });
 
-    try {
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
-        buffer += decoder.decode(value, { stream: true });
+          const events = buffer.split('\n\n');
+          buffer = events.pop() || '';
 
-        const events = buffer.split('\n\n');
-        buffer = events.pop() || '';
-
-        for (const ev of events) {
-          let dataLine = '';
-          for (const line of ev.split('\n')) {
-            if (line.startsWith('data:')) {
-              dataLine = line.slice(5).trim();
+          for (const ev of events) {
+            let dataLine = '';
+            for (const line of ev.split('\n')) {
+              if (line.startsWith('data:')) {
+                dataLine = line.slice(5).trim();
+              }
             }
-          }
-          if (!dataLine || dataLine === '[DONE]') continue;
+            if (!dataLine || dataLine === '[DONE]') continue;
 
-          let parsed;
-          try { parsed = JSON.parse(dataLine); } catch { continue; }
+            let parsed;
+            try { parsed = JSON.parse(dataLine); } catch { continue; }
 
-          const output = parsed.output || {};
-          if (output.session_id) sessionId = output.session_id;
+            const output = parsed.output || {};
+            if (output.session_id) sessionId = output.session_id;
 
-          // 思考过程：incremental_output: true 时每个 chunk 的 thought 字段
-          // 本身就是当次 delta 片段（参考百炼官方文档 5694-5698 的 Python 示例），
-          // 直接透传即可。只关心 action_type === 'reasoning' 的深度思考；
-          // 其他 action_type（如 api / response 等工具调用）暂不传给前端。
-          if (Array.isArray(output.thoughts)) {
-            for (const t of output.thoughts) {
-              if (!t) continue;
-              const at = t.action_type || t.actionType || '';
-              // 仅 reasoning 类型走思考流；如果上游未提供 action_type 字段，
-              // 出于兼容性也透传（旧模型 / Dify 行为）
-              if (at && at !== 'reasoning') continue;
-              const delta = t.thought || '';
-              if (!delta) continue;
-              await flush({
-                event: 'agent_thought',
-                delta,
+            // 思考过程：incremental_output: true 时每个 chunk 的 thought 字段
+            // 本身就是当次 delta 片段（参考百炼官方文档 5694-5698 的 Python 示例），
+            // 直接透传即可。只关心 action_type === 'reasoning' 的深度思考；
+            // 其他 action_type（如 api / response 等工具调用）暂不传给前端。
+            if (Array.isArray(output.thoughts)) {
+              for (const t of output.thoughts) {
+                if (!t) continue;
+                const at = t.action_type || t.actionType || '';
+                if (at && at !== 'reasoning') continue;
+                const delta = t.thought || '';
+                if (!delta) continue;
+                enqueue({
+                  event: 'agent_thought',
+                  delta,
+                  conversation_id: sessionId
+                });
+              }
+            }
+
+            // 回答内容（incremental_output: true 时直接是 delta 片段）
+            if (output.text) {
+              enqueue({
+                event: 'message',
+                answer: output.text,
+                conversation_id: sessionId
+              });
+            }
+
+            if (output.finish_reason === 'stop') {
+              enqueue({
+                event: 'message_end',
                 conversation_id: sessionId
               });
             }
           }
-
-          // 回答内容（incremental_output: true 时直接是 delta 片段）
-          if (output.text) {
-            await flush({
-              event: 'message',
-              answer: output.text,
-              conversation_id: sessionId
-            });
-          }
-
-          if (output.finish_reason === 'stop') {
-            await flush({
-              event: 'message_end',
-              conversation_id: sessionId
-            });
-          }
         }
+        controller.enqueue(encoder.encode('data: [DONE]\n\n'));
+      } catch (e) {
+        console.error('Bailian stream error:', e);
+      } finally {
+        try { reader.releaseLock(); } catch {}
+        try { controller.close(); } catch {}
       }
-      await writer.write(encoder.encode('data: [DONE]\n\n'));
-    } catch (e) {
-      console.error('Bailian stream error:', e);
-    } finally {
-      try { reader.releaseLock(); } catch {}
-      try { await writer.close(); } catch {}
+    },
+    cancel() {
+      // 客户端断开时进入这里；start() 内的 finally 已负责清理 reader
     }
-  })();
+  });
 
-  return new Response(readable, {
+  return new Response(stream, {
     headers: {
       'Content-Type': 'text/event-stream; charset=utf-8',
       'Cache-Control': 'no-cache, no-transform',

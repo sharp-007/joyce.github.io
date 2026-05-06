@@ -847,6 +847,10 @@
       const decoder = new TextDecoder();
       let buffer = '';
       
+      // 调试用：在 URL 上加 ?ai_debug=1 即可在 Console 看到每条 SSE 到达时间
+      const DEBUG_SSE = /[?&]ai_debug=1/.test(location.search);
+      const requestStartedAt = performance.now();
+
       try {
         while (true) {
           const { done, value } = await reader.read();
@@ -867,6 +871,15 @@
             if (json.conversation_id) aiConversationId = json.conversation_id;
             
             const evt = json.event;
+
+            if (DEBUG_SSE) {
+              const clientMs = Math.round(performance.now() - requestStartedAt);
+              const serverMs = typeof json.ts === 'number' ? json.ts : '-';
+              const preview = (json.delta || json.answer || '').slice(0, 30).replace(/\n/g, '\\n');
+              console.log(
+                `[AI SSE] +${clientMs}ms (server +${serverMs}ms) ${evt} "${preview}"`
+              );
+            }
             
             // Dify Agent 原生思考事件 → 进 pending 缓冲，由打字机逐字渲染
             if (evt === 'agent_thought') {
