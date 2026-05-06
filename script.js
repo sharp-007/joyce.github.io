@@ -669,14 +669,14 @@
     const botMessage = addAIMessage('', false);
     const contentEl = botMessage.querySelector('.ai-message-content');
     
-    // 思考过程：按 index 累积；
-    // 引入 displayed/pending 两段，配合自适应打字机模拟流式（百炼智能体的 thoughts
-    // 多数是阶段性批量到达，单次回包就是一大段，必须前端做"逐字推进"才有流式感）
-    const thoughtDisplayed = []; // 已渲染到 DOM 的部分
-    const thoughtPending = [];   // 已收到但还没"打"出来的缓冲
+    // 思考/回答都用"已显示 + 待显示"双队列 + 自适应打字机模拟流式
+    // 这样无论上游真流式 / 批量到达，前端都能呈现完整的视觉流式过程
+    const thoughtDisplayed = []; // 已渲染到 DOM 的思考片段（按 index）
+    const thoughtPending = [];   // 思考的待显示缓冲
     let inlineThoughtText = ''; // 来自 <think> 标签的累积思考（已显示）
     let inlineThoughtPending = ''; // <think> 内容的打字机 buffer
-    let answerText = '';
+    let answerText = '';        // 已渲染的回答（即"已显示"）
+    let answerPending = '';     // 回答的待显示缓冲
     let phase = 'thinking'; // 'thinking' | 'answering'
     const thinkState = { inThink: false, pending: '' }; // <think> 流解析状态
 
@@ -709,25 +709,28 @@
       if (phase === 'thinking') {
         contentEl.innerHTML = renderThinking(allThoughts.join('\n'), streaming, thinkElapsedSec);
       } else {
-        // answering 阶段：如果思考 pending 还没打完，折叠面板默认展开 + 显示光标
-        const thoughtStillStreaming = totalPendingLen() > 0;
+        // answering 阶段：如果思考 pending 还没打完（极少情况），折叠面板默认展开
+        const thoughtStillStreaming = totalThoughtPending() > 0;
         contentEl.innerHTML = renderAnswer(allThoughts, answerText, streaming, thoughtStillStreaming);
       }
       scrollToBottom();
     };
 
-    // 自适应打字机：根据 buffer 字数动态调整每帧消费的字符数
-    // - 短缓冲（真流式）：慢速优雅显示
-    // - 长缓冲（一次性大段）：快速追赶，避免显示落后
+    // 自适应打字机
+    // - 思考阶段慢节奏（让用户感受"在思考"）
+    // - 回答阶段快节奏（已知道答案，快点给）
+    // - 流已结束 + 还有 pending 时加速消费，避免拖延
     let typeWriterId = null;
-    const totalPendingLen = () => {
+    let streamEnded = false;
+
+    const totalThoughtPending = () => {
       let total = inlineThoughtPending.length;
       for (const p of thoughtPending) total += (p || '').length;
       return total;
     };
-    const consumeOnce = (charsBudget) => {
+
+    const consumeThought = (charsBudget) => {
       let consumed = 0;
-      // 优先消费 inline <think> pending（顺序与到达顺序一致更自然）
       if (inlineThoughtPending && consumed < charsBudget) {
         const take = Math.min(charsBudget - consumed, inlineThoughtPending.length);
         inlineThoughtText += inlineThoughtPending.slice(0, take);
@@ -744,16 +747,32 @@
       }
       return consumed;
     };
-    let streamEnded = false;
+
+    const consumeAnswer = (charsBudget) => {
+      if (!answerPending) return 0;
+      const take = Math.min(charsBudget, answerPending.length);
+      answerText += answerPending.slice(0, take);
+      answerPending = answerPending.slice(take);
+      return take;
+    };
+
     const startTypeWriter = () => {
       if (typeWriterId) return;
       typeWriterId = setInterval(() => {
-        const total = totalPendingLen();
-        if (total === 0) {
+        const tp = totalThoughtPending();
+        const ap = answerPending.length;
+
+        // 思考已打完 + answer 已开始接收 → 切到回答阶段
+        if (phase === 'thinking' && tp === 0 && ap > 0) {
+          phase = 'answering';
+        }
+
+        if (tp === 0 && ap === 0) {
           clearInterval(typeWriterId);
           typeWriterId = null;
-          // 流已结束 + pending 也清空 → 切到最终静态渲染（无光标）
+          // 流已结束 + 全部 pending 清空 → 最终静态渲染（无光标 / 折叠面板收起）
           if (streamEnded) {
+            if (phase === 'thinking') phase = 'answering';
             contentEl.innerHTML = renderAnswer(collectThoughts(), answerText, false, false);
             scrollToBottom();
           } else {
@@ -761,18 +780,29 @@
           }
           return;
         }
-        // 字数越多，每 tick 消费越多，确保不会一直追不上；
-        // 流已经结束的情况下加速消费，避免用户等太久
-        let budget = total > 800 ? 16
-                   : total > 300 ? 8
-                   : total > 80  ? 4
-                   :               2;
-        if (streamEnded) budget = Math.max(budget, 6);
-        consumeOnce(budget);
+
+        if (phase === 'thinking') {
+          // 思考阶段：~80-330 字/秒，让用户感受到"在思考"
+          let budget = tp > 800 ? 8
+                     : tp > 300 ? 5
+                     : tp > 80  ? 3
+                     :            2;
+          if (streamEnded) budget = Math.max(budget, 5); // 流已结束加速消费
+          consumeThought(budget);
+        } else {
+          // 回答阶段：~125-660 字/秒，更快
+          let budget = ap > 800 ? 16
+                     : ap > 300 ? 10
+                     : ap > 80  ? 6
+                     :            3;
+          if (streamEnded) budget = Math.max(budget, 10);
+          consumeAnswer(budget);
+        }
         scheduleUpdate(true);
       }, 24); // ~42 ticks/sec
     };
-    // 把所有 pending 一次性 flush 到 displayed（流结束 / 切换到回答阶段时调用）
+
+    // 把所有 pending 一次性 flush（流结束 / 出错时兜底用）
     const flushAllPending = () => {
       if (inlineThoughtPending) {
         inlineThoughtText += inlineThoughtPending;
@@ -783,6 +813,10 @@
           thoughtDisplayed[i] = (thoughtDisplayed[i] || '') + thoughtPending[i];
           thoughtPending[i] = '';
         }
+      }
+      if (answerPending) {
+        answerText += answerPending;
+        answerPending = '';
       }
       if (typeWriterId) { clearInterval(typeWriterId); typeWriterId = null; }
     };
@@ -856,25 +890,22 @@
               }
               startTypeWriter();
             }
-            // 回答事件 - 处理 <think> 标签 + 切换到回答阶段
+            // 回答事件 - 处理 <think> 标签 + 进 answer pending（不立即切 phase）
             else if (evt === 'agent_message' || evt === 'message') {
               const newText = json.answer || '';
               if (!newText) continue;
               const { answerOut, thoughtOut } = processThinkStream(thinkState, newText);
               
               if (thoughtOut) {
-                // <think> 内容也进打字机，与 agent_thought 一致
                 inlineThoughtPending += thoughtOut;
                 startTypeWriter();
               }
               if (answerOut) {
-                if (phase === 'thinking') {
-                  // 切到回答阶段，但不 flush 思考 pending，
-                  // 让打字机在后台继续把思考打完（折叠面板展开显示）
-                  phase = 'answering';
-                }
-                answerText += answerOut;
-                scheduleUpdate(true);
+                // 重要：不在这里切 phase！让打字机先把思考 pending 消费完，
+                // 再自动切到 answering 阶段流式打答案。
+                // 这样即便上游"思考批量到达"，用户也能看到完整的思考流式过程。
+                answerPending += answerOut;
+                startTypeWriter();
               }
             }
             // 结束事件不处理
@@ -889,25 +920,22 @@
         if (thinkState.inThink) {
           inlineThoughtPending += thinkState.pending;
         } else {
-          answerText += thinkState.pending;
-          if (phase === 'thinking') phase = 'answering';
+          answerPending += thinkState.pending;
         }
         thinkState.pending = '';
       }
-      // 如果只有思考没回答（极少情况），也算回答阶段
-      if (phase === 'thinking' && (answerText || inlineThoughtText || thoughtDisplayed.length || totalPendingLen())) {
-        phase = 'answering';
-      }
       // 标记流已结束，让打字机进入"加速消费 + 完成后做最终静态渲染"模式
       streamEnded = true;
-      // 停掉耗时计时器（思考已经收尾了）
+      // 停掉耗时计时器
       if (thinkTimerId) { clearInterval(thinkTimerId); thinkTimerId = null; }
-      if (totalPendingLen() === 0) {
-        // 没有任何待打字内容，立即做最终渲染
+
+      // 没有任何待打字内容 → 立即做最终渲染（极少见）
+      if (totalThoughtPending() === 0 && answerPending.length === 0) {
+        if (phase === 'thinking') phase = 'answering';
         contentEl.innerHTML = renderAnswer(collectThoughts(), answerText, false, false);
         scrollToBottom();
       } else {
-        // 还有 pending 时确保打字机在跑（防御性调用）
+        // 仍有 pending 时确保打字机在跑（防御性调用）
         startTypeWriter();
       }
       
