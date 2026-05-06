@@ -435,6 +435,8 @@
   let aiChatConfig = null;
   let aiConversationId = null;
   let aiIsLoading = false;
+  // 连续失败次数（不含用户主动取消）。≥2 时在错误提示后追加"可能是网络问题"
+  let aiFailureCount = 0;
 
   async function loadAIChatConfig() {
     try {
@@ -756,8 +758,8 @@
     let thinkTimerId = null;
 
     // 超时 / 取消保护
-    const TOTAL_TIMEOUT_MS = 120000; // 总超时：120 秒，超过强制中止
-    const IDLE_TIMEOUT_MS = 30000;   // 静默超时：30 秒收不到任何 SSE 数据则中止
+    const TOTAL_TIMEOUT_MS = 180000; // 总超时：180 秒，超过强制中止（兼容静默超时放宽）
+    const IDLE_TIMEOUT_MS = 60000;   // 静默超时：60 秒收不到任何 SSE 数据则中止
     const CANCEL_BTN_AFTER_MS = 8000;// 思考超过 8 秒，思考框出现"取消"按钮
     const abortController = new AbortController();
     let totalTimeoutId = null;
@@ -1051,6 +1053,8 @@
       }
       // 标记流已结束，让打字机进入"加速消费 + 完成后做最终静态渲染"模式
       streamEnded = true;
+      // 成功收到完整响应，重置连续失败计数
+      aiFailureCount = 0;
       // 停掉耗时计时器 + 超时保护（正常完成路径）
       if (thinkTimerId) { clearInterval(thinkTimerId); thinkTimerId = null; }
       if (totalTimeoutId) { clearTimeout(totalTimeoutId); totalTimeoutId = null; }
@@ -1075,6 +1079,11 @@
       flushAllPending();
       const hasContent = answerText || inlineThoughtText || thoughtDisplayed.some(Boolean);
 
+      // 用户主动取消不计入失败；其他原因（超时 / 连接中断）累加连续失败计数
+      if (!userCancelled) {
+        aiFailureCount++;
+      }
+
       let errMsg;
       if (userCancelled) {
         errMsg = lang === 'zh' ? '（已取消）' : '(Cancelled)';
@@ -1088,17 +1097,30 @@
           : '(Connection interrupted. Please retry.)';
       }
 
+      // 连续失败 ≥ 2 次：追加网络问题提示，帮助用户排查
+      const networkHint = (!userCancelled && aiFailureCount >= 2)
+        ? (lang === 'zh'
+            ? '\n（已连续多次失败，可能是网络问题，请检查网络连接后重试）'
+            : '\n(Multiple failures detected — this may be a network issue. Please check your connection and try again.)')
+        : '';
+
       if (hasContent) {
         if (phase === 'thinking') phase = 'answering';
         const allThoughts = collectThoughts();
-        const tailedAnswer = (answerText || '') + '\n\n' + errMsg;
+        const tailedAnswer = (answerText || '') + '\n\n' + errMsg + networkHint;
         contentEl.innerHTML = renderAnswer(allThoughts, tailedAnswer, false, false);
       } else {
-        contentEl.innerHTML = userCancelled
+        const baseText = userCancelled
           ? (lang === 'zh' ? '已取消。' : 'Cancelled.')
           : (timedOut
               ? (lang === 'zh' ? '响应超时，请稍后重试。' : 'Response timeout. Please retry.')
               : (lang === 'zh' ? '请求失败，请稍后再试。' : 'Request failed. Please try again.'));
+        const hintText = (!userCancelled && aiFailureCount >= 2)
+          ? (lang === 'zh'
+              ? '<br><span style="opacity:.75">已连续多次失败，可能是网络问题，请检查网络连接后重试。</span>'
+              : '<br><span style="opacity:.75">Multiple failures detected — this may be a network issue. Please check your connection.</span>')
+          : '';
+        contentEl.innerHTML = baseText + hintText;
       }
       scrollToBottom();
     } finally {
