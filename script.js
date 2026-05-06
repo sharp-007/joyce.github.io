@@ -669,9 +669,13 @@
     const botMessage = addAIMessage('', false);
     const contentEl = botMessage.querySelector('.ai-message-content');
     
-    // 思考过程：按 index 累积（avoid 旧版 push 累积式整段导致的重复递增）
-    const thoughtParts = []; // thoughtParts[i] = '...'
-    let inlineThoughtText = ''; // 来自 <think> 标签的累积思考
+    // 思考过程：按 index 累积；
+    // 引入 displayed/pending 两段，配合自适应打字机模拟流式（百炼智能体的 thoughts
+    // 多数是阶段性批量到达，单次回包就是一大段，必须前端做"逐字推进"才有流式感）
+    const thoughtDisplayed = []; // 已渲染到 DOM 的部分
+    const thoughtPending = [];   // 已收到但还没"打"出来的缓冲
+    let inlineThoughtText = ''; // 来自 <think> 标签的累积思考（已显示）
+    let inlineThoughtPending = ''; // <think> 内容的打字机 buffer
     let answerText = '';
     let phase = 'thinking'; // 'thinking' | 'answering'
     const thinkState = { inThink: false, pending: '' }; // <think> 流解析状态
@@ -695,7 +699,7 @@
     };
 
     const collectThoughts = () => {
-      const arr = thoughtParts.filter(Boolean);
+      const arr = thoughtDisplayed.filter(Boolean);
       if (inlineThoughtText) arr.push(inlineThoughtText);
       return arr;
     };
@@ -705,9 +709,82 @@
       if (phase === 'thinking') {
         contentEl.innerHTML = renderThinking(allThoughts.join('\n'), streaming, thinkElapsedSec);
       } else {
-        contentEl.innerHTML = renderAnswer(allThoughts, answerText, streaming);
+        // answering 阶段：如果思考 pending 还没打完，折叠面板默认展开 + 显示光标
+        const thoughtStillStreaming = totalPendingLen() > 0;
+        contentEl.innerHTML = renderAnswer(allThoughts, answerText, streaming, thoughtStillStreaming);
       }
       scrollToBottom();
+    };
+
+    // 自适应打字机：根据 buffer 字数动态调整每帧消费的字符数
+    // - 短缓冲（真流式）：慢速优雅显示
+    // - 长缓冲（一次性大段）：快速追赶，避免显示落后
+    let typeWriterId = null;
+    const totalPendingLen = () => {
+      let total = inlineThoughtPending.length;
+      for (const p of thoughtPending) total += (p || '').length;
+      return total;
+    };
+    const consumeOnce = (charsBudget) => {
+      let consumed = 0;
+      // 优先消费 inline <think> pending（顺序与到达顺序一致更自然）
+      if (inlineThoughtPending && consumed < charsBudget) {
+        const take = Math.min(charsBudget - consumed, inlineThoughtPending.length);
+        inlineThoughtText += inlineThoughtPending.slice(0, take);
+        inlineThoughtPending = inlineThoughtPending.slice(take);
+        consumed += take;
+      }
+      for (let i = 0; i < thoughtPending.length && consumed < charsBudget; i++) {
+        const pending = thoughtPending[i] || '';
+        if (!pending) continue;
+        const take = Math.min(charsBudget - consumed, pending.length);
+        thoughtDisplayed[i] = (thoughtDisplayed[i] || '') + pending.slice(0, take);
+        thoughtPending[i] = pending.slice(take);
+        consumed += take;
+      }
+      return consumed;
+    };
+    let streamEnded = false;
+    const startTypeWriter = () => {
+      if (typeWriterId) return;
+      typeWriterId = setInterval(() => {
+        const total = totalPendingLen();
+        if (total === 0) {
+          clearInterval(typeWriterId);
+          typeWriterId = null;
+          // 流已结束 + pending 也清空 → 切到最终静态渲染（无光标）
+          if (streamEnded) {
+            contentEl.innerHTML = renderAnswer(collectThoughts(), answerText, false, false);
+            scrollToBottom();
+          } else {
+            scheduleUpdate(true);
+          }
+          return;
+        }
+        // 字数越多，每 tick 消费越多，确保不会一直追不上；
+        // 流已经结束的情况下加速消费，避免用户等太久
+        let budget = total > 800 ? 16
+                   : total > 300 ? 8
+                   : total > 80  ? 4
+                   :               2;
+        if (streamEnded) budget = Math.max(budget, 6);
+        consumeOnce(budget);
+        scheduleUpdate(true);
+      }, 24); // ~42 ticks/sec
+    };
+    // 把所有 pending 一次性 flush 到 displayed（流结束 / 切换到回答阶段时调用）
+    const flushAllPending = () => {
+      if (inlineThoughtPending) {
+        inlineThoughtText += inlineThoughtPending;
+        inlineThoughtPending = '';
+      }
+      for (let i = 0; i < thoughtPending.length; i++) {
+        if (thoughtPending[i]) {
+          thoughtDisplayed[i] = (thoughtDisplayed[i] || '') + thoughtPending[i];
+          thoughtPending[i] = '';
+        }
+      }
+      if (typeWriterId) { clearInterval(typeWriterId); typeWriterId = null; }
     };
 
     // 立即占位渲染，让用户第一时间看到反馈（不等首个 SSE chunk）
@@ -715,7 +792,6 @@
     thinkTimerId = setInterval(() => {
       if (phase !== 'thinking') return;
       thinkElapsedSec = Math.floor((Date.now() - thinkStartedAt) / 1000);
-      // 仅当还在思考阶段时刷新计时器；用 rAF 节流
       scheduleUpdate(true);
     }, 1000);
     
@@ -758,19 +834,27 @@
             
             const evt = json.event;
             
-            // Dify Agent 原生思考事件
+            // Dify Agent 原生思考事件 → 进 pending 缓冲，由打字机逐字渲染
             if (evt === 'agent_thought') {
-              // 新协议（百炼）：{ index, delta }，按索引累加增量
-              // 兼容旧协议（Dify）：{ thought } 完整文本，按索引覆盖
+              // 新协议（百炼代理）：{ index, delta } 增量
+              // 兼容旧协议（Dify）：{ thought } 完整文本
               const idx = typeof json.index === 'number' ? json.index : 0;
               if (typeof json.delta === 'string' && json.delta.length > 0) {
-                thoughtParts[idx] = (thoughtParts[idx] || '') + json.delta;
+                thoughtPending[idx] = (thoughtPending[idx] || '') + json.delta;
               } else {
                 const thought = json.thought || json.message || '';
                 if (!thought) continue;
-                thoughtParts[idx] = thought;
+                // 旧协议下计算 delta：thought 是从头开始的累积文本
+                const already = (thoughtDisplayed[idx] || '') + (thoughtPending[idx] || '');
+                if (thought.length > already.length) {
+                  thoughtPending[idx] = (thoughtPending[idx] || '') + thought.slice(already.length);
+                } else if (thought !== already) {
+                  // 极端情况：内容完全不一样（被改写），重置
+                  thoughtDisplayed[idx] = '';
+                  thoughtPending[idx] = thought;
+                }
               }
-              if (phase === 'thinking') scheduleUpdate(true);
+              startTypeWriter();
             }
             // 回答事件 - 处理 <think> 标签 + 切换到回答阶段
             else if (evt === 'agent_message' || evt === 'message') {
@@ -778,12 +862,20 @@
               if (!newText) continue;
               const { answerOut, thoughtOut } = processThinkStream(thinkState, newText);
               
-              if (thoughtOut) inlineThoughtText += thoughtOut;
-              if (answerOut) {
-                if (phase === 'thinking') phase = 'answering';
-                answerText += answerOut;
+              if (thoughtOut) {
+                // <think> 内容也进打字机，与 agent_thought 一致
+                inlineThoughtPending += thoughtOut;
+                startTypeWriter();
               }
-              if (thoughtOut || answerOut) scheduleUpdate(true);
+              if (answerOut) {
+                if (phase === 'thinking') {
+                  // 切到回答阶段，但不 flush 思考 pending，
+                  // 让打字机在后台继续把思考打完（折叠面板展开显示）
+                  phase = 'answering';
+                }
+                answerText += answerOut;
+                scheduleUpdate(true);
+              }
             }
             // 结束事件不处理
           }
@@ -792,29 +884,40 @@
         try { reader.releaseLock(); } catch {}
       }
       
-      // 流结束：把残留的 pending 文本归位
+      // 流结束：把残留的 <think> pending 归位
       if (thinkState.pending) {
         if (thinkState.inThink) {
-          inlineThoughtText += thinkState.pending;
+          inlineThoughtPending += thinkState.pending;
         } else {
           answerText += thinkState.pending;
           if (phase === 'thinking') phase = 'answering';
         }
+        thinkState.pending = '';
       }
       // 如果只有思考没回答（极少情况），也算回答阶段
-      if (phase === 'thinking' && (answerText || inlineThoughtText || thoughtParts.length)) {
+      if (phase === 'thinking' && (answerText || inlineThoughtText || thoughtDisplayed.length || totalPendingLen())) {
         phase = 'answering';
       }
-      
-      // 最终渲染（无光标、无计时器）
-      contentEl.innerHTML = renderAnswer(collectThoughts(), answerText, false);
-      scrollToBottom();
+      // 标记流已结束，让打字机进入"加速消费 + 完成后做最终静态渲染"模式
+      streamEnded = true;
+      // 停掉耗时计时器（思考已经收尾了）
+      if (thinkTimerId) { clearInterval(thinkTimerId); thinkTimerId = null; }
+      if (totalPendingLen() === 0) {
+        // 没有任何待打字内容，立即做最终渲染
+        contentEl.innerHTML = renderAnswer(collectThoughts(), answerText, false, false);
+        scrollToBottom();
+      } else {
+        // 还有 pending 时确保打字机在跑（防御性调用）
+        startTypeWriter();
+      }
       
     } catch (err) {
       console.error('AI Chat Error:', err);
       contentEl.innerHTML = lang === 'zh' ? '请求失败，请稍后再试。' : 'Request failed. Please try again.';
+      if (typeWriterId) { clearInterval(typeWriterId); typeWriterId = null; }
     } finally {
       if (thinkTimerId) clearInterval(thinkTimerId);
+      // 注意：不在 finally 里清打字机，让它跑完剩余 pending 自然停止
       aiIsLoading = false;
       sendBtn.disabled = false;
       input.focus();
@@ -840,17 +943,23 @@
   }
   
   // 渲染回答（带折叠的思考过程）
-  function renderAnswer(thoughts, answer, streaming) {
+  // thoughtStillStreaming: 思考 pending 还没打完时为 true，
+  // 此时折叠面板默认展开 + 内容尾部显示光标，让用户继续看到思考流
+  function renderAnswer(thoughts, answer, streaming, thoughtStillStreaming) {
     let html = '';
     
     // 折叠的思考过程
     if (thoughts.length > 0) {
       const thoughtText = thoughts.join('\n');
-      const label = lang === 'zh' ? '已深度思考（点击展开）' : 'Deep thinking (click to expand)';
+      const finishedLabel = lang === 'zh' ? '已深度思考（点击展开）' : 'Deep thinking (click to expand)';
+      const streamingLabel = lang === 'zh' ? '思考中（继续输出）' : 'Thinking (streaming)';
+      const label = thoughtStillStreaming ? streamingLabel : finishedLabel;
+      const openAttr = thoughtStillStreaming ? ' open' : '';
+      const cursor = thoughtStillStreaming ? '<span class="ai-cursor"></span>' : '';
       html += `
-        <details class="ai-thought-collapse">
+        <details class="ai-thought-collapse"${openAttr}>
           <summary>💭 ${label}</summary>
-          <div class="ai-thought-body">${escHtml(thoughtText)}</div>
+          <div class="ai-thought-body">${escHtml(thoughtText)}${cursor}</div>
         </details>
       `;
     }
