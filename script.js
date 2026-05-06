@@ -1120,15 +1120,15 @@
     const stages = lang === 'zh'
       ? [
           { until: 2,  icon: '💭', label: '思考中' },
-          { until: 5,  icon: '🔍', label: '分析您的问题中' },
-          { until: 10, icon: '📚', label: '查找相关资料中' },
+          { until: 5,  icon: '🔍', label: '分析问题中' },
+          { until: 10, icon: '📚', label: '查找资料中' },
           { until: 18, icon: '🧩', label: '整理回答中' },
           { until: 30, icon: '✨', label: '即将完成' },
           { until: Infinity, icon: '⏳', label: '复杂问题需要更多时间，请稍候' }
         ]
       : [
           { until: 2,  icon: '💭', label: 'Thinking' },
-          { until: 5,  icon: '🔍', label: 'Analyzing your question' },
+          { until: 5,  icon: '🔍', label: 'Analyzing question' },
           { until: 10, icon: '📚', label: 'Searching references' },
           { until: 18, icon: '🧩', label: 'Drafting the answer' },
           { until: 30, icon: '✨', label: 'Finishing up' },
