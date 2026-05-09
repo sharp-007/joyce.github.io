@@ -14,7 +14,7 @@
       "text_zh": "在SAS担任JMP软件华北区数据分析顾问期间，主导售前方案设计与产品演示，赋能半导体、汽车等制造企业数字化转型；在星网宇达任部门经理期间，主导跨部门协作将核心指标提升至国内领先水平，显著加速产品研发与量产。"
     },
     {
-      "text_en": "Beihang University M.Eng. PMP and Alibaba Cloud ACP Senior LLM Engineer certified.",
+      "text_en": "Beihang University M.Eng. PMP and Alibaba Cloud ACP LLM certified.",
       "text_zh": "北航工学硕士，持有PMP与阿里云大模型ACP认证。"
     }
   ],
@@ -24,8 +24,8 @@
       "text_zh": "PMP"
     },
     {
-      "text_en": "Alibaba Cloud ACP",
-      "text_zh": "阿里云ACP"
+      "text_en": "Alibaba Cloud Professional ACP LLM",
+      "text_zh": "阿里云大模型高级工程师ACP"
     },
     {
       "text_en": "Deep Learning Architect",
@@ -90,17 +90,20 @@
     {
       "platform": "GitHub",
       "url": "https://github.com/sharp-007",
-      "icon": "github"
+      "icon": "github",
+      "display": ""
     },
     {
       "platform": "LinkedIn",
       "url": "https://www.linkedin.com/in/joyce-pan-549596138/",
-      "icon": "linkedin"
+      "icon": "linkedin",
+      "display": ""
     },
     {
       "platform": "YouTube",
       "url": "https://www.youtube.com/@MindsAIPanda",
-      "icon": "youtube"
+      "icon": "youtube",
+      "display": ""
     },
     {
       "platform": "Email",
