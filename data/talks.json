@@ -3,22 +3,37 @@
     {
       "type_en": "Webinar",
       "type_zh": "在线直播",
-      "title_en": "DOE Intro: Master DOE in 60 Minutes",
+      "title_en": "DOE Intro: Master DOE from Zero to One",
       "title_zh": "DOE入门课：从方法到实践，60分钟轻松掌握DOE",
       "cover": "images/uploads/talks/doe-intro.png",
       "url": "https://www.jmp.com/zh-hans/resources/on-demand/local/jmp-doe-from-zero-on-demand",
-      "date": "2024",
-      "skills": ["DOE", "统计分析", "JMP"]
+      "date": "2023",
+      "skills": [
+        "DOE",
+        "统计分析",
+        "JMP",
+        "响应曲面设计",
+        "定制设计"
+      ]
     },
     {
       "type_en": "Webinar",
       "type_zh": "在线直播",
-      "title_en": "DOE Case Studies: 3 Methods for R&D & Process Optimization",
+      "title_en": "DOE Industrial Case Studies for R&D & Process Optimization",
       "title_zh": "DOE经典案例实战：产品研发与工艺优化的3种实验设计方法",
       "cover": "images/uploads/talks/doe-cases.png",
       "url": "https://www.jmp.com/zh-hans/resources/on-demand/local/doe-industry-cases-study",
       "date": "2024",
-      "skills": ["DOE", "统计分析", "工艺优化", "JMP"]
+      "skills": [
+        "DOE",
+        "统计分析",
+        "工艺优化",
+        "JMP",
+        "电子/化工/食品",
+        "代理模型",
+        "混料设计",
+        "空间填充设计"
+      ]
     },
     {
       "type_en": "Webinar",
@@ -27,18 +42,29 @@
       "title_zh": "45分钟完全入门质量分析：2大案例讲透质量工程师80%的数据分析场景",
       "cover": "images/uploads/talks/quality-analysis.png",
       "url": "https://www.jmp.com/zh-hans/resources/on-demand/local/get-started-quality-engineer",
-      "date": "2024",
-      "skills": ["质量管理", "统计分析", "数据可视化", "JMP"]
+      "date": "2025",
+      "skills": [
+        "质量管理",
+        "统计分析",
+        "数据可视化",
+        "JMP",
+        "六西格玛",
+        "工作流自动化"
+      ]
     },
     {
       "type_en": "Workshop",
       "type_zh": "工作坊",
-      "title_en": "Data Visualization User Group: Online Courses + Offline Training",
+      "title_en": "Data Visualization User Group: Online Courses + On-site Workshop",
       "title_zh": "数据可视化User Group：线上课程+线下用户训练营",
       "cover": "images/uploads/talks/user-group.png",
       "url": "",
-      "date": "2023-2024",
-      "skills": ["数据可视化", "JMP"]
+      "date": "2024",
+      "skills": [
+        "数据可视化",
+        "JMP",
+        "Visual Storytelling"
+      ]
     },
     {
       "type_en": "Webinar",
@@ -47,8 +73,14 @@
       "title_zh": "食品感官分析与配方优化的常用统计方法与实战案例",
       "cover": "images/uploads/talks/food-webinar.png",
       "url": "",
-      "date": "2024",
-      "skills": ["统计分析", "DOE", "感官分析", "配方优化", "JMP"]
+      "date": "2025",
+      "skills": [
+        "统计分析",
+        "DOE",
+        "JMP",
+        "感官分析",
+        "配方优化"
+      ]
     }
   ]
 }
