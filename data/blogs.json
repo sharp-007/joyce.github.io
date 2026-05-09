@@ -8,10 +8,10 @@
       "date": "2026-04-20"
     },
     {
-      "url": "https://mp.weixin.qq.com/s/RlMWMXGu4taOElHMOSVk-g",
-      "title_zh": "大模型如何重塑数据平台？一张图讲清楚10层技术栈的变与不变",
       "title_en": "How Large Models Are Reshaping Data Platforms: One Diagram, 10 Layers Explained",
+      "title_zh": "大模型如何重塑数据平台？一张图讲清楚10层技术栈的变与不变",
       "cover": "images/uploads/wechat-cover-llm-data-platform.png",
+      "url": "https://mp.weixin.qq.com/s/RlMWMXGu4taOElHMOSVk-g",
       "date": "2026-05-02"
     },
     {
@@ -22,10 +22,10 @@
       "date": "2026-04-15"
     },
     {
-      "url": "https://mp.weixin.qq.com/s/6kTeCudFb2IB3j5evO73gQ",
-      "title_zh": "一图理解世界模型",
       "title_en": "World Models, Explained in One Diagram",
+      "title_zh": "一图理解世界模型",
       "cover": "images/uploads/worldmodels_xiaohongshu.png",
+      "url": "https://mp.weixin.qq.com/s/6kTeCudFb2IB3j5evO73gQ",
       "date": "2026-05-02"
     },
     {
@@ -41,6 +41,13 @@
       "cover": "images/uploads/wechat-illustration-03-fundamentals-practice.png",
       "url": "https://mp.weixin.qq.com/s/cDDkY_QcgwUJKKTHa95UgQ",
       "date": "2026-02-10"
+    },
+    {
+      "title_en": "Multimodal Embeddings and RAG: A Practical Guide",
+      "title_zh": "多模态RAG的正确打开方式",
+      "cover": "/images/uploads/cover_from_prompt_2.png",
+      "url": "https://mp.weixin.qq.com/s/_J5QqeLLy2xUuKXKTXcZiQ",
+      "date": "2026-05-09"
     }
   ]
 }
