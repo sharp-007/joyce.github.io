@@ -4,5 +4,23 @@
   "proxy_url": "/api/bailian",
   "app_token": "5kXSGBQlYNazCdOW",
   "welcome_message": "",
-  "allowed_hostnames": ["joyce.hitai.space", "localhost", "127.0.0.1"]
+  "suggested_questions": [
+    {
+      "text": "工作经历"
+    },
+    {
+      "text": "AI项目"
+    },
+    {
+      "text": "公开演讲"
+    },
+    {
+      "text": "创意作品"
+    }
+  ],
+  "allowed_hostnames": [
+    "joyce.hitai.space",
+    "localhost",
+    "127.0.0.1"
+  ]
 }
