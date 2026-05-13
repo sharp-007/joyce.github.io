@@ -22,11 +22,11 @@
       "url": "https://www.bilibili.com/video/BV1pyofB2Ebe/"
     },
     {
-      "title_en": "DOE Intro Course",
-      "title_zh": "DOE入门课：60分钟掌握DOE",
+      "title_en": "Distill Myself - Episode 1: Multimodal RAG Practice",
+      "title_zh": "我蒸馏我自己  第一集  多模态RAG应用实战",
       "subtitle": "JMP · DOE · Public Course",
-      "cover": "images/uploads/talks/doe-intro.png",
-      "url": "https://www.jmp.com/zh-hans/resources/on-demand/local/jmp-doe-from-zero-on-demand"
+      "cover": "/images/uploads/封面2.jpg",
+      "url": "https://www.youtube.com/watch?v=eXUGIx7SGZU"
     },
     {
       "title_en": "Industrial Defect Detection · YOLO11",
