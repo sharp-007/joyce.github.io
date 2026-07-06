@@ -125,8 +125,11 @@
   }
 
   function renderProjects(items) {
+    // 合并成一个连续网格：featured 排在前面，其余按原顺序拼在后面
+    // 这样无论 featured 数量是否恰好为一行的倍数，都不会出现"中间断裂"的孤儿行
     const featured = items.filter(p => p.featured);
     const others = items.filter(p => !p.featured);
+    const ordered = [...featured, ...others];
 
     const container = document.getElementById('projects-grid');
     if (!container) return;
@@ -137,7 +140,7 @@
     };
 
     let html = '<div class="photo-grid photo-grid-4 fade-in">';
-    featured.forEach(p => {
+    ordered.forEach(p => {
       html += `
         <a href="${escHtml(p.url)}" target="_blank" class="photo-card project-card"${p.id ? ` id="${escHtml(p.id)}"` : ''}>
           <img src="${escHtml(p.cover)}" alt="${escHtml(p.title_en)}" loading="lazy" ${imgErr}>
@@ -147,18 +150,6 @@
     });
     html += '</div>';
 
-    if (others.length) {
-      html += '<div class="photo-grid photo-grid-4 fade-in" style="margin-top:16px">';
-      others.forEach(p => {
-        html += `
-          <a href="${escHtml(p.url)}" target="_blank" class="photo-card project-card"${p.id ? ` id="${escHtml(p.id)}"` : ''}>
-            <img src="${escHtml(p.cover)}" alt="${escHtml(p.title_en)}" loading="lazy" ${imgErr}>
-            <div class="photo-card-label" data-en="${escHtml(p.title_en)}" data-zh="${escHtml(p.title_zh)}">${escHtml(p.title_en)}</div>
-            ${renderSkills(p.skills)}
-          </a>`;
-      });
-      html += '</div>';
-    }
     container.innerHTML = html;
   }
 
