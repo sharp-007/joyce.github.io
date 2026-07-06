@@ -8,39 +8,81 @@
       "date": "2026-04-20"
     },
     {
-      "url": "https://mp.weixin.qq.com/s/RlMWMXGu4taOElHMOSVk-g",
-      "title_zh": "大模型如何重塑数据平台？一张图讲清楚10层技术栈的变与不变",
       "title_en": "How Large Models Are Reshaping Data Platforms: One Diagram, 10 Layers Explained",
+      "title_zh": "大模型如何重塑数据平台？一张图讲清楚10层技术栈的变与不变",
       "cover": "images/uploads/wechat-cover-llm-data-platform.png",
-      "date": "2026-05-02"
+      "url": "https://mp.weixin.qq.com/s/RlMWMXGu4taOElHMOSVk-g",
+      "date": "2026-04-18"
     },
     {
       "title_en": "The Ultimate Guide to World Models",
       "title_zh": "一文读懂世界模型",
       "cover": "images/uploads/world-model-wechat-cover.png",
       "url": "https://mp.weixin.qq.com/s/Dq5zCliOY9LeO0Uzh3oTCA?token=2126128470&lang=zh_CN",
-      "date": "2026-04-15"
+      "date": "2026-04-18"
     },
     {
-      "url": "https://mp.weixin.qq.com/s/6kTeCudFb2IB3j5evO73gQ",
-      "title_zh": "一图理解世界模型",
       "title_en": "World Models, Explained in One Diagram",
+      "title_zh": "一图理解世界模型",
       "cover": "images/uploads/worldmodels_xiaohongshu.png",
-      "date": "2026-05-02"
+      "url": "https://mp.weixin.qq.com/s/6kTeCudFb2IB3j5evO73gQ",
+      "date": "2026-04-20"
     },
     {
       "title_en": "What Defines Human Value in the Era of AI?",
       "title_zh": "AI时代，人类的核心价值在哪里？",
       "cover": "images/uploads/xiaohongshu_cover.png",
       "url": "https://mp.weixin.qq.com/s/79hOq2ySP2MQts5QpMe7kg?token=2126128470&lang=zh_CN",
-      "date": "2026-03-20"
+      "date": "2026-04-25"
     },
     {
       "title_en": "In an AI-Driven World, Play the Long Game",
       "title_zh": "AI时代如何反脆弱：相信时间的力量",
       "cover": "images/uploads/wechat-illustration-03-fundamentals-practice.png",
       "url": "https://mp.weixin.qq.com/s/cDDkY_QcgwUJKKTHa95UgQ",
-      "date": "2026-02-10"
+      "date": "2026-05-01"
+    },
+    {
+      "title_en": "Multimodal Embeddings and RAG: A Practical Guide",
+      "title_zh": "多模态RAG的正确打开方式",
+      "cover": "/images/uploads/cover_from_prompt_2.png",
+      "url": "https://mp.weixin.qq.com/s/_J5QqeLLy2xUuKXKTXcZiQ",
+      "date": "2026-05-09"
+    },
+    {
+      "title_en": "Distill Myself - Episode 1: Multimodal RAG Practice",
+      "title_zh": "我蒸馏我自己  第一集  多模态RAG应用实战",
+      "cover": "/images/uploads/封面2.jpg",
+      "url": "https://mp.weixin.qq.com/s/rNgBxX5wUa5wZ8Ds2GzAIQ",
+      "date": "2026-05-13"
+    },
+    {
+      "title_en": "Why create an Ontology?",
+      "title_zh": "一场原料危机，看懂 Palantir 的 AI 落地逻辑",
+      "cover": "/images/uploads/Ontology_微信发布版_V10_封面.png",
+      "url": "https://mp.weixin.qq.com/s/WwVuYsPomtpO_Sbhd9IDvA",
+      "date": "2026-05-22"
+    },
+    {
+      "title_en": "AI Coding: The Shift in Paradigm, the Shift in Advantage",
+      "title_zh": "AI编程：范式迁移与新式竞争力",
+      "cover": "/images/uploads/AI编程.png",
+      "url": "https://mp.weixin.qq.com/s/6VuEaQQVO_4VXUSR7cFvFA",
+      "date": "2026-05-24"
+    },
+    {
+      "title_en": "10 Key Insights for Industrial AI",
+      "title_zh": "工业AI，10条核心洞察",
+      "cover": "/images/uploads/01_market_overview.png",
+      "url": "https://mp.weixin.qq.com/s/FK6QmTeg1v1kzLTz1sx-kw",
+      "date": "2026-06-12"
+    },
+    {
+      "title_en": "Ahead of the Curve: Germany’s Ideal Path in the Race for Industrial AI",
+      "title_zh": "德国工业AI领跑真相：自有生产数据才是王牌",
+      "cover": "/images/uploads/05_employment.jpg",
+      "url": "https://mp.weixin.qq.com/s/sShxDYyc0wDf2yXavyWptQ",
+      "date": "2026-07-06"
     }
   ]
 }

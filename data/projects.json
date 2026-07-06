@@ -1,6 +1,20 @@
 {
   "items": [
     {
+      "title_en": "Industrial AI Paper Hub",
+      "title_zh": "工业AI文献合集",
+      "desc_en": "Selected Key Literature in Industrial AI (Chinese Translation Collection).\nFor researchers, engineers, and practitioners in industrial AI and digital-intelligent transformation of manufacturing industries.\nAn independent third-party compilation, continuously updated, for learning and reference purposes only.",
+      "desc_zh": "精选 Industrial AI 重要文献中文翻译\n面向工业 AI 研究者、工程师与制造业数智化转型从业者\n中立第三方，持续更新，仅供学习参考",
+      "cover": "/images/uploads/cover.png",
+      "url": "https://www.papers.hitai.space/",
+      "id": "project-iaiph",
+      "featured": true,
+      "skills": [
+        "Industrial AI",
+        "Web Dvelopment"
+      ]
+    },
+    {
       "title_en": "Industrial ChatBI Platform",
       "title_zh": "工业ChatBI智能对话分析平台",
       "desc_en": "OEE analytics combining traditional BI dashboards with NL2SQL conversational analysis",
@@ -9,7 +23,13 @@
       "url": "https://github.com/sharp-007/ChatBI_OEE",
       "id": "project-chatbi",
       "featured": true,
-      "skills": ["Python", "SQL", "LLM", "ChatBI", "NL2SQL"]
+      "skills": [
+        "Python",
+        "SQL",
+        "LLM",
+        "ChatBI",
+        "NL2SQL"
+      ]
     },
     {
       "title_en": "Industrial Defect Detection · YOLO11",
@@ -20,7 +40,12 @@
       "url": "https://github.com/sharp-007/carbon_fiber_defect_detection_system_python3.10",
       "id": "project-defect",
       "featured": true,
-      "skills": ["Python", "PyTorch", "YOLO", "Deep Learning"]
+      "skills": [
+        "Python",
+        "PyTorch",
+        "YOLO",
+        "Deep Learning"
+      ]
     },
     {
       "title_en": "Industrial Knowledge Q&A · RAG",
@@ -31,7 +56,12 @@
       "url": "https://github.com/sharp-007/industrial_agent_mini_demo",
       "id": "project-rag",
       "featured": true,
-      "skills": ["Python", "RAG", "LLM", "LangChain"]
+      "skills": [
+        "Python",
+        "RAG",
+        "LLM",
+        "LangChain"
+      ]
     },
     {
       "title_en": "Dify Agents · RAG + TTS",
@@ -42,7 +72,13 @@
       "url": "https://github.com/sharp-007/Dify_Agents",
       "id": "project-dify",
       "featured": true,
-      "skills": ["Dify", "RAG", "LLM", "Agent", "TTS"]
+      "skills": [
+        "Dify",
+        "RAG",
+        "LLM",
+        "Agent",
+        "TTS"
+      ]
     },
     {
       "title_en": "AssetOpsBench Agent Mini Demo",
@@ -53,7 +89,11 @@
       "url": "https://github.com/sharp-007/mini_demo_with_AssetOpsBench",
       "id": "",
       "featured": false,
-      "skills": ["Python", "Agent", "LLM"]
+      "skills": [
+        "Python",
+        "Agent",
+        "LLM"
+      ]
     },
     {
       "title_en": "Kaggle Dogs vs Cats · PyTorch",
@@ -64,18 +104,26 @@
       "url": "https://github.com/sharp-007/Kaggle_Dogs_vs_Cats_PyTorch",
       "id": "",
       "featured": false,
-      "skills": ["Python", "PyTorch", "Machine Learning"]
+      "skills": [
+        "Python",
+        "PyTorch",
+        "Machine Learning"
+      ]
     },
     {
-      "title_en": "Glass Panel Quality · Random Forest",
-      "title_zh": "玻璃面板质量分析 · 随机森林",
-      "desc_en": "Applied Random Forest for defect classification and key factor identification, AUC 0.92",
+      "title_en": "Glass Panel Quality RCA · Random Forest",
+      "title_zh": "玻璃面板质量根因分析 · 随机森林",
+      "desc_en": "Applied Random Forest for defect classification and key factors identification, AUC 0.92",
       "desc_zh": "应用随机森林模型预测缺陷分类并识别关键因子，AUC达0.92",
       "cover": "images/uploads/projects/arcing-rf.png",
       "url": "https://github.com/sharp-007/Arcing-Issue-Solution-with-Random-Forest",
       "id": "",
       "featured": false,
-      "skills": ["Python", "Machine Learning", "Random Forest"]
+      "skills": [
+        "Python",
+        "Machine Learning",
+        "Random Forest"
+      ]
     },
     {
       "title_en": "Hexi Corridor Silk Road",
@@ -86,7 +134,11 @@
       "url": "https://github.com/sharp-007/Hexi-Corridor-Silk-Road",
       "id": "",
       "featured": false,
-      "skills": ["JMP", "Data Visualization"]
+      "skills": [
+        "JMP",
+        "Data Visualization",
+        "Storytelling"
+      ]
     }
   ]
 }
