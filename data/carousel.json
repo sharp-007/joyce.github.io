@@ -3,7 +3,7 @@
     {
       "title_en": "Industrial ChatBI Platform",
       "title_zh": "工业ChatBI智能对话分析平台",
-      "subtitle": "NL2SQL · Streamlit · Qwen",
+      "subtitle": "NL2SQL · Streamlit · LLM · Data Agent",
       "cover": "images/uploads/projects/chatbi-oee.png",
       "url": "https://github.com/sharp-007/ChatBI_OEE"
     },
