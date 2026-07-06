@@ -15,6 +15,20 @@
       "url": "https://github.com/sharp-007/industrial_agent_mini_demo"
     },
     {
+      "title_en": "Industrial AI Paper Hub",
+      "title_zh": "工业AI文献合集",
+      "subtitle": "面向工业 AI 研究者、工程师与制造业数智化转型从业者",
+      "cover": "/images/uploads/cover.png",
+      "url": "https://www.papers.hitai.space/"
+    },
+    {
+      "title_en": "Industrial Defect Detection · YOLO11",
+      "title_zh": "工业缺陷智能检测系统",
+      "subtitle": "YOLO11 · Deep Learning · Quality Control",
+      "cover": "images/uploads/projects/defect-detection.png",
+      "url": "https://github.com/sharp-007/carbon_fiber_defect_detection_system_python3.10"
+    },
+    {
       "title_en": "Light Everywhere",
       "title_zh": "城市角落的光 | AI原创音乐MV | 原创动画短片",
       "subtitle": "AIGC Short Film · AI Music & Visuals",
@@ -27,20 +41,6 @@
       "subtitle": "Multimodal · RAG · Demo",
       "cover": "/images/uploads/封面2.jpg",
       "url": "https://www.youtube.com/watch?v=eXUGIx7SGZU"
-    },
-    {
-      "title_en": "Industrial Defect Detection · YOLO11",
-      "title_zh": "工业缺陷智能检测系统",
-      "subtitle": "YOLO11 · Deep Learning · Quality Control",
-      "cover": "images/uploads/projects/defect-detection.png",
-      "url": "https://github.com/sharp-007/carbon_fiber_defect_detection_system_python3.10"
-    },
-    {
-      "title_en": "Industrial AI Paper Hub",
-      "title_zh": "工业AI文献合集",
-      "subtitle": "面向工业 AI 研究者、工程师与制造业数智化转型从业者",
-      "cover": "/images/uploads/cover.png",
-      "url": "https://www.papers.hitai.space/"
     }
   ]
 }
